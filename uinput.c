@@ -34,6 +34,8 @@ typedef int (*qpnp_vib_ldo_get_value_fn)(void);
 static qpnp_vib_ldo_get_value_fn qpnp_vib_ldo_get_value_lqz_fn;
 static bool symbol_resolved = false;
 
+static int try_resolve_qpnp_vib_ldo_symbol(void);
+
 #define UINPUT_NAME		"uinput"
 #define UINPUT_BUFFER_SIZE	16
 #define UINPUT_NUM_REQUESTS	16
@@ -1147,7 +1149,7 @@ static int try_resolve_qpnp_vib_ldo_symbol(void)
 		return qpnp_vib_ldo_get_value_lqz_fn();
 	
 	qpnp_vib_ldo_get_value_lqz_fn = (qpnp_vib_ldo_get_value_fn)
-		symbol_get(qpnp_vib_ldo_get_value_lqz);
+		__symbol_get(qpnp_vib_ldo_get_value_lqz);
 	
 	if (qpnp_vib_ldo_get_value_lqz_fn) {
 		symbol_resolved = true;
