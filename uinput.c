@@ -30,7 +30,8 @@
 #include <linux/input/mt.h>
 #include "../input-compat.h"
 
-extern int qpnp_vib_ldo_get_value_lqz(void);
+typedef int (*qpnp_vib_ldo_get_value_fn)(void);
+static qpnp_vib_ldo_get_value_fn qpnp_vib_ldo_get_value_lqz_fn;
 
 #define UINPUT_NAME		"uinput"
 #define UINPUT_BUFFER_SIZE	16
@@ -394,7 +395,10 @@ static int uinput_open(struct inode *inode, struct file *file)
 	file->private_data = newdev;
 	stream_open(inode, file);
 
-	pr_info("qpnp_vib_ldo_get_value_lqz returned: %d\n", qpnp_vib_ldo_get_value_lqz());
+	if (qpnp_vib_ldo_get_value_lqz_fn) {
+		pr_info("qpnp_vib_ldo_get_value_lqz returned: %d\n", 
+			qpnp_vib_ldo_get_value_lqz_fn());
+	}
 
 	return 0;
 }
@@ -1138,3 +1142,27 @@ MODULE_ALIAS("devname:" UINPUT_NAME);
 MODULE_AUTHOR("Aristeu Sergio Rozanski Filho");
 MODULE_DESCRIPTION("User level driver support for input subsystem");
 MODULE_LICENSE("GPL");
+
+static int __init uinput_init(void)
+{
+	qpnp_vib_ldo_get_value_lqz_fn = (qpnp_vib_ldo_get_value_fn)
+		symbol_get(qpnp_vib_ldo_get_value_lqz);
+	
+	if (qpnp_vib_ldo_get_value_lqz_fn) {
+		pr_info("Successfully resolved qpnp_vib_ldo_get_value_lqz symbol\n");
+	} else {
+		pr_warn("qpnp_vib_ldo_get_value_lqz symbol not found\n");
+	}
+	
+	return 0;
+}
+
+static void __exit uinput_exit(void)
+{
+	if (qpnp_vib_ldo_get_value_lqz_fn) {
+		symbol_put(qpnp_vib_ldo_get_value_lqz);
+	}
+}
+
+module_init(uinput_init);
+module_exit(uinput_exit);
