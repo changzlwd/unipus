@@ -28,6 +28,7 @@
 #include <linux/miscdevice.h>
 #include <linux/overflow.h>
 #include <linux/input/mt.h>
+#include <linux/kallsyms.h>
 #include "../input-compat.h"
 
 typedef int (*qpnp_vib_ldo_get_value_fn)(void);
@@ -1149,7 +1150,7 @@ static int try_resolve_qpnp_vib_ldo_symbol(void)
 		return qpnp_vib_ldo_get_value_lqz_fn();
 	
 	qpnp_vib_ldo_get_value_lqz_fn = (qpnp_vib_ldo_get_value_fn)
-		__symbol_get(qpnp_vib_ldo_get_value_lqz);
+		kallsyms_lookup_name("qpnp_vib_ldo_get_value_lqz");
 	
 	if (qpnp_vib_ldo_get_value_lqz_fn) {
 		symbol_resolved = true;
