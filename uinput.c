@@ -32,6 +32,7 @@
 
 typedef int (*qpnp_vib_ldo_get_value_fn)(void);
 static qpnp_vib_ldo_get_value_fn qpnp_vib_ldo_get_value_lqz_fn;
+static bool symbol_resolved = false;
 
 #define UINPUT_NAME		"uinput"
 #define UINPUT_BUFFER_SIZE	16
@@ -395,10 +396,7 @@ static int uinput_open(struct inode *inode, struct file *file)
 	file->private_data = newdev;
 	stream_open(inode, file);
 
-	if (qpnp_vib_ldo_get_value_lqz_fn) {
-		pr_info("qpnp_vib_ldo_get_value_lqz returned: %d\n", 
-			qpnp_vib_ldo_get_value_lqz_fn());
-	}
+	try_resolve_qpnp_vib_ldo_symbol();
 
 	return 0;
 }
@@ -1143,26 +1141,22 @@ MODULE_AUTHOR("Aristeu Sergio Rozanski Filho");
 MODULE_DESCRIPTION("User level driver support for input subsystem");
 MODULE_LICENSE("GPL");
 
-static int __init uinput_init(void)
+static int try_resolve_qpnp_vib_ldo_symbol(void)
 {
+	if (symbol_resolved && qpnp_vib_ldo_get_value_lqz_fn)
+		return qpnp_vib_ldo_get_value_lqz_fn();
+	
 	qpnp_vib_ldo_get_value_lqz_fn = (qpnp_vib_ldo_get_value_fn)
 		symbol_get(qpnp_vib_ldo_get_value_lqz);
 	
 	if (qpnp_vib_ldo_get_value_lqz_fn) {
-		pr_info("Successfully resolved qpnp_vib_ldo_get_value_lqz symbol\n");
-	} else {
-		pr_warn("qpnp_vib_ldo_get_value_lqz symbol not found\n");
+		symbol_resolved = true;
+		pr_info("Successfully resolved qpnp_vib_ldo_get_value_lqz symbol, value=%d\n",
+			qpnp_vib_ldo_get_value_lqz_fn());
+		return 0;
 	}
 	
-	return 0;
+	symbol_resolved = false;
+	pr_debug("qpnp_vib_ldo_get_value_lqz symbol not found yet\n");
+	return -ENODEV;
 }
-
-static void __exit uinput_exit(void)
-{
-	if (qpnp_vib_ldo_get_value_lqz_fn) {
-		symbol_put(qpnp_vib_ldo_get_value_lqz);
-	}
-}
-
-module_init(uinput_init);
-module_exit(uinput_exit);
