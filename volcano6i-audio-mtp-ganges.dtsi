@@ -1,0 +1,18 @@
+#include "volcano-audio-mtp.dtsi"
+#include "volcano-audio-bt-swr.dtsi"
+
+&pineapple_snd {
+	qcom,model = "volcano-qrd-snd-card";	//liruntong modify for bringup 20251020
+	qcom,msm-mbhc-usbc-audio-supported = <1>;
+	qcom,msm-mbhc-hphl-swh = <0>;
+	qcom,msm-mbhc-gnd-swh = <0>;
+	//liruntong modify for headset 20251029
+	//fsa4480-i2c-handle = <&fsa4480>;
+	/delete-property/ qcom,pri-mi2s-gpios;
+	qcom,wcn-bt = <0>;
+	qcom,wcn-btfm-proxy = <1>;	//liruntong close wcn-bt use wcn-btfm-proxy for QCM6690 platform 20260130
+};
+
+&fm_i2s0_gpios {
+	status = "disabled";
+};
