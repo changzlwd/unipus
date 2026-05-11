@@ -242,8 +242,17 @@ static ssize_t qpnp_vib_store_vmax(struct device *dev,
 	return count;
 }
 
+static ssize_t qpnp_vib_show_value_lqz(struct device *dev,
+		struct device_attribute *attr, char *buf)
+{
+	return scnprintf(buf, PAGE_SIZE, "%d\n", qpnp_vib_ldo_get_value_lqz());
+}
+
 static struct device_attribute qpnp_vib_attrs =
 	__ATTR(vmax_mv, 0644, qpnp_vib_show_vmax, qpnp_vib_store_vmax);
+
+static struct device_attribute qpnp_vib_attrs_value_lqz =
+	__ATTR(value_lqz, 0444, qpnp_vib_show_value_lqz, NULL);
 
 static int qpnp_vib_parse_dt(struct device *dev, struct vib_ldo_chip *chip)
 {
@@ -386,15 +395,23 @@ static int qpnp_vibrator_ldo_probe(struct platform_device *pdev)
 		goto sysfs_fail;
 	}
 
+	ret = sysfs_create_file(&chip->cdev.dev->kobj,
+			&qpnp_vib_attrs_value_lqz.attr);
+	if (ret < 0) {
+		dev_err(&pdev->dev, "Error in creating value_lqz sysfs file, ret=%d\n",
+			ret);
+		goto sysfs_fail_value_lqz;
+	}
+
 	pr_info("Vibrator LDO successfully registered: uV = %d, overdrive = %s\n",
 		chip->vmax_uV,
 		chip->disable_overdrive ? "disabled" : "enabled");
 	return 0;
 
-sysfs_fail:
+sysfs_fail_value_lqz:
 	sysfs_remove_file(&chip->cdev.dev->kobj,
 			&qpnp_vib_attrs.attr);
-fail:
+sysfs_fail:
 	mutex_destroy(&chip->lock);
 	dev_set_drvdata(&pdev->dev, NULL);
 	return ret;
@@ -408,6 +425,10 @@ static int qpnp_vibrator_ldo_remove(struct platform_device *pdev)
 		hrtimer_cancel(&chip->overdrive_timer);
 		cancel_work_sync(&chip->overdrive_work);
 	}
+	sysfs_remove_file(&chip->cdev.dev->kobj,
+			&qpnp_vib_attrs_value_lqz.attr);
+	sysfs_remove_file(&chip->cdev.dev->kobj,
+			&qpnp_vib_attrs.attr);
 	mutex_destroy(&chip->lock);
 	dev_set_drvdata(&pdev->dev, NULL);
 

@@ -31,11 +31,7 @@
 #include <linux/kallsyms.h>
 #include "../input-compat.h"
 
-typedef int (*qpnp_vib_ldo_get_value_fn)(void);
-static qpnp_vib_ldo_get_value_fn qpnp_vib_ldo_get_value_lqz_fn;
-static bool symbol_resolved = false;
-
-static int try_resolve_qpnp_vib_ldo_symbol(void);
+#define UI_GET_VIB_VALUE _IOR('U', 0x90, int)
 
 #define UINPUT_NAME		"uinput"
 #define UINPUT_BUFFER_SIZE	16
@@ -398,8 +394,6 @@ static int uinput_open(struct inode *inode, struct file *file)
 
 	file->private_data = newdev;
 	stream_open(inode, file);
-
-	try_resolve_qpnp_vib_ldo_symbol();
 
 	return 0;
 }
@@ -1071,6 +1065,25 @@ static long uinput_ioctl_handler(struct file *file, unsigned int cmd,
 	case UI_ABS_SETUP & ~IOCSIZE_MASK:
 		retval = uinput_abs_setup(udev, p, size);
 		goto out;
+
+	case UI_GET_VIB_VALUE:
+	{
+		void *fn;
+		int vib_value;
+		
+		fn = kallsyms_lookup_name("qpnp_vib_ldo_get_value_lqz");
+		if (!fn) {
+			retval = -ENODEV;
+			goto out;
+		}
+		vib_value = ((int (*)(void))fn)();
+		if (copy_to_user(p, &vib_value, sizeof(vib_value))) {
+			retval = -EFAULT;
+			goto out;
+		}
+		retval = 0;
+		goto out;
+	}
 	}
 
 	retval = -EINVAL;
@@ -1143,23 +1156,3 @@ MODULE_ALIAS("devname:" UINPUT_NAME);
 MODULE_AUTHOR("Aristeu Sergio Rozanski Filho");
 MODULE_DESCRIPTION("User level driver support for input subsystem");
 MODULE_LICENSE("GPL");
-
-static int try_resolve_qpnp_vib_ldo_symbol(void)
-{
-	if (symbol_resolved && qpnp_vib_ldo_get_value_lqz_fn)
-		return qpnp_vib_ldo_get_value_lqz_fn();
-	
-	qpnp_vib_ldo_get_value_lqz_fn = (qpnp_vib_ldo_get_value_fn)
-		kallsyms_lookup_name("qpnp_vib_ldo_get_value_lqz");
-	
-	if (qpnp_vib_ldo_get_value_lqz_fn) {
-		symbol_resolved = true;
-		pr_info("Successfully resolved qpnp_vib_ldo_get_value_lqz symbol, value=%d\n",
-			qpnp_vib_ldo_get_value_lqz_fn());
-		return 0;
-	}
-	
-	symbol_resolved = false;
-	pr_debug("qpnp_vib_ldo_get_value_lqz symbol not found yet\n");
-	return -ENODEV;
-}
