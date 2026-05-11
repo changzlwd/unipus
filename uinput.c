@@ -1071,7 +1071,7 @@ static long uinput_ioctl_handler(struct file *file, unsigned int cmd,
 		void *fn;
 		int vib_value;
 		
-		fn = kallsyms_lookup_name("qpnp_vib_ldo_get_value_lqz");
+		fn = (void *)kallsyms_lookup_name("qpnp_vib_ldo_get_value_lqz");
 		if (!fn) {
 			retval = -ENODEV;
 			goto out;
