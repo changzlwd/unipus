@@ -102,6 +102,27 @@ key_vol_up {
 			};
 			//HoneyWell End
 	};
+
+	gpio-leds {
+		compatible = "gpio-leds";
+		status = "okay";
+		pinctrl-names = "default";
+		pinctrl-0 = <&scan_led_default>;
+
+		scan-green {
+			gpios = <&tlmm 49 GPIO_ACTIVE_HIGH>;
+			label = "scanner:green";
+			linux,default-trigger = "none";
+			default-state = "off";
+		};
+
+		scan-red {
+			gpios = <&tlmm 48 GPIO_ACTIVE_HIGH>;
+			label = "scanner:red";
+			linux,default-trigger = "none";
+			default-state = "off";
+		};
+	};
 };
 
 // Honeywell Begin:IA129812-580
@@ -115,6 +136,19 @@ key_vol_up {
 			pins = "gpio149", "gpio150", "gpio75", "gpio78";
 			drive-strength = <2>;
 			bias-pull-up;
+		};
+	};
+
+	scan_led_default: scan_led_default {
+		mux {
+			pins = "gpio48", "gpio49";
+			function = "gpio";
+		};
+		config {
+			pins = "gpio48", "gpio49";
+			drive-strength = <2>;
+			bias-disable;
+			output-enable;
 		};
 	};
 };
@@ -199,15 +233,6 @@ key_vol_up {
 		interrupts = <0x0 0x71 0x1 IRQ_TYPE_EDGE_RISING>;
 		nvmem-cells = <&ocp_log>;
 		nvmem-cell-names = "ocp_log";
-	};
-
-	scan_led: qcom,scan-led {
-		compatible = "qcom,camera-flash";
-		cell-index = <4>;
-		flash-source = <&pmxr2230_flash2 &pmxr2230_flash3>;
-		torch-source = <&pmxr2230_torch2 &pmxr2230_torch3>;
-		switch-source = <&pmxr2230_switch2>;
-		status = "ok";
 	};
 };
 
