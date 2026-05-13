@@ -204,6 +204,7 @@ key_vol_up {
 	scan_red_flash: qcom,scan-red {
 		cell-index = <4>;
 		compatible = "qcom,camera-flash";
+		qcom,led-name = "scan-red";
 		flash-source = <&pmxr2230_flash1>;
 		torch-source = <&pmxr2230_torch1>;
 		switch-source = <&pmxr2230_switch1>;
@@ -213,6 +214,7 @@ key_vol_up {
 	scan_green_flash: qcom,scan-green {
 		cell-index = <5>;
 		compatible = "qcom,camera-flash";
+		qcom,led-name = "scan-green";
 		flash-source = <&pmxr2230_flash2>;
 		torch-source = <&pmxr2230_torch2>;
 		switch-source = <&pmxr2230_switch1>;
