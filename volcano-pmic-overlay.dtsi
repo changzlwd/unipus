@@ -248,6 +248,28 @@ key_vol_up {
 	status = "ok";
 };
 
+&pmxr2230_torch1 {
+	label = "scan-red";
+	qcom,led-name = "scan-red";
+	qcom,default-led-trigger = "none";
+};
+
+&pmxr2230_torch2 {
+	label = "scan-green";
+	qcom,led-name = "scan-green";
+	qcom,default-led-trigger = "none";
+};
+
+&pmxr2230_flash1 {
+	label = "scan-red";
+	qcom,led-name = "scan-red";
+};
+
+&pmxr2230_flash2 {
+	label = "scan-green";
+	qcom,led-name = "scan-green";
+};
+
 &battery_charger {
 	#cooling-cells = <2>;
 	qcom,thermal-mitigation-step = <500000>;
