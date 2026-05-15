@@ -30,9 +30,8 @@
 
 #define ARRAY_SIZE(a) (sizeof(a) / sizeof((a)[0]))
 
-#define CONSUMERIR_SYSFS_PATH "/sys/class/consumerir/ir"
-#define CONSUMERIR_SEND_PATH CONSUMERIR_SYSFS_PATH "/send"
-#define CONSUMERIR_FREQ_PATH CONSUMERIR_SYSFS_PATH "/frequency"
+#define IR_GPIO_PATH "/sys/class/IR_IR/IR_IR"
+#define PWM_PERIOD_NS 26900
 
 static const consumerir_freq_range_t consumerir_freqs[] = {
     {.min = 30000, .max = 30000},
@@ -76,63 +75,45 @@ static int consumerir_write_string(const char *path, const char *value) {
     return result;
 }
 
-static int consumerir_write_pattern(const char *path, const int pattern[], int pattern_len) {
-    int fd;
-    int result = -1;
-    int i;
-
-    fd = open(path, O_WRONLY);
-    if (fd >= 0) {
-        char buffer[8192];
-        int pos = 0;
-        
-        for (i = 0; i < pattern_len; i++) {
-            if (i > 0) {
-                pos += snprintf(buffer + pos, sizeof(buffer) - pos, ",");
-            }
-            pos += snprintf(buffer + pos, sizeof(buffer) - pos, "%d", pattern[i]);
-            if (pos >= sizeof(buffer) - 10) {
-                ALOGE("Pattern buffer overflow");
-                result = -1;
-                goto exit;
-            }
-        }
-        pos += snprintf(buffer + pos, sizeof(buffer) - pos, "\n");
-        
-        if (write(fd, buffer, pos) == pos) {
-            result = 0;
-        }
-        
-exit:
-        close(fd);
-    }
-
-    return result;
-}
-
 static int consumerir_transmit(struct consumerir_device *dev __unused,
    int carrier_freq, const int pattern[], int pattern_len)
 {
     int i;
+    int fd = -1;
     int total_time = 0;
+    int duty = 0;
+    int period_ns;
 
     ALOGD("transmit for %d Hz, %d slices", carrier_freq, pattern_len);
 
+    fd = open(IR_GPIO_PATH, O_WRONLY);
+    if (fd < 0) {
+        ALOGE("Cannot open IR device: %s", IR_GPIO_PATH);
+        return -1;
+    }
+
+    period_ns = 1000000000 / carrier_freq;
+    duty = period_ns / 2;
+
+    consumerir_write_string(IR_GPIO_PATH, "enable");
+    usleep(1000);
+
     for (i = 0; i < pattern_len; i++) {
-        total_time += pattern[i];
+        int state = (i % 2 == 0) ? 1 : 0;
+        int duration_us = pattern[i];
+
+        if (state) {
+            consumerir_write_int(IR_GPIO_PATH, 1);
+        } else {
+            consumerir_write_int(IR_GPIO_PATH, 0);
+        }
+
+        usleep(duration_us);
+        total_time += duration_us;
     }
 
-    if (consumerir_write_int(CONSUMERIR_FREQ_PATH, carrier_freq) < 0) {
-        ALOGE("Failed to set frequency: %s", CONSUMERIR_FREQ_PATH);
-        return -1;
-    }
-
-    if (consumerir_write_pattern(CONSUMERIR_SEND_PATH, pattern, pattern_len) < 0) {
-        ALOGE("Failed to write pattern: %s", CONSUMERIR_SEND_PATH);
-        return -1;
-    }
-
-    usleep(total_time);
+    consumerir_write_string(IR_GPIO_PATH, "disable");
+    close(fd);
 
     ALOGD("transmit completed, total time: %d us", total_time);
 
@@ -189,7 +170,7 @@ static int consumerir_open(const hw_module_t* module, const char* name,
     dev->get_carrier_freqs = consumerir_get_carrier_freqs;
 
     *device = (hw_device_t*) dev;
-    ALOGI("Consumer IR device opened successfully with sysfs");
+    ALOGI("Consumer IR device opened successfully");
     return 0;
 }
 
@@ -203,7 +184,7 @@ consumerir_module_t HAL_MODULE_INFO_SYM = {
         .module_api_version = CONSUMERIR_MODULE_API_VERSION_1_0,
         .hal_api_version    = HARDWARE_HAL_API_VERSION,
         .id                 = CONSUMERIR_HARDWARE_MODULE_ID,
-        .name               = "Sysfs IR HAL",
+        .name               = "GPIO IR HAL",
         .author             = "Custom IR HAL Implementation",
         .methods            = &consumerir_module_methods,
     },
