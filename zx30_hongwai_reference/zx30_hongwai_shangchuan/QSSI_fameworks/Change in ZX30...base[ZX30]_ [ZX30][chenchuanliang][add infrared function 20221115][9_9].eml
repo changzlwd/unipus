@@ -1,0 +1,93 @@
+Received: from m12-16.163.com (unknown [220.181.12.16])
+	by bizmx10.qq.com (NewMx) with SMTP id 
+	for <likefei@unicair.cn>; Wed, 16 Nov 2022 10:03:25 +0800
+X-QQ-SPAM: none
+X-QQ-HITDIVERSE: none
+X-QQ-FEAT: ZsjW4gAmN6SQhQkMk4PQ5oT9O8OVY+zhz4tU8n08TTEro8P6yZEt832cLBwNq
+	CNprdvjV4HTei6WL4KeIvaO83cEOzVMXw2AfXZd/2qZw4awVXL+ILY/A7SCZyEftPvoD50Z
+	7YxlDXEdtkl11jbU0co8psncMzCgDz7LTsWRHpl8w7IJn9/ROFaHkz329hL22IAk/ooShMp
+	OzdRX9LwGZ+FF7wt1ue1nWmDXfGe6o4AQnlikgXIRNNg4FMiHAEAwrFlg/bK24IuqB+WYeR
+	A/3OzrmcC+nNcWVgq0HFVV4UMLTtZzXr35/xlJJEpjTwKt597sJoBftsl2WGgq229fYljR4
+	GaQqRywgLqmq3pD7UL4gVTEBDZfco8XdYKoMXPfCV8iEPSiT1FlArpGlESHaAr7bQ1xRNd6
+	f08Wi8+UUVdrC9oxOLr9p9g52r5BFiXU
+X-QQ-MAILINFO: M4z91vDa1GL8zBGxu6oEQwJnzN9dx91Z8irIoE6x5V4Zjm/lfNk4INugj
+	dAoNbFVvcEmUMGZQOCrmchNc69a7GgutaExDyB6Sey906Q7VpPDTJx/44pxxYPIU8kHQeXJ
+	n3A9y43W0ED1EUVWA4bum6UA0Ycp/CHoScRH2nzyHV+CXmsbq59Ep+ujrXHf7wmIECUjKNw
+	EX/lSXG8eDmvCOHA=
+X-QQ-mid: bizmx10t1668564205t35hhghpp
+X-QQ-ORGSender: codereview_gerrit@163.com
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=163.com;
+	s=s110527; h=Date:From:Message-ID:Subject:MIME-Version; bh=fHH0s
+	vRpe99mYYc67JaUjk2WdFSX8eR3qcxUQzfmGQE=; b=a+J1C26OvOLakgh4Df8W/
+	z5GNbnt4s7bYYSu+XvpHoSFOwSBM3+w4tRCcMNrgTdNswqeqiLkptbVZpVEEakcD
+	tqotK1isWtuuvbg+QA9yCtXtYbFnvMGoQ1Mbs6P9Ql8oC9ikNKrAaUTdQYmx2LbC
+	46RrCISRjLRa920TutfRcE=
+Received: from 192.168.117.71 (unknown [112.6.18.36])
+	by smtp12 (Coremail) with SMTP id EMCowAAXH+PkRHRjDum3CA--.0S2;
+	Wed, 16 Nov 2022 10:03:22 +0800 (CST)
+Date: Wed, 16 Nov 2022 10:03:16 +0800
+From: CodeReview <codereview_gerrit@163.com>
+To: likefei@unicair.cn
+Message-ID: <gerrit.1668479705757.I8bca2497901d345aad362125b3b2928109c196de@192.168.117.71>
+Reply-To: daniel_sun@unicair.cn
+X-Gerrit-MessageType: newchange
+Subject: Change in ZX30...base[ZX30]: [ZX30][chenchuanliang][add infrared function 20221115][9/9]
+X-Gerrit-Change-Id: I8bca2497901d345aad362125b3b2928109c196de
+List-Id: <gerrit-ZX30-qssi-platform-frameworks-base.192.168.117.71>
+List-Unsubscribe: <http://192.168.117.71:80/settings>
+X-Gerrit-ChangeURL: <http://192.168.117.71:80/11658>
+X-Gerrit-Commit: 46f95c2cd5327da97c162d01e90274d5b4f4f9de
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+Content-Disposition: inline
+User-Agent: Gerrit/2.5.4
+X-CM-TRANSID:EMCowAAXH+PkRHRjDum3CA--.0S2
+X-Coremail-Antispam: 1Uf129KBjvJXoW7Cry3Cr1rtw13Gry5JrWxXrb_yoW8Xr18pw
+	4j9w48Kr48Jry7uw1Ut3W3ZFyrW343A3yYqFs5u3W7Zrnxt3Z7XF47J3WUKw4UArs2ka45
+	JF1vvrWvq345Wr7anT9S1TB71UUUUUUqnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
+	9KBjDUYxBIdaVFxhVjvjDU0xZFpf9x07U0JPiUUUUU=
+X-Originating-IP: [112.6.18.36]
+X-CM-SenderInfo: pfrgv25hylv4hbjh22llw6il2tof0z/xtbB3w67gmBHMwAudgAAsk
+
+From <daniel_sun@unicair.cn>:
+
+Hello likefei@unicair.cn,
+
+I'd like you to do a code review.  Please visit
+
+    http://192.168.117.71:80/11658
+
+to review the following change.
+
+Change subject: [ZX30][chenchuanliang][add infrared function 20221115][9/9]
+......................................................................
+
+[ZX30][chenchuanliang][add infrared function 20221115][9/9]
+
+Change-Id: I8bca2497901d345aad362125b3b2928109c196de
+---
+M core/api/current.txt
+M core/java/android/hardware/ConsumerIrManager.java
+M core/java/android/hardware/IConsumerIrService.aidl
+M services/core/java/com/android/server/ConsumerIrService.java
+M services/core/jni/com_android_server_ConsumerIrService.cpp
+5 files changed, 267 insertions(+), 3 deletions(-)
+
+
+  git pull ssh://192.168.117.71:29418/ZX30/qssi/platform/frameworks/base refs/changes/58/11658/2
+-- 
+To view, visit http://192.168.117.71:80/11658
+To unsubscribe, visit http://192.168.117.71:80/settings
+
+Gerrit-MessageType: newchange
+Gerrit-Change-Id: I8bca2497901d345aad362125b3b2928109c196de
+Gerrit-PatchSet: 2
+Gerrit-Project: ZX30/qssi/platform/frameworks/base
+Gerrit-Branch: ZX30
+Gerrit-Owner: daniel_sun@unicair.cn
+Gerrit-Reviewer: chenchuanliang <chenchuanliang@unicair.cn>
+Gerrit-Reviewer: daniel_sun@unicair.cn
+Gerrit-Reviewer: likefei@unicair.cn
+
+

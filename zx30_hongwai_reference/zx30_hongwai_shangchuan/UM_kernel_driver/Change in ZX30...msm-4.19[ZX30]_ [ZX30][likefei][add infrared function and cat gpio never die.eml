@@ -1,0 +1,93 @@
+Received: from m12-12.163.com (unknown [220.181.12.12])
+	by bizmx16.qq.com (NewMx) with SMTP id 
+	for <likefei@unicair.cn>; Wed, 16 Nov 2022 10:02:35 +0800
+X-QQ-SPAM: none
+X-QQ-HITDIVERSE: none
+X-QQ-FEAT: 3NZyaS4W9Rrvl/I/TuPhj/bbtbLOTVuikQdlJl4m5V7/cFrtZLViG7NTWsJwI
+	qBJax1G8rvzCL/PZNP2AJltxTzXVff+BBxD/kdWiBPl3GESWLycR6KgXeF7xCkQamJDA5hF
+	xK34QimFBWhriBsDRslojvS3i5q3R2+/Vy8U70TR6xRSgs+47uJ71H82A+JlOEh7OEEbvXo
+	Nk7R5Te2AC8MATYg4feXXIImys07Qf3FPkSs0zCOlQK7npcX/kPCIEX0/daK4X5Sx3lrTNV
+	nJblN917co3Xiykp5JZ2x3mNASHjPft+SxHorNfszBN4sbQcbym4QpoqQ5UZ5M2ArWV2eXO
+	X0En0jSEwgyRtjxAPnA01dj+riL0yEfnbfeG4HEV+H1gZ0m1y0Z2bvVRHTsYGNGdMKSejgS
+	e655opNNPdG+0NpbXnai+A==
+X-QQ-MAILINFO: NFsZrwZFHbKrFo3IxiBs0JP6R/xY8Rg9J2S/f/SQ2DbzKba5Y6mvDNpkA
+	pE6jQLYJhv7Do5ClhSVpJcpMTTdcHyAx/lxQd06HKYkw6oaAp6mVu+/fZHk6cGQyMCmShDW
+	bDA9pcBapsXvs7AGTz2sUkdisKA1VSKJ9DZWtoiShIIC
+X-QQ-mid: bizmx16t1668564155tdii9d31q
+X-QQ-ORGSender: codereview_gerrit@163.com
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=163.com;
+	s=s110527; h=Date:From:Message-ID:Subject:MIME-Version; bh=0CdlK
+	nZZmDZBZV2t75zU1Rxiy7G0hFVPUeY50s6w2Lc=; b=AvYHNEtAWJiTydIgK+LcS
+	sDvP+EEh/2Rl77yoXQMpMKUtEldfPMnBZAFiCkuZtrkZ+xgEVZFdP8ysgll/TEv3
+	nLQCt/u9S0RqmjaI4qjoVvnKsTPULaeALZe+3cSUKBcyhpNUBYjotiRHUiMqU5/G
+	725PiQCaXrer5at+LH0zi8=
+Received: from 192.168.117.71 (unknown [112.6.18.36])
+	by smtp8 (Coremail) with SMTP id DMCowACXGQi5RHRjp+d3oQ--.43498S2;
+	Wed, 16 Nov 2022 10:02:33 +0800 (CST)
+Date: Wed, 16 Nov 2022 10:02:33 +0800
+From: CodeReview <codereview_gerrit@163.com>
+To: likefei@unicair.cn
+Message-ID: <gerrit.1668478115223.I3caa6abbc332f9d19c2e3487fb7caa6cbd37a140@192.168.117.71>
+Reply-To: daniel_sun@unicair.cn
+X-Gerrit-MessageType: newchange
+Subject: Change in ZX30...msm-4.19[ZX30]: [ZX30][likefei][add infrared function and cat gpio never die...
+X-Gerrit-Change-Id: I3caa6abbc332f9d19c2e3487fb7caa6cbd37a140
+List-Id: <gerrit-ZX30-kernel-msm-4.19.192.168.117.71>
+List-Unsubscribe: <http://192.168.117.71:80/settings>
+X-Gerrit-ChangeURL: <http://192.168.117.71:80/11652>
+X-Gerrit-Commit: 0662e6622b4a5e3d0279df5a1c479510ce27f665
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+Content-Disposition: inline
+User-Agent: Gerrit/2.5.4
+X-CM-TRANSID:DMCowACXGQi5RHRjp+d3oQ--.43498S2
+X-Coremail-Antispam: 1Uf129KBjvJXoW7Cry3Wr1DAr4rZrWfGFW3Wrg_yoW8JFWUpa
+	yjk3yqkr4DJFyDCw1j93WayFyrtw13G3yjgFWFy34DuF15tF1xGF4UJF1UKw4DArsFyFWa
+	q3WDuFy8KryDGF7anT9S1TB71UUUUUUqnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
+	9KBjDUYxBIdaVFxhVjvjDU0xZFpf9x07UepBfUUUUU=
+X-Originating-IP: [112.6.18.36]
+X-CM-SenderInfo: pfrgv25hylv4hbjh22llw6il2tof0z/xtbB3xa7gmBHMwAn9gAAs1
+
+From <daniel_sun@unicair.cn>:
+
+Hello likefei@unicair.cn,
+
+I'd like you to do a code review.  Please visit
+
+    http://192.168.117.71:80/11652
+
+to review the following change.
+
+Change subject: [ZX30][likefei][add infrared function and cat gpio never die 20221115][5/9]
+......................................................................
+
+[ZX30][likefei][add infrared function and cat gpio never die 20221115][5/9]
+
+Change-Id: I3caa6abbc332f9d19c2e3487fb7caa6cbd37a140
+---
+M drivers/Kconfig
+M drivers/Makefile
+A drivers/irxinwei/Kconfig
+A drivers/irxinwei/Makefile
+A drivers/irxinwei/et4007.c
+A drivers/irxinwei/et4007.h
+M drivers/pinctrl/qcom/pinctrl-msm.c
+7 files changed, 1,801 insertions(+), 10 deletions(-)
+
+
+  git pull ssh://192.168.117.71:29418/ZX30/kernel/msm-4.19 refs/changes/52/11652/2
+-- 
+To view, visit http://192.168.117.71:80/11652
+To unsubscribe, visit http://192.168.117.71:80/settings
+
+Gerrit-MessageType: newchange
+Gerrit-Change-Id: I3caa6abbc332f9d19c2e3487fb7caa6cbd37a140
+Gerrit-PatchSet: 2
+Gerrit-Project: ZX30/kernel/msm-4.19
+Gerrit-Branch: ZX30
+Gerrit-Owner: daniel_sun@unicair.cn
+Gerrit-Reviewer: daniel_sun@unicair.cn
+Gerrit-Reviewer: likefei@unicair.cn
+
+

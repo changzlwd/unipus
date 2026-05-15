@@ -1,0 +1,87 @@
+Received: from m12.mail.163.com (unknown [220.181.12.199])
+	by bizmx2.qq.com (NewMx) with SMTP id 
+	for <likefei@unicair.cn>; Thu, 17 Nov 2022 13:03:29 +0800
+X-QQ-SPAM: none
+X-QQ-HITDIVERSE: none
+X-QQ-FEAT: UJdl9ATTMXfiXlYfhtLqR2eGaf0ol6hE6PkyvFpSNock96+8Vl6ju6toNGJo3
+	+mdiG62DAUI1JQh6HxptgNLPKoFAvMRdTwgMYGsFeBmEpJBEQ2X7pUGksZoU/Cw8Y6bTHAP
+	zvssjVsRVoSxFHX79B1tIvpI1aCCGGjnh54sfC9U8c80J0WtFXsbE/Tt43FZqvyIqu0OKn1
+	V0dmvlBX/4nE6j08A8oB/lGpncXPT8P/S7fzmq9fXbe8ZhgaynJ11g2527LPVik+3WGba+Q
+	pWkj97LljiLyE4dDkqVZ0USIxuCYy1K9m4PTUVfspblYkURQzBumSUFN3shipmndAe298B6
+	cHTCQJsosvNFaBxYionGUBiOifZ65D2wMtaQdN+p+hRliCFWHf0WXMMYstb0uSgDPZ5inWn
+	nw9ngKr4pLv67V/Q7ZLVZFZQuNZ3xmlk
+X-QQ-MAILINFO: OZRKZJBxZ1nBxZaawcfBWaqfLVyPKn550uefaCcNd0xmgDVL1iFJvWAtD
+	hqb97YNnh27smn+ynCuxga8X7h1JQ3kCOAotksBISgSv7rJZScKyuweFg1F6/qKEga0zN8q
+	spIKEvbdHeoXDrk/yAZVe5HlnnE7U9KpueFrTNXWtDcNnmfgzlLOTphhBEHJdYgW6Eto/FL
+	feWEYWlY1G6Cyzq4=
+X-QQ-mid: bizmx2t1668661409ta4eq9sfr
+X-QQ-ORGSender: codereview_gerrit@163.com
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=163.com;
+	s=s110527; h=Date:From:Message-ID:Subject:MIME-Version; bh=lWIQ3
+	W2hqNN9rmBct5shsunvRPyZisPQftI3rhzFB1w=; b=jTIgBUwLrVLDxIy4lRbTf
+	T6x0l4JecoJsy+CnqiwylxCFQSwNl004bTurK44cVNIH4XEwfbRllACHPd5camgj
+	2xKAhSE23mFhMn7KIAnKHKskKwIoYkdaHAW3daB8n80YVR9mNTcWSbf61j4XClEG
+	wbulhICbaIqudrLZVCgj98=
+Received: from 192.168.117.71 (unknown [112.6.18.36])
+	by zwqz-smtp-mta-g2-4 (Coremail) with SMTP id _____wDnZqqZwHVjwfAAAA--.789S2;
+	Thu, 17 Nov 2022 13:03:21 +0800 (CST)
+Date: Thu, 17 Nov 2022 13:03:21 +0800
+From: CodeReview <codereview_gerrit@163.com>
+To: likefei@unicair.cn
+Message-ID: <gerrit.1668657983415.If34fd96aae79e28425f0293cee940e16f33fbe1f@192.168.117.71>
+Reply-To: daniel_sun@unicair.cn
+X-Gerrit-MessageType: newchange
+Subject: Change in ZX30...libhardware[ZX30]: [ZX30][likefei][optimize infrared funtion][3/3]
+X-Gerrit-Change-Id: If34fd96aae79e28425f0293cee940e16f33fbe1f
+List-Id: <gerrit-ZX30-qssi-platform-hardware-libhardware.192.168.117.71>
+List-Unsubscribe: <http://192.168.117.71:80/settings>
+X-Gerrit-ChangeURL: <http://192.168.117.71:80/11773>
+X-Gerrit-Commit: b498e707d293da59d52c49c04f1c74d763454c69
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+Content-Disposition: inline
+User-Agent: Gerrit/2.5.4
+X-CM-TRANSID:_____wDnZqqZwHVjwfAAAA--.789S2
+X-Coremail-Antispam: 1Uf129KBjvdXoW7Jr4UWr13Zr18AryfAF4rAFb_yoWDtFb_Cr
+	1Sgrn7Cw1UXrn2yr90yFy7ZrWqqry093s5urWktr1fZFyjyF1rCF4DJrnYgF15t3Z2vFW5
+	Aa13Xw4DXFy7CjkaLaAFLSUrUUUUUb8apTn2vfkv8UJUUUU8Yxn0WfASr-VFAUDa7-sFnT
+	9fnUUvcSsGvfC2KfnxnUUI43ZEXa7sRZ4SoPUUUUU==
+X-Originating-IP: [112.6.18.36]
+X-CM-SenderInfo: pfrgv25hylv4hbjh22llw6il2tof0z/1tbiHQC8gmI67yvvogAAsy
+
+From <daniel_sun@unicair.cn>:
+
+Hello likefei@unicair.cn,
+
+I'd like you to do a code review.  Please visit
+
+    http://192.168.117.71:80/11773
+
+to review the following change.
+
+Change subject: [ZX30][likefei][optimize infrared funtion][3/3]
+......................................................................
+
+[ZX30][likefei][optimize infrared funtion][3/3]
+
+Change-Id: If34fd96aae79e28425f0293cee940e16f33fbe1f
+---
+M modules/consumerir/consumerir.c
+1 file changed, 61 insertions(+), 23 deletions(-)
+
+
+  git pull ssh://192.168.117.71:29418/ZX30/qssi/platform/hardware/libhardware refs/changes/73/11773/1
+-- 
+To view, visit http://192.168.117.71:80/11773
+To unsubscribe, visit http://192.168.117.71:80/settings
+
+Gerrit-MessageType: newchange
+Gerrit-Change-Id: If34fd96aae79e28425f0293cee940e16f33fbe1f
+Gerrit-PatchSet: 1
+Gerrit-Project: ZX30/qssi/platform/hardware/libhardware
+Gerrit-Branch: ZX30
+Gerrit-Owner: daniel_sun@unicair.cn
+Gerrit-Reviewer: likefei@unicair.cn
+
+
