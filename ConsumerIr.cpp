@@ -1,87 +1,80 @@
 /*
- * Copyright (C) 2016 The Android Open Source Project
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *      http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
+ * SPDX-FileCopyrightText: 2017-2024 The LineageOS Project
+ * SPDX-License-Identifier: Apache-2.0
  */
 
-#define LOG_TAG "ConsumerIrService"
-
-#include <log/log.h>
-
-#include <hardware/hardware.h>
-#include <hardware/consumerir.h>
+#define LOG_TAG "ConsumerIr"
 
 #include "ConsumerIr.h"
 
+#include <android-base/logging.h>
+#include <fcntl.h>
+#include <linux/lirc.h>
+#include <string>
+
+using std::vector;
+
+namespace aidl {
 namespace android {
 namespace hardware {
 namespace ir {
-namespace V1_0 {
-namespace implementation {
 
-ConsumerIr::ConsumerIr(consumerir_device_t *device) {
-    mDevice = device;
+static const std::string kIrDevice = "/dev/lirc0";
+static const int kDutyCycle = 33;
+
+static vector<ConsumerIrFreqRange> kRangeVec{
+    {.minHz = 30000, .maxHz = 60000},
+};
+
+::ndk::ScopedAStatus ConsumerIr::getCarrierFreqs(vector<ConsumerIrFreqRange>* _aidl_return) {
+    *_aidl_return = kRangeVec;
+    return ::ndk::ScopedAStatus::ok();
 }
 
-// Methods from ::android::hardware::consumerir::V1_0::IConsumerIr follow.
-Return<bool> ConsumerIr::transmit(int32_t carrierFreq, const hidl_vec<int32_t>& pattern) {
-    return mDevice->transmit(mDevice, carrierFreq, pattern.data(), pattern.size()) == 0;
+::ndk::ScopedAStatus ConsumerIr::transmit(int32_t carrierFreqHz, const vector<int32_t>& pattern) {
+    size_t entries = pattern.size();
+    if (entries == 0) {
+        return ::ndk::ScopedAStatus::ok();
+    }
+
+    int fd = open(kIrDevice.c_str(), O_RDWR);
+    if (fd < 0) {
+        LOG(ERROR) << "Failed to open " << kIrDevice << ", error " << fd;
+        return ::ndk::ScopedAStatus::fromExceptionCode(EX_ILLEGAL_STATE);
+    }
+
+    int rc = ioctl(fd, LIRC_SET_SEND_CARRIER, &carrierFreqHz);
+    if (rc < 0) {
+        LOG(ERROR) << "Failed to set carrier " << carrierFreqHz << ", error: " << errno;
+        close(fd);
+        return ::ndk::ScopedAStatus::fromExceptionCode(EX_UNSUPPORTED_OPERATION);
+    }
+
+    rc = ioctl(fd, LIRC_SET_SEND_DUTY_CYCLE, &kDutyCycle);
+    if (rc < 0) {
+        LOG(ERROR) << "Failed to set duty cycle " << kDutyCycle << ", error: " << errno;
+        close(fd);
+        return ::ndk::ScopedAStatus::fromExceptionCode(EX_ILLEGAL_STATE);
+    }
+
+    if ((entries & 1) != 0) {
+        rc = write(fd, pattern.data(), entries * sizeof(int32_t));
+    } else {
+        rc = write(fd, pattern.data(), (entries - 1) * sizeof(int32_t));
+        usleep(pattern[entries - 1]);
+    }
+
+    if (rc < 0) {
+        LOG(ERROR) << "Failed to write pattern, " << entries << " entries, error: " << errno;
+        close(fd);
+        return ::ndk::ScopedAStatus::fromExceptionCode(EX_ILLEGAL_STATE);
+    }
+
+    close(fd);
+    return ::ndk::ScopedAStatus::ok();
 }
 
-Return<void> ConsumerIr::getCarrierFreqs(getCarrierFreqs_cb _hidl_cb) {
-    int32_t len = mDevice->get_num_carrier_freqs(mDevice);
-    if (len < 0) {
-        _hidl_cb(false, {});
-        return Void();
-    }
-
-    consumerir_freq_range_t *rangeAr = new consumerir_freq_range_t[len];
-    bool success = (mDevice->get_carrier_freqs(mDevice, len, rangeAr) >= 0);
-    if (!success) {
-        _hidl_cb(false, {});
-        return Void();
-    }
-
-    hidl_vec<ConsumerIrFreqRange> rangeVec;
-    rangeVec.resize(len);
-    for (int32_t i = 0; i < len; i++) {
-        rangeVec[i].min = static_cast<uint32_t>(rangeAr[i].min);
-        rangeVec[i].max = static_cast<uint32_t>(rangeAr[i].max);
-    }
-    _hidl_cb(true, rangeVec);
-    return Void();
-}
-
-
-IConsumerIr* HIDL_FETCH_IConsumerIr(const char * /*name*/) {
-    consumerir_device_t *dev;
-    const hw_module_t *hw_module = NULL;
-
-    int ret = hw_get_module(CONSUMERIR_HARDWARE_MODULE_ID, &hw_module);
-    if (ret != 0) {
-        ALOGE("hw_get_module %s failed: %d", CONSUMERIR_HARDWARE_MODULE_ID, ret);
-        return nullptr;
-    }
-    ret = hw_module->methods->open(hw_module, CONSUMERIR_TRANSMITTER, (hw_device_t **) &dev);
-    if (ret < 0) {
-        ALOGE("Can't open consumer IR transmitter, error: %d", ret);
-        return nullptr;
-    }
-    return new ConsumerIr(dev);
-}
-
-}  // namespace implementation
-}  // namespace V1_0
-}  // namespace ir
-}  // namespace hardware
-}  // namespace android
+} // namespace ir
+} // namespace hardware
+} // namespace android
+} // namespace aidl

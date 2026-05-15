@@ -615,9 +615,7 @@ PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/android.hardware.consumerir.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.consumerir.xml
 
 PRODUCT_PACKAGES += \
-    consumerir.default \
-    android.hardware.ir@1.0-service \
-    android.hardware.ir@1.0-impl
+    android.hardware.ir-service.volcano
 
 #houchaoying 20251215 VENDOR A14 widevine s
 TARGET_BUILD_WIDEVINE := nonupdatable
