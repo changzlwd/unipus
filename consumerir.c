@@ -69,8 +69,6 @@ static int consumerir_transmit(struct consumerir_device *dev __unused,
     if (features & LIRC_CAN_SET_SEND_CARRIER) {
         if (ioctl(fd, LIRC_SET_SEND_CARRIER, carrier_freq) < 0) {
             ALOGE("LIRC_SET_SEND_CARRIER failed: %s", strerror(errno));
-            ret = -1;
-            goto exit;
         }
     }
 
@@ -82,33 +80,23 @@ static int consumerir_transmit(struct consumerir_device *dev __unused,
     }
 
     if (features & LIRC_CAN_SEND_RAW) {
-        struct lirc_raw_config config;
-        config.rc_proto = LIRC_RC_5;
-        if (ioctl(fd, LIRC_SET_REC_CARRIER, carrier_freq) < 0) {
-            ALOGW("LIRC_SET_REC_CARRIER failed: %s", strerror(errno));
-        }
-
-        int *raw_buf = (int *)malloc(pattern_len * sizeof(int));
-        if (!raw_buf) {
-            ALOGE("Failed to allocate memory for raw buffer");
-            ret = -1;
-            goto exit;
-        }
+        __u32 buffer[pattern_len + 1];
+        buffer[0] = pattern_len;
 
         for (i = 0; i < pattern_len; i++) {
-            raw_buf[i] = pattern[i];
+            buffer[i + 1] = pattern[i];
             total_time += pattern[i];
         }
 
-        ssize_t bytes_written = write(fd, raw_buf, pattern_len * sizeof(int));
-        if (bytes_written != pattern_len * sizeof(int)) {
+        size_t buf_size = (pattern_len + 1) * sizeof(__u32);
+        ssize_t bytes_written = write(fd, buffer, buf_size);
+        if (bytes_written != buf_size) {
             ALOGE("Write to LIRC device failed: %s", strerror(errno));
             ret = -1;
         } else {
             ALOGD("Successfully wrote %zd bytes", bytes_written);
+            ret = 0;
         }
-
-        free(raw_buf);
     } else {
         ALOGE("LIRC does not support RAW send");
         ret = -1;
@@ -118,7 +106,6 @@ static int consumerir_transmit(struct consumerir_device *dev __unused,
     usleep(total_time);
 
     ALOGD("transmit completed, total time: %d us", total_time);
-    ret = 0;
 
 exit:
     close(fd);
