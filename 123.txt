@@ -1,139 +1,969 @@
-05-16 08:30:55.160  1694  1916 E HwcComposer: getLuts failed Status(-129, EX_TRANSACTION_FAILED): 'UNKNOWN_TRANSACTION: '
-05-16 08:30:55.261  1694  1916 E HwcComposer: getLuts failed Status(-129, EX_TRANSACTION_FAILED): 'UNKNOWN_TRANSACTION: '
-05-16 08:30:55.361  1694  1916 E HwcComposer: getLuts failed Status(-129, EX_TRANSACTION_FAILED): 'UNKNOWN_TRANSACTION: '
-05-16 08:30:55.462  1694  1916 E HwcComposer: getLuts failed Status(-129, EX_TRANSACTION_FAILED): 'UNKNOWN_TRANSACTION: '
-05-16 08:30:55.562  1694  1916 E HwcComposer: getLuts failed Status(-129, EX_TRANSACTION_FAILED): 'UNKNOWN_TRANSACTION: '
-05-16 08:30:55.663  1694  1916 E HwcComposer: getLuts failed Status(-129, EX_TRANSACTION_FAILED): 'UNKNOWN_TRANSACTION: '
-05-16 08:30:55.763  1694  1916 E HwcComposer: getLuts failed Status(-129, EX_TRANSACTION_FAILED): 'UNKNOWN_TRANSACTION: '
-05-16 08:30:55.864  1694  1916 E HwcComposer: getLuts failed Status(-129, EX_TRANSACTION_FAILED): 'UNKNOWN_TRANSACTION: '
-05-16 08:30:55.964  1694  1916 E HwcComposer: getLuts failed Status(-129, EX_TRANSACTION_FAILED): 'UNKNOWN_TRANSACTION: '
-05-16 08:30:56.064  1694  1916 E HwcComposer: getLuts failed Status(-129, EX_TRANSACTION_FAILED): 'UNKNOWN_TRANSACTION: '
-05-16 08:30:56.165  1694  1916 E HwcComposer: getLuts failed Status(-129, EX_TRANSACTION_FAILED): 'UNKNOWN_TRANSACTION: '
-05-16 08:30:56.181  1972  1972 I CNSS    : /sys/wifi/dump_in_progress doesn't exist
-05-16 08:30:56.182  1972  1972 I CNSS    : /sys/wifi/max_chipset_log_size doesn't exist
-05-16 08:30:56.198  3936  4168 D WifiClientModeImpl[736265:wlan0]: updateLinkLayerStatsRssiSpeedFrequencyCapabilities rssi=-33 TxLinkspeed=866 freq=5785 RxLinkSpeed=866
-05-16 08:30:56.198  3936  4168 D WifiDataStall: tx tput in kbps: 627748
-05-16 08:30:56.198  3936  4168 D WifiDataStall: rx tput in kbps: 815257
-05-16 08:30:56.199  3936  4168 V WifiConfigManager: Updating scan detail cache freq=5785 BSSID=c8:bf:4c:77:58:fb RSSI=-32 for "UNICAIR"WPA_PSK
-05-16 08:30:56.199  3936  4168 D WifiDataStall:  ccaLevel = 15
-05-16 08:30:56.199  3936  4168 D WifiDataStall: L2 txTputKbps: 774494, rxTputKbps: 815257, L3 txTputKbps: 0, rxTputKbps: 0, TxTrafficHigh: false, RxTrafficHigh: false, Throughput Sufficient: true
-05-16 08:30:56.200  3936  4168 D WifiThroughputPredictor:  utilization (LLS) 15 isBluetoothConnected: false final utilization: 15
-05-16 08:30:56.200  3936  4168 D WifiThroughputPredictor:  BW: 2 RSSI: -33 Nss: 2 Mode: 5 symDur: 3600 snrDb 41 bitPerTone: 6667 rate: 866 throughput: 815
-05-16 08:30:56.200  3936  4168 D WifiThroughputPredictor:  utilization (LLS) 15 isBluetoothConnected: false final utilization: 15
-05-16 08:30:56.200  3936  4168 D WifiThroughputPredictor:  BW: 2 RSSI: -33 Nss: 2 Mode: 5 symDur: 3600 snrDb 41 bitPerTone: 6667 rate: 866 throughput: 815
-05-16 08:30:56.201  3936  4168 D WifiScoreCard: BSSID update SIGNAL_POLL ID: 69380597 SSID: "UNICAIR", BSSID: c8:bf:4c:77:58:fb, MAC: 66:70:e7:ef:44:76, IP: /192.168.31.194, Security type: 2, Supplicant state: COMPLETED, Wi-Fi standard: 11ac, RSSI: -33, Link speed: 866Mbps, Tx Link speed: 866Mbps, Max Supported Tx Link speed: 866Mbps, Rx Link speed: 866Mbps, Max Supported Rx Link speed: 866Mbps, Frequency: 5785MHz, Net ID: 0, Metered hint: false, score: 60, isUsable: true, CarrierMerged: false, SubscriptionId: -1, IsPrimary: 1, Trusted: true, Restricted: false, Ephemeral: false, OEM paid: false, OEM private: false, OSU AP: false, FQDN: <none>, Provider friendly name: <none>, Requesting package name: <none>"UNICAIR"wpa2-pskMLO Information: , Is TID-To-Link negotiation supported by the AP: false, AP MLD Address: <none>, AP MLO Link Id: <none>, AP MLO Affiliated links: <none>, Vendor Data: <none>
-05-16 08:30:56.201  3936  4168 D WifiScoreCard: txRate: 2 txSpeed: 866
-05-16 08:30:56.202  3936  4168 D WifiScoreCard: network update SIGNAL_POLL "UNICAIR" ID: 266647767 RSSI -33 txSpeed -1
-05-16 08:30:56.202  3936  4168 D WifiClientModeImpl[736265:wlan0]:  ClientModeImpl$L2ConnectedState screen=on 1 0 "UNICAIR" c8:bf:4c:77:58:fb rssi=-33 f=5785 sc=60 link=866 tx=0.7, 0.2, 0.0 rx=0.5 bcn=1716 [on:0 tx:0 rx:3 period:3040] from screen [on:46744 period:215447] score=60
-05-16 08:30:56.266  1694  1916 E HwcComposer: getLuts failed Status(-129, EX_TRANSACTION_FAILED): 'UNKNOWN_TRANSACTION: '
-05-16 08:30:56.367  1694  1916 E HwcComposer: getLuts failed Status(-129, EX_TRANSACTION_FAILED): 'UNKNOWN_TRANSACTION: '
-05-16 08:30:56.466  1694  1916 E HwcComposer: getLuts failed Status(-129, EX_TRANSACTION_FAILED): 'UNKNOWN_TRANSACTION: '
-05-16 08:30:56.568  1694  1916 E HwcComposer: getLuts failed Status(-129, EX_TRANSACTION_FAILED): 'UNKNOWN_TRANSACTION: '
-05-16 08:30:56.667  1694  1916 E HwcComposer: getLuts failed Status(-129, EX_TRANSACTION_FAILED): 'UNKNOWN_TRANSACTION: '
-05-16 08:30:56.769  1694  1916 E HwcComposer: getLuts failed Status(-129, EX_TRANSACTION_FAILED): 'UNKNOWN_TRANSACTION: '
-05-16 08:30:56.869  1694  1916 E HwcComposer: getLuts failed Status(-129, EX_TRANSACTION_FAILED): 'UNKNOWN_TRANSACTION: '
-05-16 08:30:56.970  1694  1916 E HwcComposer: getLuts failed Status(-129, EX_TRANSACTION_FAILED): 'UNKNOWN_TRANSACTION: '
-05-16 08:30:57.070  1694  1916 E HwcComposer: getLuts failed Status(-129, EX_TRANSACTION_FAILED): 'UNKNOWN_TRANSACTION: '
-05-16 08:30:57.171  1694  1916 E HwcComposer: getLuts failed Status(-129, EX_TRANSACTION_FAILED): 'UNKNOWN_TRANSACTION: '
-05-16 08:30:57.272  1694  1916 E HwcComposer: getLuts failed Status(-129, EX_TRANSACTION_FAILED): 'UNKNOWN_TRANSACTION: '
-05-16 08:30:57.371  1694  1916 E HwcComposer: getLuts failed Status(-129, EX_TRANSACTION_FAILED): 'UNKNOWN_TRANSACTION: '
-05-16 08:30:57.382  3936  6703 W ActivityManager: pid 3936 system sent binder code 2 with flags 0 to frozen apps and got error -32
-05-16 08:30:57.383  3936  6703 E ConsumerIrService: Error transmitting frequency: 38000
-05-16 08:30:57.383  1639  1639 D vendor.qti.vibrator: Vibrator on for timeoutMs: 50
-05-16 08:30:57.385  1639 12597 D vendor.qti.vibrator: Starting on on another thread
-05-16 08:30:57.436  1639 12597 D vendor.qti.vibrator: Notifying on complete
-05-16 08:30:57.437  1639  1639 D vendor.qti.vibrator: QTI Vibrator off
-05-16 08:30:57.472  1694  1916 E HwcComposer: getLuts failed Status(-129, EX_TRANSACTION_FAILED): 'UNKNOWN_TRANSACTION: '
-05-16 08:30:57.572  1694  1916 E HwcComposer: getLuts failed Status(-129, EX_TRANSACTION_FAILED): 'UNKNOWN_TRANSACTION: '
-05-16 08:30:57.673  1694  1916 E HwcComposer: getLuts failed Status(-129, EX_TRANSACTION_FAILED): 'UNKNOWN_TRANSACTION: '
-05-16 08:30:57.773  1694  1916 E HwcComposer: getLuts failed Status(-129, EX_TRANSACTION_FAILED): 'UNKNOWN_TRANSACTION: '
-05-16 08:30:57.791  3936 11809 W ActivityManager: pid 3936 system sent binder code 2 with flags 0 to frozen apps and got error -32
-05-16 08:30:57.791  3936 11809 D ActivityManager: Too many transaction errors, throttling freezer binder callback.
-05-16 08:30:57.791  3936 11809 E ConsumerIrService: Error transmitting frequency: 38000
-05-16 08:30:57.792  1639  1639 D vendor.qti.vibrator: Vibrator on for timeoutMs: 50
-05-16 08:30:57.793  1639 12598 D vendor.qti.vibrator: Starting on on another thread
-05-16 08:30:57.843  1639 12598 D vendor.qti.vibrator: Notifying on complete
-05-16 08:30:57.844  1639  1639 D vendor.qti.vibrator: QTI Vibrator off
-05-16 08:30:57.874  1694  1916 E HwcComposer: getLuts failed Status(-129, EX_TRANSACTION_FAILED): 'UNKNOWN_TRANSACTION: '
-05-16 08:30:57.974  1694  1916 E HwcComposer: getLuts failed Status(-129, EX_TRANSACTION_FAILED): 'UNKNOWN_TRANSACTION: '
-05-16 08:30:58.077  1694  1916 E HwcComposer: getLuts failed Status(-129, EX_TRANSACTION_FAILED): 'UNKNOWN_TRANSACTION: '
-05-16 08:30:58.151  3936  6703 W ActivityManager: pid 3936 system sent binder code 2 with flags 0 to frozen apps and got error -32
-05-16 08:30:58.151  3936  6703 D ActivityManager: Too many transaction errors, throttling freezer binder callback.
-05-16 08:30:58.152  3936  6703 E ConsumerIrService: Error transmitting frequency: 38000
-05-16 08:30:58.152  1639  1639 D vendor.qti.vibrator: Vibrator on for timeoutMs: 50
-05-16 08:30:58.154  1639 12599 D vendor.qti.vibrator: Starting on on another thread
-05-16 08:30:58.179  1694  1916 E HwcComposer: getLuts failed Status(-129, EX_TRANSACTION_FAILED): 'UNKNOWN_TRANSACTION: '
-05-16 08:30:58.205  1639 12599 D vendor.qti.vibrator: Notifying on complete
-05-16 08:30:58.207  1639  1639 D vendor.qti.vibrator: QTI Vibrator off
-05-16 08:30:58.279  1694  1916 E HwcComposer: getLuts failed Status(-129, EX_TRANSACTION_FAILED): 'UNKNOWN_TRANSACTION: '
-05-16 08:30:58.378  1694  1916 E HwcComposer: getLuts failed Status(-129, EX_TRANSACTION_FAILED): 'UNKNOWN_TRANSACTION: '
-05-16 08:30:58.452  3936  6703 W ActivityManager: pid 3936 system sent binder code 2 with flags 0 to frozen apps and got error -32
-05-16 08:30:58.452  3936  6703 D ActivityManager: Too many transaction errors, throttling freezer binder callback.
-05-16 08:30:58.452  3936  6703 E ConsumerIrService: Error transmitting frequency: 38000
-05-16 08:30:58.453  1639  1639 D vendor.qti.vibrator: Vibrator on for timeoutMs: 50
-05-16 08:30:58.455  1639 12600 D vendor.qti.vibrator: Starting on on another thread
-05-16 08:30:58.479  1694  1916 E HwcComposer: getLuts failed Status(-129, EX_TRANSACTION_FAILED): 'UNKNOWN_TRANSACTION: '
-05-16 08:30:58.506  1639 12600 D vendor.qti.vibrator: Notifying on complete
-05-16 08:30:58.507  1639  1639 D vendor.qti.vibrator: QTI Vibrator off
-05-16 08:30:58.580  1694  1916 E HwcComposer: getLuts failed Status(-129, EX_TRANSACTION_FAILED): 'UNKNOWN_TRANSACTION: '
-05-16 08:30:58.680  1694  1916 E HwcComposer: getLuts failed Status(-129, EX_TRANSACTION_FAILED): 'UNKNOWN_TRANSACTION: '
-05-16 08:30:58.780  1694  1916 E HwcComposer: getLuts failed Status(-129, EX_TRANSACTION_FAILED): 'UNKNOWN_TRANSACTION: '
-05-16 08:30:58.811  3936  6703 W ActivityManager: pid 3936 system sent binder code 2 with flags 0 to frozen apps and got error -32
-05-16 08:30:58.811  3936  6703 D ActivityManager: Too many transaction errors, throttling freezer binder callback.
-05-16 08:30:58.811  3936  6703 E ConsumerIrService: Error transmitting frequency: 38000
-05-16 08:30:58.812  1639  1639 D vendor.qti.vibrator: Vibrator on for timeoutMs: 50
-05-16 08:30:58.813  1639 12601 D vendor.qti.vibrator: Starting on on another thread
-05-16 08:30:58.863  1639 12601 D vendor.qti.vibrator: Notifying on complete
-05-16 08:30:58.865  1639  1639 D vendor.qti.vibrator: QTI Vibrator off
-05-16 08:30:58.881  1694  1916 E HwcComposer: getLuts failed Status(-129, EX_TRANSACTION_FAILED): 'UNKNOWN_TRANSACTION: '
-05-16 08:30:58.982  1694  1916 E HwcComposer: getLuts failed Status(-129, EX_TRANSACTION_FAILED): 'UNKNOWN_TRANSACTION: '
-05-16 08:30:59.082  1694  1916 E HwcComposer: getLuts failed Status(-129, EX_TRANSACTION_FAILED): 'UNKNOWN_TRANSACTION: '
-05-16 08:30:59.095  3936  6703 W ActivityManager: pid 3936 system sent binder code 2 with flags 0 to frozen apps and got error -32
-05-16 08:30:59.095  3936  6703 D ActivityManager: Too many transaction errors, throttling freezer binder callback.
-05-16 08:30:59.095  3936  6703 E ConsumerIrService: Error transmitting frequency: 38000
-05-16 08:30:59.095  1639  1639 D vendor.qti.vibrator: Vibrator on for timeoutMs: 50
-05-16 08:30:59.096  1639 12602 D vendor.qti.vibrator: Starting on on another thread
-05-16 08:30:59.146  1639 12602 D vendor.qti.vibrator: Notifying on complete
-05-16 08:30:59.147  1639  1639 D vendor.qti.vibrator: QTI Vibrator off
-05-16 08:30:59.183  1694  1916 E HwcComposer: getLuts failed Status(-129, EX_TRANSACTION_FAILED): 'UNKNOWN_TRANSACTION: '
-05-16 08:30:59.239  3936  4168 D WifiClientModeImpl[736265:wlan0]: updateLinkLayerStatsRssiSpeedFrequencyCapabilities rssi=-34 TxLinkspeed=866 freq=5785 RxLinkSpeed=866
-05-16 08:30:59.240  3936  4168 D WifiDataStall: tx tput in kbps: 774494
-05-16 08:30:59.240  3936  4168 D WifiDataStall: rx tput in kbps: 815257
-05-16 08:30:59.240  3936  4168 V WifiConfigManager: Updating scan detail cache freq=5785 BSSID=c8:bf:4c:77:58:fb RSSI=-33 for "UNICAIR"WPA_PSK
-05-16 08:30:59.240  3936  4168 D WifiDataStall:  ccaLevel = 15
-05-16 08:30:59.240  3936  4168 D WifiDataStall: L2 txTputKbps: 774494, rxTputKbps: 815257, L3 txTputKbps: 0, rxTputKbps: 0, TxTrafficHigh: false, RxTrafficHigh: false, Throughput Sufficient: true
-05-16 08:30:59.241  3936  4168 D WifiThroughputPredictor:  utilization (LLS) 15 isBluetoothConnected: false final utilization: 15
-05-16 08:30:59.241  3936  4168 D WifiThroughputPredictor:  BW: 2 RSSI: -34 Nss: 2 Mode: 5 symDur: 3600 snrDb 40 bitPerTone: 6667 rate: 866 throughput: 815
-05-16 08:30:59.241  3936  4168 D WifiThroughputPredictor:  utilization (LLS) 15 isBluetoothConnected: false final utilization: 15
-05-16 08:30:59.241  3936  4168 D WifiThroughputPredictor:  BW: 2 RSSI: -34 Nss: 2 Mode: 5 symDur: 3600 snrDb 40 bitPerTone: 6667 rate: 866 throughput: 815
-05-16 08:30:59.243  3936  4168 D WifiScoreCard: BSSID update SIGNAL_POLL ID: 69380597 SSID: "UNICAIR", BSSID: c8:bf:4c:77:58:fb, MAC: 66:70:e7:ef:44:76, IP: /192.168.31.194, Security type: 2, Supplicant state: COMPLETED, Wi-Fi standard: 11ac, RSSI: -34, Link speed: 866Mbps, Tx Link speed: 866Mbps, Max Supported Tx Link speed: 866Mbps, Rx Link speed: 866Mbps, Max Supported Rx Link speed: 866Mbps, Frequency: 5785MHz, Net ID: 0, Metered hint: false, score: 60, isUsable: true, CarrierMerged: false, SubscriptionId: -1, IsPrimary: 1, Trusted: true, Restricted: false, Ephemeral: false, OEM paid: false, OEM private: false, OSU AP: false, FQDN: <none>, Provider friendly name: <none>, Requesting package name: <none>"UNICAIR"wpa2-pskMLO Information: , Is TID-To-Link negotiation supported by the AP: false, AP MLD Address: <none>, AP MLO Link Id: <none>, AP MLO Affiliated links: <none>, Vendor Data: <none>
-05-16 08:30:59.243  3936  4168 D WifiScoreCard: txRate: 1 txSpeed: 866
-05-16 08:30:59.243  3936  4168 D WifiScoreCard: network update SIGNAL_POLL "UNICAIR" ID: 266647767 RSSI -34 txSpeed -1
-05-16 08:30:59.244  3936  4168 D WifiClientModeImpl[736265:wlan0]:  ClientModeImpl$L2ConnectedState screen=on 1 0 "UNICAIR" c8:bf:4c:77:58:fb rssi=-34 f=5785 sc=60 link=866 tx=0.2, 0.0, 0.0 rx=0.2 bcn=1739 [on:0 tx:0 rx:5 period:3041] from screen [on:46744 period:218489] score=60
-05-16 08:30:59.283  1694  1916 E HwcComposer: getLuts failed Status(-129, EX_TRANSACTION_FAILED): 'UNKNOWN_TRANSACTION: '
-05-16 08:30:59.388  1694  1916 E HwcComposer: getLuts failed Status(-129, EX_TRANSACTION_FAILED): 'UNKNOWN_TRANSACTION: '
-05-16 08:30:59.403  3936  6703 W ActivityManager: pid 3936 system sent binder code 2 with flags 0 to frozen apps and got error -32
-05-16 08:30:59.403  3936  6703 D ActivityManager: Too many transaction errors, throttling freezer binder callback.
-05-16 08:30:59.403  3936  6703 E ConsumerIrService: Error transmitting frequency: 38000
-05-16 08:30:59.404  1639  1639 D vendor.qti.vibrator: Vibrator on for timeoutMs: 50
-05-16 08:30:59.405  1639 12603 D vendor.qti.vibrator: Starting on on another thread
-05-16 08:30:59.455  1639 12603 D vendor.qti.vibrator: Notifying on complete
-05-16 08:30:59.456  1639  1639 D vendor.qti.vibrator: QTI Vibrator off
-05-16 08:30:59.491  1694  1916 E HwcComposer: getLuts failed Status(-129, EX_TRANSACTION_FAILED): 'UNKNOWN_TRANSACTION: '
-05-16 08:30:59.598  1694  1916 E HwcComposer: getLuts failed Status(-129, EX_TRANSACTION_FAILED): 'UNKNOWN_TRANSACTION: '
-05-16 08:30:59.680  3936 11809 W ActivityManager: pid 3936 system sent binder code 2 with flags 0 to frozen apps and got error -32
-05-16 08:30:59.680  3936 11809 D ActivityManager: Too many transaction errors, throttling freezer binder callback.
-05-16 08:30:59.680  3936 11809 E ConsumerIrService: Error transmitting frequency: 38000
-05-16 08:30:59.681  1639  1639 D vendor.qti.vibrator: Vibrator on for timeoutMs: 50
-05-16 08:30:59.682  1639 12604 D vendor.qti.vibrator: Starting on on another thread
-05-16 08:30:59.698  1694  1916 E HwcComposer: getLuts failed Status(-129, EX_TRANSACTION_FAILED): 'UNKNOWN_TRANSACTION: '
-05-16 08:30:59.732  1639 12604 D vendor.qti.vibrator: Notifying on complete
-05-16 08:30:59.733  1639  1639 D vendor.qti.vibrator: QTI Vibrator off
-05-16 08:30:59.752     0     0 F [    C3] [irq][0x4491b7d85][00: 30:59.744865] peach_v2: [0:F:HIF] hif_wake_interrupt_handler: wake interrupt received on irq 284
-05-16 08:30:59.776 11670 11670 I [kworke][0x449223f5e][00:30:59.767929] peach_v2: [11670:I:PMO] pmo_core_psoc_send_host_wakeup_ind_to_fw: Host wakeup indication sent to fw
-05-16 08:30:59.783     0     0 I [    C3] [soft_i][0x44924895e][00: 30:59.775742] peach_v2: [0:I:WMA] WLAN triggered wakeup: BPF_ALLOW (39), vdev: 0 (STA)
-05-16 08:30:59.784     0     0 I [    C3] [soft_i][0x44924a23d][00: 30:59.776074] peach_v2: [0:I:WMA] wma_wake_event_packet: Wake event packet:
-05-16 08:30:59.798  1694  1916 E HwcComposer: getLuts failed Status(-129, EX_TRANSACTION_FAILED): 'UNKNOWN_TRANSACTION: '
-05-16 08:30:59.899  1694  1916 E HwcComposer: getLuts failed Status(-129, EX_TRANSACTION_FAILED): 'UNKNOWN_TRANSACTION: '
-05-16 08:31:00.000  1694  1916 E HwcComposer: getLuts failed Status(-129, EX_TRANSACTION_FAILED): 'UNKNOWN_TRANSACTION: '
-05-16 08:31:00.100  1694  1916 E HwcComposer: getLuts failed Status(-129, EX_TRANSACTION_FAILED): 'UNKNOWN_TRANSACTION: '
+05-16 08:38:59.308  4267  4353 D ShellBackPreview: custom animation loaded android.view.animation.AnimationSet@f013773
+05-16 08:38:59.308  4267  4353 D ShellBackPreview: custom animation loaded android.view.animation.AnimationSet@85bd630
+05-16 08:38:59.308  4267  4353 D ShellBackPreview: BackAnimationController: startAnimation()
+05-16 08:38:59.309  4267  4353 D ShellBackPreview: Start back to activity animation.
+05-16 08:38:59.309  3936  4343 W ActivityManager: pid 3936 system sent binder code 2 with flags 0 to frozen apps and got error -32
+05-16 08:38:59.309  3936  4343 D ActivityManager: Too many transaction errors, throttling freezer binder callback.
+05-16 08:38:59.310  3936  4343 E ConsumerIrService: Error transmitting frequency: 38000
+05-16 08:38:59.311  4267  4353 D ShellBackPreview: BackAnimationController: startPostCommitAnimation()
+05-16 08:38:59.312  4267  4353 V WindowManagerShell:  animated by firstHandler
+05-16 08:38:59.312  1639  1639 D vendor.qti.vibrator: Vibrator on for timeoutMs: 50
+05-16 08:38:59.312  1639 13986 D vendor.qti.vibrator: Starting on on another thread
+05-16 08:38:59.319  1562  5362 E ANDR-PERF-OH: ANDR-PERF-OH: getPerfHandle() 55: Invalid handle req: 0
+05-16 08:38:59.322  4267  4353 D ShellBackPreview: BackAnimationController: onBackAnimationFinished()
+05-16 08:38:59.322  4267  4353 D ShellBackPreview: BackAnimationController: finishBackNavigation()
+05-16 08:38:59.322  4267  4353 D ShellBackPreview: resetTouchTracker -> no queued gesture
+05-16 08:38:59.323  3936  8196 D CoreBackPreview: onBackNavigationDone backType=2, triggerBack=false
+05-16 08:38:59.323  4267  4353 V WindowManagerShell: Directly starting a new transition type=CLOSE_PREDICTIVE_BACK wct=WindowContainerTransaction { changes= {} hops= [{restoreBackNav: container=null reparent=null mToTop=false mWindowingMode=null mActivityType=null}] errorCallbackToken=null taskFragmentOrganizer=null } handler=com.android.wm.shell.back.BackAnimationController$BackTransitionHandler@c88df62
+05-16 08:38:59.323  3936  4038 D CoreBackPreview: Setting Activity.mLauncherTaskBehind to false. Activity=ActivityRecord{166752509 u0 com.tiqiaa.icontrol/.BrandSelectActivity t23}
+05-16 08:38:59.325  1694  1928 I BpBinder: onLastStrongRef automatically unlinking death recipients: 
+05-16 08:38:59.325  3936  4038 D CoreBackPreview: onTransactionReady, opening: [], closing: [ActivityRecord{166752509 u0 com.tiqiaa.icontrol/.BrandSelectActivity t23}], animating: AnimationTargets{ openTarget= {ActivityRecord{166752509 u0 com.tiqiaa.icontrol/.BrandSelectActivity t23}} closeTarget= ActivityRecord{58376530 u0 com.tiqiaa.icontrol/.NewExactMatchRemoteActivity t23} mSwitchType= 2 mComposed= true mWaitTransition= false}, match: false
+05-16 08:38:59.326  3936  3968 V WindowManager: Sent Transition (#216) createdAt=05-16 08:38:59.323
+05-16 08:38:59.326  3936  3968 V WindowManager:     startWCT=WindowContainerTransaction { changes= {} hops= [{restoreBackNav: container=null reparent=null mToTop=false mWindowingMode=null mActivityType=null}] errorCallbackToken=null taskFragmentOrganizer=null }
+05-16 08:38:59.326  3936  3968 V WindowManager:     info={id=216 t=CLOSE_PREDICTIVE_BACK f=0x0 trk=0 r=[0@Point(0, 0)] c=[
+05-16 08:38:59.326  3936  3968 V WindowManager:         {m=TO_BACK f=FILLS_TASK|IS_OCCLUDED|FLAG_BACK_GESTURE_ANIMATED leash=Surface(name=ActivityRecord{166752509 u0 com.tiqiaa.icontrol/.BrandSelectActivity)/@0xfffdf84 sb=Rect(0, 0 - 1280, 2772) eb=Rect(0, 0 - 1280, 2772) epz=Point(1280, 2772) d=0 bc=fffafafa component=com.tiqiaa.icontrol/.BrandSelectActivity opt={t=FROM_STYLE mUserId=0}}
+05-16 08:38:59.326  3936  3968 V WindowManager:     ]}
+05-16 08:38:59.327  4267 11845 V WindowManagerShell: onTransitionReady(transaction=16904991285315)
+05-16 08:38:59.327  4267  4353 V WindowManagerShell: onTransitionReady (#216) android.os.BinderProxy@3fa2065: {id=216 t=CLOSE_PREDICTIVE_BACK f=0x0 trk=0 r=[0@Point(0, 0)] c=[
+05-16 08:38:59.327  4267  4353 V WindowManagerShell:         {m=TO_BACK f=FILLS_TASK|IS_OCCLUDED|FLAG_BACK_GESTURE_ANIMATED leash=Surface(name=ActivityRecord{166752509 u0 com.tiqiaa.icontrol/.BrandSelectActivity)/@0x6add7cf sb=Rect(0, 0 - 1280, 2772) eb=Rect(0, 0 - 1280, 2772) epz=Point(1280, 2772) d=0 bc=fffafafa component=com.tiqiaa.icontrol/.BrandSelectActivity opt={t=FROM_STYLE mUserId=0}}
+05-16 08:38:59.327  4267  4353 V WindowManagerShell:     ]}
+05-16 08:38:59.327  4267  4353 V WindowManagerShell: Transition (#216) android.os.BinderProxy@3fa2065@0 ready while (#215) android.os.BinderProxy@56ef8df@0 is still animating. Notify the animating transition in case they can be merged
+05-16 08:38:59.327  4267  4353 D ShellBackPreview: Back animation transition, merge pending transitions result={id=216 t=CLOSE_PREDICTIVE_BACK f=0x0 trk=0 r=[0@Point(0, 0)] c=[]}
+05-16 08:38:59.327  4267  4353 V WindowManagerShell: Transition was merged: (#216) android.os.BinderProxy@3fa2065@0 into (#215) android.os.BinderProxy@56ef8df@0
+05-16 08:38:59.328  4267  4353 V WindowManagerShell: Transition animation finished (aborted=false), notifying core (#215) android.os.BinderProxy@56ef8df@0
+05-16 08:38:59.328  3936  3968 V WindowManager: Finish Transition (#215): created at 05-16 08:38:59.281 collect-started=0.26ms request-sent=8.303ms started=13.094ms ready=13.076ms sent=21.645ms commit=14.582ms finished=47.56ms
+05-16 08:38:59.330  3936  3968 V WindowManager: Finish Transition (#216): created at 05-16 08:38:59.323 collect-started=0.088ms started=0.104ms ready=1.373ms sent=2.713ms finished=6.577ms
+05-16 08:38:59.330 13129 13129 D VRI[BrandSelectActivity]: visibilityChanged oldVisibility=true newVisibility=false
+05-16 08:38:59.331  4267  4353 V WindowManagerShell: Track 0 became idle
+05-16 08:38:59.331  4267  4353 V WindowManagerShell: All active transition animations finished
+05-16 08:38:59.331   805   805 I hwservicemanager: getTransport: Cannot find entry vendor.qti.hardware.servicetracker@1.2::IServicetracker/default in either framework or device VINTF manifest.
+05-16 08:38:59.332  3936  3971 W ActivityTaskManager: servicetracker HIDL not available
+05-16 08:38:59.332  3936  3971 E ActivityTaskManager: Unable to get servicetracker HAL instance
+05-16 08:38:59.332   805   805 I hwservicemanager: getTransport: Cannot find entry vendor.qti.hardware.servicetracker@1.2::IServicetracker/default in either framework or device VINTF manifest.
+05-16 08:38:59.332  3936  3971 W ActivityTaskManager: servicetracker HIDL not available
+05-16 08:38:59.332  3936  3971 E ActivityTaskManager: Unable to get servicetracker HAL instance
+05-16 08:38:59.337 13129 13129 D AutofillManager: view not autofillable - not passing ime action check
+05-16 08:38:59.346   805   805 I hwservicemanager: getTransport: Cannot find entry vendor.qti.hardware.servicetracker@1.2::IServicetracker/default in either framework or device VINTF manifest.
+05-16 08:38:59.347  3936  8196 W ActivityTaskManager: servicetracker HIDL not available
+05-16 08:38:59.347  3936  8196 E ActivityTaskManager: Unable to get servicetracker HAL instance
+05-16 08:38:59.347   805   805 I hwservicemanager: getTransport: Cannot find entry vendor.qti.hardware.servicetracker@1.2::IServicetracker/default in either framework or device VINTF manifest.
+05-16 08:38:59.347  3936  8196 W ActivityTaskManager: servicetracker HIDL not available
+05-16 08:38:59.347  3936  8196 E ActivityTaskManager: Unable to get servicetracker HAL instance
+05-16 08:38:59.348  3936  4059 W UsageStatsService: Unexpected activity event reported! (com.tiqiaa.icontrol/com.tiqiaa.icontrol.BrandSelectActivity event : 23 instanceId : 242967026)
+05-16 08:38:59.363  1639 13986 D vendor.qti.vibrator: Notifying on complete
+05-16 08:38:59.363  1639  1639 D vendor.qti.vibrator: QTI Vibrator off
+05-16 08:38:59.393  1694  1916 E HwcComposer: getLuts failed Status(-129, EX_TRANSACTION_FAILED): 'UNKNOWN_TRANSACTION: '
+05-16 08:38:59.496  1694  1916 E HwcComposer: getLuts failed Status(-129, EX_TRANSACTION_FAILED): 'UNKNOWN_TRANSACTION: '
+05-16 08:38:59.538  3936  8196 D CoreBackPreview: startBackNavigation currentTask=Task{dc88fe6 #23 type=standard A=10166:com.tiqiaa.icontrol}, topRunningActivity=ActivityRecord{58376530 u0 com.tiqiaa.icontrol/.NewExactMatchRemoteActivity t23}, callbackInfo=OnBackInvokedCallbackInfo{mCallback=android.window.IOnBackInvokedCallback$Stub$Proxy@9e0d77c, mPriority=-1, mIsAnimationCallback=false, mOverrideBehavior=0}, currentFocus=Window{c066049 u0 com.tiqiaa.icontrol/com.tiqiaa.icontrol.NewExactMatchRemoteActivity}
+05-16 08:38:59.538  3936  8196 D CoreBackPreview: Previous Destination is Activity:ComponentInfo{com.tiqiaa.icontrol/com.tiqiaa.icontrol.BrandSelectActivity} Task:Task=23 removedContainer:ActivityRecord{58376530 u0 com.tiqiaa.icontrol/.NewExactMatchRemoteActivity t23}, backType=TYPE_CROSS_ACTIVITY
+05-16 08:38:59.540  3936  8196 D CoreBackPreview: Setting Activity.mLauncherTaskBehind to true. Activity=ActivityRecord{166752509 u0 com.tiqiaa.icontrol/.BrandSelectActivity t23}
+05-16 08:38:59.543  1694  1928 I BpBinder: onLastStrongRef automatically unlinking death recipients: 
+05-16 08:38:59.543   805   805 I hwservicemanager: getTransport: Cannot find entry vendor.qti.hardware.servicetracker@1.2::IServicetracker/default in either framework or device VINTF manifest.
+05-16 08:38:59.543  3936  8196 W ActivityTaskManager: servicetracker HIDL not available
+05-16 08:38:59.543  3936  8196 E ActivityTaskManager: Unable to get servicetracker HAL instance
+05-16 08:38:59.544   805   805 I hwservicemanager: getTransport: Cannot find entry vendor.qti.hardware.servicetracker@1.2::IServicetracker/default in either framework or device VINTF manifest.
+05-16 08:38:59.544  3936  8196 W ActivityTaskManager: servicetracker HIDL not available
+05-16 08:38:59.545  3936  8196 E ActivityTaskManager: Unable to get servicetracker HAL instance
+05-16 08:38:59.548 13129 13129 D ViewRootImpl: Skipping stats log for color mode
+05-16 08:38:59.552  4267  4353 D ShellBackPreview: Received backNavigationInfo:BackNavigationInfo{mType=TYPE_CROSS_ACTIVITY (2), mOnBackNavigationDone=android.os.RemoteCallback@8715de1, mOnBackInvokedCallback=android.window.IOnBackInvokedCallback$Stub$Proxy@fe5b706, mPrepareRemoteAnimation=true, mAnimationCallback=false, mCustomizeAnimationInfo=CustomAnimationInfo, package name= com.tiqiaa.icontrol}
+05-16 08:38:59.552  4267  4353 V WindowManagerShell: Transition requested (#217): android.os.BinderProxy@736f1c7 TransitionRequestInfo { type = PREDICTIVE_BACK, triggerTask = null, pipChange = null, remoteTransition = null, displayChange = null, flags = 0, debugId = 217 }
+05-16 08:38:59.553  4267  4353 V WindowManagerShell: Transition (#217): request handled by BackAnimationController$BackTransitionHandler
+05-16 08:38:59.554 13129 13129 D AutofillManager: view not autofillable - not passing ime action check
+05-16 08:38:59.555  4267  4353 D ShellBackPreview: Finishing gesture with event action: 1
+05-16 08:38:59.555  4267  4353 D ShellBackPreview: onGestureFinished() mTriggerBack == false
+05-16 08:38:59.555  4267  4353 W ShellBackPreview: Gesture released, but animation didn't ready.
+05-16 08:38:59.558  4267  4477 V SnapshotDrawerUtils: Drawing snapshot surface sizeMismatch=true
+05-16 08:38:59.563  3936  3968 V WindowManager: Sent Transition (#217) createdAt=05-16 08:38:59.539 via request=TransitionRequestInfo { type = PREDICTIVE_BACK, triggerTask = null, pipChange = null, remoteTransition = null, displayChange = null, flags = 0, debugId = 217 }
+05-16 08:38:59.563  3936  3968 V WindowManager:     startWCT=WindowContainerTransaction { changes= {} hops= [] errorCallbackToken=null taskFragmentOrganizer=null }
+05-16 08:38:59.563  3936  3968 V WindowManager:     info={id=217 t=PREDICTIVE_BACK f=0x0 trk=0 r=[0@Point(0, 0)] c=[
+05-16 08:38:59.563  3936  3968 V WindowManager:         {m=CHANGE f=FILLS_TASK|FLAG_BACK_GESTURE_ANIMATED leash=Surface(name=ActivityRecord{58376530 u0 com.tiqiaa.icontrol/.NewExactMatchRemoteActivity)/@0x99bd826 sb=Rect(0, 0 - 1280, 2772) eb=Rect(0, 0 - 1280, 2772) epz=Point(1280, 2772) d=0 bc=fffafafa component=com.tiqiaa.icontrol/.NewExactMatchRemoteActivity opt={t=FROM_STYLE mUserId=0}},
+05-16 08:38:59.563  3936  3968 V WindowManager:         {m=TO_FRONT f=FILLS_TASK|IS_OCCLUDED|FLAG_BACK_GESTURE_ANIMATED leash=Surface(name=ActivityRecord{166752509 u0 com.tiqiaa.icontrol/.BrandSelectActivity)/@0xfffdf84 sb=Rect(0, 0 - 1280, 2772) eb=Rect(0, 0 - 1280, 2772) epz=Point(1280, 2772) d=0 bc=fffafafa component=com.tiqiaa.icontrol/.BrandSelectActivity opt={t=FROM_STYLE mUserId=0}}
+05-16 08:38:59.563  3936  3968 V WindowManager:     ]}
+05-16 08:38:59.564  3936  8196 W ActivityManager: pid 3936 system sent binder code 2 with flags 0 to frozen apps and got error -32
+05-16 08:38:59.564  3936  8196 D ActivityManager: Too many transaction errors, throttling freezer binder callback.
+05-16 08:38:59.564  3936  8196 E ConsumerIrService: Error transmitting frequency: 38000
+05-16 08:38:59.565  1639  1639 D vendor.qti.vibrator: Vibrator on for timeoutMs: 50
+05-16 08:38:59.565  4267  8188 V WindowManagerShell: onTransitionReady(transaction=16904991285330)
+05-16 08:38:59.566  4267  4353 V WindowManagerShell: onTransitionReady (#217) android.os.BinderProxy@736f1c7: {id=217 t=PREDICTIVE_BACK f=0x0 trk=0 r=[0@Point(0, 0)] c=[
+05-16 08:38:59.566  4267  4353 V WindowManagerShell:         {m=CHANGE f=FILLS_TASK|FLAG_BACK_GESTURE_ANIMATED leash=Surface(name=ActivityRecord{58376530 u0 com.tiqiaa.icontrol/.NewExactMatchRemoteActivity)/@0xd27ecea sb=Rect(0, 0 - 1280, 2772) eb=Rect(0, 0 - 1280, 2772) epz=Point(1280, 2772) d=0 bc=fffafafa component=com.tiqiaa.icontrol/.NewExactMatchRemoteActivity opt={t=FROM_STYLE mUserId=0}},
+05-16 08:38:59.566  4267  4353 V WindowManagerShell:         {m=TO_FRONT f=FILLS_TASK|IS_OCCLUDED|FLAG_BACK_GESTURE_ANIMATED leash=Surface(name=ActivityRecord{166752509 u0 com.tiqiaa.icontrol/.BrandSelectActivity)/@0xb2b5bdb sb=Rect(0, 0 - 1280, 2772) eb=Rect(0, 0 - 1280, 2772) epz=Point(1280, 2772) d=0 bc=fffafafa component=com.tiqiaa.icontrol/.BrandSelectActivity opt={t=FROM_STYLE mUserId=0}}
+05-16 08:38:59.566  4267  4353 V WindowManagerShell:     ]}
+05-16 08:38:59.566  4267  4353 V WindowManagerShell: Playing animation for (#217) android.os.BinderProxy@736f1c7@0
+05-16 08:38:59.566  4267  4353 V WindowManagerShell:  try firstHandler com.android.wm.shell.back.BackAnimationController$BackTransitionHandler@c88df62
+05-16 08:38:59.567  4267  4353 V ShellRecents: No matching remote found to takeover (#217)
+05-16 08:38:59.567  1639 13990 D vendor.qti.vibrator: Starting on on another thread
+05-16 08:38:59.567  4267  4353 D ShellBackPreview: custom animation loaded android.view.animation.AnimationSet@47c8151
+05-16 08:38:59.567  4267  4353 D ShellBackPreview: custom animation loaded android.view.animation.AnimationSet@e0fedb6
+05-16 08:38:59.568  4267  4353 D ShellBackPreview: BackAnimationController: startAnimation()
+05-16 08:38:59.568  4267  4353 D ShellBackPreview: Start back to activity animation.
+05-16 08:38:59.570  4267  4353 D ShellBackPreview: BackAnimationController: startPostCommitAnimation()
+05-16 08:38:59.570  4267  4353 V WindowManagerShell:  animated by firstHandler
+05-16 08:38:59.572  3936  4343 W WindowManager: Failed looking up window session=Session{dab9048 4267:u0a10124} callers=com.android.server.wm.WindowManagerService.removeClientToken:2153 com.android.server.wm.Session.remove:270 android.view.IWindowSession$Stub.onTransact:696 
+05-16 08:38:59.577  1562  5364 E ANDR-PERF-OH: ANDR-PERF-OH: getPerfHandle() 55: Invalid handle req: 0
+05-16 08:38:59.580  4267  4353 D ShellBackPreview: BackAnimationController: onBackAnimationFinished()
+05-16 08:38:59.581  4267  4353 D ShellBackPreview: BackAnimationController: finishBackNavigation()
+05-16 08:38:59.581  4267  4353 D ShellBackPreview: resetTouchTracker -> no queued gesture
+05-16 08:38:59.581  4267  4353 V WindowManagerShell: Directly starting a new transition type=CLOSE_PREDICTIVE_BACK wct=WindowContainerTransaction { changes= {} hops= [{restoreBackNav: container=null reparent=null mToTop=false mWindowingMode=null mActivityType=null}] errorCallbackToken=null taskFragmentOrganizer=null } handler=com.android.wm.shell.back.BackAnimationController$BackTransitionHandler@c88df62
+05-16 08:38:59.581  3936  6582 D CoreBackPreview: onBackNavigationDone backType=2, triggerBack=false
+05-16 08:38:59.582  3936  8196 D CoreBackPreview: Setting Activity.mLauncherTaskBehind to false. Activity=ActivityRecord{166752509 u0 com.tiqiaa.icontrol/.BrandSelectActivity t23}
+05-16 08:38:59.584  3936  8196 D CoreBackPreview: onTransactionReady, opening: [], closing: [ActivityRecord{166752509 u0 com.tiqiaa.icontrol/.BrandSelectActivity t23}], animating: AnimationTargets{ openTarget= {ActivityRecord{166752509 u0 com.tiqiaa.icontrol/.BrandSelectActivity t23}} closeTarget= ActivityRecord{58376530 u0 com.tiqiaa.icontrol/.NewExactMatchRemoteActivity t23} mSwitchType= 2 mComposed= true mWaitTransition= false}, match: false
+05-16 08:38:59.584  1694  1928 I BpBinder: onLastStrongRef automatically unlinking death recipients: 
+05-16 08:38:59.585  3936  3968 V WindowManager: Sent Transition (#218) createdAt=05-16 08:38:59.582
+05-16 08:38:59.587  3936  3968 V WindowManager:     startWCT=WindowContainerTransaction { changes= {} hops= [{restoreBackNav: container=null reparent=null mToTop=false mWindowingMode=null mActivityType=null}] errorCallbackToken=null taskFragmentOrganizer=null }
+05-16 08:38:59.588  4267  8188 V WindowManagerShell: onTransitionReady(transaction=16904991285337)
+05-16 08:38:59.588  3936  3968 V WindowManager:     info={id=218 t=CLOSE_PREDICTIVE_BACK f=0x0 trk=0 r=[0@Point(0, 0)] c=[
+05-16 08:38:59.588  3936  3968 V WindowManager:         {m=TO_BACK f=FILLS_TASK|IS_OCCLUDED|FLAG_BACK_GESTURE_ANIMATED leash=Surface(name=ActivityRecord{166752509 u0 com.tiqiaa.icontrol/.BrandSelectActivity)/@0xfffdf84 sb=Rect(0, 0 - 1280, 2772) eb=Rect(0, 0 - 1280, 2772) epz=Point(1280, 2772) d=0 bc=fffafafa component=com.tiqiaa.icontrol/.BrandSelectActivity opt={t=FROM_STYLE mUserId=0}}
+05-16 08:38:59.588  3936  3968 V WindowManager:     ]}
+05-16 08:38:59.589  4267  4353 V WindowManagerShell: onTransitionReady (#218) android.os.BinderProxy@3ce2c90: {id=218 t=CLOSE_PREDICTIVE_BACK f=0x0 trk=0 r=[0@Point(0, 0)] c=[
+05-16 08:38:59.589  4267  4353 V WindowManagerShell:         {m=TO_BACK f=FILLS_TASK|IS_OCCLUDED|FLAG_BACK_GESTURE_ANIMATED leash=Surface(name=ActivityRecord{166752509 u0 com.tiqiaa.icontrol/.BrandSelectActivity)/@0x2a52f42 sb=Rect(0, 0 - 1280, 2772) eb=Rect(0, 0 - 1280, 2772) epz=Point(1280, 2772) d=0 bc=fffafafa component=com.tiqiaa.icontrol/.BrandSelectActivity opt={t=FROM_STYLE mUserId=0}}
+05-16 08:38:59.589  4267  4353 V WindowManagerShell:     ]}
+05-16 08:38:59.589  4267  4353 V WindowManagerShell: Transition (#218) android.os.BinderProxy@3ce2c90@0 ready while (#217) android.os.BinderProxy@736f1c7@0 is still animating. Notify the animating transition in case they can be merged
+05-16 08:38:59.589  4267  4353 D ShellBackPreview: Back animation transition, merge pending transitions result={id=218 t=CLOSE_PREDICTIVE_BACK f=0x0 trk=0 r=[0@Point(0, 0)] c=[]}
+05-16 08:38:59.590  4267  4353 V WindowManagerShell: Transition was merged: (#218) android.os.BinderProxy@3ce2c90@0 into (#217) android.os.BinderProxy@736f1c7@0
+05-16 08:38:59.591  4267  4353 V WindowManagerShell: Transition animation finished (aborted=false), notifying core (#217) android.os.BinderProxy@736f1c7@0
+05-16 08:38:59.592  3936  3968 V WindowManager: Finish Transition (#217): created at 05-16 08:38:59.539 collect-started=0.223ms request-sent=8.201ms started=14.557ms ready=14.539ms sent=22.985ms commit=13.338ms finished=52.611ms
+05-16 08:38:59.594  3936  3968 V WindowManager: Finish Transition (#218): created at 05-16 08:38:59.582 collect-started=0.117ms started=0.137ms ready=1.388ms sent=2.747ms commit=6.828ms finished=11.473ms
+05-16 08:38:59.594 13129 13129 D VRI[BrandSelectActivity]: visibilityChanged oldVisibility=true newVisibility=false
+05-16 08:38:59.595  4267  4353 V WindowManagerShell: Track 0 became idle
+05-16 08:38:59.595  4267  4353 V WindowManagerShell: All active transition animations finished
+05-16 08:38:59.595   805   805 I hwservicemanager: getTransport: Cannot find entry vendor.qti.hardware.servicetracker@1.2::IServicetracker/default in either framework or device VINTF manifest.
+05-16 08:38:59.595  3936  3971 W ActivityTaskManager: servicetracker HIDL not available
+05-16 08:38:59.596  3936  3971 E ActivityTaskManager: Unable to get servicetracker HAL instance
+05-16 08:38:59.596   805   805 I hwservicemanager: getTransport: Cannot find entry vendor.qti.hardware.servicetracker@1.2::IServicetracker/default in either framework or device VINTF manifest.
+05-16 08:38:59.596 13129 13129 D AutofillManager: view not autofillable - not passing ime action check
+05-16 08:38:59.596  3936  3971 W ActivityTaskManager: servicetracker HIDL not available
+05-16 08:38:59.596  3936  3971 E ActivityTaskManager: Unable to get servicetracker HAL instance
+05-16 08:38:59.602  1694  1916 E HwcComposer: getLuts failed Status(-129, EX_TRANSACTION_FAILED): 'UNKNOWN_TRANSACTION: '
+05-16 08:38:59.605   805   805 I hwservicemanager: getTransport: Cannot find entry vendor.qti.hardware.servicetracker@1.2::IServicetracker/default in either framework or device VINTF manifest.
+05-16 08:38:59.605  3936  8196 W ActivityTaskManager: servicetracker HIDL not available
+05-16 08:38:59.605  3936  8196 E ActivityTaskManager: Unable to get servicetracker HAL instance
+05-16 08:38:59.606   805   805 I hwservicemanager: getTransport: Cannot find entry vendor.qti.hardware.servicetracker@1.2::IServicetracker/default in either framework or device VINTF manifest.
+05-16 08:38:59.606  3936  8196 W ActivityTaskManager: servicetracker HIDL not available
+05-16 08:38:59.606  3936  8196 E ActivityTaskManager: Unable to get servicetracker HAL instance
+05-16 08:38:59.606  3936  4059 W UsageStatsService: Unexpected activity event reported! (com.tiqiaa.icontrol/com.tiqiaa.icontrol.BrandSelectActivity event : 23 instanceId : 242967026)
+05-16 08:38:59.617  1639 13990 D vendor.qti.vibrator: Notifying on complete
+05-16 08:38:59.619  1639  1639 D vendor.qti.vibrator: QTI Vibrator off
+05-16 08:38:59.632   904   904 I [kworke][0x66e49556a][00:38:59.624863] peach_v2: [904:I:PMO] pmo_core_enable_wow_in_fw: drv wow is enabled
+05-16 08:38:59.705  1694  1916 E HwcComposer: getLuts failed Status(-129, EX_TRANSACTION_FAILED): 'UNKNOWN_TRANSACTION: '
+05-16 08:38:59.805  1694  1916 E HwcComposer: getLuts failed Status(-129, EX_TRANSACTION_FAILED): 'UNKNOWN_TRANSACTION: '
+05-16 08:38:59.835  3936  8196 W WindowManager: Failed looking up window session=Session{dab9048 4267:u0a10124} callers=com.android.server.wm.WindowManagerService.removeClientToken:2153 com.android.server.wm.Session.remove:270 android.view.IWindowSession$Stub.onTransact:696 
+05-16 08:38:59.906  1694  1916 E HwcComposer: getLuts failed Status(-129, EX_TRANSACTION_FAILED): 'UNKNOWN_TRANSACTION: '
+05-16 08:38:59.908  3936  8196 D CoreBackPreview: startBackNavigation currentTask=Task{dc88fe6 #23 type=standard A=10166:com.tiqiaa.icontrol}, topRunningActivity=ActivityRecord{58376530 u0 com.tiqiaa.icontrol/.NewExactMatchRemoteActivity t23}, callbackInfo=OnBackInvokedCallbackInfo{mCallback=android.window.IOnBackInvokedCallback$Stub$Proxy@9e0d77c, mPriority=-1, mIsAnimationCallback=false, mOverrideBehavior=0}, currentFocus=Window{c066049 u0 com.tiqiaa.icontrol/com.tiqiaa.icontrol.NewExactMatchRemoteActivity}
+05-16 08:38:59.909  3936  8196 D CoreBackPreview: Previous Destination is Activity:ComponentInfo{com.tiqiaa.icontrol/com.tiqiaa.icontrol.BrandSelectActivity} Task:Task=23 removedContainer:ActivityRecord{58376530 u0 com.tiqiaa.icontrol/.NewExactMatchRemoteActivity t23}, backType=TYPE_CROSS_ACTIVITY
+05-16 08:38:59.910  3936  8196 D CoreBackPreview: Setting Activity.mLauncherTaskBehind to true. Activity=ActivityRecord{166752509 u0 com.tiqiaa.icontrol/.BrandSelectActivity t23}
+05-16 08:38:59.911   805   805 I hwservicemanager: getTransport: Cannot find entry vendor.qti.hardware.servicetracker@1.2::IServicetracker/default in either framework or device VINTF manifest.
+05-16 08:38:59.911  1694  1928 I BpBinder: onLastStrongRef automatically unlinking death recipients: 
+05-16 08:38:59.912  3936  8196 W ActivityTaskManager: servicetracker HIDL not available
+05-16 08:38:59.912  3936  8196 E ActivityTaskManager: Unable to get servicetracker HAL instance
+05-16 08:38:59.912   805   805 I hwservicemanager: getTransport: Cannot find entry vendor.qti.hardware.servicetracker@1.2::IServicetracker/default in either framework or device VINTF manifest.
+05-16 08:38:59.913  3936  8196 W ActivityTaskManager: servicetracker HIDL not available
+05-16 08:38:59.913  3936  8196 E ActivityTaskManager: Unable to get servicetracker HAL instance
+05-16 08:38:59.918 13129 13129 D ViewRootImpl: Skipping stats log for color mode
+05-16 08:38:59.920  4267  4353 D ShellBackPreview: Received backNavigationInfo:BackNavigationInfo{mType=TYPE_CROSS_ACTIVITY (2), mOnBackNavigationDone=android.os.RemoteCallback@a9181bc, mOnBackInvokedCallback=android.window.IOnBackInvokedCallback$Stub$Proxy@8e3b545, mPrepareRemoteAnimation=true, mAnimationCallback=false, mCustomizeAnimationInfo=CustomAnimationInfo, package name= com.tiqiaa.icontrol}
+05-16 08:38:59.920  4267  4353 V WindowManagerShell: Transition requested (#219): android.os.BinderProxy@3f6f1cb TransitionRequestInfo { type = PREDICTIVE_BACK, triggerTask = null, pipChange = null, remoteTransition = null, displayChange = null, flags = 0, debugId = 219 }
+05-16 08:38:59.920  4267  4353 V WindowManagerShell: Transition (#219): request handled by BackAnimationController$BackTransitionHandler
+05-16 08:38:59.922 13129 13129 D AutofillManager: view not autofillable - not passing ime action check
+05-16 08:38:59.926  4267  4477 V SnapshotDrawerUtils: Drawing snapshot surface sizeMismatch=true
+05-16 08:38:59.931  4267  4285 V WindowManagerShell: onTransitionReady(transaction=16904991285352)
+05-16 08:38:59.931  3936  3968 V WindowManager: Sent Transition (#219) createdAt=05-16 08:38:59.909 via request=TransitionRequestInfo { type = PREDICTIVE_BACK, triggerTask = null, pipChange = null, remoteTransition = null, displayChange = null, flags = 0, debugId = 219 }
+05-16 08:38:59.931  3936  3968 V WindowManager:     startWCT=WindowContainerTransaction { changes= {} hops= [] errorCallbackToken=null taskFragmentOrganizer=null }
+05-16 08:38:59.931  4267  4353 V WindowManagerShell: onTransitionReady (#219) android.os.BinderProxy@3f6f1cb: {id=219 t=PREDICTIVE_BACK f=0x0 trk=0 r=[0@Point(0, 0)] c=[
+05-16 08:38:59.931  4267  4353 V WindowManagerShell:         {m=CHANGE f=FILLS_TASK|FLAG_BACK_GESTURE_ANIMATED leash=Surface(name=ActivityRecord{58376530 u0 com.tiqiaa.icontrol/.NewExactMatchRemoteActivity)/@0x3fe66f9 sb=Rect(0, 0 - 1280, 2772) eb=Rect(0, 0 - 1280, 2772) epz=Point(1280, 2772) d=0 bc=fffafafa component=com.tiqiaa.icontrol/.NewExactMatchRemoteActivity opt={t=FROM_STYLE mUserId=0}},
+05-16 08:38:59.931  4267  4353 V WindowManagerShell:         {m=TO_FRONT f=FILLS_TASK|IS_OCCLUDED|FLAG_BACK_GESTURE_ANIMATED leash=Surface(name=ActivityRecord{166752509 u0 com.tiqiaa.icontrol/.BrandSelectActivity)/@0x447e63e sb=Rect(0, 0 - 1280, 2772) eb=Rect(0, 0 - 1280, 2772) epz=Point(1280, 2772) d=0 bc=fffafafa component=com.tiqiaa.icontrol/.BrandSelectActivity opt={t=FROM_STYLE mUserId=0}}
+05-16 08:38:59.931  4267  4353 V WindowManagerShell:     ]}
+05-16 08:38:59.931  4267  4353 V WindowManagerShell: Playing animation for (#219) android.os.BinderProxy@3f6f1cb@0
+05-16 08:38:59.931  4267  4353 V WindowManagerShell:  try firstHandler com.android.wm.shell.back.BackAnimationController$BackTransitionHandler@c88df62
+05-16 08:38:59.932  4267  4353 V ShellRecents: No matching remote found to takeover (#219)
+05-16 08:38:59.932  4267  4353 D ShellBackPreview: custom animation loaded android.view.animation.AnimationSet@73579b5
+05-16 08:38:59.932  4267  4353 D ShellBackPreview: custom animation loaded android.view.animation.AnimationSet@3d8284a
+05-16 08:38:59.932  3936  3968 V WindowManager:     info={id=219 t=PREDICTIVE_BACK f=0x0 trk=0 r=[0@Point(0, 0)] c=[
+05-16 08:38:59.932  3936  3968 V WindowManager:         {m=CHANGE f=FILLS_TASK|FLAG_BACK_GESTURE_ANIMATED leash=Surface(name=ActivityRecord{58376530 u0 com.tiqiaa.icontrol/.NewExactMatchRemoteActivity)/@0x99bd826 sb=Rect(0, 0 - 1280, 2772) eb=Rect(0, 0 - 1280, 2772) epz=Point(1280, 2772) d=0 bc=fffafafa component=com.tiqiaa.icontrol/.NewExactMatchRemoteActivity opt={t=FROM_STYLE mUserId=0}},
+05-16 08:38:59.932  3936  3968 V WindowManager:         {m=TO_FRONT f=FILLS_TASK|IS_OCCLUDED|FLAG_BACK_GESTURE_ANIMATED leash=Surface(name=ActivityRecord{166752509 u0 com.tiqiaa.icontrol/.BrandSelectActivity)/@0xfffdf84 sb=Rect(0, 0 - 1280, 2772) eb=Rect(0, 0 - 1280, 2772) epz=Point(1280, 2772) d=0 bc=fffafafa component=com.tiqiaa.icontrol/.BrandSelectActivity opt={t=FROM_STYLE mUserId=0}}
+05-16 08:38:59.932  3936  3968 V WindowManager:     ]}
+05-16 08:38:59.932  4267  4353 D ShellBackPreview: BackAnimationController: startAnimation()
+05-16 08:38:59.932  4267  4353 D ShellBackPreview: Start back to activity animation.
+05-16 08:38:59.935  4267  4353 V WindowManagerShell:  animated by firstHandler
+05-16 08:38:59.937  4267  4353 D ShellBackPreview: Finishing gesture with event action: 1
+05-16 08:38:59.937  4267  4353 D ShellBackPreview: onGestureFinished() mTriggerBack == false
+05-16 08:38:59.937  4267  4353 D ShellBackPreview: BackAnimationController: startPostCommitAnimation()
+05-16 08:38:59.940  3936  4343 W ActivityManager: pid 3936 system sent binder code 2 with flags 0 to frozen apps and got error -32
+05-16 08:38:59.941  3936  4343 D ActivityManager: Too many transaction errors, throttling freezer binder callback.
+05-16 08:38:59.941  3936  4343 E ConsumerIrService: Error transmitting frequency: 38000
+05-16 08:38:59.942  1639  1639 D vendor.qti.vibrator: Vibrator on for timeoutMs: 50
+05-16 08:38:59.943  1639 13996 D vendor.qti.vibrator: Starting on on another thread
+05-16 08:38:59.945  1562  5362 E ANDR-PERF-OH: ANDR-PERF-OH: getPerfHandle() 55: Invalid handle req: 0
+05-16 08:38:59.948  4267  4353 D ShellBackPreview: BackAnimationController: onBackAnimationFinished()
+05-16 08:38:59.949  4267  4353 D ShellBackPreview: BackAnimationController: finishBackNavigation()
+05-16 08:38:59.949  4267  4353 D ShellBackPreview: resetTouchTracker -> no queued gesture
+05-16 08:38:59.949  4267  4353 V WindowManagerShell: Directly starting a new transition type=CLOSE_PREDICTIVE_BACK wct=WindowContainerTransaction { changes= {} hops= [{restoreBackNav: container=null reparent=null mToTop=false mWindowingMode=null mActivityType=null}] errorCallbackToken=null taskFragmentOrganizer=null } handler=com.android.wm.shell.back.BackAnimationController$BackTransitionHandler@c88df62
+05-16 08:38:59.949  3936  8196 D CoreBackPreview: onBackNavigationDone backType=2, triggerBack=false
+05-16 08:38:59.950  3936  6582 D CoreBackPreview: Setting Activity.mLauncherTaskBehind to false. Activity=ActivityRecord{166752509 u0 com.tiqiaa.icontrol/.BrandSelectActivity t23}
+05-16 08:38:59.951  1694  1927 I BpBinder: onLastStrongRef automatically unlinking death recipients: 
+05-16 08:38:59.952  3936  6582 D CoreBackPreview: onTransactionReady, opening: [], closing: [ActivityRecord{166752509 u0 com.tiqiaa.icontrol/.BrandSelectActivity t23}], animating: AnimationTargets{ openTarget= {ActivityRecord{166752509 u0 com.tiqiaa.icontrol/.BrandSelectActivity t23}} closeTarget= ActivityRecord{58376530 u0 com.tiqiaa.icontrol/.NewExactMatchRemoteActivity t23} mSwitchType= 2 mComposed= true mWaitTransition= false}, match: false
+05-16 08:38:59.953  3936  3968 V WindowManager: Sent Transition (#220) createdAt=05-16 08:38:59.949
+05-16 08:38:59.953  3936  3968 V WindowManager:     startWCT=WindowContainerTransaction { changes= {} hops= [{restoreBackNav: container=null reparent=null mToTop=false mWindowingMode=null mActivityType=null}] errorCallbackToken=null taskFragmentOrganizer=null }
+05-16 08:38:59.953  3936  3968 V WindowManager:     info={id=220 t=CLOSE_PREDICTIVE_BACK f=0x0 trk=0 r=[0@Point(0, 0)] c=[
+05-16 08:38:59.953  3936  3968 V WindowManager:         {m=TO_BACK f=FILLS_TASK|IS_OCCLUDED|FLAG_BACK_GESTURE_ANIMATED leash=Surface(name=ActivityRecord{166752509 u0 com.tiqiaa.icontrol/.BrandSelectActivity)/@0xfffdf84 sb=Rect(0, 0 - 1280, 2772) eb=Rect(0, 0 - 1280, 2772) epz=Point(1280, 2772) d=0 bc=fffafafa component=com.tiqiaa.icontrol/.BrandSelectActivity opt={t=FROM_STYLE mUserId=0}}
+05-16 08:38:59.953  3936  3968 V WindowManager:     ]}
+05-16 08:38:59.954  4267  8188 V WindowManagerShell: onTransitionReady(transaction=16904991285360)
+05-16 08:38:59.954  4267  4353 V WindowManagerShell: onTransitionReady (#220) android.os.BinderProxy@80b0097: {id=220 t=CLOSE_PREDICTIVE_BACK f=0x0 trk=0 r=[0@Point(0, 0)] c=[
+05-16 08:38:59.954  4267  4353 V WindowManagerShell:         {m=TO_BACK f=FILLS_TASK|IS_OCCLUDED|FLAG_BACK_GESTURE_ANIMATED leash=Surface(name=ActivityRecord{166752509 u0 com.tiqiaa.icontrol/.BrandSelectActivity)/@0x890fc31 sb=Rect(0, 0 - 1280, 2772) eb=Rect(0, 0 - 1280, 2772) epz=Point(1280, 2772) d=0 bc=fffafafa component=com.tiqiaa.icontrol/.BrandSelectActivity opt={t=FROM_STYLE mUserId=0}}
+05-16 08:38:59.954  4267  4353 V WindowManagerShell:     ]}
+05-16 08:38:59.955  4267  4353 V WindowManagerShell: Transition (#220) android.os.BinderProxy@80b0097@0 ready while (#219) android.os.BinderProxy@3f6f1cb@0 is still animating. Notify the animating transition in case they can be merged
+05-16 08:38:59.955  4267  4353 D ShellBackPreview: Back animation transition, merge pending transitions result={id=220 t=CLOSE_PREDICTIVE_BACK f=0x0 trk=0 r=[0@Point(0, 0)] c=[]}
+05-16 08:38:59.955  4267  4353 V WindowManagerShell: Transition was merged: (#220) android.os.BinderProxy@80b0097@0 into (#219) android.os.BinderProxy@3f6f1cb@0
+05-16 08:38:59.956  4267  4353 V WindowManagerShell: Transition animation finished (aborted=false), notifying core (#219) android.os.BinderProxy@3f6f1cb@0
+05-16 08:38:59.957  3936  3968 V WindowManager: Finish Transition (#219): created at 05-16 08:38:59.909 collect-started=0.396ms request-sent=6.265ms started=11.53ms ready=11.514ms sent=20.567ms commit=6.4ms finished=47.624ms
+05-16 08:38:59.958  3936  3968 V WindowManager: Finish Transition (#220): created at 05-16 08:38:59.949 collect-started=0.114ms started=0.143ms ready=1.733ms sent=3.064ms finished=8.719ms
+05-16 08:38:59.959 13129 13129 D VRI[BrandSelectActivity]: visibilityChanged oldVisibility=true newVisibility=false
+05-16 08:38:59.959  4267  4353 V WindowManagerShell: Track 0 became idle
+05-16 08:38:59.960  4267  4353 V WindowManagerShell: All active transition animations finished
+05-16 08:38:59.961   805   805 I hwservicemanager: getTransport: Cannot find entry vendor.qti.hardware.servicetracker@1.2::IServicetracker/default in either framework or device VINTF manifest.
+05-16 08:38:59.961  3936  3971 W ActivityTaskManager: servicetracker HIDL not available
+05-16 08:38:59.961  3936  3971 E ActivityTaskManager: Unable to get servicetracker HAL instance
+05-16 08:38:59.962   805   805 I hwservicemanager: getTransport: Cannot find entry vendor.qti.hardware.servicetracker@1.2::IServicetracker/default in either framework or device VINTF manifest.
+05-16 08:38:59.962  3936  3971 W ActivityTaskManager: servicetracker HIDL not available
+05-16 08:38:59.962  3936  3971 E ActivityTaskManager: Unable to get servicetracker HAL instance
+05-16 08:38:59.964 13129 13129 D AutofillManager: view not autofillable - not passing ime action check
+05-16 08:38:59.981   805   805 I hwservicemanager: getTransport: Cannot find entry vendor.qti.hardware.servicetracker@1.2::IServicetracker/default in either framework or device VINTF manifest.
+05-16 08:38:59.982  3936  6582 W ActivityTaskManager: servicetracker HIDL not available
+05-16 08:38:59.982  3936  6582 E ActivityTaskManager: Unable to get servicetracker HAL instance
+05-16 08:38:59.982   805   805 I hwservicemanager: getTransport: Cannot find entry vendor.qti.hardware.servicetracker@1.2::IServicetracker/default in either framework or device VINTF manifest.
+05-16 08:38:59.983  3936  6582 W ActivityTaskManager: servicetracker HIDL not available
+05-16 08:38:59.983  3936  6582 E ActivityTaskManager: Unable to get servicetracker HAL instance
+05-16 08:38:59.984  3936  4059 W UsageStatsService: Unexpected activity event reported! (com.tiqiaa.icontrol/com.tiqiaa.icontrol.BrandSelectActivity event : 23 instanceId : 242967026)
+05-16 08:38:59.993  1639 13996 D vendor.qti.vibrator: Notifying on complete
+05-16 08:38:59.994  1639  1639 D vendor.qti.vibrator: QTI Vibrator off
+05-16 08:39:00.006  1694  1916 E HwcComposer: getLuts failed Status(-129, EX_TRANSACTION_FAILED): 'UNKNOWN_TRANSACTION: '
+05-16 08:39:00.108  1694  1916 E HwcComposer: getLuts failed Status(-129, EX_TRANSACTION_FAILED): 'UNKNOWN_TRANSACTION: '
+05-16 08:39:00.157  3936  8196 D CoreBackPreview: startBackNavigation currentTask=Task{dc88fe6 #23 type=standard A=10166:com.tiqiaa.icontrol}, topRunningActivity=ActivityRecord{58376530 u0 com.tiqiaa.icontrol/.NewExactMatchRemoteActivity t23}, callbackInfo=OnBackInvokedCallbackInfo{mCallback=android.window.IOnBackInvokedCallback$Stub$Proxy@9e0d77c, mPriority=-1, mIsAnimationCallback=false, mOverrideBehavior=0}, currentFocus=Window{c066049 u0 com.tiqiaa.icontrol/com.tiqiaa.icontrol.NewExactMatchRemoteActivity}
+05-16 08:39:00.157  3936  8196 D CoreBackPreview: Previous Destination is Activity:ComponentInfo{com.tiqiaa.icontrol/com.tiqiaa.icontrol.BrandSelectActivity} Task:Task=23 removedContainer:ActivityRecord{58376530 u0 com.tiqiaa.icontrol/.NewExactMatchRemoteActivity t23}, backType=TYPE_CROSS_ACTIVITY
+05-16 08:39:00.159  3936  8196 D CoreBackPreview: Setting Activity.mLauncherTaskBehind to true. Activity=ActivityRecord{166752509 u0 com.tiqiaa.icontrol/.BrandSelectActivity t23}
+05-16 08:39:00.160   805   805 I hwservicemanager: getTransport: Cannot find entry vendor.qti.hardware.servicetracker@1.2::IServicetracker/default in either framework or device VINTF manifest.
+05-16 08:39:00.161  3936  8196 W ActivityTaskManager: servicetracker HIDL not available
+05-16 08:39:00.161  3936  8196 E ActivityTaskManager: Unable to get servicetracker HAL instance
+05-16 08:39:00.161  1694  1785 I BpBinder: onLastStrongRef automatically unlinking death recipients: 
+05-16 08:39:00.162   805   805 I hwservicemanager: getTransport: Cannot find entry vendor.qti.hardware.servicetracker@1.2::IServicetracker/default in either framework or device VINTF manifest.
+05-16 08:39:00.162  3936  8196 W ActivityTaskManager: servicetracker HIDL not available
+05-16 08:39:00.163  3936  8196 E ActivityTaskManager: Unable to get servicetracker HAL instance
+05-16 08:39:00.166 13129 13129 D ViewRootImpl: Skipping stats log for color mode
+05-16 08:39:00.170  4267  4353 D ShellBackPreview: Received backNavigationInfo:BackNavigationInfo{mType=TYPE_CROSS_ACTIVITY (2), mOnBackNavigationDone=android.os.RemoteCallback@572af05, mOnBackInvokedCallback=android.window.IOnBackInvokedCallback$Stub$Proxy@6063b5a, mPrepareRemoteAnimation=true, mAnimationCallback=false, mCustomizeAnimationInfo=CustomAnimationInfo, package name= com.tiqiaa.icontrol}
+05-16 08:39:00.170  4267  4353 V WindowManagerShell: Transition requested (#221): android.os.BinderProxy@858e18b TransitionRequestInfo { type = PREDICTIVE_BACK, triggerTask = null, pipChange = null, remoteTransition = null, displayChange = null, flags = 0, debugId = 221 }
+05-16 08:39:00.170  4267  4353 V WindowManagerShell: Transition (#221): request handled by BackAnimationController$BackTransitionHandler
+05-16 08:39:00.173 13129 13129 D AutofillManager: view not autofillable - not passing ime action check
+05-16 08:39:00.179  4267  4353 D ShellBackPreview: Finishing gesture with event action: 1
+05-16 08:39:00.179  4267  4353 D ShellBackPreview: onGestureFinished() mTriggerBack == false
+05-16 08:39:00.179  4267  4353 W ShellBackPreview: Gesture released, but animation didn't ready.
+05-16 08:39:00.186  1694  1694 I BpBinder: onLastStrongRef automatically unlinking death recipients: 
+05-16 08:39:00.188  4267  4285 V WindowManagerShell: onTransitionReady(transaction=16904991285378)
+05-16 08:39:00.188  4267  4353 V WindowManagerShell: onTransitionReady (#221) android.os.BinderProxy@858e18b: {id=221 t=PREDICTIVE_BACK f=0x0 trk=0 r=[0@Point(0, 0)] c=[
+05-16 08:39:00.188  4267  4353 V WindowManagerShell:         {m=CHANGE f=FILLS_TASK|FLAG_BACK_GESTURE_ANIMATED leash=Surface(name=ActivityRecord{58376530 u0 com.tiqiaa.icontrol/.NewExactMatchRemoteActivity)/@0xbb26d14 sb=Rect(0, 0 - 1280, 2772) eb=Rect(0, 0 - 1280, 2772) epz=Point(1280, 2772) d=0 bc=fffafafa component=com.tiqiaa.icontrol/.NewExactMatchRemoteActivity opt={t=FROM_STYLE mUserId=0}},
+05-16 08:39:00.188  4267  4353 V WindowManagerShell:         {m=TO_FRONT f=FILLS_TASK|IS_OCCLUDED|FLAG_BACK_GESTURE_ANIMATED leash=Surface(name=ActivityRecord{166752509 u0 com.tiqiaa.icontrol/.BrandSelectActivity)/@0x9acb9bd sb=Rect(0, 0 - 1280, 2772) eb=Rect(0, 0 - 1280, 2772) epz=Point(1280, 2772) d=0 bc=fffafafa component=com.tiqiaa.icontrol/.BrandSelectActivity opt={t=FROM_STYLE mUserId=0}}
+05-16 08:39:00.188  4267  4353 V WindowManagerShell:     ]}
+05-16 08:39:00.188  4267  4353 V WindowManagerShell: Playing animation for (#221) android.os.BinderProxy@858e18b@0
+05-16 08:39:00.188  4267  4353 V WindowManagerShell:  try firstHandler com.android.wm.shell.back.BackAnimationController$BackTransitionHandler@c88df62
+05-16 08:39:00.188  3936  3968 V WindowManager: Sent Transition (#221) createdAt=05-16 08:39:00.158 via request=TransitionRequestInfo { type = PREDICTIVE_BACK, triggerTask = null, pipChange = null, remoteTransition = null, displayChange = null, flags = 0, debugId = 221 }
+05-16 08:39:00.189  3936  3968 V WindowManager:     startWCT=WindowContainerTransaction { changes= {} hops= [] errorCallbackToken=null taskFragmentOrganizer=null }
+05-16 08:39:00.189  4267  4353 V ShellRecents: No matching remote found to takeover (#221)
+05-16 08:39:00.190  3936  8196 W ActivityManager: pid 3936 system sent binder code 2 with flags 0 to frozen apps and got error -32
+05-16 08:39:00.190  3936  8196 D ActivityManager: Too many transaction errors, throttling freezer binder callback.
+05-16 08:39:00.190  4267  4477 V SnapshotDrawerUtils: Drawing snapshot surface sizeMismatch=true
+05-16 08:39:00.190  3936  3968 V WindowManager:     info={id=221 t=PREDICTIVE_BACK f=0x0 trk=0 r=[0@Point(0, 0)] c=[
+05-16 08:39:00.190  3936  3968 V WindowManager:         {m=CHANGE f=FILLS_TASK|FLAG_BACK_GESTURE_ANIMATED leash=Surface(name=ActivityRecord{58376530 u0 com.tiqiaa.icontrol/.NewExactMatchRemoteActivity)/@0x99bd826 sb=Rect(0, 0 - 1280, 2772) eb=Rect(0, 0 - 1280, 2772) epz=Point(1280, 2772) d=0 bc=fffafafa component=com.tiqiaa.icontrol/.NewExactMatchRemoteActivity opt={t=FROM_STYLE mUserId=0}},
+05-16 08:39:00.190  3936  3968 V WindowManager:         {m=TO_FRONT f=FILLS_TASK|IS_OCCLUDED|FLAG_BACK_GESTURE_ANIMATED leash=Surface(name=ActivityRecord{166752509 u0 com.tiqiaa.icontrol/.BrandSelectActivity)/@0xfffdf84 sb=Rect(0, 0 - 1280, 2772) eb=Rect(0, 0 - 1280, 2772) epz=Point(1280, 2772) d=0 bc=fffafafa component=com.tiqiaa.icontrol/.BrandSelectActivity opt={t=FROM_STYLE mUserId=0}}
+05-16 08:39:00.190  3936  3968 V WindowManager:     ]}
+05-16 08:39:00.190  4267  4353 D ShellBackPreview: custom animation loaded android.view.animation.AnimationSet@b7034b9
+05-16 08:39:00.190  3936  8196 E ConsumerIrService: Error transmitting frequency: 38000
+05-16 08:39:00.190  4267  4353 D ShellBackPreview: custom animation loaded android.view.animation.AnimationSet@eed00fe
+05-16 08:39:00.190  4267  4353 D ShellBackPreview: BackAnimationController: startAnimation()
+05-16 08:39:00.190  4267  4353 D ShellBackPreview: Start back to activity animation.
+05-16 08:39:00.191  1639  1639 D vendor.qti.vibrator: Vibrator on for timeoutMs: 50
+05-16 08:39:00.192  4267  4353 D ShellBackPreview: BackAnimationController: startPostCommitAnimation()
+05-16 08:39:00.192  4267  4353 V WindowManagerShell:  animated by firstHandler
+05-16 08:39:00.193  1639 14000 D vendor.qti.vibrator: Starting on on another thread
+05-16 08:39:00.196  1562  5364 E ANDR-PERF-OH: ANDR-PERF-OH: getPerfHandle() 55: Invalid handle req: 0
+05-16 08:39:00.200  3936  4038 W WindowManager: Failed looking up window session=Session{dab9048 4267:u0a10124} callers=com.android.server.wm.WindowManagerService.removeClientToken:2153 com.android.server.wm.Session.remove:270 android.view.IWindowSession$Stub.onTransact:696 
+05-16 08:39:00.207  4267  4353 D ShellBackPreview: BackAnimationController: onBackAnimationFinished()
+05-16 08:39:00.208  4267  4353 D ShellBackPreview: BackAnimationController: finishBackNavigation()
+05-16 08:39:00.208  4267  4353 D ShellBackPreview: resetTouchTracker -> no queued gesture
+05-16 08:39:00.208  4267  4353 V WindowManagerShell: Directly starting a new transition type=CLOSE_PREDICTIVE_BACK wct=WindowContainerTransaction { changes= {} hops= [{restoreBackNav: container=null reparent=null mToTop=false mWindowingMode=null mActivityType=null}] errorCallbackToken=null taskFragmentOrganizer=null } handler=com.android.wm.shell.back.BackAnimationController$BackTransitionHandler@c88df62
+05-16 08:39:00.208  3936  8196 D CoreBackPreview: onBackNavigationDone backType=2, triggerBack=false
+05-16 08:39:00.210  3936  6582 D CoreBackPreview: Setting Activity.mLauncherTaskBehind to false. Activity=ActivityRecord{166752509 u0 com.tiqiaa.icontrol/.BrandSelectActivity t23}
+05-16 08:39:00.212  3936  6582 D CoreBackPreview: onTransactionReady, opening: [], closing: [ActivityRecord{166752509 u0 com.tiqiaa.icontrol/.BrandSelectActivity t23}], animating: AnimationTargets{ openTarget= {ActivityRecord{166752509 u0 com.tiqiaa.icontrol/.BrandSelectActivity t23}} closeTarget= ActivityRecord{58376530 u0 com.tiqiaa.icontrol/.NewExactMatchRemoteActivity t23} mSwitchType= 2 mComposed= true mWaitTransition= false}, match: false
+05-16 08:39:00.212  1694  1786 I BpBinder: onLastStrongRef automatically unlinking death recipients: 
+05-16 08:39:00.214  3936  3968 V WindowManager: Sent Transition (#222) createdAt=05-16 08:39:00.209
+05-16 08:39:00.214  3936  3968 V WindowManager:     startWCT=WindowContainerTransaction { changes= {} hops= [{restoreBackNav: container=null reparent=null mToTop=false mWindowingMode=null mActivityType=null}] errorCallbackToken=null taskFragmentOrganizer=null }
+05-16 08:39:00.214  3936  3968 V WindowManager:     info={id=222 t=CLOSE_PREDICTIVE_BACK f=0x0 trk=0 r=[0@Point(0, 0)] c=[
+05-16 08:39:00.214  3936  3968 V WindowManager:         {m=TO_BACK f=FILLS_TASK|IS_OCCLUDED|FLAG_BACK_GESTURE_ANIMATED leash=Surface(name=ActivityRecord{166752509 u0 com.tiqiaa.icontrol/.BrandSelectActivity)/@0xfffdf84 sb=Rect(0, 0 - 1280, 2772) eb=Rect(0, 0 - 1280, 2772) epz=Point(1280, 2772) d=0 bc=fffafafa component=com.tiqiaa.icontrol/.BrandSelectActivity opt={t=FROM_STYLE mUserId=0}}
+05-16 08:39:00.214  3936  3968 V WindowManager:     ]}
+05-16 08:39:00.216  4267  4285 V WindowManagerShell: onTransitionReady(transaction=16904991285386)
+05-16 08:39:00.216  4267  4353 V WindowManagerShell: onTransitionReady (#222) android.os.BinderProxy@f36c1f1: {id=222 t=CLOSE_PREDICTIVE_BACK f=0x0 trk=0 r=[0@Point(0, 0)] c=[
+05-16 08:39:00.216  4267  4353 V WindowManagerShell:         {m=TO_BACK f=FILLS_TASK|IS_OCCLUDED|FLAG_BACK_GESTURE_ANIMATED leash=Surface(name=ActivityRecord{166752509 u0 com.tiqiaa.icontrol/.BrandSelectActivity)/@0xace31d6 sb=Rect(0, 0 - 1280, 2772) eb=Rect(0, 0 - 1280, 2772) epz=Point(1280, 2772) d=0 bc=fffafafa component=com.tiqiaa.icontrol/.BrandSelectActivity opt={t=FROM_STYLE mUserId=0}}
+05-16 08:39:00.216  4267  4353 V WindowManagerShell:     ]}
+05-16 08:39:00.217  4267  4353 V WindowManagerShell: Transition (#222) android.os.BinderProxy@f36c1f1@0 ready while (#221) android.os.BinderProxy@858e18b@0 is still animating. Notify the animating transition in case they can be merged
+05-16 08:39:00.217  4267  4353 D ShellBackPreview: Back animation transition, merge pending transitions result={id=222 t=CLOSE_PREDICTIVE_BACK f=0x0 trk=0 r=[0@Point(0, 0)] c=[]}
+05-16 08:39:00.217  4267  4353 V WindowManagerShell: Transition was merged: (#222) android.os.BinderProxy@f36c1f1@0 into (#221) android.os.BinderProxy@858e18b@0
+05-16 08:39:00.219  4267  4353 V WindowManagerShell: Transition animation finished (aborted=false), notifying core (#221) android.os.BinderProxy@858e18b@0
+05-16 08:39:00.220  3936  3968 V WindowManager: Finish Transition (#221): created at 05-16 08:39:00.158 collect-started=0.205ms request-sent=7.558ms started=18.596ms ready=18.573ms sent=26.185ms commit=10.583ms finished=61.669ms
+05-16 08:39:00.222  3936  3968 V WindowManager: Finish Transition (#222): created at 05-16 08:39:00.209 collect-started=0.094ms started=0.109ms ready=2.258ms sent=3.916ms finished=13.154ms
+05-16 08:39:00.222 13129 13129 D VRI[BrandSelectActivity]: visibilityChanged oldVisibility=true newVisibility=false
+05-16 08:39:00.223  4267  4353 V WindowManagerShell: Track 0 became idle
+05-16 08:39:00.223  4267  4353 V WindowManagerShell: All active transition animations finished
+05-16 08:39:00.223   805   805 I hwservicemanager: getTransport: Cannot find entry vendor.qti.hardware.servicetracker@1.2::IServicetracker/default in either framework or device VINTF manifest.
+05-16 08:39:00.224  3936  3971 W ActivityTaskManager: servicetracker HIDL not available
+05-16 08:39:00.224  3936  3971 E ActivityTaskManager: Unable to get servicetracker HAL instance
+05-16 08:39:00.224   805   805 I hwservicemanager: getTransport: Cannot find entry vendor.qti.hardware.servicetracker@1.2::IServicetracker/default in either framework or device VINTF manifest.
+05-16 08:39:00.224  3936  3971 W ActivityTaskManager: servicetracker HIDL not available
+05-16 08:39:00.224  3936  3971 E ActivityTaskManager: Unable to get servicetracker HAL instance
+05-16 08:39:00.231 13129 13129 D AutofillManager: view not autofillable - not passing ime action check
+05-16 08:39:00.241   805   805 I hwservicemanager: getTransport: Cannot find entry vendor.qti.hardware.servicetracker@1.2::IServicetracker/default in either framework or device VINTF manifest.
+05-16 08:39:00.241  3936  4038 W ActivityTaskManager: servicetracker HIDL not available
+05-16 08:39:00.241  3936  4038 E ActivityTaskManager: Unable to get servicetracker HAL instance
+05-16 08:39:00.242   805   805 I hwservicemanager: getTransport: Cannot find entry vendor.qti.hardware.servicetracker@1.2::IServicetracker/default in either framework or device VINTF manifest.
+05-16 08:39:00.243  3936  4038 W ActivityTaskManager: servicetracker HIDL not available
+05-16 08:39:00.243  3936  4038 E ActivityTaskManager: Unable to get servicetracker HAL instance
+05-16 08:39:00.243  3936  4059 W UsageStatsService: Unexpected activity event reported! (com.tiqiaa.icontrol/com.tiqiaa.icontrol.BrandSelectActivity event : 23 instanceId : 242967026)
+05-16 08:39:00.244  1639 14000 D vendor.qti.vibrator: Notifying on complete
+05-16 08:39:00.244  1639  1639 D vendor.qti.vibrator: QTI Vibrator off
+05-16 08:39:00.314  1694  1916 E HwcComposer: getLuts failed Status(-129, EX_TRANSACTION_FAILED): 'UNKNOWN_TRANSACTION: '
+05-16 08:39:00.390  3936  8196 D CoreBackPreview: startBackNavigation currentTask=Task{dc88fe6 #23 type=standard A=10166:com.tiqiaa.icontrol}, topRunningActivity=ActivityRecord{58376530 u0 com.tiqiaa.icontrol/.NewExactMatchRemoteActivity t23}, callbackInfo=OnBackInvokedCallbackInfo{mCallback=android.window.IOnBackInvokedCallback$Stub$Proxy@9e0d77c, mPriority=-1, mIsAnimationCallback=false, mOverrideBehavior=0}, currentFocus=Window{c066049 u0 com.tiqiaa.icontrol/com.tiqiaa.icontrol.NewExactMatchRemoteActivity}
+05-16 08:39:00.391  3936  8196 D CoreBackPreview: Previous Destination is Activity:ComponentInfo{com.tiqiaa.icontrol/com.tiqiaa.icontrol.BrandSelectActivity} Task:Task=23 removedContainer:ActivityRecord{58376530 u0 com.tiqiaa.icontrol/.NewExactMatchRemoteActivity t23}, backType=TYPE_CROSS_ACTIVITY
+05-16 08:39:00.392  3936  8196 D CoreBackPreview: Setting Activity.mLauncherTaskBehind to true. Activity=ActivityRecord{166752509 u0 com.tiqiaa.icontrol/.BrandSelectActivity t23}
+05-16 08:39:00.394   805   805 I hwservicemanager: getTransport: Cannot find entry vendor.qti.hardware.servicetracker@1.2::IServicetracker/default in either framework or device VINTF manifest.
+05-16 08:39:00.395  3936  8196 W ActivityTaskManager: servicetracker HIDL not available
+05-16 08:39:00.395  1694  1786 I BpBinder: onLastStrongRef automatically unlinking death recipients: 
+05-16 08:39:00.395  3936  8196 E ActivityTaskManager: Unable to get servicetracker HAL instance
+05-16 08:39:00.396   805   805 I hwservicemanager: getTransport: Cannot find entry vendor.qti.hardware.servicetracker@1.2::IServicetracker/default in either framework or device VINTF manifest.
+05-16 08:39:00.397  3936  8196 W ActivityTaskManager: servicetracker HIDL not available
+05-16 08:39:00.398  3936  8196 E ActivityTaskManager: Unable to get servicetracker HAL instance
+05-16 08:39:00.401 13129 13129 D ViewRootImpl: Skipping stats log for color mode
+05-16 08:39:00.404  4267  4353 D ShellBackPreview: Received backNavigationInfo:BackNavigationInfo{mType=TYPE_CROSS_ACTIVITY (2), mOnBackNavigationDone=android.os.RemoteCallback@7d39562, mOnBackInvokedCallback=android.window.IOnBackInvokedCallback$Stub$Proxy@866a6f3, mPrepareRemoteAnimation=true, mAnimationCallback=false, mCustomizeAnimationInfo=CustomAnimationInfo, package name= com.tiqiaa.icontrol}
+05-16 08:39:00.404  4267  4353 V WindowManagerShell: Transition requested (#223): android.os.BinderProxy@ed9a5ae TransitionRequestInfo { type = PREDICTIVE_BACK, triggerTask = null, pipChange = null, remoteTransition = null, displayChange = null, flags = 0, debugId = 223 }
+05-16 08:39:00.404  4267  4353 V WindowManagerShell: Transition (#223): request handled by BackAnimationController$BackTransitionHandler
+05-16 08:39:00.407 13129 13129 D AutofillManager: view not autofillable - not passing ime action check
+05-16 08:39:00.409  3836  3879 I netd    : tetherGetStats() -> {[]} <2.62ms>
+05-16 08:39:00.411  4267  4477 V SnapshotDrawerUtils: Drawing snapshot surface sizeMismatch=true
+05-16 08:39:00.413  4267  4353 D ShellBackPreview: Finishing gesture with event action: 1
+05-16 08:39:00.414  4267  4353 D ShellBackPreview: onGestureFinished() mTriggerBack == false
+05-16 08:39:00.414  4267  4353 W ShellBackPreview: Gesture released, but animation didn't ready.
+05-16 08:39:00.416  3936  3968 V WindowManager: Sent Transition (#223) createdAt=05-16 08:39:00.391 via request=TransitionRequestInfo { type = PREDICTIVE_BACK, triggerTask = null, pipChange = null, remoteTransition = null, displayChange = null, flags = 0, debugId = 223 }
+05-16 08:39:00.416  3936  3968 V WindowManager:     startWCT=WindowContainerTransaction { changes= {} hops= [] errorCallbackToken=null taskFragmentOrganizer=null }
+05-16 08:39:00.416  4267  8188 V WindowManagerShell: onTransitionReady(transaction=16904991285402)
+05-16 08:39:00.417  4267  4353 V WindowManagerShell: onTransitionReady (#223) android.os.BinderProxy@ed9a5ae: {id=223 t=PREDICTIVE_BACK f=0x0 trk=0 r=[0@Point(0, 0)] c=[
+05-16 08:39:00.417  4267  4353 V WindowManagerShell:         {m=CHANGE f=FILLS_TASK|FLAG_BACK_GESTURE_ANIMATED leash=Surface(name=ActivityRecord{58376530 u0 com.tiqiaa.icontrol/.NewExactMatchRemoteActivity)/@0xf094947 sb=Rect(0, 0 - 1280, 2772) eb=Rect(0, 0 - 1280, 2772) epz=Point(1280, 2772) d=0 bc=fffafafa component=com.tiqiaa.icontrol/.NewExactMatchRemoteActivity opt={t=FROM_STYLE mUserId=0}},
+05-16 08:39:00.417  4267  4353 V WindowManagerShell:         {m=TO_FRONT f=FILLS_TASK|IS_OCCLUDED|FLAG_BACK_GESTURE_ANIMATED leash=Surface(name=ActivityRecord{166752509 u0 com.tiqiaa.icontrol/.BrandSelectActivity)/@0xf320574 sb=Rect(0, 0 - 1280, 2772) eb=Rect(0, 0 - 1280, 2772) epz=Point(1280, 2772) d=0 bc=fffafafa component=com.tiqiaa.icontrol/.BrandSelectActivity opt={t=FROM_STYLE mUserId=0}}
+05-16 08:39:00.417  4267  4353 V WindowManagerShell:     ]}
+05-16 08:39:00.417  3936  3968 V WindowManager:     info={id=223 t=PREDICTIVE_BACK f=0x0 trk=0 r=[0@Point(0, 0)] c=[
+05-16 08:39:00.417  3936  3968 V WindowManager:         {m=CHANGE f=FILLS_TASK|FLAG_BACK_GESTURE_ANIMATED leash=Surface(name=ActivityRecord{58376530 u0 com.tiqiaa.icontrol/.NewExactMatchRemoteActivity)/@0x99bd826 sb=Rect(0, 0 - 1280, 2772) eb=Rect(0, 0 - 1280, 2772) epz=Point(1280, 2772) d=0 bc=fffafafa component=com.tiqiaa.icontrol/.NewExactMatchRemoteActivity opt={t=FROM_STYLE mUserId=0}},
+05-16 08:39:00.417  3936  3968 V WindowManager:         {m=TO_FRONT f=FILLS_TASK|IS_OCCLUDED|FLAG_BACK_GESTURE_ANIMATED leash=Surface(name=ActivityRecord{166752509 u0 com.tiqiaa.icontrol/.BrandSelectActivity)/@0xfffdf84 sb=Rect(0, 0 - 1280, 2772) eb=Rect(0, 0 - 1280, 2772) epz=Point(1280, 2772) d=0 bc=fffafafa component=com.tiqiaa.icontrol/.BrandSelectActivity opt={t=FROM_STYLE mUserId=0}}
+05-16 08:39:00.417  3936  3968 V WindowManager:     ]}
+05-16 08:39:00.417  4267  4353 V WindowManagerShell: Playing animation for (#223) android.os.BinderProxy@ed9a5ae@0
+05-16 08:39:00.417  4267  4353 V WindowManagerShell:  try firstHandler com.android.wm.shell.back.BackAnimationController$BackTransitionHandler@c88df62
+05-16 08:39:00.418  4267  4353 V ShellRecents: No matching remote found to takeover (#223)
+05-16 08:39:00.418  4267  4353 D ShellBackPreview: custom animation loaded android.view.animation.AnimationSet@2101b12
+05-16 08:39:00.418  4267  4353 D ShellBackPreview: custom animation loaded android.view.animation.AnimationSet@b0732e3
+05-16 08:39:00.418  4267  4353 D ShellBackPreview: BackAnimationController: startAnimation()
+05-16 08:39:00.419  4267  4353 D ShellBackPreview: Start back to activity animation.
+05-16 08:39:00.421  4267  4353 D ShellBackPreview: BackAnimationController: startPostCommitAnimation()
+05-16 08:39:00.421  4267  4353 V WindowManagerShell:  animated by firstHandler
+05-16 08:39:00.424  3936  8196 W ActivityManager: pid 3936 system sent binder code 2 with flags 0 to frozen apps and got error -32
+05-16 08:39:00.424  3936  8196 D ActivityManager: Too many transaction errors, throttling freezer binder callback.
+05-16 08:39:00.424  3936  8196 E ConsumerIrService: Error transmitting frequency: 38000
+05-16 08:39:00.425  1639  1639 D vendor.qti.vibrator: Vibrator on for timeoutMs: 50
+05-16 08:39:00.426  1639 14006 D vendor.qti.vibrator: Starting on on another thread
+05-16 08:39:00.430  1562  5362 E ANDR-PERF-OH: ANDR-PERF-OH: getPerfHandle() 55: Invalid handle req: 0
+05-16 08:39:00.433  4267  4353 D ShellBackPreview: BackAnimationController: onBackAnimationFinished()
+05-16 08:39:00.433  3936  8196 W WindowManager: Failed looking up window session=Session{dab9048 4267:u0a10124} callers=com.android.server.wm.WindowManagerService.removeClientToken:2153 com.android.server.wm.Session.remove:270 android.view.IWindowSession$Stub.onTransact:696 
+05-16 08:39:00.434  4267  4353 D ShellBackPreview: BackAnimationController: finishBackNavigation()
+05-16 08:39:00.434  4267  4353 D ShellBackPreview: resetTouchTracker -> no queued gesture
+05-16 08:39:00.434  4267  4353 V WindowManagerShell: Directly starting a new transition type=CLOSE_PREDICTIVE_BACK wct=WindowContainerTransaction { changes= {} hops= [{restoreBackNav: container=null reparent=null mToTop=false mWindowingMode=null mActivityType=null}] errorCallbackToken=null taskFragmentOrganizer=null } handler=com.android.wm.shell.back.BackAnimationController$BackTransitionHandler@c88df62
+05-16 08:39:00.434  3936  4038 D CoreBackPreview: onBackNavigationDone backType=2, triggerBack=false
+05-16 08:39:00.434  3936  6582 D CoreBackPreview: Setting Activity.mLauncherTaskBehind to false. Activity=ActivityRecord{166752509 u0 com.tiqiaa.icontrol/.BrandSelectActivity t23}
+05-16 08:39:00.436  3936  6582 D CoreBackPreview: onTransactionReady, opening: [], closing: [ActivityRecord{166752509 u0 com.tiqiaa.icontrol/.BrandSelectActivity t23}], animating: AnimationTargets{ openTarget= {ActivityRecord{166752509 u0 com.tiqiaa.icontrol/.BrandSelectActivity t23}} closeTarget= ActivityRecord{58376530 u0 com.tiqiaa.icontrol/.NewExactMatchRemoteActivity t23} mSwitchType= 2 mComposed= true mWaitTransition= false}, match: false
+05-16 08:39:00.437  1694  3198 I BpBinder: onLastStrongRef automatically unlinking death recipients: 
+05-16 08:39:00.438  4267  4285 V WindowManagerShell: onTransitionReady(transaction=16904991285410)
+05-16 08:39:00.438  3936  3968 V WindowManager: Sent Transition (#224) createdAt=05-16 08:39:00.434
+05-16 08:39:00.438  3936  3968 V WindowManager:     startWCT=WindowContainerTransaction { changes= {} hops= [{restoreBackNav: container=null reparent=null mToTop=false mWindowingMode=null mActivityType=null}] errorCallbackToken=null taskFragmentOrganizer=null }
+05-16 08:39:00.438  3936  3968 V WindowManager:     info={id=224 t=CLOSE_PREDICTIVE_BACK f=0x0 trk=0 r=[0@Point(0, 0)] c=[
+05-16 08:39:00.438  3936  3968 V WindowManager:         {m=TO_BACK f=FILLS_TASK|IS_OCCLUDED|FLAG_BACK_GESTURE_ANIMATED leash=Surface(name=ActivityRecord{166752509 u0 com.tiqiaa.icontrol/.BrandSelectActivity)/@0xfffdf84 sb=Rect(0, 0 - 1280, 2772) eb=Rect(0, 0 - 1280, 2772) epz=Point(1280, 2772) d=0 bc=fffafafa component=com.tiqiaa.icontrol/.BrandSelectActivity opt={t=FROM_STYLE mUserId=0}}
+05-16 08:39:00.438  3936  3968 V WindowManager:     ]}
+05-16 08:39:00.439  4267  4353 V WindowManagerShell: onTransitionReady (#224) android.os.BinderProxy@6748f0c: {id=224 t=CLOSE_PREDICTIVE_BACK f=0x0 trk=0 r=[0@Point(0, 0)] c=[
+05-16 08:39:00.439  4267  4353 V WindowManagerShell:         {m=TO_BACK f=FILLS_TASK|IS_OCCLUDED|FLAG_BACK_GESTURE_ANIMATED leash=Surface(name=ActivityRecord{166752509 u0 com.tiqiaa.icontrol/.BrandSelectActivity)/@0x550d65e sb=Rect(0, 0 - 1280, 2772) eb=Rect(0, 0 - 1280, 2772) epz=Point(1280, 2772) d=0 bc=fffafafa component=com.tiqiaa.icontrol/.BrandSelectActivity opt={t=FROM_STYLE mUserId=0}}
+05-16 08:39:00.439  4267  4353 V WindowManagerShell:     ]}
+05-16 08:39:00.439  4267  4353 V WindowManagerShell: Transition (#224) android.os.BinderProxy@6748f0c@0 ready while (#223) android.os.BinderProxy@ed9a5ae@0 is still animating. Notify the animating transition in case they can be merged
+05-16 08:39:00.439  4267  4353 D ShellBackPreview: Back animation transition, merge pending transitions result={id=224 t=CLOSE_PREDICTIVE_BACK f=0x0 trk=0 r=[0@Point(0, 0)] c=[]}
+05-16 08:39:00.439  4267  4353 V WindowManagerShell: Transition was merged: (#224) android.os.BinderProxy@6748f0c@0 into (#223) android.os.BinderProxy@ed9a5ae@0
+05-16 08:39:00.441  4267  4353 V WindowManagerShell: Transition animation finished (aborted=false), notifying core (#223) android.os.BinderProxy@ed9a5ae@0
+05-16 08:39:00.442  3936  3968 V WindowManager: Finish Transition (#223): created at 05-16 08:39:00.391 collect-started=0.201ms request-sent=9.106ms started=14.331ms ready=14.297ms sent=23.38ms commit=5.656ms finished=50.107ms
+05-16 08:39:00.443 13129 13129 D VRI[BrandSelectActivity]: visibilityChanged oldVisibility=true newVisibility=false
+05-16 08:39:00.443  3936  3968 V WindowManager: Finish Transition (#224): created at 05-16 08:39:00.434 collect-started=0.093ms started=0.107ms ready=1.344ms sent=2.572ms finished=8.823ms
+05-16 08:39:00.444  4267  4353 V WindowManagerShell: Track 0 became idle
+05-16 08:39:00.444  4267  4353 V WindowManagerShell: All active transition animations finished
+05-16 08:39:00.446   805   805 I hwservicemanager: getTransport: Cannot find entry vendor.qti.hardware.servicetracker@1.2::IServicetracker/default in either framework or device VINTF manifest.
+05-16 08:39:00.446  3936  3971 W ActivityTaskManager: servicetracker HIDL not available
+05-16 08:39:00.446  3936  3971 E ActivityTaskManager: Unable to get servicetracker HAL instance
+05-16 08:39:00.446   805   805 I hwservicemanager: getTransport: Cannot find entry vendor.qti.hardware.servicetracker@1.2::IServicetracker/default in either framework or device VINTF manifest.
+05-16 08:39:00.446  3936  3971 W ActivityTaskManager: servicetracker HIDL not available
+05-16 08:39:00.446  3936  3971 E ActivityTaskManager: Unable to get servicetracker HAL instance
+05-16 08:39:00.448 13129 13129 D AutofillManager: view not autofillable - not passing ime action check
+05-16 08:39:00.457   805   805 I hwservicemanager: getTransport: Cannot find entry vendor.qti.hardware.servicetracker@1.2::IServicetracker/default in either framework or device VINTF manifest.
+05-16 08:39:00.458  3936  6582 W ActivityTaskManager: servicetracker HIDL not available
+05-16 08:39:00.458  3936  6582 E ActivityTaskManager: Unable to get servicetracker HAL instance
+05-16 08:39:00.458   805   805 I hwservicemanager: getTransport: Cannot find entry vendor.qti.hardware.servicetracker@1.2::IServicetracker/default in either framework or device VINTF manifest.
+05-16 08:39:00.458  3936  6582 W ActivityTaskManager: servicetracker HIDL not available
+05-16 08:39:00.458  3936  6582 E ActivityTaskManager: Unable to get servicetracker HAL instance
+05-16 08:39:00.459  3936  4059 W UsageStatsService: Unexpected activity event reported! (com.tiqiaa.icontrol/com.tiqiaa.icontrol.BrandSelectActivity event : 23 instanceId : 242967026)
+05-16 08:39:00.476  1639 14006 D vendor.qti.vibrator: Notifying on complete
+05-16 08:39:00.477  1639  1639 D vendor.qti.vibrator: QTI Vibrator off
+05-16 08:39:00.515  1694  1916 E HwcComposer: getLuts failed Status(-129, EX_TRANSACTION_FAILED): 'UNKNOWN_TRANSACTION: '
+05-16 08:39:00.615  1694  1916 E HwcComposer: getLuts failed Status(-129, EX_TRANSACTION_FAILED): 'UNKNOWN_TRANSACTION: '
+05-16 08:39:00.618  3936  4343 D CoreBackPreview: startBackNavigation currentTask=Task{dc88fe6 #23 type=standard A=10166:com.tiqiaa.icontrol}, topRunningActivity=ActivityRecord{58376530 u0 com.tiqiaa.icontrol/.NewExactMatchRemoteActivity t23}, callbackInfo=OnBackInvokedCallbackInfo{mCallback=android.window.IOnBackInvokedCallback$Stub$Proxy@9e0d77c, mPriority=-1, mIsAnimationCallback=false, mOverrideBehavior=0}, currentFocus=Window{c066049 u0 com.tiqiaa.icontrol/com.tiqiaa.icontrol.NewExactMatchRemoteActivity}
+05-16 08:39:00.619  3936  4343 D CoreBackPreview: Previous Destination is Activity:ComponentInfo{com.tiqiaa.icontrol/com.tiqiaa.icontrol.BrandSelectActivity} Task:Task=23 removedContainer:ActivityRecord{58376530 u0 com.tiqiaa.icontrol/.NewExactMatchRemoteActivity t23}, backType=TYPE_CROSS_ACTIVITY
+05-16 08:39:00.621  3936  4343 D CoreBackPreview: Setting Activity.mLauncherTaskBehind to true. Activity=ActivityRecord{166752509 u0 com.tiqiaa.icontrol/.BrandSelectActivity t23}
+05-16 08:39:00.623   805   805 I hwservicemanager: getTransport: Cannot find entry vendor.qti.hardware.servicetracker@1.2::IServicetracker/default in either framework or device VINTF manifest.
+05-16 08:39:00.623  1694  1785 I BpBinder: onLastStrongRef automatically unlinking death recipients: 
+05-16 08:39:00.624  3936  4343 W ActivityTaskManager: servicetracker HIDL not available
+05-16 08:39:00.624  3936  4343 E ActivityTaskManager: Unable to get servicetracker HAL instance
+05-16 08:39:00.624   805   805 I hwservicemanager: getTransport: Cannot find entry vendor.qti.hardware.servicetracker@1.2::IServicetracker/default in either framework or device VINTF manifest.
+05-16 08:39:00.625  3936  4343 W ActivityTaskManager: servicetracker HIDL not available
+05-16 08:39:00.625  3936  4343 E ActivityTaskManager: Unable to get servicetracker HAL instance
+05-16 08:39:00.627 13129 13129 D ViewRootImpl: Skipping stats log for color mode
+05-16 08:39:00.631  4267  4353 D ShellBackPreview: Received backNavigationInfo:BackNavigationInfo{mType=TYPE_CROSS_ACTIVITY (2), mOnBackNavigationDone=android.os.RemoteCallback@9618ff8, mOnBackInvokedCallback=android.window.IOnBackInvokedCallback$Stub$Proxy@a380cd1, mPrepareRemoteAnimation=true, mAnimationCallback=false, mCustomizeAnimationInfo=CustomAnimationInfo, package name= com.tiqiaa.icontrol}
+05-16 08:39:00.631  4267  4353 V WindowManagerShell: Transition requested (#225): android.os.BinderProxy@c1bb3a4 TransitionRequestInfo { type = PREDICTIVE_BACK, triggerTask = null, pipChange = null, remoteTransition = null, displayChange = null, flags = 0, debugId = 225 }
+05-16 08:39:00.631  4267  4353 V WindowManagerShell: Transition (#225): request handled by BackAnimationController$BackTransitionHandler
+05-16 08:39:00.632 13129 13129 D AutofillManager: view not autofillable - not passing ime action check
+05-16 08:39:00.637  4267  4477 V SnapshotDrawerUtils: Drawing snapshot surface sizeMismatch=true
+05-16 08:39:00.638  4267  4353 D ShellBackPreview: Finishing gesture with event action: 1
+05-16 08:39:00.638  4267  4353 D ShellBackPreview: onGestureFinished() mTriggerBack == false
+05-16 08:39:00.638  4267  4353 W ShellBackPreview: Gesture released, but animation didn't ready.
+05-16 08:39:00.641  3936  3968 V WindowManager: Sent Transition (#225) createdAt=05-16 08:39:00.620 via request=TransitionRequestInfo { type = PREDICTIVE_BACK, triggerTask = null, pipChange = null, remoteTransition = null, displayChange = null, flags = 0, debugId = 225 }
+05-16 08:39:00.641  3936  3968 V WindowManager:     startWCT=WindowContainerTransaction { changes= {} hops= [] errorCallbackToken=null taskFragmentOrganizer=null }
+05-16 08:39:00.641  3936  3968 V WindowManager:     info={id=225 t=PREDICTIVE_BACK f=0x0 trk=0 r=[0@Point(0, 0)] c=[
+05-16 08:39:00.641  3936  3968 V WindowManager:         {m=CHANGE f=FILLS_TASK|FLAG_BACK_GESTURE_ANIMATED leash=Surface(name=ActivityRecord{58376530 u0 com.tiqiaa.icontrol/.NewExactMatchRemoteActivity)/@0x99bd826 sb=Rect(0, 0 - 1280, 2772) eb=Rect(0, 0 - 1280, 2772) epz=Point(1280, 2772) d=0 bc=fffafafa component=com.tiqiaa.icontrol/.NewExactMatchRemoteActivity opt={t=FROM_STYLE mUserId=0}},
+05-16 08:39:00.641  3936  3968 V WindowManager:         {m=TO_FRONT f=FILLS_TASK|IS_OCCLUDED|FLAG_BACK_GESTURE_ANIMATED leash=Surface(name=ActivityRecord{166752509 u0 com.tiqiaa.icontrol/.BrandSelectActivity)/@0xfffdf84 sb=Rect(0, 0 - 1280, 2772) eb=Rect(0, 0 - 1280, 2772) epz=Point(1280, 2772) d=0 bc=fffafafa component=com.tiqiaa.icontrol/.BrandSelectActivity opt={t=FROM_STYLE mUserId=0}}
+05-16 08:39:00.641  3936  3968 V WindowManager:     ]}
+05-16 08:39:00.641  4267  4285 V WindowManagerShell: onTransitionReady(transaction=16904991285425)
+05-16 08:39:00.641  4267  4353 V WindowManagerShell: onTransitionReady (#225) android.os.BinderProxy@c1bb3a4: {id=225 t=PREDICTIVE_BACK f=0x0 trk=0 r=[0@Point(0, 0)] c=[
+05-16 08:39:00.641  4267  4353 V WindowManagerShell:         {m=CHANGE f=FILLS_TASK|FLAG_BACK_GESTURE_ANIMATED leash=Surface(name=ActivityRecord{58376530 u0 com.tiqiaa.icontrol/.NewExactMatchRemoteActivity)/@0x67168c5 sb=Rect(0, 0 - 1280, 2772) eb=Rect(0, 0 - 1280, 2772) epz=Point(1280, 2772) d=0 bc=fffafafa component=com.tiqiaa.icontrol/.NewExactMatchRemoteActivity opt={t=FROM_STYLE mUserId=0}},
+05-16 08:39:00.641  4267  4353 V WindowManagerShell:         {m=TO_FRONT f=FILLS_TASK|IS_OCCLUDED|FLAG_BACK_GESTURE_ANIMATED leash=Surface(name=ActivityRecord{166752509 u0 com.tiqiaa.icontrol/.BrandSelectActivity)/@0x993d21a sb=Rect(0, 0 - 1280, 2772) eb=Rect(0, 0 - 1280, 2772) epz=Point(1280, 2772) d=0 bc=fffafafa component=com.tiqiaa.icontrol/.BrandSelectActivity opt={t=FROM_STYLE mUserId=0}}
+05-16 08:39:00.641  4267  4353 V WindowManagerShell:     ]}
+05-16 08:39:00.641  4267  4353 V WindowManagerShell: Playing animation for (#225) android.os.BinderProxy@c1bb3a4@0
+05-16 08:39:00.642  4267  4353 V WindowManagerShell:  try firstHandler com.android.wm.shell.back.BackAnimationController$BackTransitionHandler@c88df62
+05-16 08:39:00.642  4267  4353 V ShellRecents: No matching remote found to takeover (#225)
+05-16 08:39:00.643  4267  4353 D ShellBackPreview: custom animation loaded android.view.animation.AnimationSet@184cc41
+05-16 08:39:00.643  4267  4353 D ShellBackPreview: custom animation loaded android.view.animation.AnimationSet@70cf5e6
+05-16 08:39:00.643  4267  4353 D ShellBackPreview: BackAnimationController: startAnimation()
+05-16 08:39:00.643  4267  4353 D ShellBackPreview: Start back to activity animation.
+05-16 08:39:00.645  4267  4353 D ShellBackPreview: BackAnimationController: startPostCommitAnimation()
+05-16 08:39:00.645  4267  4353 V WindowManagerShell:  animated by firstHandler
+05-16 08:39:00.654  3936  4343 W ActivityManager: pid 3936 system sent binder code 2 with flags 0 to frozen apps and got error -32
+05-16 08:39:00.654  3936  4343 D ActivityManager: Too many transaction errors, throttling freezer binder callback.
+05-16 08:39:00.654  1639  1639 D vendor.qti.vibrator: Vibrator on for timeoutMs: 50
+05-16 08:39:00.654  3936  4343 E ConsumerIrService: Error transmitting frequency: 38000
+05-16 08:39:00.655  1639 14011 D vendor.qti.vibrator: Starting on on another thread
+05-16 08:39:00.656  1562  5364 E ANDR-PERF-OH: ANDR-PERF-OH: getPerfHandle() 55: Invalid handle req: 0
+05-16 08:39:00.658  4267  4353 D ShellBackPreview: BackAnimationController: onBackAnimationFinished()
+05-16 08:39:00.659  4267  4353 D ShellBackPreview: BackAnimationController: finishBackNavigation()
+05-16 08:39:00.659  4267  4353 D ShellBackPreview: resetTouchTracker -> no queued gesture
+05-16 08:39:00.660  4267  4353 V WindowManagerShell: Directly starting a new transition type=CLOSE_PREDICTIVE_BACK wct=WindowContainerTransaction { changes= {} hops= [{restoreBackNav: container=null reparent=null mToTop=false mWindowingMode=null mActivityType=null}] errorCallbackToken=null taskFragmentOrganizer=null } handler=com.android.wm.shell.back.BackAnimationController$BackTransitionHandler@c88df62
+05-16 08:39:00.660  3936  6582 D CoreBackPreview: onBackNavigationDone backType=2, triggerBack=false
+05-16 08:39:00.661  3936  8196 D CoreBackPreview: Setting Activity.mLauncherTaskBehind to false. Activity=ActivityRecord{166752509 u0 com.tiqiaa.icontrol/.BrandSelectActivity t23}
+05-16 08:39:00.663  1694  1927 I BpBinder: onLastStrongRef automatically unlinking death recipients: 
+05-16 08:39:00.663  3936  8196 D CoreBackPreview: onTransactionReady, opening: [], closing: [ActivityRecord{166752509 u0 com.tiqiaa.icontrol/.BrandSelectActivity t23}], animating: AnimationTargets{ openTarget= {ActivityRecord{166752509 u0 com.tiqiaa.icontrol/.BrandSelectActivity t23}} closeTarget= ActivityRecord{58376530 u0 com.tiqiaa.icontrol/.NewExactMatchRemoteActivity t23} mSwitchType= 2 mComposed= true mWaitTransition= false}, match: false
+05-16 08:39:00.664  4267  4285 V WindowManagerShell: onTransitionReady(transaction=16904991285433)
+05-16 08:39:00.664  4267  4353 V WindowManagerShell: onTransitionReady (#226) android.os.BinderProxy@8f37340: {id=226 t=CLOSE_PREDICTIVE_BACK f=0x0 trk=0 r=[0@Point(0, 0)] c=[
+05-16 08:39:00.664  4267  4353 V WindowManagerShell:         {m=TO_BACK f=FILLS_TASK|IS_OCCLUDED|FLAG_BACK_GESTURE_ANIMATED leash=Surface(name=ActivityRecord{166752509 u0 com.tiqiaa.icontrol/.BrandSelectActivity)/@0x3a28a72 sb=Rect(0, 0 - 1280, 2772) eb=Rect(0, 0 - 1280, 2772) epz=Point(1280, 2772) d=0 bc=fffafafa component=com.tiqiaa.icontrol/.BrandSelectActivity opt={t=FROM_STYLE mUserId=0}}
+05-16 08:39:00.664  4267  4353 V WindowManagerShell:     ]}
+05-16 08:39:00.665  4267  4353 V WindowManagerShell: Transition (#226) android.os.BinderProxy@8f37340@0 ready while (#225) android.os.BinderProxy@c1bb3a4@0 is still animating. Notify the animating transition in case they can be merged
+05-16 08:39:00.665  4267  4353 D ShellBackPreview: Back animation transition, merge pending transitions result={id=226 t=CLOSE_PREDICTIVE_BACK f=0x0 trk=0 r=[0@Point(0, 0)] c=[]}
+05-16 08:39:00.665  4267  4353 V WindowManagerShell: Transition was merged: (#226) android.os.BinderProxy@8f37340@0 into (#225) android.os.BinderProxy@c1bb3a4@0
+05-16 08:39:00.665  3936  3968 V WindowManager: Sent Transition (#226) createdAt=05-16 08:39:00.660
+05-16 08:39:00.665  3936  3968 V WindowManager:     startWCT=WindowContainerTransaction { changes= {} hops= [{restoreBackNav: container=null reparent=null mToTop=false mWindowingMode=null mActivityType=null}] errorCallbackToken=null taskFragmentOrganizer=null }
+05-16 08:39:00.665  4267  4353 V WindowManagerShell: Transition animation finished (aborted=false), notifying core (#225) android.os.BinderProxy@c1bb3a4@0
+05-16 08:39:00.666  3936  3968 V WindowManager:     info={id=226 t=CLOSE_PREDICTIVE_BACK f=0x0 trk=0 r=[0@Point(0, 0)] c=[
+05-16 08:39:00.666  3936  3968 V WindowManager:         {m=TO_BACK f=FILLS_TASK|IS_OCCLUDED|FLAG_BACK_GESTURE_ANIMATED leash=Surface(name=ActivityRecord{166752509 u0 com.tiqiaa.icontrol/.BrandSelectActivity)/@0xfffdf84 sb=Rect(0, 0 - 1280, 2772) eb=Rect(0, 0 - 1280, 2772) epz=Point(1280, 2772) d=0 bc=fffafafa component=com.tiqiaa.icontrol/.BrandSelectActivity opt={t=FROM_STYLE mUserId=0}}
+05-16 08:39:00.666  3936  3968 V WindowManager:     ]}
+05-16 08:39:00.667  3936  3968 V WindowManager: Finish Transition (#225): created at 05-16 08:39:00.620 collect-started=0.214ms request-sent=6.851ms started=11.979ms ready=11.959ms sent=20.151ms commit=5.682ms finished=46.013ms
+05-16 08:39:00.667  3936  3968 V WindowManager: Finish Transition (#226): created at 05-16 08:39:00.660 collect-started=0.198ms started=0.221ms ready=2.072ms sent=3.463ms finished=7.057ms
+05-16 08:39:00.668 13129 13129 D VRI[BrandSelectActivity]: visibilityChanged oldVisibility=true newVisibility=false
+05-16 08:39:00.668  4267  4353 V WindowManagerShell: Track 0 became idle
+05-16 08:39:00.668  4267  4353 V WindowManagerShell: All active transition animations finished
+05-16 08:39:00.669   805   805 I hwservicemanager: getTransport: Cannot find entry vendor.qti.hardware.servicetracker@1.2::IServicetracker/default in either framework or device VINTF manifest.
+05-16 08:39:00.669  3936  3971 W ActivityTaskManager: servicetracker HIDL not available
+05-16 08:39:00.669  3936  3971 E ActivityTaskManager: Unable to get servicetracker HAL instance
+05-16 08:39:00.669   805   805 I hwservicemanager: getTransport: Cannot find entry vendor.qti.hardware.servicetracker@1.2::IServicetracker/default in either framework or device VINTF manifest.
+05-16 08:39:00.670  3936  3971 W ActivityTaskManager: servicetracker HIDL not available
+05-16 08:39:00.670  3936  3971 E ActivityTaskManager: Unable to get servicetracker HAL instance
+05-16 08:39:00.672  4267  4477 E FrameTracker: force finish cuj, time out: J<SPLASHSCREEN_EXIT_ANIM>
+05-16 08:39:00.674 13129 13129 D AutofillManager: view not autofillable - not passing ime action check
+05-16 08:39:00.683   805   805 I hwservicemanager: getTransport: Cannot find entry vendor.qti.hardware.servicetracker@1.2::IServicetracker/default in either framework or device VINTF manifest.
+05-16 08:39:00.684  3936  8196 W ActivityTaskManager: servicetracker HIDL not available
+05-16 08:39:00.684  3936  8196 E ActivityTaskManager: Unable to get servicetracker HAL instance
+05-16 08:39:00.684   805   805 I hwservicemanager: getTransport: Cannot find entry vendor.qti.hardware.servicetracker@1.2::IServicetracker/default in either framework or device VINTF manifest.
+05-16 08:39:00.684  3936  8196 W ActivityTaskManager: servicetracker HIDL not available
+05-16 08:39:00.685  3936  8196 E ActivityTaskManager: Unable to get servicetracker HAL instance
+05-16 08:39:00.685  3936  4059 W UsageStatsService: Unexpected activity event reported! (com.tiqiaa.icontrol/com.tiqiaa.icontrol.BrandSelectActivity event : 23 instanceId : 242967026)
+05-16 08:39:00.687  3936  4038 W WindowManager: Failed looking up window session=Session{dab9048 4267:u0a10124} callers=com.android.server.wm.WindowManagerService.removeClientToken:2153 com.android.server.wm.Session.remove:270 android.view.IWindowSession$Stub.onTransact:696 
+05-16 08:39:00.705  1639 14011 D vendor.qti.vibrator: Notifying on complete
+05-16 08:39:00.706  1639  1639 D vendor.qti.vibrator: QTI Vibrator off
+05-16 08:39:00.716  1694  1916 E HwcComposer: getLuts failed Status(-129, EX_TRANSACTION_FAILED): 'UNKNOWN_TRANSACTION: '
+05-16 08:39:00.816  1694  1916 E HwcComposer: getLuts failed Status(-129, EX_TRANSACTION_FAILED): 'UNKNOWN_TRANSACTION: '
+05-16 08:39:00.833  3936  6582 D CoreBackPreview: startBackNavigation currentTask=Task{dc88fe6 #23 type=standard A=10166:com.tiqiaa.icontrol}, topRunningActivity=ActivityRecord{58376530 u0 com.tiqiaa.icontrol/.NewExactMatchRemoteActivity t23}, callbackInfo=OnBackInvokedCallbackInfo{mCallback=android.window.IOnBackInvokedCallback$Stub$Proxy@9e0d77c, mPriority=-1, mIsAnimationCallback=false, mOverrideBehavior=0}, currentFocus=Window{c066049 u0 com.tiqiaa.icontrol/com.tiqiaa.icontrol.NewExactMatchRemoteActivity}
+05-16 08:39:00.834  3936  6582 D CoreBackPreview: Previous Destination is Activity:ComponentInfo{com.tiqiaa.icontrol/com.tiqiaa.icontrol.BrandSelectActivity} Task:Task=23 removedContainer:ActivityRecord{58376530 u0 com.tiqiaa.icontrol/.NewExactMatchRemoteActivity t23}, backType=TYPE_CROSS_ACTIVITY
+05-16 08:39:00.835  3936  6582 D CoreBackPreview: Setting Activity.mLauncherTaskBehind to true. Activity=ActivityRecord{166752509 u0 com.tiqiaa.icontrol/.BrandSelectActivity t23}
+05-16 08:39:00.836   805   805 I hwservicemanager: getTransport: Cannot find entry vendor.qti.hardware.servicetracker@1.2::IServicetracker/default in either framework or device VINTF manifest.
+05-16 08:39:00.837  1694  3198 I BpBinder: onLastStrongRef automatically unlinking death recipients: 
+05-16 08:39:00.837  3936  6582 W ActivityTaskManager: servicetracker HIDL not available
+05-16 08:39:00.837  3936  6582 E ActivityTaskManager: Unable to get servicetracker HAL instance
+05-16 08:39:00.837   805   805 I hwservicemanager: getTransport: Cannot find entry vendor.qti.hardware.servicetracker@1.2::IServicetracker/default in either framework or device VINTF manifest.
+05-16 08:39:00.838  3936  6582 W ActivityTaskManager: servicetracker HIDL not available
+05-16 08:39:00.838  3936  6582 E ActivityTaskManager: Unable to get servicetracker HAL instance
+05-16 08:39:00.844 13129 13129 D ViewRootImpl: Skipping stats log for color mode
+05-16 08:39:00.847  4267  4353 D ShellBackPreview: Received backNavigationInfo:BackNavigationInfo{mType=TYPE_CROSS_ACTIVITY (2), mOnBackNavigationDone=android.os.RemoteCallback@83c836c, mOnBackInvokedCallback=android.window.IOnBackInvokedCallback$Stub$Proxy@3570d35, mPrepareRemoteAnimation=true, mAnimationCallback=false, mCustomizeAnimationInfo=CustomAnimationInfo, package name= com.tiqiaa.icontrol}
+05-16 08:39:00.847  4267  4353 V WindowManagerShell: Transition requested (#227): android.os.BinderProxy@4246a58 TransitionRequestInfo { type = PREDICTIVE_BACK, triggerTask = null, pipChange = null, remoteTransition = null, displayChange = null, flags = 0, debugId = 227 }
+05-16 08:39:00.847  4267  4353 V WindowManagerShell: Transition (#227): request handled by BackAnimationController$BackTransitionHandler
+05-16 08:39:00.850 13129 13129 D AutofillManager: view not autofillable - not passing ime action check
+05-16 08:39:00.852  4267  4477 V SnapshotDrawerUtils: Drawing snapshot surface sizeMismatch=true
+05-16 08:39:00.855  4267  4353 D ShellBackPreview: Finishing gesture with event action: 1
+05-16 08:39:00.855  4267  4353 D ShellBackPreview: onGestureFinished() mTriggerBack == false
+05-16 08:39:00.855  4267  4353 W ShellBackPreview: Gesture released, but animation didn't ready.
+05-16 08:39:00.856  4267  4285 V WindowManagerShell: onTransitionReady(transaction=16904991285448)
+05-16 08:39:00.856  4267  4353 V WindowManagerShell: onTransitionReady (#227) android.os.BinderProxy@4246a58: {id=227 t=PREDICTIVE_BACK f=0x0 trk=0 r=[0@Point(0, 0)] c=[
+05-16 08:39:00.856  4267  4353 V WindowManagerShell:         {m=CHANGE f=FILLS_TASK|FLAG_BACK_GESTURE_ANIMATED leash=Surface(name=ActivityRecord{58376530 u0 com.tiqiaa.icontrol/.NewExactMatchRemoteActivity)/@0x95f3be9 sb=Rect(0, 0 - 1280, 2772) eb=Rect(0, 0 - 1280, 2772) epz=Point(1280, 2772) d=0 bc=fffafafa component=com.tiqiaa.icontrol/.NewExactMatchRemoteActivity opt={t=FROM_STYLE mUserId=0}},
+05-16 08:39:00.856  4267  4353 V WindowManagerShell:         {m=TO_FRONT f=FILLS_TASK|IS_OCCLUDED|FLAG_BACK_GESTURE_ANIMATED leash=Surface(name=ActivityRecord{166752509 u0 com.tiqiaa.icontrol/.BrandSelectActivity)/@0x103b06e sb=Rect(0, 0 - 1280, 2772) eb=Rect(0, 0 - 1280, 2772) epz=Point(1280, 2772) d=0 bc=fffafafa component=com.tiqiaa.icontrol/.BrandSelectActivity opt={t=FROM_STYLE mUserId=0}}
+05-16 08:39:00.856  4267  4353 V WindowManagerShell:     ]}
+05-16 08:39:00.856  4267  4353 V WindowManagerShell: Playing animation for (#227) android.os.BinderProxy@4246a58@0
+05-16 08:39:00.856  4267  4353 V WindowManagerShell:  try firstHandler com.android.wm.shell.back.BackAnimationController$BackTransitionHandler@c88df62
+05-16 08:39:00.857  3936  3968 V WindowManager: Sent Transition (#227) createdAt=05-16 08:39:00.834 via request=TransitionRequestInfo { type = PREDICTIVE_BACK, triggerTask = null, pipChange = null, remoteTransition = null, displayChange = null, flags = 0, debugId = 227 }
+05-16 08:39:00.857  3936  3968 V WindowManager:     startWCT=WindowContainerTransaction { changes= {} hops= [] errorCallbackToken=null taskFragmentOrganizer=null }
+05-16 08:39:00.857  4267  4353 V ShellRecents: No matching remote found to takeover (#227)
+05-16 08:39:00.857  4267  4353 D ShellBackPreview: custom animation loaded android.view.animation.AnimationSet@81d9f9c
+05-16 08:39:00.858  4267  4353 D ShellBackPreview: custom animation loaded android.view.animation.AnimationSet@9e6ada5
+05-16 08:39:00.858  4267  4353 D ShellBackPreview: BackAnimationController: startAnimation()
+05-16 08:39:00.858  4267  4353 D ShellBackPreview: Start back to activity animation.
+05-16 08:39:00.858  3936  3968 V WindowManager:     info={id=227 t=PREDICTIVE_BACK f=0x0 trk=0 r=[0@Point(0, 0)] c=[
+05-16 08:39:00.858  3936  3968 V WindowManager:         {m=CHANGE f=FILLS_TASK|FLAG_BACK_GESTURE_ANIMATED leash=Surface(name=ActivityRecord{58376530 u0 com.tiqiaa.icontrol/.NewExactMatchRemoteActivity)/@0x99bd826 sb=Rect(0, 0 - 1280, 2772) eb=Rect(0, 0 - 1280, 2772) epz=Point(1280, 2772) d=0 bc=fffafafa component=com.tiqiaa.icontrol/.NewExactMatchRemoteActivity opt={t=FROM_STYLE mUserId=0}},
+05-16 08:39:00.858  3936  3968 V WindowManager:         {m=TO_FRONT f=FILLS_TASK|IS_OCCLUDED|FLAG_BACK_GESTURE_ANIMATED leash=Surface(name=ActivityRecord{166752509 u0 com.tiqiaa.icontrol/.BrandSelectActivity)/@0xfffdf84 sb=Rect(0, 0 - 1280, 2772) eb=Rect(0, 0 - 1280, 2772) epz=Point(1280, 2772) d=0 bc=fffafafa component=com.tiqiaa.icontrol/.BrandSelectActivity opt={t=FROM_STYLE mUserId=0}}
+05-16 08:39:00.858  3936  3968 V WindowManager:     ]}
+05-16 08:39:00.859  4267  4353 D ShellBackPreview: BackAnimationController: startPostCommitAnimation()
+05-16 08:39:00.860  4267  4353 V WindowManagerShell:  animated by firstHandler
+05-16 08:39:00.865  1562  5362 E ANDR-PERF-OH: ANDR-PERF-OH: getPerfHandle() 55: Invalid handle req: 0
+05-16 08:39:00.869  3936  8196 W ActivityManager: pid 3936 system sent binder code 2 with flags 0 to frozen apps and got error -32
+05-16 08:39:00.869  3936  8196 D ActivityManager: Too many transaction errors, throttling freezer binder callback.
+05-16 08:39:00.869  3936  8196 E ConsumerIrService: Error transmitting frequency: 38000
+05-16 08:39:00.871  1639  1639 D vendor.qti.vibrator: Vibrator on for timeoutMs: 50
+05-16 08:39:00.871  1639 14017 D vendor.qti.vibrator: Starting on on another thread
+05-16 08:39:00.875  4267  4353 D ShellBackPreview: BackAnimationController: onBackAnimationFinished()
+05-16 08:39:00.875  4267  4353 D ShellBackPreview: BackAnimationController: finishBackNavigation()
+05-16 08:39:00.875  4267  4353 D ShellBackPreview: resetTouchTracker -> no queued gesture
+05-16 08:39:00.876  4267  4353 V WindowManagerShell: Directly starting a new transition type=CLOSE_PREDICTIVE_BACK wct=WindowContainerTransaction { changes= {} hops= [{restoreBackNav: container=null reparent=null mToTop=false mWindowingMode=null mActivityType=null}] errorCallbackToken=null taskFragmentOrganizer=null } handler=com.android.wm.shell.back.BackAnimationController$BackTransitionHandler@c88df62
+05-16 08:39:00.876  3936  6582 D CoreBackPreview: onBackNavigationDone backType=2, triggerBack=false
+05-16 08:39:00.876  3936  8196 D CoreBackPreview: Setting Activity.mLauncherTaskBehind to false. Activity=ActivityRecord{166752509 u0 com.tiqiaa.icontrol/.BrandSelectActivity t23}
+05-16 08:39:00.877  3936  8196 D CoreBackPreview: onTransactionReady, opening: [], closing: [ActivityRecord{166752509 u0 com.tiqiaa.icontrol/.BrandSelectActivity t23}], animating: AnimationTargets{ openTarget= {ActivityRecord{166752509 u0 com.tiqiaa.icontrol/.BrandSelectActivity t23}} closeTarget= ActivityRecord{58376530 u0 com.tiqiaa.icontrol/.NewExactMatchRemoteActivity t23} mSwitchType= 2 mComposed= true mWaitTransition= false}, match: false
+05-16 08:39:00.878  1694  1785 I BpBinder: onLastStrongRef automatically unlinking death recipients: 
+05-16 08:39:00.879  3936  3968 V WindowManager: Sent Transition (#228) createdAt=05-16 08:39:00.876
+05-16 08:39:00.879  4267  4285 V WindowManagerShell: onTransitionReady(transaction=16904991285456)
+05-16 08:39:00.879  3936  3968 V WindowManager:     startWCT=WindowContainerTransaction { changes= {} hops= [{restoreBackNav: container=null reparent=null mToTop=false mWindowingMode=null mActivityType=null}] errorCallbackToken=null taskFragmentOrganizer=null }
+05-16 08:39:00.879  3936  3968 V WindowManager:     info={id=228 t=CLOSE_PREDICTIVE_BACK f=0x0 trk=0 r=[0@Point(0, 0)] c=[
+05-16 08:39:00.879  3936  3968 V WindowManager:         {m=TO_BACK f=FILLS_TASK|IS_OCCLUDED|FLAG_BACK_GESTURE_ANIMATED leash=Surface(name=ActivityRecord{166752509 u0 com.tiqiaa.icontrol/.BrandSelectActivity)/@0xfffdf84 sb=Rect(0, 0 - 1280, 2772) eb=Rect(0, 0 - 1280, 2772) epz=Point(1280, 2772) d=0 bc=fffafafa component=com.tiqiaa.icontrol/.BrandSelectActivity opt={t=FROM_STYLE mUserId=0}}
+05-16 08:39:00.879  3936  3968 V WindowManager:     ]}
+05-16 08:39:00.880  4267  4353 V WindowManagerShell: onTransitionReady (#228) android.os.BinderProxy@63d5f46: {id=228 t=CLOSE_PREDICTIVE_BACK f=0x0 trk=0 r=[0@Point(0, 0)] c=[
+05-16 08:39:00.880  4267  4353 V WindowManagerShell:         {m=TO_BACK f=FILLS_TASK|IS_OCCLUDED|FLAG_BACK_GESTURE_ANIMATED leash=Surface(name=ActivityRecord{166752509 u0 com.tiqiaa.icontrol/.BrandSelectActivity)/@0x8331988 sb=Rect(0, 0 - 1280, 2772) eb=Rect(0, 0 - 1280, 2772) epz=Point(1280, 2772) d=0 bc=fffafafa component=com.tiqiaa.icontrol/.BrandSelectActivity opt={t=FROM_STYLE mUserId=0}}
+05-16 08:39:00.880  4267  4353 V WindowManagerShell:     ]}
+05-16 08:39:00.880  4267  4353 V WindowManagerShell: Transition (#228) android.os.BinderProxy@63d5f46@0 ready while (#227) android.os.BinderProxy@4246a58@0 is still animating. Notify the animating transition in case they can be merged
+05-16 08:39:00.880  4267  4353 D ShellBackPreview: Back animation transition, merge pending transitions result={id=228 t=CLOSE_PREDICTIVE_BACK f=0x0 trk=0 r=[0@Point(0, 0)] c=[]}
+05-16 08:39:00.880  4267  4353 V WindowManagerShell: Transition was merged: (#228) android.os.BinderProxy@63d5f46@0 into (#227) android.os.BinderProxy@4246a58@0
+05-16 08:39:00.882  4267  4353 V WindowManagerShell: Transition animation finished (aborted=false), notifying core (#227) android.os.BinderProxy@4246a58@0
+05-16 08:39:00.883  3936  3968 V WindowManager: Finish Transition (#227): created at 05-16 08:39:00.834 collect-started=0.227ms request-sent=7.537ms started=13.114ms ready=13.099ms sent=20.769ms commit=8.033ms finished=48.205ms
+05-16 08:39:00.883  3936  3968 V WindowManager: Finish Transition (#228): created at 05-16 08:39:00.876 collect-started=0.134ms started=0.151ms ready=1.09ms sent=2.275ms finished=7.444ms
+05-16 08:39:00.884 13129 13129 D VRI[BrandSelectActivity]: visibilityChanged oldVisibility=true newVisibility=false
+05-16 08:39:00.884  4267  4353 V WindowManagerShell: Track 0 became idle
+05-16 08:39:00.884  4267  4353 V WindowManagerShell: All active transition animations finished
+05-16 08:39:00.885   805   805 I hwservicemanager: getTransport: Cannot find entry vendor.qti.hardware.servicetracker@1.2::IServicetracker/default in either framework or device VINTF manifest.
+05-16 08:39:00.885  3936  3971 W ActivityTaskManager: servicetracker HIDL not available
+05-16 08:39:00.885  3936  3971 E ActivityTaskManager: Unable to get servicetracker HAL instance
+05-16 08:39:00.885   805   805 I hwservicemanager: getTransport: Cannot find entry vendor.qti.hardware.servicetracker@1.2::IServicetracker/default in either framework or device VINTF manifest.
+05-16 08:39:00.886  3936  3971 W ActivityTaskManager: servicetracker HIDL not available
+05-16 08:39:00.886  3936  3971 E ActivityTaskManager: Unable to get servicetracker HAL instance
+05-16 08:39:00.891 13129 13129 D AutofillManager: view not autofillable - not passing ime action check
+05-16 08:39:00.895  3936  8196 W WindowManager: Failed looking up window session=Session{dab9048 4267:u0a10124} callers=com.android.server.wm.WindowManagerService.removeClientToken:2153 com.android.server.wm.Session.remove:270 android.view.IWindowSession$Stub.onTransact:696 
+05-16 08:39:00.900   805   805 I hwservicemanager: getTransport: Cannot find entry vendor.qti.hardware.servicetracker@1.2::IServicetracker/default in either framework or device VINTF manifest.
+05-16 08:39:00.900  3936  6582 W ActivityTaskManager: servicetracker HIDL not available
+05-16 08:39:00.901  3936  6582 E ActivityTaskManager: Unable to get servicetracker HAL instance
+05-16 08:39:00.901   805   805 I hwservicemanager: getTransport: Cannot find entry vendor.qti.hardware.servicetracker@1.2::IServicetracker/default in either framework or device VINTF manifest.
+05-16 08:39:00.901  3936  6582 W ActivityTaskManager: servicetracker HIDL not available
+05-16 08:39:00.901  3936  6582 E ActivityTaskManager: Unable to get servicetracker HAL instance
+05-16 08:39:00.902  3936  4059 W UsageStatsService: Unexpected activity event reported! (com.tiqiaa.icontrol/com.tiqiaa.icontrol.BrandSelectActivity event : 23 instanceId : 242967026)
+05-16 08:39:00.916  1694  1916 E HwcComposer: getLuts failed Status(-129, EX_TRANSACTION_FAILED): 'UNKNOWN_TRANSACTION: '
+05-16 08:39:00.921  1639 14017 D vendor.qti.vibrator: Notifying on complete
+05-16 08:39:00.922  1639  1639 D vendor.qti.vibrator: QTI Vibrator off
+05-16 08:39:01.023  1694  1916 E HwcComposer: getLuts failed Status(-129, EX_TRANSACTION_FAILED): 'UNKNOWN_TRANSACTION: '
+05-16 08:39:01.051  3936  8196 D CoreBackPreview: startBackNavigation currentTask=Task{dc88fe6 #23 type=standard A=10166:com.tiqiaa.icontrol}, topRunningActivity=ActivityRecord{58376530 u0 com.tiqiaa.icontrol/.NewExactMatchRemoteActivity t23}, callbackInfo=OnBackInvokedCallbackInfo{mCallback=android.window.IOnBackInvokedCallback$Stub$Proxy@9e0d77c, mPriority=-1, mIsAnimationCallback=false, mOverrideBehavior=0}, currentFocus=Window{c066049 u0 com.tiqiaa.icontrol/com.tiqiaa.icontrol.NewExactMatchRemoteActivity}
+05-16 08:39:01.051  3936  8196 D CoreBackPreview: Previous Destination is Activity:ComponentInfo{com.tiqiaa.icontrol/com.tiqiaa.icontrol.BrandSelectActivity} Task:Task=23 removedContainer:ActivityRecord{58376530 u0 com.tiqiaa.icontrol/.NewExactMatchRemoteActivity t23}, backType=TYPE_CROSS_ACTIVITY
+05-16 08:39:01.053  3936  8196 D CoreBackPreview: Setting Activity.mLauncherTaskBehind to true. Activity=ActivityRecord{166752509 u0 com.tiqiaa.icontrol/.BrandSelectActivity t23}
+05-16 08:39:01.054   805   805 I hwservicemanager: getTransport: Cannot find entry vendor.qti.hardware.servicetracker@1.2::IServicetracker/default in either framework or device VINTF manifest.
+05-16 08:39:01.055  3936  8196 W ActivityTaskManager: servicetracker HIDL not available
+05-16 08:39:01.055  3936  8196 E ActivityTaskManager: Unable to get servicetracker HAL instance
+05-16 08:39:01.056  1694  1927 I BpBinder: onLastStrongRef automatically unlinking death recipients: 
+05-16 08:39:01.056   805   805 I hwservicemanager: getTransport: Cannot find entry vendor.qti.hardware.servicetracker@1.2::IServicetracker/default in either framework or device VINTF manifest.
+05-16 08:39:01.057  3936  8196 W ActivityTaskManager: servicetracker HIDL not available
+05-16 08:39:01.057  3936  8196 E ActivityTaskManager: Unable to get servicetracker HAL instance
+05-16 08:39:01.062 13129 13129 D ViewRootImpl: Skipping stats log for color mode
+05-16 08:39:01.066  4267  4353 D ShellBackPreview: Received backNavigationInfo:BackNavigationInfo{mType=TYPE_CROSS_ACTIVITY (2), mOnBackNavigationDone=android.os.RemoteCallback@f41f159, mOnBackInvokedCallback=android.window.IOnBackInvokedCallback$Stub$Proxy@a73111e, mPrepareRemoteAnimation=true, mAnimationCallback=false, mCustomizeAnimationInfo=CustomAnimationInfo, package name= com.tiqiaa.icontrol}
+05-16 08:39:01.067 13129 13129 D AutofillManager: view not autofillable - not passing ime action check
+05-16 08:39:01.071  4267  4353 V WindowManagerShell: Transition requested (#229): android.os.BinderProxy@d699dff TransitionRequestInfo { type = PREDICTIVE_BACK, triggerTask = null, pipChange = null, remoteTransition = null, displayChange = null, flags = 0, debugId = 229 }
+05-16 08:39:01.072  4267  4353 V WindowManagerShell: Transition (#229): request handled by BackAnimationController$BackTransitionHandler
+05-16 08:39:01.074  4267  4353 D ShellBackPreview: Finishing gesture with event action: 1
+05-16 08:39:01.074  4267  4353 D ShellBackPreview: onGestureFinished() mTriggerBack == false
+05-16 08:39:01.074  4267  4353 W ShellBackPreview: Gesture released, but animation didn't ready.
+05-16 08:39:01.078  4267  8188 V WindowManagerShell: onTransitionReady(transaction=16904991285473)
+05-16 08:39:01.079  3936  3968 V WindowManager: Sent Transition (#229) createdAt=05-16 08:39:01.052 via request=TransitionRequestInfo { type = PREDICTIVE_BACK, triggerTask = null, pipChange = null, remoteTransition = null, displayChange = null, flags = 0, debugId = 229 }
+05-16 08:39:01.079  1694  1694 I BpBinder: onLastStrongRef automatically unlinking death recipients: 
+05-16 08:39:01.081  3936  3968 V WindowManager:     startWCT=WindowContainerTransaction { changes= {} hops= [] errorCallbackToken=null taskFragmentOrganizer=null }
+05-16 08:39:01.083  3936  4343 W ActivityManager: pid 3936 system sent binder code 2 with flags 0 to frozen apps and got error -32
+05-16 08:39:01.083  3936  4343 D ActivityManager: Too many transaction errors, throttling freezer binder callback.
+05-16 08:39:01.083  3936  3968 V WindowManager:     info={id=229 t=PREDICTIVE_BACK f=0x0 trk=0 r=[0@Point(0, 0)] c=[
+05-16 08:39:01.083  3936  3968 V WindowManager:         {m=CHANGE f=FILLS_TASK|FLAG_BACK_GESTURE_ANIMATED leash=Surface(name=ActivityRecord{58376530 u0 com.tiqiaa.icontrol/.NewExactMatchRemoteActivity)/@0x99bd826 sb=Rect(0, 0 - 1280, 2772) eb=Rect(0, 0 - 1280, 2772) epz=Point(1280, 2772) d=0 bc=fffafafa component=com.tiqiaa.icontrol/.NewExactMatchRemoteActivity opt={t=FROM_STYLE mUserId=0}},
+05-16 08:39:01.083  3936  3968 V WindowManager:         {m=TO_FRONT f=FILLS_TASK|IS_OCCLUDED|FLAG_BACK_GESTURE_ANIMATED leash=Surface(name=ActivityRecord{166752509 u0 com.tiqiaa.icontrol/.BrandSelectActivity)/@0xfffdf84 sb=Rect(0, 0 - 1280, 2772) eb=Rect(0, 0 - 1280, 2772) epz=Point(1280, 2772) d=0 bc=fffafafa component=com.tiqiaa.icontrol/.BrandSelectActivity opt={t=FROM_STYLE mUserId=0}}
+05-16 08:39:01.083  3936  3968 V WindowManager:     ]}
+05-16 08:39:01.084  3936  4343 E ConsumerIrService: Error transmitting frequency: 38000
+05-16 08:39:01.084  1639  1639 D vendor.qti.vibrator: Vibrator on for timeoutMs: 50
+05-16 08:39:01.085  4267  4477 V SnapshotDrawerUtils: Drawing snapshot surface sizeMismatch=true
+05-16 08:39:01.085  4267  4353 V WindowManagerShell: onTransitionReady (#229) android.os.BinderProxy@d699dff: {id=229 t=PREDICTIVE_BACK f=0x0 trk=0 r=[0@Point(0, 0)] c=[
+05-16 08:39:01.085  4267  4353 V WindowManagerShell:         {m=CHANGE f=FILLS_TASK|FLAG_BACK_GESTURE_ANIMATED leash=Surface(name=ActivityRecord{58376530 u0 com.tiqiaa.icontrol/.NewExactMatchRemoteActivity)/@0x6a3f4b8 sb=Rect(0, 0 - 1280, 2772) eb=Rect(0, 0 - 1280, 2772) epz=Point(1280, 2772) d=0 bc=fffafafa component=com.tiqiaa.icontrol/.NewExactMatchRemoteActivity opt={t=FROM_STYLE mUserId=0}},
+05-16 08:39:01.085  4267  4353 V WindowManagerShell:         {m=TO_FRONT f=FILLS_TASK|IS_OCCLUDED|FLAG_BACK_GESTURE_ANIMATED leash=Surface(name=ActivityRecord{166752509 u0 com.tiqiaa.icontrol/.BrandSelectActivity)/@0x6af7291 sb=Rect(0, 0 - 1280, 2772) eb=Rect(0, 0 - 1280, 2772) epz=Point(1280, 2772) d=0 bc=fffafafa component=com.tiqiaa.icontrol/.BrandSelectActivity opt={t=FROM_STYLE mUserId=0}}
+05-16 08:39:01.085  4267  4353 V WindowManagerShell:     ]}
+05-16 08:39:01.085  4267  4353 V WindowManagerShell: Playing animation for (#229) android.os.BinderProxy@d699dff@0
+05-16 08:39:01.085  4267  4353 V WindowManagerShell:  try firstHandler com.android.wm.shell.back.BackAnimationController$BackTransitionHandler@c88df62
+05-16 08:39:01.086  4267  4353 V ShellRecents: No matching remote found to takeover (#229)
+05-16 08:39:01.086  1639 14020 D vendor.qti.vibrator: Starting on on another thread
+05-16 08:39:01.086  4267  4353 D ShellBackPreview: custom animation loaded android.view.animation.AnimationSet@5e2ab82
+05-16 08:39:01.086  4267  4353 D ShellBackPreview: custom animation loaded android.view.animation.AnimationSet@a50d293
+05-16 08:39:01.086  4267  4353 D ShellBackPreview: BackAnimationController: startAnimation()
+05-16 08:39:01.087  4267  4353 D ShellBackPreview: Start back to activity animation.
+05-16 08:39:01.088  4267  4353 D ShellBackPreview: BackAnimationController: startPostCommitAnimation()
+05-16 08:39:01.088  4267  4353 V WindowManagerShell:  animated by firstHandler
+05-16 08:39:01.097  1562  5364 E ANDR-PERF-OH: ANDR-PERF-OH: getPerfHandle() 55: Invalid handle req: 0
+05-16 08:39:01.101  4267  4353 D ShellBackPreview: BackAnimationController: onBackAnimationFinished()
+05-16 08:39:01.102  4267  4353 D ShellBackPreview: BackAnimationController: finishBackNavigation()
+05-16 08:39:01.102  4267  4353 D ShellBackPreview: resetTouchTracker -> no queued gesture
+05-16 08:39:01.102  4267  4353 V WindowManagerShell: Directly starting a new transition type=CLOSE_PREDICTIVE_BACK wct=WindowContainerTransaction { changes= {} hops= [{restoreBackNav: container=null reparent=null mToTop=false mWindowingMode=null mActivityType=null}] errorCallbackToken=null taskFragmentOrganizer=null } handler=com.android.wm.shell.back.BackAnimationController$BackTransitionHandler@c88df62
+05-16 08:39:01.102  3936  4343 D CoreBackPreview: onBackNavigationDone backType=2, triggerBack=false
+05-16 08:39:01.103  3936  4670 D CoreBackPreview: Setting Activity.mLauncherTaskBehind to false. Activity=ActivityRecord{166752509 u0 com.tiqiaa.icontrol/.BrandSelectActivity t23}
+05-16 08:39:01.106  1694  1927 I BpBinder: onLastStrongRef automatically unlinking death recipients: 
+05-16 08:39:01.107  3936  4670 D CoreBackPreview: onTransactionReady, opening: [], closing: [ActivityRecord{166752509 u0 com.tiqiaa.icontrol/.BrandSelectActivity t23}], animating: AnimationTargets{ openTarget= {ActivityRecord{166752509 u0 com.tiqiaa.icontrol/.BrandSelectActivity t23}} closeTarget= ActivityRecord{58376530 u0 com.tiqiaa.icontrol/.NewExactMatchRemoteActivity t23} mSwitchType= 2 mComposed= true mWaitTransition= false}, match: false
+05-16 08:39:01.110  3936  3968 V WindowManager: Sent Transition (#230) createdAt=05-16 08:39:01.103
+05-16 08:39:01.110  3936  3968 V WindowManager:     startWCT=WindowContainerTransaction { changes= {} hops= [{restoreBackNav: container=null reparent=null mToTop=false mWindowingMode=null mActivityType=null}] errorCallbackToken=null taskFragmentOrganizer=null }
+05-16 08:39:01.111  3936  3968 V WindowManager:     info={id=230 t=CLOSE_PREDICTIVE_BACK f=0x0 trk=0 r=[0@Point(0, 0)] c=[
+05-16 08:39:01.111  3936  3968 V WindowManager:         {m=TO_BACK f=FILLS_TASK|IS_OCCLUDED|FLAG_BACK_GESTURE_ANIMATED leash=Surface(name=ActivityRecord{166752509 u0 com.tiqiaa.icontrol/.BrandSelectActivity)/@0xfffdf84 sb=Rect(0, 0 - 1280, 2772) eb=Rect(0, 0 - 1280, 2772) epz=Point(1280, 2772) d=0 bc=fffafafa component=com.tiqiaa.icontrol/.BrandSelectActivity opt={t=FROM_STYLE mUserId=0}}
+05-16 08:39:01.111  3936  3968 V WindowManager:     ]}
+05-16 08:39:01.112  4267  4285 V WindowManagerShell: onTransitionReady(transaction=16904991285480)
+05-16 08:39:01.112  4267  4353 V WindowManagerShell: onTransitionReady (#230) android.os.BinderProxy@d991bfc: {id=230 t=CLOSE_PREDICTIVE_BACK f=0x0 trk=0 r=[0@Point(0, 0)] c=[
+05-16 08:39:01.112  4267  4353 V WindowManagerShell:         {m=TO_BACK f=FILLS_TASK|IS_OCCLUDED|FLAG_BACK_GESTURE_ANIMATED leash=Surface(name=ActivityRecord{166752509 u0 com.tiqiaa.icontrol/.BrandSelectActivity)/@0x19fe285 sb=Rect(0, 0 - 1280, 2772) eb=Rect(0, 0 - 1280, 2772) epz=Point(1280, 2772) d=0 bc=fffafafa component=com.tiqiaa.icontrol/.BrandSelectActivity opt={t=FROM_STYLE mUserId=0}}
+05-16 08:39:01.112  4267  4353 V WindowManagerShell:     ]}
+05-16 08:39:01.113  4267  4353 V WindowManagerShell: Transition (#230) android.os.BinderProxy@d991bfc@0 ready while (#229) android.os.BinderProxy@d699dff@0 is still animating. Notify the animating transition in case they can be merged
+05-16 08:39:01.113  4267  4353 D ShellBackPreview: Back animation transition, merge pending transitions result={id=230 t=CLOSE_PREDICTIVE_BACK f=0x0 trk=0 r=[0@Point(0, 0)] c=[]}
+05-16 08:39:01.113  4267  4353 V WindowManagerShell: Transition was merged: (#230) android.os.BinderProxy@d991bfc@0 into (#229) android.os.BinderProxy@d699dff@0
+05-16 08:39:01.114  4267  4353 V WindowManagerShell: Transition animation finished (aborted=false), notifying core (#229) android.os.BinderProxy@d699dff@0
+05-16 08:39:01.116  3936  3968 V WindowManager: Finish Transition (#229): created at 05-16 08:39:01.052 collect-started=0.233ms request-sent=8.86ms started=20.48ms ready=20.459ms sent=25.056ms commit=11.126ms finished=63.684ms
+05-16 08:39:01.117  3936  3968 V WindowManager: Finish Transition (#230): created at 05-16 08:39:01.103 collect-started=0.19ms started=0.243ms ready=3.083ms sent=6.23ms finished=14.503ms
+05-16 08:39:01.118 13129 13129 D VRI[BrandSelectActivity]: visibilityChanged oldVisibility=true newVisibility=false
+05-16 08:39:01.119  4267  4353 V WindowManagerShell: Track 0 became idle
+05-16 08:39:01.119  4267  4353 V WindowManagerShell: All active transition animations finished
+05-16 08:39:01.119   805   805 I hwservicemanager: getTransport: Cannot find entry vendor.qti.hardware.servicetracker@1.2::IServicetracker/default in either framework or device VINTF manifest.
+05-16 08:39:01.119  3936  3971 W ActivityTaskManager: servicetracker HIDL not available
+05-16 08:39:01.119  3936  3971 E ActivityTaskManager: Unable to get servicetracker HAL instance
+05-16 08:39:01.120   805   805 I hwservicemanager: getTransport: Cannot find entry vendor.qti.hardware.servicetracker@1.2::IServicetracker/default in either framework or device VINTF manifest.
+05-16 08:39:01.120  3936  3971 W ActivityTaskManager: servicetracker HIDL not available
+05-16 08:39:01.120  3936  3971 E ActivityTaskManager: Unable to get servicetracker HAL instance
+05-16 08:39:01.123  1694  1916 E HwcComposer: getLuts failed Status(-129, EX_TRANSACTION_FAILED): 'UNKNOWN_TRANSACTION: '
+05-16 08:39:01.125 13129 13129 D AutofillManager: view not autofillable - not passing ime action check
+05-16 08:39:01.128  3936  4670 W WindowManager: Failed looking up window session=Session{dab9048 4267:u0a10124} callers=com.android.server.wm.WindowManagerService.removeClientToken:2153 com.android.server.wm.Session.remove:270 android.view.IWindowSession$Stub.onTransact:696 
+05-16 08:39:01.134   805   805 I hwservicemanager: getTransport: Cannot find entry vendor.qti.hardware.servicetracker@1.2::IServicetracker/default in either framework or device VINTF manifest.
+05-16 08:39:01.135  3936  8196 W ActivityTaskManager: servicetracker HIDL not available
+05-16 08:39:01.135  3936  8196 E ActivityTaskManager: Unable to get servicetracker HAL instance
+05-16 08:39:01.135   805   805 I hwservicemanager: getTransport: Cannot find entry vendor.qti.hardware.servicetracker@1.2::IServicetracker/default in either framework or device VINTF manifest.
+05-16 08:39:01.135  3936  8196 W ActivityTaskManager: servicetracker HIDL not available
+05-16 08:39:01.135  3936  8196 E ActivityTaskManager: Unable to get servicetracker HAL instance
+05-16 08:39:01.136  3936  4059 W UsageStatsService: Unexpected activity event reported! (com.tiqiaa.icontrol/com.tiqiaa.icontrol.BrandSelectActivity event : 23 instanceId : 242967026)
+05-16 08:39:01.136  1639 14020 D vendor.qti.vibrator: Notifying on complete
+05-16 08:39:01.137  1639  1639 D vendor.qti.vibrator: QTI Vibrator off
+05-16 08:39:01.224  1694  1916 E HwcComposer: getLuts failed Status(-129, EX_TRANSACTION_FAILED): 'UNKNOWN_TRANSACTION: '
+05-16 08:39:01.276  3936  8196 D CoreBackPreview: startBackNavigation currentTask=Task{dc88fe6 #23 type=standard A=10166:com.tiqiaa.icontrol}, topRunningActivity=ActivityRecord{58376530 u0 com.tiqiaa.icontrol/.NewExactMatchRemoteActivity t23}, callbackInfo=OnBackInvokedCallbackInfo{mCallback=android.window.IOnBackInvokedCallback$Stub$Proxy@9e0d77c, mPriority=-1, mIsAnimationCallback=false, mOverrideBehavior=0}, currentFocus=Window{c066049 u0 com.tiqiaa.icontrol/com.tiqiaa.icontrol.NewExactMatchRemoteActivity}
+05-16 08:39:01.276  3936  8196 D CoreBackPreview: Previous Destination is Activity:ComponentInfo{com.tiqiaa.icontrol/com.tiqiaa.icontrol.BrandSelectActivity} Task:Task=23 removedContainer:ActivityRecord{58376530 u0 com.tiqiaa.icontrol/.NewExactMatchRemoteActivity t23}, backType=TYPE_CROSS_ACTIVITY
+05-16 08:39:01.277  3936  8196 D CoreBackPreview: Setting Activity.mLauncherTaskBehind to true. Activity=ActivityRecord{166752509 u0 com.tiqiaa.icontrol/.BrandSelectActivity t23}
+05-16 08:39:01.278   805   805 I hwservicemanager: getTransport: Cannot find entry vendor.qti.hardware.servicetracker@1.2::IServicetracker/default in either framework or device VINTF manifest.
+05-16 08:39:01.279  1694  1785 I BpBinder: onLastStrongRef automatically unlinking death recipients: 
+05-16 08:39:01.279  3936  8196 W ActivityTaskManager: servicetracker HIDL not available
+05-16 08:39:01.279  3936  8196 E ActivityTaskManager: Unable to get servicetracker HAL instance
+05-16 08:39:01.280   805   805 I hwservicemanager: getTransport: Cannot find entry vendor.qti.hardware.servicetracker@1.2::IServicetracker/default in either framework or device VINTF manifest.
+05-16 08:39:01.280  3936  8196 W ActivityTaskManager: servicetracker HIDL not available
+05-16 08:39:01.280  3936  8196 E ActivityTaskManager: Unable to get servicetracker HAL instance
+05-16 08:39:01.286 13129 13129 D ViewRootImpl: Skipping stats log for color mode
+05-16 08:39:01.288  4267  4353 D ShellBackPreview: Received backNavigationInfo:BackNavigationInfo{mType=TYPE_CROSS_ACTIVITY (2), mOnBackNavigationDone=android.os.RemoteCallback@5e9a2e7, mOnBackInvokedCallback=android.window.IOnBackInvokedCallback$Stub$Proxy@9c6ee94, mPrepareRemoteAnimation=true, mAnimationCallback=false, mCustomizeAnimationInfo=CustomAnimationInfo, package name= com.tiqiaa.icontrol}
+05-16 08:39:01.288  4267  4353 V WindowManagerShell: Transition requested (#231): android.os.BinderProxy@3a0f932 TransitionRequestInfo { type = PREDICTIVE_BACK, triggerTask = null, pipChange = null, remoteTransition = null, displayChange = null, flags = 0, debugId = 231 }
+05-16 08:39:01.288  4267  4353 V WindowManagerShell: Transition (#231): request handled by BackAnimationController$BackTransitionHandler
+05-16 08:39:01.291  4267  4353 D ShellBackPreview: Finishing gesture with event action: 1
+05-16 08:39:01.291  4267  4353 D ShellBackPreview: onGestureFinished() mTriggerBack == false
+05-16 08:39:01.291  4267  4353 W ShellBackPreview: Gesture released, but animation didn't ready.
+05-16 08:39:01.292 13129 13129 D AutofillManager: view not autofillable - not passing ime action check
+05-16 08:39:01.294  4267  4477 V SnapshotDrawerUtils: Drawing snapshot surface sizeMismatch=true
+05-16 08:39:01.300  3936  3968 V WindowManager: Sent Transition (#231) createdAt=05-16 08:39:01.277 via request=TransitionRequestInfo { type = PREDICTIVE_BACK, triggerTask = null, pipChange = null, remoteTransition = null, displayChange = null, flags = 0, debugId = 231 }
+05-16 08:39:01.301  3936  3968 V WindowManager:     startWCT=WindowContainerTransaction { changes= {} hops= [] errorCallbackToken=null taskFragmentOrganizer=null }
+05-16 08:39:01.301  3936  3968 V WindowManager:     info={id=231 t=PREDICTIVE_BACK f=0x0 trk=0 r=[0@Point(0, 0)] c=[
+05-16 08:39:01.301  3936  3968 V WindowManager:         {m=CHANGE f=FILLS_TASK|FLAG_BACK_GESTURE_ANIMATED leash=Surface(name=ActivityRecord{58376530 u0 com.tiqiaa.icontrol/.NewExactMatchRemoteActivity)/@0x99bd826 sb=Rect(0, 0 - 1280, 2772) eb=Rect(0, 0 - 1280, 2772) epz=Point(1280, 2772) d=0 bc=fffafafa component=com.tiqiaa.icontrol/.NewExactMatchRemoteActivity opt={t=FROM_STYLE mUserId=0}},
+05-16 08:39:01.301  3936  3968 V WindowManager:         {m=TO_FRONT f=FILLS_TASK|IS_OCCLUDED|FLAG_BACK_GESTURE_ANIMATED leash=Surface(name=ActivityRecord{166752509 u0 com.tiqiaa.icontrol/.BrandSelectActivity)/@0xfffdf84 sb=Rect(0, 0 - 1280, 2772) eb=Rect(0, 0 - 1280, 2772) epz=Point(1280, 2772) d=0 bc=fffafafa component=com.tiqiaa.icontrol/.BrandSelectActivity opt={t=FROM_STYLE mUserId=0}}
+05-16 08:39:01.301  3936  3968 V WindowManager:     ]}
+05-16 08:39:01.303  1639  1639 D vendor.qti.vibrator: Vibrator on for timeoutMs: 50
+05-16 08:39:01.304  4267  8188 V WindowManagerShell: onTransitionReady(transaction=16904991285495)
+05-16 08:39:01.304  4267  4353 V WindowManagerShell: onTransitionReady (#231) android.os.BinderProxy@3a0f932: {id=231 t=PREDICTIVE_BACK f=0x0 trk=0 r=[0@Point(0, 0)] c=[
+05-16 08:39:01.304  4267  4353 V WindowManagerShell:         {m=CHANGE f=FILLS_TASK|FLAG_BACK_GESTURE_ANIMATED leash=Surface(name=ActivityRecord{58376530 u0 com.tiqiaa.icontrol/.NewExactMatchRemoteActivity)/@0x5f542fb sb=Rect(0, 0 - 1280, 2772) eb=Rect(0, 0 - 1280, 2772) epz=Point(1280, 2772) d=0 bc=fffafafa component=com.tiqiaa.icontrol/.NewExactMatchRemoteActivity opt={t=FROM_STYLE mUserId=0}},
+05-16 08:39:01.304  4267  4353 V WindowManagerShell:         {m=TO_FRONT f=FILLS_TASK|IS_OCCLUDED|FLAG_BACK_GESTURE_ANIMATED leash=Surface(name=ActivityRecord{166752509 u0 com.tiqiaa.icontrol/.BrandSelectActivity)/@0xcf82f18 sb=Rect(0, 0 - 1280, 2772) eb=Rect(0, 0 - 1280, 2772) epz=Point(1280, 2772) d=0 bc=fffafafa component=com.tiqiaa.icontrol/.BrandSelectActivity opt={t=FROM_STYLE mUserId=0}}
+05-16 08:39:01.304  4267  4353 V WindowManagerShell:     ]}
+05-16 08:39:01.304  4267  4353 V WindowManagerShell: Playing animation for (#231) android.os.BinderProxy@3a0f932@0
+05-16 08:39:01.304  3936  6582 W ActivityManager: pid 3936 system sent binder code 2 with flags 0 to frozen apps and got error -32
+05-16 08:39:01.304  4267  4353 V WindowManagerShell:  try firstHandler com.android.wm.shell.back.BackAnimationController$BackTransitionHandler@c88df62
+05-16 08:39:01.304  3936  6582 D ActivityManager: Too many transaction errors, throttling freezer binder callback.
+05-16 08:39:01.305  3936  6582 E ConsumerIrService: Error transmitting frequency: 38000
+05-16 08:39:01.305  1639 14026 D vendor.qti.vibrator: Starting on on another thread
+05-16 08:39:01.306  4267  4353 V ShellRecents: No matching remote found to takeover (#231)
+05-16 08:39:01.307  4267  4353 D ShellBackPreview: custom animation loaded android.view.animation.AnimationSet@f2bd756
+05-16 08:39:01.307  4267  4353 D ShellBackPreview: custom animation loaded android.view.animation.AnimationSet@3cb13d7
+05-16 08:39:01.307  4267  4353 D ShellBackPreview: BackAnimationController: startAnimation()
+05-16 08:39:01.309  4267  4353 D ShellBackPreview: Start back to activity animation.
+05-16 08:39:01.311  4267  4353 D ShellBackPreview: BackAnimationController: startPostCommitAnimation()
+05-16 08:39:01.311  4267  4353 V WindowManagerShell:  animated by firstHandler
+05-16 08:39:01.315  1562  5362 E ANDR-PERF-OH: ANDR-PERF-OH: getPerfHandle() 55: Invalid handle req: 0
+05-16 08:39:01.318  4267  4353 D ShellBackPreview: BackAnimationController: onBackAnimationFinished()
+05-16 08:39:01.319  4267  4353 D ShellBackPreview: BackAnimationController: finishBackNavigation()
+05-16 08:39:01.319  4267  4353 D ShellBackPreview: resetTouchTracker -> no queued gesture
+05-16 08:39:01.319  4267  4353 V WindowManagerShell: Directly starting a new transition type=CLOSE_PREDICTIVE_BACK wct=WindowContainerTransaction { changes= {} hops= [{restoreBackNav: container=null reparent=null mToTop=false mWindowingMode=null mActivityType=null}] errorCallbackToken=null taskFragmentOrganizer=null } handler=com.android.wm.shell.back.BackAnimationController$BackTransitionHandler@c88df62
+05-16 08:39:01.319  3936  6582 D CoreBackPreview: onBackNavigationDone backType=2, triggerBack=false
+05-16 08:39:01.319  3936  4343 D CoreBackPreview: Setting Activity.mLauncherTaskBehind to false. Activity=ActivityRecord{166752509 u0 com.tiqiaa.icontrol/.BrandSelectActivity t23}
+05-16 08:39:01.321  3936  4343 D CoreBackPreview: onTransactionReady, opening: [], closing: [ActivityRecord{166752509 u0 com.tiqiaa.icontrol/.BrandSelectActivity t23}], animating: AnimationTargets{ openTarget= {ActivityRecord{166752509 u0 com.tiqiaa.icontrol/.BrandSelectActivity t23}} closeTarget= ActivityRecord{58376530 u0 com.tiqiaa.icontrol/.NewExactMatchRemoteActivity t23} mSwitchType= 2 mComposed= true mWaitTransition= false}, match: false
+05-16 08:39:01.322  1694  1785 I BpBinder: onLastStrongRef automatically unlinking death recipients: 
+05-16 08:39:01.322  4267  8188 V WindowManagerShell: onTransitionReady(transaction=16904991285503)
+05-16 08:39:01.322  3936  3968 V WindowManager: Sent Transition (#232) createdAt=05-16 08:39:01.319
+05-16 08:39:01.323  3936  3968 V WindowManager:     startWCT=WindowContainerTransaction { changes= {} hops= [{restoreBackNav: container=null reparent=null mToTop=false mWindowingMode=null mActivityType=null}] errorCallbackToken=null taskFragmentOrganizer=null }
+05-16 08:39:01.323  4267  4353 V WindowManagerShell: onTransitionReady (#232) android.os.BinderProxy@9d9c930: {id=232 t=CLOSE_PREDICTIVE_BACK f=0x0 trk=0 r=[0@Point(0, 0)] c=[
+05-16 08:39:01.323  4267  4353 V WindowManagerShell:         {m=TO_BACK f=FILLS_TASK|IS_OCCLUDED|FLAG_BACK_GESTURE_ANIMATED leash=Surface(name=ActivityRecord{166752509 u0 com.tiqiaa.icontrol/.BrandSelectActivity)/@0x82612e2 sb=Rect(0, 0 - 1280, 2772) eb=Rect(0, 0 - 1280, 2772) epz=Point(1280, 2772) d=0 bc=fffafafa component=com.tiqiaa.icontrol/.BrandSelectActivity opt={t=FROM_STYLE mUserId=0}}
+05-16 08:39:01.323  4267  4353 V WindowManagerShell:     ]}
+05-16 08:39:01.323  3936  3968 V WindowManager:     info={id=232 t=CLOSE_PREDICTIVE_BACK f=0x0 trk=0 r=[0@Point(0, 0)] c=[
+05-16 08:39:01.323  3936  3968 V WindowManager:         {m=TO_BACK f=FILLS_TASK|IS_OCCLUDED|FLAG_BACK_GESTURE_ANIMATED leash=Surface(name=ActivityRecord{166752509 u0 com.tiqiaa.icontrol/.BrandSelectActivity)/@0xfffdf84 sb=Rect(0, 0 - 1280, 2772) eb=Rect(0, 0 - 1280, 2772) epz=Point(1280, 2772) d=0 bc=fffafafa component=com.tiqiaa.icontrol/.BrandSelectActivity opt={t=FROM_STYLE mUserId=0}}
+05-16 08:39:01.323  3936  3968 V WindowManager:     ]}
+05-16 08:39:01.323  4267  4353 V WindowManagerShell: Transition (#232) android.os.BinderProxy@9d9c930@0 ready while (#231) android.os.BinderProxy@3a0f932@0 is still animating. Notify the animating transition in case they can be merged
+05-16 08:39:01.323  4267  4353 D ShellBackPreview: Back animation transition, merge pending transitions result={id=232 t=CLOSE_PREDICTIVE_BACK f=0x0 trk=0 r=[0@Point(0, 0)] c=[]}
+05-16 08:39:01.323  4267  4353 V WindowManagerShell: Transition was merged: (#232) android.os.BinderProxy@9d9c930@0 into (#231) android.os.BinderProxy@3a0f932@0
+05-16 08:39:01.324  4267  4353 V WindowManagerShell: Transition animation finished (aborted=false), notifying core (#231) android.os.BinderProxy@3a0f932@0
+05-16 08:39:01.325  1694  1916 E HwcComposer: getLuts failed Status(-129, EX_TRANSACTION_FAILED): 'UNKNOWN_TRANSACTION: '
+05-16 08:39:01.325  3936  3968 V WindowManager: Finish Transition (#231): created at 05-16 08:39:01.277 collect-started=0.207ms request-sent=7.322ms started=13.444ms ready=13.42ms sent=22.078ms commit=14.354ms finished=48.185ms
+05-16 08:39:01.327 13129 13129 D VRI[BrandSelectActivity]: visibilityChanged oldVisibility=true newVisibility=false
+05-16 08:39:01.327  3936  3968 V WindowManager: Finish Transition (#232): created at 05-16 08:39:01.319 collect-started=0.087ms started=0.101ms ready=1.38ms sent=2.769ms finished=6.869ms
+05-16 08:39:01.327  4267  4353 V WindowManagerShell: Track 0 became idle
+05-16 08:39:01.327  4267  4353 V WindowManagerShell: All active transition animations finished
+05-16 08:39:01.328   805   805 I hwservicemanager: getTransport: Cannot find entry vendor.qti.hardware.servicetracker@1.2::IServicetracker/default in either framework or device VINTF manifest.
+05-16 08:39:01.328  3936  3971 W ActivityTaskManager: servicetracker HIDL not available
+05-16 08:39:01.328  3936  3971 E ActivityTaskManager: Unable to get servicetracker HAL instance
+05-16 08:39:01.329   805   805 I hwservicemanager: getTransport: Cannot find entry vendor.qti.hardware.servicetracker@1.2::IServicetracker/default in either framework or device VINTF manifest.
+05-16 08:39:01.329  3936  3971 W ActivityTaskManager: servicetracker HIDL not available
+05-16 08:39:01.329  3936  3971 E ActivityTaskManager: Unable to get servicetracker HAL instance
+05-16 08:39:01.331  3936  4343 W WindowManager: Failed looking up window session=Session{dab9048 4267:u0a10124} callers=com.android.server.wm.WindowManagerService.removeClientToken:2153 com.android.server.wm.Session.remove:270 android.view.IWindowSession$Stub.onTransact:696 
+05-16 08:39:01.334 13129 13129 D AutofillManager: view not autofillable - not passing ime action check
+05-16 08:39:01.343   805   805 I hwservicemanager: getTransport: Cannot find entry vendor.qti.hardware.servicetracker@1.2::IServicetracker/default in either framework or device VINTF manifest.
+05-16 08:39:01.343  3936  6582 W ActivityTaskManager: servicetracker HIDL not available
+05-16 08:39:01.344  3936  6582 E ActivityTaskManager: Unable to get servicetracker HAL instance
+05-16 08:39:01.344   805   805 I hwservicemanager: getTransport: Cannot find entry vendor.qti.hardware.servicetracker@1.2::IServicetracker/default in either framework or device VINTF manifest.
+05-16 08:39:01.344  3936  6582 W ActivityTaskManager: servicetracker HIDL not available
+05-16 08:39:01.344  3936  6582 E ActivityTaskManager: Unable to get servicetracker HAL instance
+05-16 08:39:01.345  3936  4059 W UsageStatsService: Unexpected activity event reported! (com.tiqiaa.icontrol/com.tiqiaa.icontrol.BrandSelectActivity event : 23 instanceId : 242967026)
+05-16 08:39:01.355  1639 14026 D vendor.qti.vibrator: Notifying on complete
+05-16 08:39:01.355  1639  1639 D vendor.qti.vibrator: QTI Vibrator off
+05-16 08:39:01.426  1694  1916 E HwcComposer: getLuts failed Status(-129, EX_TRANSACTION_FAILED): 'UNKNOWN_TRANSACTION: '
+05-16 08:39:01.450  3936  6582 D CoreBackPreview: startBackNavigation currentTask=Task{dc88fe6 #23 type=standard A=10166:com.tiqiaa.icontrol}, topRunningActivity=ActivityRecord{58376530 u0 com.tiqiaa.icontrol/.NewExactMatchRemoteActivity t23}, callbackInfo=OnBackInvokedCallbackInfo{mCallback=android.window.IOnBackInvokedCallback$Stub$Proxy@9e0d77c, mPriority=-1, mIsAnimationCallback=false, mOverrideBehavior=0}, currentFocus=Window{c066049 u0 com.tiqiaa.icontrol/com.tiqiaa.icontrol.NewExactMatchRemoteActivity}
+05-16 08:39:01.451  3936  6582 D CoreBackPreview: Previous Destination is Activity:ComponentInfo{com.tiqiaa.icontrol/com.tiqiaa.icontrol.BrandSelectActivity} Task:Task=23 removedContainer:ActivityRecord{58376530 u0 com.tiqiaa.icontrol/.NewExactMatchRemoteActivity t23}, backType=TYPE_CROSS_ACTIVITY
+05-16 08:39:01.452  3936  6582 D CoreBackPreview: Setting Activity.mLauncherTaskBehind to true. Activity=ActivityRecord{166752509 u0 com.tiqiaa.icontrol/.BrandSelectActivity t23}
+05-16 08:39:01.453   805   805 I hwservicemanager: getTransport: Cannot find entry vendor.qti.hardware.servicetracker@1.2::IServicetracker/default in either framework or device VINTF manifest.
+05-16 08:39:01.453  1694  1785 I BpBinder: onLastStrongRef automatically unlinking death recipients: 
+05-16 08:39:01.454  3936  6582 W ActivityTaskManager: servicetracker HIDL not available
+05-16 08:39:01.454  3936  6582 E ActivityTaskManager: Unable to get servicetracker HAL instance
+05-16 08:39:01.455   805   805 I hwservicemanager: getTransport: Cannot find entry vendor.qti.hardware.servicetracker@1.2::IServicetracker/default in either framework or device VINTF manifest.
+05-16 08:39:01.455  3936  6582 W ActivityTaskManager: servicetracker HIDL not available
+05-16 08:39:01.455  3936  6582 E ActivityTaskManager: Unable to get servicetracker HAL instance
+05-16 08:39:01.459 13129 13129 D ViewRootImpl: Skipping stats log for color mode
+05-16 08:39:01.461 13129 13129 D AutofillManager: view not autofillable - not passing ime action check
+05-16 08:39:01.463  4267  4353 D ShellBackPreview: Received backNavigationInfo:BackNavigationInfo{mType=TYPE_CROSS_ACTIVITY (2), mOnBackNavigationDone=android.os.RemoteCallback@fca485c, mOnBackInvokedCallback=android.window.IOnBackInvokedCallback$Stub$Proxy@e550765, mPrepareRemoteAnimation=true, mAnimationCallback=false, mCustomizeAnimationInfo=CustomAnimationInfo, package name= com.tiqiaa.icontrol}
+05-16 08:39:01.463  4267  4353 V WindowManagerShell: Transition requested (#233): android.os.BinderProxy@f931c3a TransitionRequestInfo { type = PREDICTIVE_BACK, triggerTask = null, pipChange = null, remoteTransition = null, displayChange = null, flags = 0, debugId = 233 }
+05-16 08:39:01.463  4267  4353 V WindowManagerShell: Transition (#233): request handled by BackAnimationController$BackTransitionHandler
+05-16 08:39:01.467  3836  3879 I netd    : tetherGetStats() -> {[]} <1.27ms>
+05-16 08:39:01.469  4267  4477 V SnapshotDrawerUtils: Drawing snapshot surface sizeMismatch=true
+05-16 08:39:01.474  3936  3968 V WindowManager: Sent Transition (#233) createdAt=05-16 08:39:01.451 via request=TransitionRequestInfo { type = PREDICTIVE_BACK, triggerTask = null, pipChange = null, remoteTransition = null, displayChange = null, flags = 0, debugId = 233 }
+05-16 08:39:01.474  3936  3968 V WindowManager:     startWCT=WindowContainerTransaction { changes= {} hops= [] errorCallbackToken=null taskFragmentOrganizer=null }
+05-16 08:39:01.474  3936  3968 V WindowManager:     info={id=233 t=PREDICTIVE_BACK f=0x0 trk=0 r=[0@Point(0, 0)] c=[
+05-16 08:39:01.474  3936  3968 V WindowManager:         {m=CHANGE f=FILLS_TASK|FLAG_BACK_GESTURE_ANIMATED leash=Surface(name=ActivityRecord{58376530 u0 com.tiqiaa.icontrol/.NewExactMatchRemoteActivity)/@0x99bd826 sb=Rect(0, 0 - 1280, 2772) eb=Rect(0, 0 - 1280, 2772) epz=Point(1280, 2772) d=0 bc=fffafafa component=com.tiqiaa.icontrol/.NewExactMatchRemoteActivity opt={t=FROM_STYLE mUserId=0}},
+05-16 08:39:01.474  3936  3968 V WindowManager:         {m=TO_FRONT f=FILLS_TASK|IS_OCCLUDED|FLAG_BACK_GESTURE_ANIMATED leash=Surface(name=ActivityRecord{166752509 u0 com.tiqiaa.icontrol/.BrandSelectActivity)/@0xfffdf84 sb=Rect(0, 0 - 1280, 2772) eb=Rect(0, 0 - 1280, 2772) epz=Point(1280, 2772) d=0 bc=fffafafa component=com.tiqiaa.icontrol/.BrandSelectActivity opt={t=FROM_STYLE mUserId=0}}
+05-16 08:39:01.474  3936  3968 V WindowManager:     ]}
+05-16 08:39:01.476  4267 11845 V WindowManagerShell: onTransitionReady(transaction=16904991285518)
+05-16 08:39:01.477  4267  4353 V WindowManagerShell: onTransitionReady (#233) android.os.BinderProxy@f931c3a: {id=233 t=PREDICTIVE_BACK f=0x0 trk=0 r=[0@Point(0, 0)] c=[
+05-16 08:39:01.477  4267  4353 V WindowManagerShell:         {m=CHANGE f=FILLS_TASK|FLAG_BACK_GESTURE_ANIMATED leash=Surface(name=ActivityRecord{58376530 u0 com.tiqiaa.icontrol/.NewExactMatchRemoteActivity)/@0x9ae0bde sb=Rect(0, 0 - 1280, 2772) eb=Rect(0, 0 - 1280, 2772) epz=Point(1280, 2772) d=0 bc=fffafafa component=com.tiqiaa.icontrol/.NewExactMatchRemoteActivity opt={t=FROM_STYLE mUserId=0}},
+05-16 08:39:01.477  4267  4353 V WindowManagerShell:         {m=TO_FRONT f=FILLS_TASK|IS_OCCLUDED|FLAG_BACK_GESTURE_ANIMATED leash=Surface(name=ActivityRecord{166752509 u0 com.tiqiaa.icontrol/.BrandSelectActivity)/@0x26ce1bf sb=Rect(0, 0 - 1280, 2772) eb=Rect(0, 0 - 1280, 2772) epz=Point(1280, 2772) d=0 bc=fffafafa component=com.tiqiaa.icontrol/.BrandSelectActivity opt={t=FROM_STYLE mUserId=0}}
+05-16 08:39:01.477  4267  4353 V WindowManagerShell:     ]}
+05-16 08:39:01.477  4267  4353 V WindowManagerShell: Playing animation for (#233) android.os.BinderProxy@f931c3a@0
+05-16 08:39:01.477  4267  4353 V WindowManagerShell:  try firstHandler com.android.wm.shell.back.BackAnimationController$BackTransitionHandler@c88df62
+05-16 08:39:01.478  4267  4353 V ShellRecents: No matching remote found to takeover (#233)
+05-16 08:39:01.478  4267  4353 D ShellBackPreview: custom animation loaded android.view.animation.AnimationSet@b2f93d5
+05-16 08:39:01.478  4267  4353 D ShellBackPreview: custom animation loaded android.view.animation.AnimationSet@e0b07ea
+05-16 08:39:01.478  4267  4353 D ShellBackPreview: BackAnimationController: startAnimation()
+05-16 08:39:01.479  4267  4353 D ShellBackPreview: Start back to activity animation.
+05-16 08:39:01.480  4267  4353 V WindowManagerShell:  animated by firstHandler
+05-16 08:39:01.490  1562  5364 E ANDR-PERF-OH: ANDR-PERF-OH: getPerfHandle() 55: Invalid handle req: 0
+05-16 08:39:01.516  4267  4353 D ShellBackPreview: Finishing gesture with event action: 1
+05-16 08:39:01.516  4267  4353 D ShellBackPreview: onGestureFinished() mTriggerBack == false
+05-16 08:39:01.516  4267  4353 D ShellBackPreview: BackAnimationController: startPostCommitAnimation()
+05-16 08:39:01.526  1694  1916 E HwcComposer: getLuts failed Status(-129, EX_TRANSACTION_FAILED): 'UNKNOWN_TRANSACTION: '
+05-16 08:39:01.528  4267  4353 D ShellBackPreview: BackAnimationController: onBackAnimationFinished()
+05-16 08:39:01.528  4267  4353 D ShellBackPreview: BackAnimationController: finishBackNavigation()
+05-16 08:39:01.529  4267  4353 D ShellBackPreview: resetTouchTracker -> no queued gesture
+05-16 08:39:01.529  4267  4353 V WindowManagerShell: Directly starting a new transition type=CLOSE_PREDICTIVE_BACK wct=WindowContainerTransaction { changes= {} hops= [{restoreBackNav: container=null reparent=null mToTop=false mWindowingMode=null mActivityType=null}] errorCallbackToken=null taskFragmentOrganizer=null } handler=com.android.wm.shell.back.BackAnimationController$BackTransitionHandler@c88df62
+05-16 08:39:01.530  3936  4343 D CoreBackPreview: onBackNavigationDone backType=2, triggerBack=false
+05-16 08:39:01.530  3936  8196 D CoreBackPreview: Setting Activity.mLauncherTaskBehind to false. Activity=ActivityRecord{166752509 u0 com.tiqiaa.icontrol/.BrandSelectActivity t23}
+05-16 08:39:01.533  1694  1928 I BpBinder: onLastStrongRef automatically unlinking death recipients: 
+05-16 08:39:01.533  3936  8196 D CoreBackPreview: onTransactionReady, opening: [], closing: [ActivityRecord{166752509 u0 com.tiqiaa.icontrol/.BrandSelectActivity t23}], animating: AnimationTargets{ openTarget= {ActivityRecord{166752509 u0 com.tiqiaa.icontrol/.BrandSelectActivity t23}} closeTarget= ActivityRecord{58376530 u0 com.tiqiaa.icontrol/.NewExactMatchRemoteActivity t23} mSwitchType= 2 mComposed= true mWaitTransition= false}, match: false
+05-16 08:39:01.535  4267  8188 V WindowManagerShell: onTransitionReady(transaction=16904991285525)
+05-16 08:39:01.535  3936  3968 V WindowManager: Sent Transition (#234) createdAt=05-16 08:39:01.529
+05-16 08:39:01.536  3936  3968 V WindowManager:     startWCT=WindowContainerTransaction { changes= {} hops= [{restoreBackNav: container=null reparent=null mToTop=false mWindowingMode=null mActivityType=null}] errorCallbackToken=null taskFragmentOrganizer=null }
+05-16 08:39:01.536  4267  4353 V WindowManagerShell: onTransitionReady (#234) android.os.BinderProxy@8af49b7: {id=234 t=CLOSE_PREDICTIVE_BACK f=0x0 trk=0 r=[0@Point(0, 0)] c=[
+05-16 08:39:01.536  4267  4353 V WindowManagerShell:         {m=TO_BACK f=FILLS_TASK|IS_OCCLUDED|FLAG_BACK_GESTURE_ANIMATED leash=Surface(name=ActivityRecord{166752509 u0 com.tiqiaa.icontrol/.BrandSelectActivity)/@0xbe29851 sb=Rect(0, 0 - 1280, 2772) eb=Rect(0, 0 - 1280, 2772) epz=Point(1280, 2772) d=0 bc=fffafafa component=com.tiqiaa.icontrol/.BrandSelectActivity opt={t=FROM_STYLE mUserId=0}}
+05-16 08:39:01.536  4267  4353 V WindowManagerShell:     ]}
+05-16 08:39:01.536  4267  4353 V WindowManagerShell: Transition (#234) android.os.BinderProxy@8af49b7@0 ready while (#233) android.os.BinderProxy@f931c3a@0 is still animating. Notify the animating transition in case they can be merged
+05-16 08:39:01.537  3936  3968 V WindowManager:     info={id=234 t=CLOSE_PREDICTIVE_BACK f=0x0 trk=0 r=[0@Point(0, 0)] c=[
+05-16 08:39:01.537  3936  3968 V WindowManager:         {m=TO_BACK f=FILLS_TASK|IS_OCCLUDED|FLAG_BACK_GESTURE_ANIMATED leash=Surface(name=ActivityRecord{166752509 u0 com.tiqiaa.icontrol/.BrandSelectActivity)/@0xfffdf84 sb=Rect(0, 0 - 1280, 2772) eb=Rect(0, 0 - 1280, 2772) epz=Point(1280, 2772) d=0 bc=fffafafa component=com.tiqiaa.icontrol/.BrandSelectActivity opt={t=FROM_STYLE mUserId=0}}
+05-16 08:39:01.537  3936  3968 V WindowManager:     ]}
+05-16 08:39:01.537  4267  4353 D ShellBackPreview: Back animation transition, merge pending transitions result={id=234 t=CLOSE_PREDICTIVE_BACK f=0x0 trk=0 r=[0@Point(0, 0)] c=[]}
+05-16 08:39:01.537  4267  4353 V WindowManagerShell: Transition was merged: (#234) android.os.BinderProxy@8af49b7@0 into (#233) android.os.BinderProxy@f931c3a@0
+05-16 08:39:01.538  4267  4353 V WindowManagerShell: Transition animation finished (aborted=false), notifying core (#233) android.os.BinderProxy@f931c3a@0
+05-16 08:39:01.539  3936  3968 V WindowManager: Finish Transition (#233): created at 05-16 08:39:01.451 collect-started=0.253ms request-sent=6.889ms started=12.652ms ready=12.634ms sent=21.484ms commit=8.087ms finished=87.438ms
+05-16 08:39:01.542  3936  3968 V WindowManager: Finish Transition (#234): created at 05-16 08:39:01.529 collect-started=0.125ms started=0.145ms ready=3.141ms sent=4.717ms finished=11.17ms
+05-16 08:39:01.542 13129 13129 D VRI[BrandSelectActivity]: visibilityChanged oldVisibility=true newVisibility=false
+05-16 08:39:01.543  4267  4353 V WindowManagerShell: Track 0 became idle
+05-16 08:39:01.543  4267  4353 V WindowManagerShell: All active transition animations finished
+05-16 08:39:01.544   805   805 I hwservicemanager: getTransport: Cannot find entry vendor.qti.hardware.servicetracker@1.2::IServicetracker/default in either framework or device VINTF manifest.
+05-16 08:39:01.544  3936  3971 W ActivityTaskManager: servicetracker HIDL not available
+05-16 08:39:01.544  3936  3971 E ActivityTaskManager: Unable to get servicetracker HAL instance
+05-16 08:39:01.544   805   805 I hwservicemanager: getTransport: Cannot find entry vendor.qti.hardware.servicetracker@1.2::IServicetracker/default in either framework or device VINTF manifest.
+05-16 08:39:01.544  3936  3971 W ActivityTaskManager: servicetracker HIDL not available
+05-16 08:39:01.544  3936  3971 E ActivityTaskManager: Unable to get servicetracker HAL instance
+05-16 08:39:01.551 13129 13129 D AutofillManager: view not autofillable - not passing ime action check
+05-16 08:39:01.560   805   805 I hwservicemanager: getTransport: Cannot find entry vendor.qti.hardware.servicetracker@1.2::IServicetracker/default in either framework or device VINTF manifest.
+05-16 08:39:01.561  3936  8196 W ActivityTaskManager: servicetracker HIDL not available
+05-16 08:39:01.561  3936  8196 E ActivityTaskManager: Unable to get servicetracker HAL instance
+05-16 08:39:01.562   805   805 I hwservicemanager: getTransport: Cannot find entry vendor.qti.hardware.servicetracker@1.2::IServicetracker/default in either framework or device VINTF manifest.
+05-16 08:39:01.562  3936  8196 W ActivityTaskManager: servicetracker HIDL not available
+05-16 08:39:01.562  3936  8196 E ActivityTaskManager: Unable to get servicetracker HAL instance
+05-16 08:39:01.563  3936  4059 W UsageStatsService: Unexpected activity event reported! (com.tiqiaa.icontrol/com.tiqiaa.icontrol.BrandSelectActivity event : 23 instanceId : 242967026)
+05-16 08:39:01.571  3936  6582 W WindowManager: Failed looking up window session=Session{dab9048 4267:u0a10124} callers=com.android.server.wm.WindowManagerService.removeClientToken:2153 com.android.server.wm.Session.remove:270 android.view.IWindowSession$Stub.onTransact:696 
+05-16 08:39:01.627  1694  1916 E HwcComposer: getLuts failed Status(-129, EX_TRANSACTION_FAILED): 'UNKNOWN_TRANSACTION: '
+05-16 08:39:01.727  1694  1916 E HwcComposer: getLuts failed Status(-129, EX_TRANSACTION_FAILED): 'UNKNOWN_TRANSACTION: '
+05-16 08:39:01.786  3936  6582 D CoreBackPreview: startBackNavigation currentTask=Task{dc88fe6 #23 type=standard A=10166:com.tiqiaa.icontrol}, topRunningActivity=ActivityRecord{58376530 u0 com.tiqiaa.icontrol/.NewExactMatchRemoteActivity t23}, callbackInfo=OnBackInvokedCallbackInfo{mCallback=android.window.IOnBackInvokedCallback$Stub$Proxy@9e0d77c, mPriority=-1, mIsAnimationCallback=false, mOverrideBehavior=0}, currentFocus=Window{c066049 u0 com.tiqiaa.icontrol/com.tiqiaa.icontrol.NewExactMatchRemoteActivity}
+05-16 08:39:01.787  3936  6582 D CoreBackPreview: Previous Destination is Activity:ComponentInfo{com.tiqiaa.icontrol/com.tiqiaa.icontrol.BrandSelectActivity} Task:Task=23 removedContainer:ActivityRecord{58376530 u0 com.tiqiaa.icontrol/.NewExactMatchRemoteActivity t23}, backType=TYPE_CROSS_ACTIVITY
+05-16 08:39:01.790  3936  6582 D CoreBackPreview: Setting Activity.mLauncherTaskBehind to true. Activity=ActivityRecord{166752509 u0 com.tiqiaa.icontrol/.BrandSelectActivity t23}
+05-16 08:39:01.792   805   805 I hwservicemanager: getTransport: Cannot find entry vendor.qti.hardware.servicetracker@1.2::IServicetracker/default in either framework or device VINTF manifest.
+05-16 08:39:01.793  1694  1928 I BpBinder: onLastStrongRef automatically unlinking death recipients: 
+05-16 08:39:01.793  3936  6582 W ActivityTaskManager: servicetracker HIDL not available
+05-16 08:39:01.793  3936  6582 E ActivityTaskManager: Unable to get servicetracker HAL instance
+05-16 08:39:01.793   805   805 I hwservicemanager: getTransport: Cannot find entry vendor.qti.hardware.servicetracker@1.2::IServicetracker/default in either framework or device VINTF manifest.
+05-16 08:39:01.793  3936  6582 W ActivityTaskManager: servicetracker HIDL not available
+05-16 08:39:01.793  3936  6582 E ActivityTaskManager: Unable to get servicetracker HAL instance
+05-16 08:39:01.796 13129 13129 D ViewRootImpl: Skipping stats log for color mode
+05-16 08:39:01.799  3936  8196 W WindowManager: Failed looking up window session=Session{dab9048 4267:u0a10124} callers=com.android.server.wm.WindowManagerService.removeClientToken:2153 com.android.server.wm.Session.remove:270 android.view.IWindowSession$Stub.onTransact:696 
+05-16 08:39:01.799  4267  4353 D ShellBackPreview: Received backNavigationInfo:BackNavigationInfo{mType=TYPE_CROSS_ACTIVITY (2), mOnBackNavigationDone=android.os.RemoteCallback@5419f90, mOnBackInvokedCallback=android.window.IOnBackInvokedCallback$Stub$Proxy@4ef0089, mPrepareRemoteAnimation=true, mAnimationCallback=false, mCustomizeAnimationInfo=CustomAnimationInfo, package name= com.tiqiaa.icontrol}
+05-16 08:39:01.799  4267  4353 V WindowManagerShell: Transition requested (#235): android.os.BinderProxy@b4924bc TransitionRequestInfo { type = PREDICTIVE_BACK, triggerTask = null, pipChange = null, remoteTransition = null, displayChange = null, flags = 0, debugId = 235 }
+05-16 08:39:01.799  4267  4353 V WindowManagerShell: Transition (#235): request handled by BackAnimationController$BackTransitionHandler
+05-16 08:39:01.802 13129 13129 D AutofillManager: view not autofillable - not passing ime action check
+05-16 08:39:01.804  4267  4477 V SnapshotDrawerUtils: Drawing snapshot surface sizeMismatch=true
+05-16 08:39:01.807  4267  4353 D ShellBackPreview: Finishing gesture with event action: 1
+05-16 08:39:01.807  4267  4353 D ShellBackPreview: onGestureFinished() mTriggerBack == false
+05-16 08:39:01.807  4267  4353 W ShellBackPreview: Gesture released, but animation didn't ready.
+05-16 08:39:01.809  3936  3968 V WindowManager: Sent Transition (#235) createdAt=05-16 08:39:01.789 via request=TransitionRequestInfo { type = PREDICTIVE_BACK, triggerTask = null, pipChange = null, remoteTransition = null, displayChange = null, flags = 0, debugId = 235 }
+05-16 08:39:01.810  3936  3968 V WindowManager:     startWCT=WindowContainerTransaction { changes= {} hops= [] errorCallbackToken=null taskFragmentOrganizer=null }
+05-16 08:39:01.810  3936  3968 V WindowManager:     info={id=235 t=PREDICTIVE_BACK f=0x0 trk=0 r=[0@Point(0, 0)] c=[
+05-16 08:39:01.810  3936  3968 V WindowManager:         {m=CHANGE f=FILLS_TASK|FLAG_BACK_GESTURE_ANIMATED leash=Surface(name=ActivityRecord{58376530 u0 com.tiqiaa.icontrol/.NewExactMatchRemoteActivity)/@0x99bd826 sb=Rect(0, 0 - 1280, 2772) eb=Rect(0, 0 - 1280, 2772) epz=Point(1280, 2772) d=0 bc=fffafafa component=com.tiqiaa.icontrol/.NewExactMatchRemoteActivity opt={t=FROM_STYLE mUserId=0}},
+05-16 08:39:01.810  3936  3968 V WindowManager:         {m=TO_FRONT f=FILLS_TASK|IS_OCCLUDED|FLAG_BACK_GESTURE_ANIMATED leash=Surface(name=ActivityRecord{166752509 u0 com.tiqiaa.icontrol/.BrandSelectActivity)/@0xfffdf84 sb=Rect(0, 0 - 1280, 2772) eb=Rect(0, 0 - 1280, 2772) epz=Point(1280, 2772) d=0 bc=fffafafa component=com.tiqiaa.icontrol/.BrandSelectActivity opt={t=FROM_STYLE mUserId=0}}
+05-16 08:39:01.810  3936  3968 V WindowManager:     ]}
+05-16 08:39:01.811  4267 11845 V WindowManagerShell: onTransitionReady(transaction=16904991285541)
+05-16 08:39:01.811  4267  4353 V WindowManagerShell: onTransitionReady (#235) android.os.BinderProxy@b4924bc: {id=235 t=PREDICTIVE_BACK f=0x0 trk=0 r=[0@Point(0, 0)] c=[
+05-16 08:39:01.811  4267  4353 V WindowManagerShell:         {m=CHANGE f=FILLS_TASK|FLAG_BACK_GESTURE_ANIMATED leash=Surface(name=ActivityRecord{58376530 u0 com.tiqiaa.icontrol/.NewExactMatchRemoteActivity)/@0xf0c27f2 sb=Rect(0, 0 - 1280, 2772) eb=Rect(0, 0 - 1280, 2772) epz=Point(1280, 2772) d=0 bc=fffafafa component=com.tiqiaa.icontrol/.NewExactMatchRemoteActivity opt={t=FROM_STYLE mUserId=0}},
+05-16 08:39:01.811  4267  4353 V WindowManagerShell:         {m=TO_FRONT f=FILLS_TASK|IS_OCCLUDED|FLAG_BACK_GESTURE_ANIMATED leash=Surface(name=ActivityRecord{166752509 u0 com.tiqiaa.icontrol/.BrandSelectActivity)/@0x384ee43 sb=Rect(0, 0 - 1280, 2772) eb=Rect(0, 0 - 1280, 2772) epz=Point(1280, 2772) d=0 bc=fffafafa component=com.tiqiaa.icontrol/.BrandSelectActivity opt={t=FROM_STYLE mUserId=0}}
+05-16 08:39:01.811  4267  4353 V WindowManagerShell:     ]}
+05-16 08:39:01.812  4267  4353 V WindowManagerShell: Playing animation for (#235) android.os.BinderProxy@b4924bc@0
+05-16 08:39:01.812  4267  4353 V WindowManagerShell:  try firstHandler com.android.wm.shell.back.BackAnimationController$BackTransitionHandler@c88df62
+05-16 08:39:01.813  4267  4353 V ShellRecents: No matching remote found to takeover (#235)
+05-16 08:39:01.813  4267  4353 D ShellBackPreview: custom animation loaded android.view.animation.AnimationSet@91c1df9
+05-16 08:39:01.813  4267  4353 D ShellBackPreview: custom animation loaded android.view.animation.AnimationSet@9b0d13e
+05-16 08:39:01.813  4267  4353 D ShellBackPreview: BackAnimationController: startAnimation()
+05-16 08:39:01.814  4267  4353 D ShellBackPreview: Start back to activity animation.
+05-16 08:39:01.815  1694  1694 I BpBinder: onLastStrongRef automatically unlinking death recipients: 
+05-16 08:39:01.816  3936  8196 W ActivityManager: pid 3936 system sent binder code 2 with flags 0 to frozen apps and got error -32
+05-16 08:39:01.816  3936  8196 D ActivityManager: Too many transaction errors, throttling freezer binder callback.
+05-16 08:39:01.816  3936  8196 E ConsumerIrService: Error transmitting frequency: 38000
+05-16 08:39:01.816  1639  1639 D vendor.qti.vibrator: Vibrator on for timeoutMs: 50
+05-16 08:39:01.817  4267  4353 D ShellBackPreview: BackAnimationController: startPostCommitAnimation()
+05-16 08:39:01.817  1639 14034 D vendor.qti.vibrator: Starting on on another thread
+05-16 08:39:01.817  4267  4353 V WindowManagerShell:  animated by firstHandler
+05-16 08:39:01.824  1562  5362 E ANDR-PERF-OH: ANDR-PERF-OH: getPerfHandle() 55: Invalid handle req: 0
+05-16 08:39:01.828  4267  4353 D ShellBackPreview: BackAnimationController: onBackAnimationFinished()
+05-16 08:39:01.828  4267  4353 D ShellBackPreview: BackAnimationController: finishBackNavigation()
+05-16 08:39:01.828  4267  4353 D ShellBackPreview: resetTouchTracker -> no queued gesture
+05-16 08:39:01.829  4267  4353 V WindowManagerShell: Directly starting a new transition type=CLOSE_PREDICTIVE_BACK wct=WindowContainerTransaction { changes= {} hops= [{restoreBackNav: container=null reparent=null mToTop=false mWindowingMode=null mActivityType=null}] errorCallbackToken=null taskFragmentOrganizer=null } handler=com.android.wm.shell.back.BackAnimationController$BackTransitionHandler@c88df62
+05-16 08:39:01.829  3936  8196 D CoreBackPreview: onBackNavigationDone backType=2, triggerBack=false
+05-16 08:39:01.829  3936  4343 D CoreBackPreview: Setting Activity.mLauncherTaskBehind to false. Activity=ActivityRecord{166752509 u0 com.tiqiaa.icontrol/.BrandSelectActivity t23}
+05-16 08:39:01.831  1694  1785 I BpBinder: onLastStrongRef automatically unlinking death recipients: 
+05-16 08:39:01.832  3936  4343 D CoreBackPreview: onTransactionReady, opening: [], closing: [ActivityRecord{166752509 u0 com.tiqiaa.icontrol/.BrandSelectActivity t23}], animating: AnimationTargets{ openTarget= {ActivityRecord{166752509 u0 com.tiqiaa.icontrol/.BrandSelectActivity t23}} closeTarget= ActivityRecord{58376530 u0 com.tiqiaa.icontrol/.NewExactMatchRemoteActivity t23} mSwitchType= 2 mComposed= true mWaitTransition= false}, match: false
+05-16 08:39:01.834  3936  3968 V WindowManager: Sent Transition (#236) createdAt=05-16 08:39:01.829
+05-16 08:39:01.834  3936  3968 V WindowManager:     startWCT=WindowContainerTransaction { changes= {} hops= [{restoreBackNav: container=null reparent=null mToTop=false mWindowingMode=null mActivityType=null}] errorCallbackToken=null taskFragmentOrganizer=null }
+05-16 08:39:01.834  3936  3968 V WindowManager:     info={id=236 t=CLOSE_PREDICTIVE_BACK f=0x0 trk=0 r=[0@Point(0, 0)] c=[
+05-16 08:39:01.834  3936  3968 V WindowManager:         {m=TO_BACK f=FILLS_TASK|IS_OCCLUDED|FLAG_BACK_GESTURE_ANIMATED leash=Surface(name=ActivityRecord{166752509 u0 com.tiqiaa.icontrol/.BrandSelectActivity)/@0xfffdf84 sb=Rect(0, 0 - 1280, 2772) eb=Rect(0, 0 - 1280, 2772) epz=Point(1280, 2772) d=0 bc=fffafafa component=com.tiqiaa.icontrol/.BrandSelectActivity opt={t=FROM_STYLE mUserId=0}}
+05-16 08:39:01.834  3936  3968 V WindowManager:     ]}
+05-16 08:39:01.834  4267  6570 V WindowManagerShell: onTransitionReady(transaction=16904991285548)
+05-16 08:39:01.834  4267  4353 V WindowManagerShell: onTransitionReady (#236) android.os.BinderProxy@e64c34a: {id=236 t=CLOSE_PREDICTIVE_BACK f=0x0 trk=0 r=[0@Point(0, 0)] c=[
+05-16 08:39:01.834  4267  4353 V WindowManagerShell:         {m=TO_BACK f=FILLS_TASK|IS_OCCLUDED|FLAG_BACK_GESTURE_ANIMATED leash=Surface(name=ActivityRecord{166752509 u0 com.tiqiaa.icontrol/.BrandSelectActivity)/@0x5f7a0b5 sb=Rect(0, 0 - 1280, 2772) eb=Rect(0, 0 - 1280, 2772) epz=Point(1280, 2772) d=0 bc=fffafafa component=com.tiqiaa.icontrol/.BrandSelectActivity opt={t=FROM_STYLE mUserId=0}}
+05-16 08:39:01.834  4267  4353 V WindowManagerShell:     ]}
+05-16 08:39:01.834  4267  4353 V WindowManagerShell: Transition (#236) android.os.BinderProxy@e64c34a@0 ready while (#235) android.os.BinderProxy@b4924bc@0 is still animating. Notify the animating transition in case they can be merged
+05-16 08:39:01.834  4267  4353 D ShellBackPreview: Back animation transition, merge pending transitions result={id=236 t=CLOSE_PREDICTIVE_BACK f=0x0 trk=0 r=[0@Point(0, 0)] c=[]}
+05-16 08:39:01.834  4267  4353 V WindowManagerShell: Transition was merged: (#236) android.os.BinderProxy@e64c34a@0 into (#235) android.os.BinderProxy@b4924bc@0
+05-16 08:39:01.835  4267  4353 V WindowManagerShell: Transition animation finished (aborted=false), notifying core (#235) android.os.BinderProxy@b4924bc@0
+05-16 08:39:01.836  3936  3968 V WindowManager: Finish Transition (#235): created at 05-16 08:39:01.789 collect-started=0.308ms request-sent=6.541ms started=10.734ms ready=10.716ms sent=18.842ms commit=7.683ms finished=46.87ms
+05-16 08:39:01.838  3936  3968 V WindowManager: Finish Transition (#236): created at 05-16 08:39:01.829 collect-started=0.082ms started=0.097ms ready=2.542ms sent=3.986ms finished=8.631ms
+05-16 08:39:01.838 13129 13129 D VRI[BrandSelectActivity]: visibilityChanged oldVisibility=true newVisibility=false
+05-16 08:39:01.839  4267  4353 V WindowManagerShell: Track 0 became idle
+05-16 08:39:01.839  4267  4353 V WindowManagerShell: All active transition animations finished
+05-16 08:39:01.840   805   805 I hwservicemanager: getTransport: Cannot find entry vendor.qti.hardware.servicetracker@1.2::IServicetracker/default in either framework or device VINTF manifest.
+05-16 08:39:01.840  3936  3971 W ActivityTaskManager: servicetracker HIDL not available
+05-16 08:39:01.840  3936  3971 E ActivityTaskManager: Unable to get servicetracker HAL instance
+05-16 08:39:01.841   805   805 I hwservicemanager: getTransport: Cannot find entry vendor.qti.hardware.servicetracker@1.2::IServicetracker/default in either framework or device VINTF manifest.
+05-16 08:39:01.841  3936  3971 W ActivityTaskManager: servicetracker HIDL not available
+05-16 08:39:01.841  3936  3971 E ActivityTaskManager: Unable to get servicetracker HAL instance
+05-16 08:39:01.843 13129 13129 D AutofillManager: view not autofillable - not passing ime action check
+05-16 08:39:01.852   805   805 I hwservicemanager: getTransport: Cannot find entry vendor.qti.hardware.servicetracker@1.2::IServicetracker/default in either framework or device VINTF manifest.
+05-16 08:39:01.852  3936  4343 W ActivityTaskManager: servicetracker HIDL not available
+05-16 08:39:01.852  3936  4343 E ActivityTaskManager: Unable to get servicetracker HAL instance
+05-16 08:39:01.853   805   805 I hwservicemanager: getTransport: Cannot find entry vendor.qti.hardware.servicetracker@1.2::IServicetracker/default in either framework or device VINTF manifest.
+05-16 08:39:01.853  3936  4343 W ActivityTaskManager: servicetracker HIDL not available
+05-16 08:39:01.853  3936  4343 E ActivityTaskManager: Unable to get servicetracker HAL instance
+05-16 08:39:01.853  3936  4059 W UsageStatsService: Unexpected activity event reported! (com.tiqiaa.icontrol/com.tiqiaa.icontrol.BrandSelectActivity event : 23 instanceId : 242967026)
+05-16 08:39:01.867  1639 14034 D vendor.qti.vibrator: Notifying on complete
+05-16 08:39:01.868  1639  1639 D vendor.qti.vibrator: QTI Vibrator off
+05-16 08:39:01.922  3936  4168 D WifiClientModeImpl[736265:wlan0]: updateLinkLayerStatsRssiSpeedFrequencyCapabilities rssi=-32 TxLinkspeed=1083 freq=5785 RxLinkSpeed=975
+05-16 08:39:01.923  3936  4168 D WifiDataStall: tx tput in kbps: 968565
+05-16 08:39:01.923  3936  4168 D WifiDataStall: rx tput in kbps: 917871
+05-16 08:39:01.923  3936  4168 V WifiConfigManager: Updating scan detail cache freq=5785 BSSID=c8:bf:4c:77:58:fb RSSI=-31 for "UNICAIR"WPA_PSK
+05-16 08:39:01.924  3936  4168 D WifiDataStall:  ccaLevel = 15
+05-16 08:39:01.924  3936  4168 D WifiDataStall: L2 txTputKbps: 968565, rxTputKbps: 917871, L3 txTputKbps: 0, rxTputKbps: 0, TxTrafficHigh: false, RxTrafficHigh: false, Throughput Sufficient: true
+05-16 08:39:01.925  3936  4168 D WifiThroughputPredictor:  utilization (LLS) 15 isBluetoothConnected: false final utilization: 15
+05-16 08:39:01.925  3936  4168 D WifiThroughputPredictor:  BW: 2 RSSI: -32 Nss: 2 Mode: 5 symDur: 3600 snrDb 42 bitPerTone: 6667 rate: 866 throughput: 815
+05-16 08:39:01.925  3936  4168 D WifiThroughputPredictor:  utilization (LLS) 15 isBluetoothConnected: false final utilization: 15
+05-16 08:39:01.925  3936  4168 D WifiThroughputPredictor:  BW: 2 RSSI: -32 Nss: 2 Mode: 5 symDur: 3600 snrDb 42 bitPerTone: 6667 rate: 866 throughput: 815
+05-16 08:39:01.927  3936  4168 D WifiScoreCard: BSSID update SIGNAL_POLL ID: 69380597 SSID: "UNICAIR", BSSID: c8:bf:4c:77:58:fb, MAC: 66:70:e7:ef:44:76, IP: /192.168.31.194, Security type: 2, Supplicant state: COMPLETED, Wi-Fi standard: 11ac, RSSI: -32, Link speed: 1083Mbps, Tx Link speed: 1083Mbps, Max Supported Tx Link speed: 866Mbps, Rx Link speed: 975Mbps, Max Supported Rx Link speed: 866Mbps, Frequency: 5785MHz, Net ID: 0, Metered hint: false, score: 60, isUsable: true, CarrierMerged: false, SubscriptionId: -1, IsPrimary: 1, Trusted: true, Restricted: false, Ephemeral: false, OEM paid: false, OEM private: false, OSU AP: false, FQDN: <none>, Provider friendly name: <none>, Requesting package name: <none>"UNICAIR"wpa2-pskMLO Information: , Is TID-To-Link negotiation supported by the AP: false, AP MLD Address: <none>, AP MLO Link Id: <none>, AP MLO Affiliated links: <none>, Vendor Data: <none>
+05-16 08:39:01.927  3936  4168 D WifiScoreCard: txRate: 2 txSpeed: 1083
+05-16 08:39:01.927  3936  4168 D WifiScoreCard: network update SIGNAL_POLL "UNICAIR" ID: 266647767 RSSI -32 txSpeed -1
+05-16 08:39:01.928  3936  4168 D WifiClientModeImpl[736265:wlan0]:  ClientModeImpl$L2ConnectedState screen=on 7 0 "UNICAIR" c8:bf:4c:77:58:fb rssi=-32 f=5785 sc=60 link=1083 tx=1.4, 0.2, 0.0 rx=1.3 bcn=5381 [on:235 tx:0 rx:11 period:3037] from screen [on:4092 period:15180] score=60
+05-16 08:39:01.933  1694  1916 E HwcComposer: getLuts failed Status(-129, EX_TRANSACTION_FAILED): 'UNKNOWN_TRANSACTION: '
