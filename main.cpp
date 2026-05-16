@@ -84,13 +84,22 @@ ConsumerIr::ConsumerIr() {
 
 ::ndk::ScopedAStatus ConsumerIr::transmit(int32_t in_carrierFreqHz,
                                           const std::vector<int32_t>& in_pattern) {
+    ALOGD("ConsumerIr::transmit called: carrierFreq=%d, patternSize=%zu", in_carrierFreqHz, in_pattern.size());
+    
     if (!mDevice) {
+        ALOGE("ConsumerIr::transmit: mDevice is NULL!");
         return ::ndk::ScopedAStatus::fromExceptionCode(EX_UNSUPPORTED_OPERATION);
     }
     if (in_carrierFreqHz > 0) {
-        mDevice->transmit(mDevice, in_carrierFreqHz, in_pattern.data(), in_pattern.size());
+        int ret = mDevice->transmit(mDevice, in_carrierFreqHz, in_pattern.data(), in_pattern.size());
+        ALOGD("ConsumerIr::transmit: mDevice->transmit returned: %d", ret);
+        if (ret != 0) {
+            ALOGE("ConsumerIr::transmit: failed with error %d", ret);
+            return ::ndk::ScopedAStatus::fromExceptionCode(EX_UNSUPPORTED_OPERATION);
+        }
         return ::ndk::ScopedAStatus::ok();
     } else {
+        ALOGE("ConsumerIr::transmit: invalid carrierFreq: %d", in_carrierFreqHz);
         return ::ndk::ScopedAStatus::fromExceptionCode(EX_UNSUPPORTED_OPERATION);
     }
 }
