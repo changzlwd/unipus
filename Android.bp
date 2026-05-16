@@ -17,7 +17,7 @@ cc_binary {
     relative_install_path: "hw",
     init_rc: ["android.hardware.ir-service.volcano.rc"],
     vendor: true,
-    vintf_fragments: ["android.hardware.ir-service.volcano.xml"],
+    // vintf_fragments: ["android.hardware.ir-service.volcano.xml"],
 
     shared_libs: [
         "libbase",
