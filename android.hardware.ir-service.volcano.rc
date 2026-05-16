@@ -2,3 +2,4 @@ service vendor.ir-default /vendor/bin/hw/android.hardware.ir-service.volcano
     class hal
     user system
     group system
+    interface android.hardware.ir.IConsumerIr/default
