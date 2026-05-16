@@ -1,459 +1,139 @@
-========================================================
- Building external modules and installing them into staging directory
-+ '[' -n '' ']'
-++ rel_path /Data_8T1/liruntong/lrt-workspace/UNC6690_R12/LA.VENDOR.14.3.7/LINUX/android/kernel_platform/                                                           ..//vendor/nxp/opensource/driver ./msm-kernel
-++ python -c 'import os.path; import sys; print(os.path.relpath(sys.argv[1], sys.argv[2]))' /Data_8T1/lir                                                           untong/lrt-workspace/UNC6690_R12/LA.VENDOR.14.3.7/LINUX/android/kernel_platform/..//vendor/nxp/opensource                                                           /driver ./msm-kernel
-+ EXT_MOD_REL=../../vendor/nxp/opensource/driver
-+ '[' -n '' ']'
-+ mkdir -p /Data_8T1/liruntong/lrt-workspace/UNC6690_R12/LA.VENDOR.14.3.7/LINUX/android/out/target/produc                                                           t/volcano/obj/DLKM_OBJ/kernel_platform/msm-kernel/../../vendor/nxp/opensource/driver
-++ echo ..//vendor/nxp/opensource/driver
-++ sed -e 's/^[\.\/]*//'
-+ module_path=vendor/nxp/opensource/driver
-++ echo vendor/nxp/opensource/driver
-++ cut -d / -f 1
-+ top_dir=vendor
-+ cd /Data_8T1/liruntong/lrt-workspace/UNC6690_R12/LA.VENDOR.14.3.7/LINUX/android/kernel_platform
-+ ln -fs ../vendor
-+ pkg_path=vendor/nxp/opensource/driver
-+ '[' -f vendor/nxp/opensource/driver/BUILD.bazel ']'
-+ '[' volcano = msmnile ']'
-+ '[' volcano = sm6150 ']'
-+ '[' volcano = volcano ']'
-+ btgt=pineapple
-+ filter_regex='pineapple_gki_.*_dist$'
-+ '[' true = true ']'
-+ '[' -n vendor/nxp/opensource/driver ']'
-+ '[' -n pineapple ']'
-++ ./tools/bazel query --ui_event_filters=-info --noshow_progress 'filter('\''pineapple_gki_.*_dist$'\'',                                                            //vendor/nxp/opensource/driver/...)'
-Another command (pid=18587) is running. Waiting for it to complete on the server (server_pid=28421)...
-Another command (pid=17611) is running. Waiting for it to complete on the server (server_pid=28421)...
-Another command (pid=8558) is running. Waiting for it to complete on the server (server_pid=28421)...
-Another command (pid=12878) is running. Waiting for it to complete on the server (server_pid=28421)...
-+ build_target=//vendor/nxp/opensource/driver:pineapple_gki_nxp-nci_dist
-+ '[' -n //vendor/nxp/opensource/driver:pineapple_gki_nxp-nci_dist ']'
-++ printf '%s\n' //vendor/nxp/opensource/driver:pineapple_gki_nxp-nci_dist
-++ wc -l
-+ '[' 1 -gt 1 ']'
-+ '[' '!' -f build/msm_kernel_extensions.bzl ']'
-+ '[' '!' -f build/abl_extensions.bzl ']'
-+ build_flags=($(cat "${KERNEL_KIT}/build_opts.txt" | xargs))
-++ cat /Data_8T1/liruntong/lrt-workspace/UNC6690_R12/LA.VENDOR.14.3.7/LINUX/android/device/qcom/volcano-k                                                           ernel/build_opts.txt
-++ xargs
-+ '[' false = true ']'
-+ '[' -n '' ']'
-+ ./tools/bazel run --//msm-kernel:skip_abi=true --//bootable/bootloader/edk2:target_build_variant=userde                                                           bug --user_kmi_symbol_lists=//msm-kernel:android/abi_gki_aarch64_qcom --ignore_missing_projects //vendor/                                                           nxp/opensource/driver:pineapple_gki_nxp-nci_dist -- --dist_dir=/Data_8T1/liruntong/lrt-workspace/UNC6690_                                                           R12/LA.VENDOR.14.3.7/LINUX/android/out/target/product/volcano/obj/DLKM_OBJ/kernel_platform/msm-kernel/../                                                           ../vendor/nxp/opensource/driver
-Another command (pid=23462) is running. Waiting for it to complete on the server (server_pid=28421)...
-Loading:
-Loading:
-Loading: 0 packages loaded
-Analyzing: target //vendor/nxp/opensource/driver:pineapple_gki_nxp-nci_dist (0 packages loaded, 0 targets                                                            configured)
-INFO: Analyzed target //vendor/nxp/opensource/driver:pineapple_gki_nxp-nci_dist (0 packages loaded, 52 ta                                                           rgets configured).
-INFO: Found 1 target...
-[0 / 2] [Prepa] Writing script vendor/nxp/opensource/driver/pineapple_gki_nxp-nci_dist
-[44 / 47] Creating DDK module configuration @//vendor/nxp/opensource/driver:pineapple_gki_nxp-nci_config;                                                            0s linux-sandbox
-[45 / 47] [Prepa] Building external kernel module (lto=default;notrim) @//vendor/nxp/opensource/driver:pi                                                           neapple_gki_nxp-nci
-[45 / 47] Building external kernel module (lto=default;notrim) @//vendor/nxp/opensource/driver:pineapple_                                                           gki_nxp-nci; 1s linux-sandbox
-[46 / 47] checking cached actions
-Target //vendor/nxp/opensource/driver:pineapple_gki_nxp-nci_dist up-to-date:
-  bazel-bin/vendor/nxp/opensource/driver/pineapple_gki_nxp-nci_dist
-INFO: Elapsed time: 21.525s, Critical Path: 8.65s
-INFO: 18 processes: 11 internal, 7 linux-sandbox.
-INFO: Build completed successfully, 18 total actions
-INFO: Running command line: bazel-bin/vendor/nxp/opensource/driver/pineapple_gki_nxp-nci_dist '--dist_dir                                                           =/Data_8T1/liruntong/lrt-workspace/UNC6690_R12/LA.VENDOR.14.3.7/LINUX/android/out/target/product/volcano/                                                           obj/DLKM_OBJ/kernel_platform/msm-kernel/../../vendor/nxp/opensource/driver'
-[dist] INFO: Copying to /Data_8T1/liruntong/lrt-workspace/UNC6690_R12/LA.VENDOR.14.3.7/LINUX/android/out/                                                           target/product/volcano/obj/DLKM_OBJ/kernel_platform/msm-kernel/../../vendor/nxp/opensource/driver
-[dist] DEBUG: Copying file: /Data_8T1/liruntong/lrt-workspace/UNC6690_R12/LA.VENDOR.14.3.7/LINUX/android/                                                           out/target/product/volcano/obj/DLKM_OBJ/kernel_platform/msm-kernel/../../vendor/nxp/opensource/driver/nxp                                                           -nci.ko
-[dist] DEBUG: Copying file: /Data_8T1/liruntong/lrt-workspace/UNC6690_R12/LA.VENDOR.14.3.7/LINUX/android/                                                           out/target/product/volcano/obj/DLKM_OBJ/kernel_platform/msm-kernel/../../vendor/nxp/opensource/driver/pin                                                           eapple_gki_nxp-nci.check_no_remaining
-[dist] DEBUG: Copying file: /Data_8T1/liruntong/lrt-workspace/UNC6690_R12/LA.VENDOR.14.3.7/LINUX/android/                                                           out/target/product/volcano/obj/DLKM_OBJ/kernel_platform/msm-kernel/../../vendor/nxp/opensource/driver/pin                                                           eapple_gki_nxp-nci_Module.symvers
-+ cat /Data_8T1/liruntong/lrt-workspace/UNC6690_R12/LA.VENDOR.14.3.7/LINUX/android/out/target/product/vol                                                           cano/obj/DLKM_OBJ/kernel_platform/msm-kernel/../../vendor/nxp/opensource/driver/pineapple_gki_nxp-nci_Mod                                                           ule.symvers
-+ '[' -n /Data_8T1/liruntong/lrt-workspace/UNC6690_R12/LA.VENDOR.14.3.7/LINUX/android/out/target/product/                                                           volcano/obj/DLKM/nxp-nci.ko_intermediates ']'
-++ dirname /Data_8T1/liruntong/lrt-workspace/UNC6690_R12/LA.VENDOR.14.3.7/LINUX/android/out/target/produc                                                           t/volcano/obj/DLKM/nxp-nci.ko_intermediates
-+ mkdir -p /Data_8T1/liruntong/lrt-workspace/UNC6690_R12/LA.VENDOR.14.3.7/LINUX/android/out/target/produc                                                           t/volcano/obj/DLKM
-+ rm -rf /Data_8T1/liruntong/lrt-workspace/UNC6690_R12/LA.VENDOR.14.3.7/LINUX/android/out/target/product/                                                           volcano/obj/DLKM/nxp-nci.ko_intermediates/../../vendor/nxp/opensource/driver
-+ cp -ar /Data_8T1/liruntong/lrt-workspace/UNC6690_R12/LA.VENDOR.14.3.7/LINUX/android/out/target/product/                                                           volcano/obj/DLKM_OBJ/kernel_platform/msm-kernel/../../vendor/nxp/opensource/driver /Data_8T1/liruntong/lr                                                           t-workspace/UNC6690_R12/LA.VENDOR.14.3.7/LINUX/android/out/target/product/volcano/obj/DLKM/nxp-nci.ko_int                                                           ermediates
-+ for ko in "${OUT_DIR}/${EXT_MOD_REL}"/*.ko
-++ dirname /Data_8T1/liruntong/lrt-workspace/UNC6690_R12/LA.VENDOR.14.3.7/LINUX/android/out/target/produc                                                           t/volcano/obj/DLKM/nxp-nci.ko_intermediates
-++ basename /Data_8T1/liruntong/lrt-workspace/UNC6690_R12/LA.VENDOR.14.3.7/LINUX/android/out/target/produ                                                           ct/volcano/obj/DLKM_OBJ/kernel_platform/msm-kernel/../../vendor/nxp/opensource/driver/nxp-nci.ko
-+ rm -rf /Data_8T1/liruntong/lrt-workspace/UNC6690_R12/LA.VENDOR.14.3.7/LINUX/android/out/target/product/                                                           volcano/obj/DLKM/nxp-nci.ko_intermediates
-++ dirname /Data_8T1/liruntong/lrt-workspace/UNC6690_R12/LA.VENDOR.14.3.7/LINUX/android/out/target/produc                                                           t/volcano/obj/DLKM/nxp-nci.ko_intermediates
-++ basename /Data_8T1/liruntong/lrt-workspace/UNC6690_R12/LA.VENDOR.14.3.7/LINUX/android/out/target/produ                                                           ct/volcano/obj/DLKM_OBJ/kernel_platform/msm-kernel/../../vendor/nxp/opensource/driver/nxp-nci.ko
-+ cp -ar /Data_8T1/liruntong/lrt-workspace/UNC6690_R12/LA.VENDOR.14.3.7/LINUX/android/out/target/product/                                                           volcano/obj/DLKM_OBJ/kernel_platform/msm-kernel/../../vendor/nxp/opensource/driver /Data_8T1/liruntong/lr                                                           t-workspace/UNC6690_R12/LA.VENDOR.14.3.7/LINUX/android/out/target/product/volcano/obj/DLKM/nxp-nci.ko_int                                                           ermediates
-+ '[' -n '' ']'
-+ set +x
-[ 85% 1816/2124] target Prebuilt: nxp-nci.ko (out/target/product/volcano/obj/DLKM/nxp-nci.ko_intermediate                                                           s/nxp-nci.ko)
-[ 85% 1817/2124] Install: out/target/product/volcano/dlkm/lib/modules/nxp-nci.ko
-[ 85% 1818/2124] build out/target/product/volcano/obj/PACKAGING/check_vintf_all_intermediates/check_vintf                                                           _vendor.log
-FAILED: out/target/product/volcano/obj/PACKAGING/check_vintf_all_intermediates/check_vintf_vendor.log
-/bin/bash -c "( out/host/linux-x86/bin/checkvintf --check-one --dirmap /vendor:out/target/product/volcano                                                           /vendor --dirmap /apex:out/target/product/volcano/apex --property ro.boot.product.vendor.sku=volcano > ou                                                           t/target/product/volcano/obj/PACKAGING/check_vintf_all_intermediates/check_vintf_vendor.log 2>&1 ) || ( c                                                           at out/target/product/volcano/obj/PACKAGING/check_vintf_all_intermediates/check_vintf_vendor.log && exit                                                            1 )"
-Checking vendor manifest.
-getDeviceHalManifest: Reading VINTF information.
-Sysprop ro.boot.product.vendor.sku=volcano
-Fetch 'out/target/product/volcano/vendor/etc/vintf/manifest_volcano.xml': OK
-List 'out/target/product/volcano/vendor/etc/vintf/manifest/': OK
-Fetch 'out/target/product/volcano/vendor/etc/vintf/manifest/vendor.qti.hardware.debugutils-service.xml':                                                            OK
-Fetch 'out/target/product/volcano/vendor/etc/vintf/manifest/bcs-ranging.xml': OK
-Fetch 'out/target/product/volcano/vendor/etc/vintf/manifest/vendor.qti.hardware.radio.uim_remote_server.x                                                           ml': OK
-Fetch 'out/target/product/volcano/vendor/etc/vintf/manifest/bluetooth_audio.xml': OK
-Fetch 'out/target/product/volcano/vendor/etc/vintf/manifest/vendor.qti.hardware.radio.ims.xml': OK
-Fetch 'out/target/product/volcano/vendor/etc/vintf/manifest/vendor.qti.diag.hal.service.xml': OK
-Fetch 'out/target/product/volcano/vendor/etc/vintf/manifest/android.hardware.security.keymint-service-qti                                                           .xml': OK
-Fetch 'out/target/product/volcano/vendor/etc/vintf/manifest/vendor.qti.hardware.display.demura-service.xm                                                           l': OK
-Fetch 'out/target/product/volcano/vendor/etc/vintf/manifest/vendor.qti.camera.provider.xml': OK
-Fetch 'out/target/product/volcano/vendor/etc/vintf/manifest/ImsRtpService-aidl.xml': OK
-Fetch 'out/target/product/volcano/vendor/etc/vintf/manifest/android.hardware.gnss-aidl-service-qti.xml':                                                            OK
-Fetch 'out/target/product/volcano/vendor/etc/vintf/manifest/vendor.qti.hardware.display.composer-service.                                                           xml': OK
-Fetch 'out/target/product/volcano/vendor/etc/vintf/manifest/android.hardware.graphics.mapper-impl-qti-dis                                                           play.xml': OK
-Fetch 'out/target/product/volcano/vendor/etc/vintf/manifest/android.hardware.wifi.hostapd.xml': OK
-Fetch 'out/target/product/volcano/vendor/etc/vintf/manifest/vendor.qti.hardware.trustedui-aidl-service.xm                                                           l': OK
-Fetch 'out/target/product/volcano/vendor/etc/vintf/manifest/vendor.qti.hardware.display.allocator-service                                                           .xml': OK
-Fetch 'out/target/product/volcano/vendor/etc/vintf/manifest/vendor.qti.hardware.vibrator.service.xml': OK
-Fetch 'out/target/product/volcano/vendor/etc/vintf/manifest/android.hardware.thermal-service.qti.xml': OK
-Fetch 'out/target/product/volcano/vendor/etc/vintf/manifest/dpm-saidl.xml': OK
-Fetch 'out/target/product/volcano/vendor/etc/vintf/manifest/qesdk-manager.xml': OK
-Fetch 'out/target/product/volcano/vendor/etc/vintf/manifest/android.hardware.radio.voice.xml': OK
-Fetch 'out/target/product/volcano/vendor/etc/vintf/manifest/vendor.qti.hardware.lights.service.xml': OK
-Fetch 'out/target/product/volcano/vendor/etc/vintf/manifest/deviceinfo-saidl.xml': OK
-Fetch 'out/target/product/volcano/vendor/etc/vintf/manifest/vendor.qti.hardware.limits-service.xml': OK
-Fetch 'out/target/product/volcano/vendor/etc/vintf/manifest/vendor.qti.hardware.radio.uim.xml': OK
-Fetch 'out/target/product/volcano/vendor/etc/vintf/manifest/vendor.qti.hardware.servicetrackeraidl-servic                                                           e.xml': OK
-Fetch 'out/target/product/volcano/vendor/etc/vintf/manifest/vendor.qti.hardware.radio.lpa.xml': OK
-Fetch 'out/target/product/volcano/vendor/etc/vintf/manifest/manifest_non_qmaa_extn.xml': OK
-Fetch 'out/target/product/volcano/vendor/etc/vintf/manifest/android.hardware.radio.sap.xml': OK
-Fetch 'out/target/product/volcano/vendor/etc/vintf/manifest/dataconnection-saidl.xml': OK
-Fetch 'out/target/product/volcano/vendor/etc/vintf/manifest/vendor.qti.hardware.wifi.wificfr-service.xml'                                                           : OK
-Fetch 'out/target/product/volcano/vendor/etc/vintf/manifest/vendor.qti.ims.factoryaidlservice.xml': OK
-Fetch 'out/target/product/volcano/vendor/etc/vintf/manifest/vendor.qti.qccvndhal_aidl-service.xml': OK
-Fetch 'out/target/product/volcano/vendor/etc/vintf/manifest/datafactoryservice-saidl.xml': OK
-Fetch 'out/target/product/volcano/vendor/etc/vintf/manifest/vendor.qti.hardware.tetheroffload.service.xml                                                           ': OK
-Fetch 'out/target/product/volcano/vendor/etc/vintf/manifest/power.xml': OK
-Fetch 'out/target/product/volcano/vendor/etc/vintf/manifest/manifest_identity_credential.xml': OK
-Fetch 'out/target/product/volcano/vendor/etc/vintf/manifest/vendor.qti.hardware.embmssl.xml': OK
-Fetch 'out/target/product/volcano/vendor/etc/vintf/manifest/android.hardware.radio.modem.xml': OK
-Fetch 'out/target/product/volcano/vendor/etc/vintf/manifest/vendor.qti.hardware.radio.qtiradioconfig.xml'                                                           : OK
-Fetch 'out/target/product/volcano/vendor/etc/vintf/manifest/BtFmd.xml': OK
-Fetch 'out/target/product/volcano/vendor/etc/vintf/manifest/qtiradio-saidl.xml': OK
-Fetch 'out/target/product/volcano/vendor/etc/vintf/manifest/atfwd-saidl.xml': OK
-Fetch 'out/target/product/volcano/vendor/etc/vintf/manifest/android.hardware.usb-service.qti.xml': OK
-Fetch 'out/target/product/volcano/vendor/etc/vintf/manifest/android.hardware.usb.gadget-service.qti.xml':                                                            OK
-Fetch 'out/target/product/volcano/vendor/etc/vintf/manifest/android.hardware.radio.messaging.xml': OK
-Fetch 'out/target/product/volcano/vendor/etc/vintf/manifest/android.hardware.radio.sim.xml': OK
-Fetch 'out/target/product/volcano/vendor/etc/vintf/manifest/vendor.qti.camera.postproc-impl.xml': OK
-Fetch 'out/target/product/volcano/vendor/etc/vintf/manifest/manifest_non_qmaa.xml': OK
-Fetch 'out/target/product/volcano/vendor/etc/vintf/manifest/boot-service.qti.xml': OK
-Fetch 'out/target/product/volcano/vendor/etc/vintf/manifest/android.hardware.drm-service.clearkey.xml': O                                                           K
-Fetch 'out/target/product/volcano/vendor/etc/vintf/manifest/vendor.qti.hardware.wifidisplaysession-servic                                                           e.xml': OK
-Fetch 'out/target/product/volcano/vendor/etc/vintf/manifest/android.hardware.wifi.supplicant.xml': OK
-Fetch 'out/target/product/volcano/vendor/etc/vintf/manifest/vendor.qti.hardware.data.connectionaidl.xml':                                                            OK
-Fetch 'out/target/product/volcano/vendor/etc/vintf/manifest/vendor.qti.hardware.perf2.xml': OK
-Fetch 'out/target/product/volcano/vendor/etc/vintf/manifest/vendor.qti.hardware.radio.am.xml': OK
-Fetch 'out/target/product/volcano/vendor/etc/vintf/manifest/vendor.qti.hardware.radio.uim_remote_client.x                                                           ml': OK
-Fetch 'out/target/product/volcano/vendor/etc/vintf/manifest/vendor.qti.hardware.soter-service.xml': OK
-Fetch 'out/target/product/volcano/vendor/etc/vintf/manifest/android.hardware.radio.data.xml': OK
-Fetch 'out/target/product/volcano/vendor/etc/vintf/manifest/mwqem-saidl.xml': OK
-Fetch 'out/target/product/volcano/vendor/etc/vintf/manifest/vendor.silead.hardware.fingerprintext-service                                                           .xml': OK
-Fetch 'out/target/product/volcano/vendor/etc/vintf/manifest/fingerprint-default.xml': OK
-Fetch 'out/target/product/volcano/vendor/etc/vintf/manifest/vendor.qti.camera.offlinecamera-impl.xml': OK
-Fetch 'out/target/product/volcano/vendor/etc/vintf/manifest/android.hardware.drm-service.xml': OK
-Fetch 'out/target/product/volcano/vendor/etc/vintf/manifest/vendor.qti.hardware.alarm.xml': OK
-Fetch 'out/target/product/volcano/vendor/etc/vintf/manifest/vendor.qti.hardware.qseecom@1.0-service.xml':                                                            OK
-Fetch 'out/target/product/volcano/vendor/etc/vintf/manifest/qcrilhook-saidl.xml': OK
-Fetch 'out/target/product/volcano/vendor/etc/vintf/manifest/c2_manifest_vendor.xml': OK
-Fetch 'out/target/product/volcano/vendor/etc/vintf/manifest/vendor.qti.hardware.secureprocessor.xml': OK
-Fetch 'out/target/product/volcano/vendor/etc/vintf/manifest/c2_manifest_vendor_audio.xml': OK
-Fetch 'out/target/product/volcano/vendor/etc/vintf/manifest/dumpstate-qti.xml': OK
-Fetch 'out/target/product/volcano/vendor/etc/vintf/manifest/vendor.qti.hardware.factory.ifactory.xml': OK
-Fetch 'out/target/product/volcano/vendor/etc/vintf/manifest/vendor.qti.memory.pasrmanager-service.xml': O                                                           K
-Fetch 'out/target/product/volcano/vendor/etc/vintf/manifest/vendor.qti.gnss-service.xml': OK
-Fetch 'out/target/product/volcano/vendor/etc/vintf/manifest/bttpi-saidl.xml': OK
-Fetch 'out/target/product/volcano/vendor/etc/vintf/manifest/vendor.qti.hardware.qrs.qrsprovider.xml': OK
-Fetch 'out/target/product/volcano/vendor/etc/vintf/manifest/vendor.qti.qspa-service.xml': OK
-Fetch 'out/target/product/volcano/vendor/etc/vintf/manifest/vendor.qti.qspmhal-service.xml': OK
-Fetch 'out/target/product/volcano/vendor/etc/vintf/manifest/imsdcservice-saidl.xml': OK
-Fetch 'out/target/product/volcano/vendor/etc/vintf/manifest/android.hardware.sensors-multihal.xml': OK
-Fetch 'out/target/product/volcano/vendor/etc/vintf/manifest/android.hardware.health-service.qti.xml': OK
-Fetch 'out/target/product/volcano/vendor/etc/vintf/manifest/vendor.qti.hardware.wifi.wifimyftm-service.xm                                                           l': OK
-Fetch 'out/target/product/volcano/vendor/etc/vintf/manifest/android.hardware.secure_element.xml': OK
-Fetch 'out/target/product/volcano/vendor/etc/vintf/manifest/qms-saidl.xml': OK
-Fetch 'out/target/product/volcano/vendor/etc/vintf/manifest/android.hardware.wifi-service.xml': OK
-Fetch 'out/target/product/volcano/vendor/etc/vintf/manifest/android.hardware.cas-service.xml': OK
-Fetch 'out/target/product/volcano/vendor/etc/vintf/manifest/vendor.qti.hardware.power.powermodule.xml': O                                                           K
-Fetch 'out/target/product/volcano/vendor/etc/vintf/manifest/android.hardware.radio.network.xml': OK
-Fetch 'out/target/product/volcano/vendor/etc/vintf/manifest/android.hardware.ir-service.volcano.xml': OK
-getDeviceHalManifest: status from fetching VINTF information: -2147483648
-getDeviceHalManifest: -2147483648 VINTF parse error: Cannot add manifest fragment /vendor/etc/vintf/manif                                                           est/android.hardware.ir-service.volcano.xml: HAL "android.hardware.ir" has a conflict: Conflicting FqInst                                                           ance: IConsumerIr/default (@1) (from /vendor/etc/vintf/manifest_volcano.xml) vs. IConsumerIr/default (@1)                                                            (from /vendor/etc/vintf/manifest/android.hardware.ir-service.volcano.xml). Check whether or not multiple                                                            modules providing the same HAL are installed.
-ERROR: Cannot fetch vendor manifest.
-[ 85% 1819/2124] build out/target/product/volcano/obj/DLKM_OBJ/vendor/st/opensource/driver/buildko.timestamp
-awk: can't open file /Data_8T1/liruntong/lrt-workspace/UNC6690_R12/LA.VENDOR.14.3.7/LINUX/android/kernel_platform/./msm-kernel/android/gki_system_dlkm_modules
- source line number 1
-========================================================
- Building external modules and installing them into staging directory
-+ '[' -n '' ']'
-++ rel_path /Data_8T1/liruntong/lrt-workspace/UNC6690_R12/LA.VENDOR.14.3.7/LINUX/android/kernel_platform/..//vendor/st/opensource/driver ./msm-kernel
-++ python -c 'import os.path; import sys; print(os.path.relpath(sys.argv[1], sys.argv[2]))' /Data_8T1/liruntong/lrt-workspace/UNC6690_R12/LA.VENDOR.14.3.7/LINUX/android/kernel_platform/..//vendor/st/opensource/driver ./msm-kernel
-+ EXT_MOD_REL=../../vendor/st/opensource/driver
-+ '[' -n '' ']'
-+ mkdir -p /Data_8T1/liruntong/lrt-workspace/UNC6690_R12/LA.VENDOR.14.3.7/LINUX/android/out/target/product/volcano/obj/DLKM_OBJ/kernel_platform/msm-kernel/../../vendor/st/opensource/driver
-++ echo ..//vendor/st/opensource/driver
-++ sed -e 's/^[\.\/]*//'
-+ module_path=vendor/st/opensource/driver
-++ echo vendor/st/opensource/driver
-++ cut -d / -f 1
-+ top_dir=vendor
-+ cd /Data_8T1/liruntong/lrt-workspace/UNC6690_R12/LA.VENDOR.14.3.7/LINUX/android/kernel_platform
-+ ln -fs ../vendor
-+ pkg_path=vendor/st/opensource/driver
-+ '[' -f vendor/st/opensource/driver/BUILD.bazel ']'
-+ '[' volcano = msmnile ']'
-+ '[' volcano = sm6150 ']'
-+ '[' volcano = volcano ']'
-+ btgt=pineapple
-+ filter_regex='pineapple_gki_.*_dist$'
-+ '[' true = true ']'
-+ '[' -n vendor/st/opensource/driver ']'
-+ '[' -n pineapple ']'
-++ ./tools/bazel query --ui_event_filters=-info --noshow_progress 'filter('\''pineapple_gki_.*_dist$'\'', //vendor/st/opensource/driver/...)'
-Another command (pid=17611) is running. Waiting for it to complete on the server (server_pid=28421)...
-Another command (pid=8558) is running. Waiting for it to complete on the server (server_pid=28421)...
-+ build_target=//vendor/st/opensource/driver:pineapple_gki_stm_nfc_i2c_dist
-+ '[' -n //vendor/st/opensource/driver:pineapple_gki_stm_nfc_i2c_dist ']'
-++ printf '%s\n' //vendor/st/opensource/driver:pineapple_gki_stm_nfc_i2c_dist
-++ wc -l
-+ '[' 1 -gt 1 ']'
-+ '[' '!' -f build/msm_kernel_extensions.bzl ']'
-+ '[' '!' -f build/abl_extensions.bzl ']'
-+ build_flags=($(cat "${KERNEL_KIT}/build_opts.txt" | xargs))
-++ cat /Data_8T1/liruntong/lrt-workspace/UNC6690_R12/LA.VENDOR.14.3.7/LINUX/android/device/qcom/volcano-kernel/build_opts.txt
-++ xargs
-+ '[' false = true ']'
-+ '[' -n '' ']'
-+ ./tools/bazel run --//msm-kernel:skip_abi=true --//bootable/bootloader/edk2:target_build_variant=userdebug --user_kmi_symbol_lists=//msm-kernel:android/abi_gki_aarch64_qcom --ignore_missing_projects //vendor/st/opensource/driver:pineapple_gki_stm_nfc_i2c_dist -- --dist_dir=/Data_8T1/liruntong/lrt-workspace/UNC6690_R12/LA.VENDOR.14.3.7/LINUX/android/out/target/product/volcano/obj/DLKM_OBJ/kernel_platform/msm-kernel/../../vendor/st/opensource/driver
-Another command (pid=18775) is running. Waiting for it to complete on the server (server_pid=28421)...
-Another command (pid=23462) is running. Waiting for it to complete on the server (server_pid=28421)...
-Another command (pid=6156) is running. Waiting for it to complete on the server (server_pid=28421)...
-Another command (pid=17905) is running. Waiting for it to complete on the server (server_pid=28421)...
-Loading:
-Loading:
-Loading: 0 packages loaded
-Analyzing: target //vendor/st/opensource/driver:pineapple_gki_stm_nfc_i2c_dist (0 packages loaded, 0 targets configured)
-INFO: Analyzed target //vendor/st/opensource/driver:pineapple_gki_stm_nfc_i2c_dist (0 packages loaded, 11 targets configured).
-INFO: Found 1 target...
-[0 / 3] [Prepa] BazelWorkspaceStatusAction stable-status.txt ... (2 actions, 0 running)
-[453 / 456] Creating DDK module configuration @//vendor/st/opensource/driver:pineapple_gki_stm_nfc_i2c_config; 0s linux-sandbox
-[454 / 456] [Prepa] Building external kernel module (lto=default;notrim) @//vendor/st/opensource/driver:pineapple_gki_stm_nfc_i2c
-[454 / 456] Building external kernel module (lto=default;notrim) @//vendor/st/opensource/driver:pineapple_gki_stm_nfc_i2c; 1s linux-sandbox
-[455 / 456] [Prepa] Copying outputs @//vendor/st/opensource/driver:pineapple_gki_stm_nfc_i2c
-Target //vendor/st/opensource/driver:pineapple_gki_stm_nfc_i2c_dist up-to-date:
-  bazel-bin/vendor/st/opensource/driver/pineapple_gki_stm_nfc_i2c_dist
-INFO: Elapsed time: 41.076s, Critical Path: 7.15s
-INFO: 18 processes: 11 internal, 7 linux-sandbox.
-INFO: Build completed successfully, 18 total actions
-INFO: Running command line: bazel-bin/vendor/st/opensource/driver/pineapple_gki_stm_nfc_i2c_dist '--dist_dir=/Data_8T1/liruntong/lrt-workspace/UNC6690_R12/LA.VENDOR.14.3.7/LINUX/android/out/target/product/volcano/obj/DLKM_OBJ/kernel_platform/msm-kernel/../../vendor/st/opensource/driver'
-[dist] INFO: Copying to /Data_8T1/liruntong/lrt-workspace/UNC6690_R12/LA.VENDOR.14.3.7/LINUX/android/out/target/product/volcano/obj/DLKM_OBJ/kernel_platform/msm-kernel/../../vendor/st/opensource/driver
-[dist] DEBUG: Copying file: /Data_8T1/liruntong/lrt-workspace/UNC6690_R12/LA.VENDOR.14.3.7/LINUX/android/out/target/product/volcano/obj/DLKM_OBJ/kernel_platform/msm-kernel/../../vendor/st/opensource/driver/stm_nfc_i2c.ko
-[dist] DEBUG: Copying file: /Data_8T1/liruntong/lrt-workspace/UNC6690_R12/LA.VENDOR.14.3.7/LINUX/android/out/target/product/volcano/obj/DLKM_OBJ/kernel_platform/msm-kernel/../../vendor/st/opensource/driver/pineapple_gki_stm_nfc_i2c.check_no_remaining
-[dist] DEBUG: Copying file: /Data_8T1/liruntong/lrt-workspace/UNC6690_R12/LA.VENDOR.14.3.7/LINUX/android/out/target/product/volcano/obj/DLKM_OBJ/kernel_platform/msm-kernel/../../vendor/st/opensource/driver/pineapple_gki_stm_nfc_i2c_Module.symvers
-+ cat /Data_8T1/liruntong/lrt-workspace/UNC6690_R12/LA.VENDOR.14.3.7/LINUX/android/out/target/product/volcano/obj/DLKM_OBJ/kernel_platform/msm-kernel/../../vendor/st/opensource/driver/pineapple_gki_stm_nfc_i2c_Module.symvers
-+ '[' -n /Data_8T1/liruntong/lrt-workspace/UNC6690_R12/LA.VENDOR.14.3.7/LINUX/android/out/target/product/volcano/obj/DLKM/stm_nfc_i2c.ko_intermediates ']'
-++ dirname /Data_8T1/liruntong/lrt-workspace/UNC6690_R12/LA.VENDOR.14.3.7/LINUX/android/out/target/product/volcano/obj/DLKM/stm_nfc_i2c.ko_intermediates
-+ mkdir -p /Data_8T1/liruntong/lrt-workspace/UNC6690_R12/LA.VENDOR.14.3.7/LINUX/android/out/target/product/volcano/obj/DLKM
-+ rm -rf /Data_8T1/liruntong/lrt-workspace/UNC6690_R12/LA.VENDOR.14.3.7/LINUX/android/out/target/product/volcano/obj/DLKM/stm_nfc_i2c.ko_intermediates/../../vendor/st/opensource/driver
-+ cp -ar /Data_8T1/liruntong/lrt-workspace/UNC6690_R12/LA.VENDOR.14.3.7/LINUX/android/out/target/product/volcano/obj/DLKM_OBJ/kernel_platform/msm-kernel/../../vendor/st/opensource/driver /Data_8T1/liruntong/lrt-workspace/UNC6690_R12/LA.VENDOR.14.3.7/LINUX/android/out/target/product/volcano/obj/DLKM/stm_nfc_i2c.ko_intermediates
-+ for ko in "${OUT_DIR}/${EXT_MOD_REL}"/*.ko
-++ dirname /Data_8T1/liruntong/lrt-workspace/UNC6690_R12/LA.VENDOR.14.3.7/LINUX/android/out/target/product/volcano/obj/DLKM/stm_nfc_i2c.ko_intermediates
-++ basename /Data_8T1/liruntong/lrt-workspace/UNC6690_R12/LA.VENDOR.14.3.7/LINUX/android/out/target/product/volcano/obj/DLKM_OBJ/kernel_platform/msm-kernel/../../vendor/st/opensource/driver/stm_nfc_i2c.ko
-+ rm -rf /Data_8T1/liruntong/lrt-workspace/UNC6690_R12/LA.VENDOR.14.3.7/LINUX/android/out/target/product/volcano/obj/DLKM/stm_nfc_i2c.ko_intermediates
-++ dirname /Data_8T1/liruntong/lrt-workspace/UNC6690_R12/LA.VENDOR.14.3.7/LINUX/android/out/target/product/volcano/obj/DLKM/stm_nfc_i2c.ko_intermediates
-++ basename /Data_8T1/liruntong/lrt-workspace/UNC6690_R12/LA.VENDOR.14.3.7/LINUX/android/out/target/product/volcano/obj/DLKM_OBJ/kernel_platform/msm-kernel/../../vendor/st/opensource/driver/stm_nfc_i2c.ko
-+ cp -ar /Data_8T1/liruntong/lrt-workspace/UNC6690_R12/LA.VENDOR.14.3.7/LINUX/android/out/target/product/volcano/obj/DLKM_OBJ/kernel_platform/msm-kernel/../../vendor/st/opensource/driver /Data_8T1/liruntong/lrt-workspace/UNC6690_R12/LA.VENDOR.14.3.7/LINUX/android/out/target/product/volcano/obj/DLKM/stm_nfc_i2c.ko_intermediates
-+ '[' -n '' ']'
-+ set +x
-[ 85% 1820/2124] build out/target/product/volcano/obj/DLKM_OBJ/vendor/qcom/opensource/datarmnet-ext/shs/buildko.timestamp
-awk: can't open file /Data_8T1/liruntong/lrt-workspace/UNC6690_R12/LA.VENDOR.14.3.7/LINUX/android/kernel_platform/./msm-kernel/android/gki_system_dlkm_modules
- source line number 1
-========================================================
- Building external modules and installing them into staging directory
-+ '[' -n '' ']'
-++ rel_path /Data_8T1/liruntong/lrt-workspace/UNC6690_R12/LA.VENDOR.14.3.7/LINUX/android/kernel_platform/..//vendor/qcom/opensource/datarmnet-ext/shs ./msm-kernel
-++ python -c 'import os.path; import sys; print(os.path.relpath(sys.argv[1], sys.argv[2]))' /Data_8T1/liruntong/lrt-workspace/UNC6690_R12/LA.VENDOR.14.3.7/LINUX/android/kernel_platform/..//vendor/qcom/opensource/datarmnet-ext/shs ./msm-kernel
-+ EXT_MOD_REL=../../vendor/qcom/opensource/datarmnet-ext/shs
-+ '[' -n '' ']'
-+ mkdir -p /Data_8T1/liruntong/lrt-workspace/UNC6690_R12/LA.VENDOR.14.3.7/LINUX/android/out/target/product/volcano/obj/DLKM_OBJ/kernel_platform/msm-kernel/../../vendor/qcom/opensource/datarmnet-ext/shs
-++ sed -e 's/^[\.\/]*//'
-++ echo ..//vendor/qcom/opensource/datarmnet-ext/shs
-+ module_path=vendor/qcom/opensource/datarmnet-ext/shs
-++ cut -d / -f 1
-++ echo vendor/qcom/opensource/datarmnet-ext/shs
-+ top_dir=vendor
-+ cd /Data_8T1/liruntong/lrt-workspace/UNC6690_R12/LA.VENDOR.14.3.7/LINUX/android/kernel_platform
-+ ln -fs ../vendor
-+ pkg_path=vendor/qcom/opensource/datarmnet-ext/shs
-+ '[' -f vendor/qcom/opensource/datarmnet-ext/shs/BUILD.bazel ']'
-+ '[' volcano = msmnile ']'
-+ '[' volcano = sm6150 ']'
-+ '[' volcano = volcano ']'
-+ btgt=pineapple
-+ filter_regex='pineapple_gki_.*_dist$'
-+ '[' true = true ']'
-+ '[' -n vendor/qcom/opensource/datarmnet-ext/shs ']'
-+ '[' -n pineapple ']'
-++ ./tools/bazel query --ui_event_filters=-info --noshow_progress 'filter('\''pineapple_gki_.*_dist$'\'', //vendor/qcom/opensource/datarmnet-ext/shs/...)'
-Another command (pid=14948) is running. Waiting for it to complete on the server (server_pid=28421)...
-Another command (pid=16709) is running. Waiting for it to complete on the server (server_pid=28421)...
-Another command (pid=19433) is running. Waiting for it to complete on the server (server_pid=28421)...
-Another command (pid=9420) is running. Waiting for it to complete on the server (server_pid=28421)...
-Another command (pid=7915) is running. Waiting for it to complete on the server (server_pid=28421)...
-Another command (pid=12951) is running. Waiting for it to complete on the server (server_pid=28421)...
-Another command (pid=18587) is running. Waiting for it to complete on the server (server_pid=28421)...
-+ build_target=//vendor/qcom/opensource/datarmnet-ext/shs:pineapple_gki_datarment-ext_dist
-+ '[' -n //vendor/qcom/opensource/datarmnet-ext/shs:pineapple_gki_datarment-ext_dist ']'
-++ printf '%s\n' //vendor/qcom/opensource/datarmnet-ext/shs:pineapple_gki_datarment-ext_dist
-++ wc -l
-+ '[' 1 -gt 1 ']'
-+ '[' '!' -f build/msm_kernel_extensions.bzl ']'
-+ '[' '!' -f build/abl_extensions.bzl ']'
-+ build_flags=($(cat "${KERNEL_KIT}/build_opts.txt" | xargs))
-++ cat /Data_8T1/liruntong/lrt-workspace/UNC6690_R12/LA.VENDOR.14.3.7/LINUX/android/device/qcom/volcano-kernel/build_opts.txt
-++ xargs
-+ '[' false = true ']'
-+ '[' -n '' ']'
-+ ./tools/bazel run --//msm-kernel:skip_abi=true --//bootable/bootloader/edk2:target_build_variant=userdebug --user_kmi_symbol_lists=//msm-kernel:android/abi_gki_aarch64_qcom --ignore_missing_projects //vendor/qcom/opensource/datarmnet-ext/shs:pineapple_gki_datarment-ext_dist -- --dist_dir=/Data_8T1/liruntong/lrt-workspace/UNC6690_R12/LA.VENDOR.14.3.7/LINUX/android/out/target/product/volcano/obj/DLKM_OBJ/kernel_platform/msm-kernel/../../vendor/qcom/opensource/datarmnet-ext/shs
-Another command (pid=8558) is running. Waiting for it to complete on the server (server_pid=28421)...
-Another command (pid=12878) is running. Waiting for it to complete on the server (server_pid=28421)...
-Another command (pid=18775) is running. Waiting for it to complete on the server (server_pid=28421)...
-Another command (pid=23462) is running. Waiting for it to complete on the server (server_pid=28421)...
-Another command (pid=6156) is running. Waiting for it to complete on the server (server_pid=28421)...
-Another command (pid=17905) is running. Waiting for it to complete on the server (server_pid=28421)...
-Another command (pid=30971) is running. Waiting for it to complete on the server (server_pid=28421)...
-Loading:
-Loading:
-Loading: 0 packages loaded
-Analyzing: target //vendor/qcom/opensource/datarmnet-ext/shs:pineapple_gki_datarment-ext_dist (0 packages loaded, 0 targets configured)
-INFO: Analyzed target //vendor/qcom/opensource/datarmnet-ext/shs:pineapple_gki_datarment-ext_dist (0 packages loaded, 41 targets configured).
-INFO: Found 1 target...
-[0 / 3] [Prepa] BazelWorkspaceStatusAction stable-status.txt
-[68 / 71] Creating DDK module configuration @//vendor/qcom/opensource/datarmnet-ext/shs:pineapple_gki_shs_config; 0s linux-sandbox
-INFO: From Creating DDK module configuration @//vendor/qcom/opensource/datarmnet-ext/shs:pineapple_gki_shs_config:
-../../../../../../../../../../../vendor/qcom/opensource/datarmnet/core/Kconfig:5:warning: config symbol defined without type
-../../../../../../../../../../../vendor/qcom/opensource/datarmnet/core/Kconfig:8:warning: config symbol 'RMNET_CORE' uses select, but is not bool or tristate
-../../../../../../../../../../../vendor/qcom/opensource/datarmnet/core/Kconfig:15:warning: config symbol defined without type
-[69 / 71] [Prepa] Building external kernel module (lto=default;notrim) @//vendor/qcom/opensource/datarmnet-ext/shs:pineapple_gki_shs
-[69 / 71] Building external kernel module (lto=default;notrim) @//vendor/qcom/opensource/datarmnet-ext/shs:pineapple_gki_shs; 1s linux-sandbox
-[70 / 71] [Prepa] Copying outputs @//vendor/qcom/opensource/datarmnet-ext/shs:pineapple_gki_shs
-Target //vendor/qcom/opensource/datarmnet-ext/shs:pineapple_gki_datarment-ext_dist up-to-date:
-  bazel-bin/vendor/qcom/opensource/datarmnet-ext/shs/pineapple_gki_datarment-ext_dist
-INFO: Elapsed time: 65.013s, Critical Path: 11.16s
-INFO: 18 processes: 11 internal, 7 linux-sandbox.
-INFO: Build completed successfully, 18 total actions
-INFO: Running command line: bazel-bin/vendor/qcom/opensource/datarmnet-ext/shs/pineapple_gki_datarment-ext_dist '--dist_dir=/Data_8T1/liruntong/lrt-workspace/UNC6690_R12/LA.VENDOR.14.3.7/LINUX/android/out/target/product/volcano/obj/DLKM_OBJ/kernel_platform/msm-kernel/../../vendor/qcom/opensource/datarmnet-ext/shs'
-[dist] INFO: Copying to /Data_8T1/liruntong/lrt-workspace/UNC6690_R12/LA.VENDOR.14.3.7/LINUX/android/out/target/product/volcano/obj/DLKM_OBJ/kernel_platform/msm-kernel/../../vendor/qcom/opensource/datarmnet-ext/shs
-[dist] DEBUG: Copying file: /Data_8T1/liruntong/lrt-workspace/UNC6690_R12/LA.VENDOR.14.3.7/LINUX/android/out/target/product/volcano/obj/DLKM_OBJ/kernel_platform/msm-kernel/../../vendor/qcom/opensource/datarmnet-ext/shs/rmnet_shs.ko
-[dist] DEBUG: Copying file: /Data_8T1/liruntong/lrt-workspace/UNC6690_R12/LA.VENDOR.14.3.7/LINUX/android/out/target/product/volcano/obj/DLKM_OBJ/kernel_platform/msm-kernel/../../vendor/qcom/opensource/datarmnet-ext/shs/pineapple_gki_shs.check_no_remaining
-[dist] DEBUG: Copying file: /Data_8T1/liruntong/lrt-workspace/UNC6690_R12/LA.VENDOR.14.3.7/LINUX/android/out/target/product/volcano/obj/DLKM_OBJ/kernel_platform/msm-kernel/../../vendor/qcom/opensource/datarmnet-ext/shs/pineapple_gki_shs_Module.symvers
-+ cat /Data_8T1/liruntong/lrt-workspace/UNC6690_R12/LA.VENDOR.14.3.7/LINUX/android/out/target/product/volcano/obj/DLKM_OBJ/kernel_platform/msm-kernel/../../vendor/qcom/opensource/datarmnet-ext/shs/pineapple_gki_shs_Module.symvers
-+ '[' -n /Data_8T1/liruntong/lrt-workspace/UNC6690_R12/LA.VENDOR.14.3.7/LINUX/android/out/target/product/volcano/obj/DLKM/rmnet_shs.ko_intermediates ']'
-++ dirname /Data_8T1/liruntong/lrt-workspace/UNC6690_R12/LA.VENDOR.14.3.7/LINUX/android/out/target/product/volcano/obj/DLKM/rmnet_shs.ko_intermediates
-+ mkdir -p /Data_8T1/liruntong/lrt-workspace/UNC6690_R12/LA.VENDOR.14.3.7/LINUX/android/out/target/product/volcano/obj/DLKM
-+ rm -rf /Data_8T1/liruntong/lrt-workspace/UNC6690_R12/LA.VENDOR.14.3.7/LINUX/android/out/target/product/volcano/obj/DLKM/rmnet_shs.ko_intermediates/../../vendor/qcom/opensource/datarmnet-ext/shs
-+ cp -ar /Data_8T1/liruntong/lrt-workspace/UNC6690_R12/LA.VENDOR.14.3.7/LINUX/android/out/target/product/volcano/obj/DLKM_OBJ/kernel_platform/msm-kernel/../../vendor/qcom/opensource/datarmnet-ext/shs /Data_8T1/liruntong/lrt-workspace/UNC6690_R12/LA.VENDOR.14.3.7/LINUX/android/out/target/product/volcano/obj/DLKM/rmnet_shs.ko_intermediates
-+ for ko in "${OUT_DIR}/${EXT_MOD_REL}"/*.ko
-++ dirname /Data_8T1/liruntong/lrt-workspace/UNC6690_R12/LA.VENDOR.14.3.7/LINUX/android/out/target/product/volcano/obj/DLKM/rmnet_shs.ko_intermediates
-++ basename /Data_8T1/liruntong/lrt-workspace/UNC6690_R12/LA.VENDOR.14.3.7/LINUX/android/out/target/product/volcano/obj/DLKM_OBJ/kernel_platform/msm-kernel/../../vendor/qcom/opensource/datarmnet-ext/shs/rmnet_shs.ko
-+ rm -rf /Data_8T1/liruntong/lrt-workspace/UNC6690_R12/LA.VENDOR.14.3.7/LINUX/android/out/target/product/volcano/obj/DLKM/rmnet_shs.ko_intermediates
-++ dirname /Data_8T1/liruntong/lrt-workspace/UNC6690_R12/LA.VENDOR.14.3.7/LINUX/android/out/target/product/volcano/obj/DLKM/rmnet_shs.ko_intermediates
-++ basename /Data_8T1/liruntong/lrt-workspace/UNC6690_R12/LA.VENDOR.14.3.7/LINUX/android/out/target/product/volcano/obj/DLKM_OBJ/kernel_platform/msm-kernel/../../vendor/qcom/opensource/datarmnet-ext/shs/rmnet_shs.ko
-+ cp -ar /Data_8T1/liruntong/lrt-workspace/UNC6690_R12/LA.VENDOR.14.3.7/LINUX/android/out/target/product/volcano/obj/DLKM_OBJ/kernel_platform/msm-kernel/../../vendor/qcom/opensource/datarmnet-ext/shs /Data_8T1/liruntong/lrt-workspace/UNC6690_R12/LA.VENDOR.14.3.7/LINUX/android/out/target/product/volcano/obj/DLKM/rmnet_shs.ko_intermediates
-+ '[' -n '' ']'
-+ set +x
-[ 85% 1821/2124] build out/target/product/volcano/obj/DLKM_OBJ/vendor/st/opensource/eSE-driver/buildko.timestamp
-awk: can't open file /Data_8T1/liruntong/lrt-workspace/UNC6690_R12/LA.VENDOR.14.3.7/LINUX/android/kernel_platform/./msm-kernel/android/gki_system_dlkm_modules
- source line number 1
-========================================================
- Building external modules and installing them into staging directory
-+ '[' -n '' ']'
-++ rel_path /Data_8T1/liruntong/lrt-workspace/UNC6690_R12/LA.VENDOR.14.3.7/LINUX/android/kernel_platform/..//vendor/st/opensource/eSE-driver ./msm-kernel
-++ python -c 'import os.path; import sys; print(os.path.relpath(sys.argv[1], sys.argv[2]))' /Data_8T1/liruntong/lrt-workspace/UNC6690_R12/LA.VENDOR.14.3.7/LINUX/android/kernel_platform/..//vendor/st/opensource/eSE-driver ./msm-kernel
-+ EXT_MOD_REL=../../vendor/st/opensource/eSE-driver
-+ '[' -n '' ']'
-+ mkdir -p /Data_8T1/liruntong/lrt-workspace/UNC6690_R12/LA.VENDOR.14.3.7/LINUX/android/out/target/product/volcano/obj/DLKM_OBJ/kernel_platform/msm-kernel/../../vendor/st/opensource/eSE-driver
-++ echo ..//vendor/st/opensource/eSE-driver
-++ sed -e 's/^[\.\/]*//'
-+ module_path=vendor/st/opensource/eSE-driver
-++ echo vendor/st/opensource/eSE-driver
-++ cut -d / -f 1
-+ top_dir=vendor
-+ cd /Data_8T1/liruntong/lrt-workspace/UNC6690_R12/LA.VENDOR.14.3.7/LINUX/android/kernel_platform
-+ ln -fs ../vendor
-+ pkg_path=vendor/st/opensource/eSE-driver
-+ '[' -f vendor/st/opensource/eSE-driver/BUILD.bazel ']'
-+ '[' volcano = msmnile ']'
-+ '[' volcano = sm6150 ']'
-+ '[' volcano = volcano ']'
-+ btgt=pineapple
-+ filter_regex='pineapple_gki_.*_dist$'
-+ '[' true = true ']'
-+ '[' -n vendor/st/opensource/eSE-driver ']'
-+ '[' -n pineapple ']'
-++ ./tools/bazel query --ui_event_filters=-info --noshow_progress 'filter('\''pineapple_gki_.*_dist$'\'', //vendor/st/opensource/eSE-driver/...)'
-Another command (pid=6156) is running. Waiting for it to complete on the server (server_pid=28421)...
-+ build_target=//vendor/st/opensource/eSE-driver:pineapple_gki_stm_st54se_gpio_dist
-+ '[' -n //vendor/st/opensource/eSE-driver:pineapple_gki_stm_st54se_gpio_dist ']'
-++ printf '%s\n' //vendor/st/opensource/eSE-driver:pineapple_gki_stm_st54se_gpio_dist
-++ wc -l
-+ '[' 1 -gt 1 ']'
-+ '[' '!' -f build/msm_kernel_extensions.bzl ']'
-+ '[' '!' -f build/abl_extensions.bzl ']'
-+ build_flags=($(cat "${KERNEL_KIT}/build_opts.txt" | xargs))
-++ cat /Data_8T1/liruntong/lrt-workspace/UNC6690_R12/LA.VENDOR.14.3.7/LINUX/android/device/qcom/volcano-kernel/build_opts.txt
-++ xargs
-+ '[' false = true ']'
-+ '[' -n '' ']'
-+ ./tools/bazel run --//msm-kernel:skip_abi=true --//bootable/bootloader/edk2:target_build_variant=userdebug --user_kmi_symbol_lists=//msm-kernel:android/abi_gki_aarch64_qcom --ignore_missing_projects //vendor/st/opensource/eSE-driver:pineapple_gki_stm_st54se_gpio_dist -- --dist_dir=/Data_8T1/liruntong/lrt-workspace/UNC6690_R12/LA.VENDOR.14.3.7/LINUX/android/out/target/product/volcano/obj/DLKM_OBJ/kernel_platform/msm-kernel/../../vendor/st/opensource/eSE-driver
-Another command (pid=30971) is running. Waiting for it to complete on the server (server_pid=28421)...
-Another command (pid=18178) is running. Waiting for it to complete on the server (server_pid=28421)...
-Loading:
-Loading:
-Loading: 0 packages loaded
-Analyzing: target //vendor/st/opensource/eSE-driver:pineapple_gki_stm_st54se_gpio_dist (0 packages loaded, 0 targets configured)
-INFO: Analyzed target //vendor/st/opensource/eSE-driver:pineapple_gki_stm_st54se_gpio_dist (0 packages loaded, 9 targets configured).
-INFO: Found 1 target...
-[0 / 5] [Prepa] BazelWorkspaceStatusAction stable-status.txt ... (3 actions, 0 running)
-[28 / 31] Creating DDK module configuration @//vendor/st/opensource/eSE-driver:pineapple_gki_stm_st54se_gpio_config; 1s linux-sandbox
-[29 / 31] Building external kernel module (lto=default;notrim) @//vendor/st/opensource/eSE-driver:pineapple_gki_stm_st54se_gpio; 1s linux-sandbox
-[30 / 31] [Prepa] Copying outputs @//vendor/st/opensource/eSE-driver:pineapple_gki_stm_st54se_gpio
-Target //vendor/st/opensource/eSE-driver:pineapple_gki_stm_st54se_gpio_dist up-to-date:
-  bazel-bin/vendor/st/opensource/eSE-driver/pineapple_gki_stm_st54se_gpio_dist
-INFO: Elapsed time: 32.093s, Critical Path: 5.67s
-INFO: 18 processes: 11 internal, 7 linux-sandbox.
-INFO: Build completed successfully, 18 total actions
-INFO: Running command line: bazel-bin/vendor/st/opensource/eSE-driver/pineapple_gki_stm_st54se_gpio_dist '--dist_dir=/Data_8T1/liruntong/lrt-workspace/UNC6690_R12/LA.VENDOR.14.3.7/LINUX/android/out/target/product/volcano/obj/DLKM_OBJ/kernel_platform/msm-kernel/../../vendor/st/opensource/eSE-driver'
-[dist] INFO: Copying to /Data_8T1/liruntong/lrt-workspace/UNC6690_R12/LA.VENDOR.14.3.7/LINUX/android/out/target/product/volcano/obj/DLKM_OBJ/kernel_platform/msm-kernel/../../vendor/st/opensource/eSE-driver
-[dist] DEBUG: Copying file: /Data_8T1/liruntong/lrt-workspace/UNC6690_R12/LA.VENDOR.14.3.7/LINUX/android/out/target/product/volcano/obj/DLKM_OBJ/kernel_platform/msm-kernel/../../vendor/st/opensource/eSE-driver/stm_st54se_gpio.ko
-[dist] DEBUG: Copying file: /Data_8T1/liruntong/lrt-workspace/UNC6690_R12/LA.VENDOR.14.3.7/LINUX/android/out/target/product/volcano/obj/DLKM_OBJ/kernel_platform/msm-kernel/../../vendor/st/opensource/eSE-driver/pineapple_gki_stm_st54se_gpio.check_no_remaining
-[dist] DEBUG: Copying file: /Data_8T1/liruntong/lrt-workspace/UNC6690_R12/LA.VENDOR.14.3.7/LINUX/android/out/target/product/volcano/obj/DLKM_OBJ/kernel_platform/msm-kernel/../../vendor/st/opensource/eSE-driver/pineapple_gki_stm_st54se_gpio_Module.symvers
-+ cat /Data_8T1/liruntong/lrt-workspace/UNC6690_R12/LA.VENDOR.14.3.7/LINUX/android/out/target/product/volcano/obj/DLKM_OBJ/kernel_platform/msm-kernel/../../vendor/st/opensource/eSE-driver/pineapple_gki_stm_st54se_gpio_Module.symvers
-+ '[' -n /Data_8T1/liruntong/lrt-workspace/UNC6690_R12/LA.VENDOR.14.3.7/LINUX/android/out/target/product/volcano/obj/DLKM/stm_st54se_gpio.ko_intermediates ']'
-++ dirname /Data_8T1/liruntong/lrt-workspace/UNC6690_R12/LA.VENDOR.14.3.7/LINUX/android/out/target/product/volcano/obj/DLKM/stm_st54se_gpio.ko_intermediates
-+ mkdir -p /Data_8T1/liruntong/lrt-workspace/UNC6690_R12/LA.VENDOR.14.3.7/LINUX/android/out/target/product/volcano/obj/DLKM
-+ rm -rf /Data_8T1/liruntong/lrt-workspace/UNC6690_R12/LA.VENDOR.14.3.7/LINUX/android/out/target/product/volcano/obj/DLKM/stm_st54se_gpio.ko_intermediates/../../vendor/st/opensource/eSE-driver
-+ cp -ar /Data_8T1/liruntong/lrt-workspace/UNC6690_R12/LA.VENDOR.14.3.7/LINUX/android/out/target/product/volcano/obj/DLKM_OBJ/kernel_platform/msm-kernel/../../vendor/st/opensource/eSE-driver /Data_8T1/liruntong/lrt-workspace/UNC6690_R12/LA.VENDOR.14.3.7/LINUX/android/out/target/product/volcano/obj/DLKM/stm_st54se_gpio.ko_intermediates
-+ for ko in "${OUT_DIR}/${EXT_MOD_REL}"/*.ko
-++ dirname /Data_8T1/liruntong/lrt-workspace/UNC6690_R12/LA.VENDOR.14.3.7/LINUX/android/out/target/product/volcano/obj/DLKM/stm_st54se_gpio.ko_intermediates
-++ basename /Data_8T1/liruntong/lrt-workspace/UNC6690_R12/LA.VENDOR.14.3.7/LINUX/android/out/target/product/volcano/obj/DLKM_OBJ/kernel_platform/msm-kernel/../../vendor/st/opensource/eSE-driver/stm_st54se_gpio.ko
-+ rm -rf /Data_8T1/liruntong/lrt-workspace/UNC6690_R12/LA.VENDOR.14.3.7/LINUX/android/out/target/product/volcano/obj/DLKM/stm_st54se_gpio.ko_intermediates
-++ dirname /Data_8T1/liruntong/lrt-workspace/UNC6690_R12/LA.VENDOR.14.3.7/LINUX/android/out/target/product/volcano/obj/DLKM/stm_st54se_gpio.ko_intermediates
-++ basename /Data_8T1/liruntong/lrt-workspace/UNC6690_R12/LA.VENDOR.14.3.7/LINUX/android/out/target/product/volcano/obj/DLKM_OBJ/kernel_platform/msm-kernel/../../vendor/st/opensource/eSE-driver/stm_st54se_gpio.ko
-+ cp -ar /Data_8T1/liruntong/lrt-workspace/UNC6690_R12/LA.VENDOR.14.3.7/LINUX/android/out/target/product/volcano/obj/DLKM_OBJ/kernel_platform/msm-kernel/../../vendor/st/opensource/eSE-driver /Data_8T1/liruntong/lrt-workspace/UNC6690_R12/LA.VENDOR.14.3.7/LINUX/android/out/target/product/volcano/obj/DLKM/stm_st54se_gpio.ko_intermediates
-+ '[' -n '' ']'
-+ set +x
-ninja: build stopped: subcommand failed.
-18:51:09 ninja failed with: exit status 1
-
-#### failed to build some targets (15:13 (mm:ss)) ####
-
-
-real    15m13.603s
-user    2m55.790s
-sys     0m44.253s
-============================================
-[build.sh]: FAILED: make -j4 dist ENABLE_AB=true SYSTEMEXT_SEPARATE_PARTITION_ENABLE=true BOARD_DYNAMIC_PARTITION_ENABLE=true ENABLE_VIRTUAL_AB=true SHIPPING_API_LEVEL=29 SKIP_ABI_CHECKS=true
-============================================
-liruntong@unicair:~/lrt-workspace/UNC6690_R12/LA.VENDOR.14.3.7/LINUX/android$
+05-16 08:30:55.160  1694  1916 E HwcComposer: getLuts failed Status(-129, EX_TRANSACTION_FAILED): 'UNKNOWN_TRANSACTION: '
+05-16 08:30:55.261  1694  1916 E HwcComposer: getLuts failed Status(-129, EX_TRANSACTION_FAILED): 'UNKNOWN_TRANSACTION: '
+05-16 08:30:55.361  1694  1916 E HwcComposer: getLuts failed Status(-129, EX_TRANSACTION_FAILED): 'UNKNOWN_TRANSACTION: '
+05-16 08:30:55.462  1694  1916 E HwcComposer: getLuts failed Status(-129, EX_TRANSACTION_FAILED): 'UNKNOWN_TRANSACTION: '
+05-16 08:30:55.562  1694  1916 E HwcComposer: getLuts failed Status(-129, EX_TRANSACTION_FAILED): 'UNKNOWN_TRANSACTION: '
+05-16 08:30:55.663  1694  1916 E HwcComposer: getLuts failed Status(-129, EX_TRANSACTION_FAILED): 'UNKNOWN_TRANSACTION: '
+05-16 08:30:55.763  1694  1916 E HwcComposer: getLuts failed Status(-129, EX_TRANSACTION_FAILED): 'UNKNOWN_TRANSACTION: '
+05-16 08:30:55.864  1694  1916 E HwcComposer: getLuts failed Status(-129, EX_TRANSACTION_FAILED): 'UNKNOWN_TRANSACTION: '
+05-16 08:30:55.964  1694  1916 E HwcComposer: getLuts failed Status(-129, EX_TRANSACTION_FAILED): 'UNKNOWN_TRANSACTION: '
+05-16 08:30:56.064  1694  1916 E HwcComposer: getLuts failed Status(-129, EX_TRANSACTION_FAILED): 'UNKNOWN_TRANSACTION: '
+05-16 08:30:56.165  1694  1916 E HwcComposer: getLuts failed Status(-129, EX_TRANSACTION_FAILED): 'UNKNOWN_TRANSACTION: '
+05-16 08:30:56.181  1972  1972 I CNSS    : /sys/wifi/dump_in_progress doesn't exist
+05-16 08:30:56.182  1972  1972 I CNSS    : /sys/wifi/max_chipset_log_size doesn't exist
+05-16 08:30:56.198  3936  4168 D WifiClientModeImpl[736265:wlan0]: updateLinkLayerStatsRssiSpeedFrequencyCapabilities rssi=-33 TxLinkspeed=866 freq=5785 RxLinkSpeed=866
+05-16 08:30:56.198  3936  4168 D WifiDataStall: tx tput in kbps: 627748
+05-16 08:30:56.198  3936  4168 D WifiDataStall: rx tput in kbps: 815257
+05-16 08:30:56.199  3936  4168 V WifiConfigManager: Updating scan detail cache freq=5785 BSSID=c8:bf:4c:77:58:fb RSSI=-32 for "UNICAIR"WPA_PSK
+05-16 08:30:56.199  3936  4168 D WifiDataStall:  ccaLevel = 15
+05-16 08:30:56.199  3936  4168 D WifiDataStall: L2 txTputKbps: 774494, rxTputKbps: 815257, L3 txTputKbps: 0, rxTputKbps: 0, TxTrafficHigh: false, RxTrafficHigh: false, Throughput Sufficient: true
+05-16 08:30:56.200  3936  4168 D WifiThroughputPredictor:  utilization (LLS) 15 isBluetoothConnected: false final utilization: 15
+05-16 08:30:56.200  3936  4168 D WifiThroughputPredictor:  BW: 2 RSSI: -33 Nss: 2 Mode: 5 symDur: 3600 snrDb 41 bitPerTone: 6667 rate: 866 throughput: 815
+05-16 08:30:56.200  3936  4168 D WifiThroughputPredictor:  utilization (LLS) 15 isBluetoothConnected: false final utilization: 15
+05-16 08:30:56.200  3936  4168 D WifiThroughputPredictor:  BW: 2 RSSI: -33 Nss: 2 Mode: 5 symDur: 3600 snrDb 41 bitPerTone: 6667 rate: 866 throughput: 815
+05-16 08:30:56.201  3936  4168 D WifiScoreCard: BSSID update SIGNAL_POLL ID: 69380597 SSID: "UNICAIR", BSSID: c8:bf:4c:77:58:fb, MAC: 66:70:e7:ef:44:76, IP: /192.168.31.194, Security type: 2, Supplicant state: COMPLETED, Wi-Fi standard: 11ac, RSSI: -33, Link speed: 866Mbps, Tx Link speed: 866Mbps, Max Supported Tx Link speed: 866Mbps, Rx Link speed: 866Mbps, Max Supported Rx Link speed: 866Mbps, Frequency: 5785MHz, Net ID: 0, Metered hint: false, score: 60, isUsable: true, CarrierMerged: false, SubscriptionId: -1, IsPrimary: 1, Trusted: true, Restricted: false, Ephemeral: false, OEM paid: false, OEM private: false, OSU AP: false, FQDN: <none>, Provider friendly name: <none>, Requesting package name: <none>"UNICAIR"wpa2-pskMLO Information: , Is TID-To-Link negotiation supported by the AP: false, AP MLD Address: <none>, AP MLO Link Id: <none>, AP MLO Affiliated links: <none>, Vendor Data: <none>
+05-16 08:30:56.201  3936  4168 D WifiScoreCard: txRate: 2 txSpeed: 866
+05-16 08:30:56.202  3936  4168 D WifiScoreCard: network update SIGNAL_POLL "UNICAIR" ID: 266647767 RSSI -33 txSpeed -1
+05-16 08:30:56.202  3936  4168 D WifiClientModeImpl[736265:wlan0]:  ClientModeImpl$L2ConnectedState screen=on 1 0 "UNICAIR" c8:bf:4c:77:58:fb rssi=-33 f=5785 sc=60 link=866 tx=0.7, 0.2, 0.0 rx=0.5 bcn=1716 [on:0 tx:0 rx:3 period:3040] from screen [on:46744 period:215447] score=60
+05-16 08:30:56.266  1694  1916 E HwcComposer: getLuts failed Status(-129, EX_TRANSACTION_FAILED): 'UNKNOWN_TRANSACTION: '
+05-16 08:30:56.367  1694  1916 E HwcComposer: getLuts failed Status(-129, EX_TRANSACTION_FAILED): 'UNKNOWN_TRANSACTION: '
+05-16 08:30:56.466  1694  1916 E HwcComposer: getLuts failed Status(-129, EX_TRANSACTION_FAILED): 'UNKNOWN_TRANSACTION: '
+05-16 08:30:56.568  1694  1916 E HwcComposer: getLuts failed Status(-129, EX_TRANSACTION_FAILED): 'UNKNOWN_TRANSACTION: '
+05-16 08:30:56.667  1694  1916 E HwcComposer: getLuts failed Status(-129, EX_TRANSACTION_FAILED): 'UNKNOWN_TRANSACTION: '
+05-16 08:30:56.769  1694  1916 E HwcComposer: getLuts failed Status(-129, EX_TRANSACTION_FAILED): 'UNKNOWN_TRANSACTION: '
+05-16 08:30:56.869  1694  1916 E HwcComposer: getLuts failed Status(-129, EX_TRANSACTION_FAILED): 'UNKNOWN_TRANSACTION: '
+05-16 08:30:56.970  1694  1916 E HwcComposer: getLuts failed Status(-129, EX_TRANSACTION_FAILED): 'UNKNOWN_TRANSACTION: '
+05-16 08:30:57.070  1694  1916 E HwcComposer: getLuts failed Status(-129, EX_TRANSACTION_FAILED): 'UNKNOWN_TRANSACTION: '
+05-16 08:30:57.171  1694  1916 E HwcComposer: getLuts failed Status(-129, EX_TRANSACTION_FAILED): 'UNKNOWN_TRANSACTION: '
+05-16 08:30:57.272  1694  1916 E HwcComposer: getLuts failed Status(-129, EX_TRANSACTION_FAILED): 'UNKNOWN_TRANSACTION: '
+05-16 08:30:57.371  1694  1916 E HwcComposer: getLuts failed Status(-129, EX_TRANSACTION_FAILED): 'UNKNOWN_TRANSACTION: '
+05-16 08:30:57.382  3936  6703 W ActivityManager: pid 3936 system sent binder code 2 with flags 0 to frozen apps and got error -32
+05-16 08:30:57.383  3936  6703 E ConsumerIrService: Error transmitting frequency: 38000
+05-16 08:30:57.383  1639  1639 D vendor.qti.vibrator: Vibrator on for timeoutMs: 50
+05-16 08:30:57.385  1639 12597 D vendor.qti.vibrator: Starting on on another thread
+05-16 08:30:57.436  1639 12597 D vendor.qti.vibrator: Notifying on complete
+05-16 08:30:57.437  1639  1639 D vendor.qti.vibrator: QTI Vibrator off
+05-16 08:30:57.472  1694  1916 E HwcComposer: getLuts failed Status(-129, EX_TRANSACTION_FAILED): 'UNKNOWN_TRANSACTION: '
+05-16 08:30:57.572  1694  1916 E HwcComposer: getLuts failed Status(-129, EX_TRANSACTION_FAILED): 'UNKNOWN_TRANSACTION: '
+05-16 08:30:57.673  1694  1916 E HwcComposer: getLuts failed Status(-129, EX_TRANSACTION_FAILED): 'UNKNOWN_TRANSACTION: '
+05-16 08:30:57.773  1694  1916 E HwcComposer: getLuts failed Status(-129, EX_TRANSACTION_FAILED): 'UNKNOWN_TRANSACTION: '
+05-16 08:30:57.791  3936 11809 W ActivityManager: pid 3936 system sent binder code 2 with flags 0 to frozen apps and got error -32
+05-16 08:30:57.791  3936 11809 D ActivityManager: Too many transaction errors, throttling freezer binder callback.
+05-16 08:30:57.791  3936 11809 E ConsumerIrService: Error transmitting frequency: 38000
+05-16 08:30:57.792  1639  1639 D vendor.qti.vibrator: Vibrator on for timeoutMs: 50
+05-16 08:30:57.793  1639 12598 D vendor.qti.vibrator: Starting on on another thread
+05-16 08:30:57.843  1639 12598 D vendor.qti.vibrator: Notifying on complete
+05-16 08:30:57.844  1639  1639 D vendor.qti.vibrator: QTI Vibrator off
+05-16 08:30:57.874  1694  1916 E HwcComposer: getLuts failed Status(-129, EX_TRANSACTION_FAILED): 'UNKNOWN_TRANSACTION: '
+05-16 08:30:57.974  1694  1916 E HwcComposer: getLuts failed Status(-129, EX_TRANSACTION_FAILED): 'UNKNOWN_TRANSACTION: '
+05-16 08:30:58.077  1694  1916 E HwcComposer: getLuts failed Status(-129, EX_TRANSACTION_FAILED): 'UNKNOWN_TRANSACTION: '
+05-16 08:30:58.151  3936  6703 W ActivityManager: pid 3936 system sent binder code 2 with flags 0 to frozen apps and got error -32
+05-16 08:30:58.151  3936  6703 D ActivityManager: Too many transaction errors, throttling freezer binder callback.
+05-16 08:30:58.152  3936  6703 E ConsumerIrService: Error transmitting frequency: 38000
+05-16 08:30:58.152  1639  1639 D vendor.qti.vibrator: Vibrator on for timeoutMs: 50
+05-16 08:30:58.154  1639 12599 D vendor.qti.vibrator: Starting on on another thread
+05-16 08:30:58.179  1694  1916 E HwcComposer: getLuts failed Status(-129, EX_TRANSACTION_FAILED): 'UNKNOWN_TRANSACTION: '
+05-16 08:30:58.205  1639 12599 D vendor.qti.vibrator: Notifying on complete
+05-16 08:30:58.207  1639  1639 D vendor.qti.vibrator: QTI Vibrator off
+05-16 08:30:58.279  1694  1916 E HwcComposer: getLuts failed Status(-129, EX_TRANSACTION_FAILED): 'UNKNOWN_TRANSACTION: '
+05-16 08:30:58.378  1694  1916 E HwcComposer: getLuts failed Status(-129, EX_TRANSACTION_FAILED): 'UNKNOWN_TRANSACTION: '
+05-16 08:30:58.452  3936  6703 W ActivityManager: pid 3936 system sent binder code 2 with flags 0 to frozen apps and got error -32
+05-16 08:30:58.452  3936  6703 D ActivityManager: Too many transaction errors, throttling freezer binder callback.
+05-16 08:30:58.452  3936  6703 E ConsumerIrService: Error transmitting frequency: 38000
+05-16 08:30:58.453  1639  1639 D vendor.qti.vibrator: Vibrator on for timeoutMs: 50
+05-16 08:30:58.455  1639 12600 D vendor.qti.vibrator: Starting on on another thread
+05-16 08:30:58.479  1694  1916 E HwcComposer: getLuts failed Status(-129, EX_TRANSACTION_FAILED): 'UNKNOWN_TRANSACTION: '
+05-16 08:30:58.506  1639 12600 D vendor.qti.vibrator: Notifying on complete
+05-16 08:30:58.507  1639  1639 D vendor.qti.vibrator: QTI Vibrator off
+05-16 08:30:58.580  1694  1916 E HwcComposer: getLuts failed Status(-129, EX_TRANSACTION_FAILED): 'UNKNOWN_TRANSACTION: '
+05-16 08:30:58.680  1694  1916 E HwcComposer: getLuts failed Status(-129, EX_TRANSACTION_FAILED): 'UNKNOWN_TRANSACTION: '
+05-16 08:30:58.780  1694  1916 E HwcComposer: getLuts failed Status(-129, EX_TRANSACTION_FAILED): 'UNKNOWN_TRANSACTION: '
+05-16 08:30:58.811  3936  6703 W ActivityManager: pid 3936 system sent binder code 2 with flags 0 to frozen apps and got error -32
+05-16 08:30:58.811  3936  6703 D ActivityManager: Too many transaction errors, throttling freezer binder callback.
+05-16 08:30:58.811  3936  6703 E ConsumerIrService: Error transmitting frequency: 38000
+05-16 08:30:58.812  1639  1639 D vendor.qti.vibrator: Vibrator on for timeoutMs: 50
+05-16 08:30:58.813  1639 12601 D vendor.qti.vibrator: Starting on on another thread
+05-16 08:30:58.863  1639 12601 D vendor.qti.vibrator: Notifying on complete
+05-16 08:30:58.865  1639  1639 D vendor.qti.vibrator: QTI Vibrator off
+05-16 08:30:58.881  1694  1916 E HwcComposer: getLuts failed Status(-129, EX_TRANSACTION_FAILED): 'UNKNOWN_TRANSACTION: '
+05-16 08:30:58.982  1694  1916 E HwcComposer: getLuts failed Status(-129, EX_TRANSACTION_FAILED): 'UNKNOWN_TRANSACTION: '
+05-16 08:30:59.082  1694  1916 E HwcComposer: getLuts failed Status(-129, EX_TRANSACTION_FAILED): 'UNKNOWN_TRANSACTION: '
+05-16 08:30:59.095  3936  6703 W ActivityManager: pid 3936 system sent binder code 2 with flags 0 to frozen apps and got error -32
+05-16 08:30:59.095  3936  6703 D ActivityManager: Too many transaction errors, throttling freezer binder callback.
+05-16 08:30:59.095  3936  6703 E ConsumerIrService: Error transmitting frequency: 38000
+05-16 08:30:59.095  1639  1639 D vendor.qti.vibrator: Vibrator on for timeoutMs: 50
+05-16 08:30:59.096  1639 12602 D vendor.qti.vibrator: Starting on on another thread
+05-16 08:30:59.146  1639 12602 D vendor.qti.vibrator: Notifying on complete
+05-16 08:30:59.147  1639  1639 D vendor.qti.vibrator: QTI Vibrator off
+05-16 08:30:59.183  1694  1916 E HwcComposer: getLuts failed Status(-129, EX_TRANSACTION_FAILED): 'UNKNOWN_TRANSACTION: '
+05-16 08:30:59.239  3936  4168 D WifiClientModeImpl[736265:wlan0]: updateLinkLayerStatsRssiSpeedFrequencyCapabilities rssi=-34 TxLinkspeed=866 freq=5785 RxLinkSpeed=866
+05-16 08:30:59.240  3936  4168 D WifiDataStall: tx tput in kbps: 774494
+05-16 08:30:59.240  3936  4168 D WifiDataStall: rx tput in kbps: 815257
+05-16 08:30:59.240  3936  4168 V WifiConfigManager: Updating scan detail cache freq=5785 BSSID=c8:bf:4c:77:58:fb RSSI=-33 for "UNICAIR"WPA_PSK
+05-16 08:30:59.240  3936  4168 D WifiDataStall:  ccaLevel = 15
+05-16 08:30:59.240  3936  4168 D WifiDataStall: L2 txTputKbps: 774494, rxTputKbps: 815257, L3 txTputKbps: 0, rxTputKbps: 0, TxTrafficHigh: false, RxTrafficHigh: false, Throughput Sufficient: true
+05-16 08:30:59.241  3936  4168 D WifiThroughputPredictor:  utilization (LLS) 15 isBluetoothConnected: false final utilization: 15
+05-16 08:30:59.241  3936  4168 D WifiThroughputPredictor:  BW: 2 RSSI: -34 Nss: 2 Mode: 5 symDur: 3600 snrDb 40 bitPerTone: 6667 rate: 866 throughput: 815
+05-16 08:30:59.241  3936  4168 D WifiThroughputPredictor:  utilization (LLS) 15 isBluetoothConnected: false final utilization: 15
+05-16 08:30:59.241  3936  4168 D WifiThroughputPredictor:  BW: 2 RSSI: -34 Nss: 2 Mode: 5 symDur: 3600 snrDb 40 bitPerTone: 6667 rate: 866 throughput: 815
+05-16 08:30:59.243  3936  4168 D WifiScoreCard: BSSID update SIGNAL_POLL ID: 69380597 SSID: "UNICAIR", BSSID: c8:bf:4c:77:58:fb, MAC: 66:70:e7:ef:44:76, IP: /192.168.31.194, Security type: 2, Supplicant state: COMPLETED, Wi-Fi standard: 11ac, RSSI: -34, Link speed: 866Mbps, Tx Link speed: 866Mbps, Max Supported Tx Link speed: 866Mbps, Rx Link speed: 866Mbps, Max Supported Rx Link speed: 866Mbps, Frequency: 5785MHz, Net ID: 0, Metered hint: false, score: 60, isUsable: true, CarrierMerged: false, SubscriptionId: -1, IsPrimary: 1, Trusted: true, Restricted: false, Ephemeral: false, OEM paid: false, OEM private: false, OSU AP: false, FQDN: <none>, Provider friendly name: <none>, Requesting package name: <none>"UNICAIR"wpa2-pskMLO Information: , Is TID-To-Link negotiation supported by the AP: false, AP MLD Address: <none>, AP MLO Link Id: <none>, AP MLO Affiliated links: <none>, Vendor Data: <none>
+05-16 08:30:59.243  3936  4168 D WifiScoreCard: txRate: 1 txSpeed: 866
+05-16 08:30:59.243  3936  4168 D WifiScoreCard: network update SIGNAL_POLL "UNICAIR" ID: 266647767 RSSI -34 txSpeed -1
+05-16 08:30:59.244  3936  4168 D WifiClientModeImpl[736265:wlan0]:  ClientModeImpl$L2ConnectedState screen=on 1 0 "UNICAIR" c8:bf:4c:77:58:fb rssi=-34 f=5785 sc=60 link=866 tx=0.2, 0.0, 0.0 rx=0.2 bcn=1739 [on:0 tx:0 rx:5 period:3041] from screen [on:46744 period:218489] score=60
+05-16 08:30:59.283  1694  1916 E HwcComposer: getLuts failed Status(-129, EX_TRANSACTION_FAILED): 'UNKNOWN_TRANSACTION: '
+05-16 08:30:59.388  1694  1916 E HwcComposer: getLuts failed Status(-129, EX_TRANSACTION_FAILED): 'UNKNOWN_TRANSACTION: '
+05-16 08:30:59.403  3936  6703 W ActivityManager: pid 3936 system sent binder code 2 with flags 0 to frozen apps and got error -32
+05-16 08:30:59.403  3936  6703 D ActivityManager: Too many transaction errors, throttling freezer binder callback.
+05-16 08:30:59.403  3936  6703 E ConsumerIrService: Error transmitting frequency: 38000
+05-16 08:30:59.404  1639  1639 D vendor.qti.vibrator: Vibrator on for timeoutMs: 50
+05-16 08:30:59.405  1639 12603 D vendor.qti.vibrator: Starting on on another thread
+05-16 08:30:59.455  1639 12603 D vendor.qti.vibrator: Notifying on complete
+05-16 08:30:59.456  1639  1639 D vendor.qti.vibrator: QTI Vibrator off
+05-16 08:30:59.491  1694  1916 E HwcComposer: getLuts failed Status(-129, EX_TRANSACTION_FAILED): 'UNKNOWN_TRANSACTION: '
+05-16 08:30:59.598  1694  1916 E HwcComposer: getLuts failed Status(-129, EX_TRANSACTION_FAILED): 'UNKNOWN_TRANSACTION: '
+05-16 08:30:59.680  3936 11809 W ActivityManager: pid 3936 system sent binder code 2 with flags 0 to frozen apps and got error -32
+05-16 08:30:59.680  3936 11809 D ActivityManager: Too many transaction errors, throttling freezer binder callback.
+05-16 08:30:59.680  3936 11809 E ConsumerIrService: Error transmitting frequency: 38000
+05-16 08:30:59.681  1639  1639 D vendor.qti.vibrator: Vibrator on for timeoutMs: 50
+05-16 08:30:59.682  1639 12604 D vendor.qti.vibrator: Starting on on another thread
+05-16 08:30:59.698  1694  1916 E HwcComposer: getLuts failed Status(-129, EX_TRANSACTION_FAILED): 'UNKNOWN_TRANSACTION: '
+05-16 08:30:59.732  1639 12604 D vendor.qti.vibrator: Notifying on complete
+05-16 08:30:59.733  1639  1639 D vendor.qti.vibrator: QTI Vibrator off
+05-16 08:30:59.752     0     0 F [    C3] [irq][0x4491b7d85][00: 30:59.744865] peach_v2: [0:F:HIF] hif_wake_interrupt_handler: wake interrupt received on irq 284
+05-16 08:30:59.776 11670 11670 I [kworke][0x449223f5e][00:30:59.767929] peach_v2: [11670:I:PMO] pmo_core_psoc_send_host_wakeup_ind_to_fw: Host wakeup indication sent to fw
+05-16 08:30:59.783     0     0 I [    C3] [soft_i][0x44924895e][00: 30:59.775742] peach_v2: [0:I:WMA] WLAN triggered wakeup: BPF_ALLOW (39), vdev: 0 (STA)
+05-16 08:30:59.784     0     0 I [    C3] [soft_i][0x44924a23d][00: 30:59.776074] peach_v2: [0:I:WMA] wma_wake_event_packet: Wake event packet:
+05-16 08:30:59.798  1694  1916 E HwcComposer: getLuts failed Status(-129, EX_TRANSACTION_FAILED): 'UNKNOWN_TRANSACTION: '
+05-16 08:30:59.899  1694  1916 E HwcComposer: getLuts failed Status(-129, EX_TRANSACTION_FAILED): 'UNKNOWN_TRANSACTION: '
+05-16 08:31:00.000  1694  1916 E HwcComposer: getLuts failed Status(-129, EX_TRANSACTION_FAILED): 'UNKNOWN_TRANSACTION: '
+05-16 08:31:00.100  1694  1916 E HwcComposer: getLuts failed Status(-129, EX_TRANSACTION_FAILED): 'UNKNOWN_TRANSACTION: '
