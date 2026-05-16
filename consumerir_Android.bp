@@ -1,0 +1,14 @@
+cc_library_shared {
+    name: "consumerir.default",
+    vendor: true,
+    relative_install_path: "hw",
+    srcs: ["consumerir.c"],
+    cflags: [
+        "-Wall",
+        "-Werror",
+    ],
+    shared_libs: [
+        "liblog",
+        "libhardware",
+    ],
+}
