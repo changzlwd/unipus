@@ -30,4 +30,10 @@ cc_binary {
     ],
 
     srcs: ["main.cpp"],
+
+    aidl: {
+        include_dirs: [
+            "frameworks/native/aidl/android/hardware",
+        ],
+    },
 }
