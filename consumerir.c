@@ -42,8 +42,15 @@ static int consumerir_transmit(struct consumerir_device *dev __unused,
     int fd = -1;
     int ret = 0;
     unsigned int mode = LIRC_MODE_PULSE;
+    int send_len = pattern_len;
 
     ALOGE("consumerir_transmit: called for %d Hz, %d slices", carrier_freq, pattern_len);
+
+    /* LIRC requires pattern length to be odd */
+    if (send_len % 2 == 0 && send_len > 0) {
+        send_len--;
+        ALOGE("consumerir_transmit: pattern is even, sending first %d slices", send_len);
+    }
 
     fd = open(LIRC_DEVICE_PATH, O_RDWR);
     if (fd < 0) {
@@ -63,10 +70,10 @@ static int consumerir_transmit(struct consumerir_device *dev __unused,
     }
 
     /* Write the pattern */
-    ssize_t written = write(fd, pattern, pattern_len * sizeof(int));
-    if (written != pattern_len * sizeof(int)) {
+    ssize_t written = write(fd, pattern, send_len * sizeof(int));
+    if (written != send_len * sizeof(int)) {
         ALOGE("Failed to write pattern to LIRC: written=%zd, expected=%zd, error: %s", 
-              written, (pattern_len * sizeof(int)), strerror(errno));
+              written, (send_len * sizeof(int)), strerror(errno));
         ret = -1;
     } else {
         ALOGE("Successfully wrote %zd bytes to LIRC", written);
