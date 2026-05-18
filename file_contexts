@@ -1,2 +1,5 @@
 # IR HAL service
 /vendor/bin/hw/android\.hardware\.ir-service\.volcano u:object_r:hal_ir_default_exec:s0
+
+# LIRC device
+/dev/lirc0 u:object_r:lirc_device:s0
