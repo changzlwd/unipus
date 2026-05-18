@@ -42,17 +42,17 @@ static int consumerir_transmit(struct consumerir_device *dev __unused,
     int fd = -1;
     int ret = 0;
 
-    ALOGI("consumerir_transmit: called for %d Hz, %d slices", carrier_freq, pattern_len);
+    ALOGE("consumerir_transmit: called for %d Hz, %d slices", carrier_freq, pattern_len);
 
     fd = open(LIRC_DEVICE_PATH, O_RDWR);
     if (fd < 0) {
         ALOGE("Cannot open LIRC device: %s, error: %s", LIRC_DEVICE_PATH, strerror(errno));
         return -1;
     }
-    ALOGD("Opened LIRC device fd=%d", fd);
+    ALOGE("Opened LIRC device fd=%d", fd);
 
     if (ioctl(fd, LIRC_SET_SEND_CARRIER, &carrier_freq) < 0) {
-        ALOGW("LIRC_SET_SEND_CARRIER failed: %s", strerror(errno));
+        ALOGE("LIRC_SET_SEND_CARRIER failed: %s", strerror(errno));
     }
 
     ssize_t written = write(fd, pattern, pattern_len * sizeof(int));
@@ -61,7 +61,7 @@ static int consumerir_transmit(struct consumerir_device *dev __unused,
               written, (pattern_len * sizeof(int)), strerror(errno));
         ret = -1;
     } else {
-        ALOGI("Successfully wrote %zd bytes to LIRC", written);
+        ALOGE("Successfully wrote %zd bytes to LIRC", written);
     }
 
     close(fd);
