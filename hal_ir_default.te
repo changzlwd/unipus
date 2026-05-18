@@ -1,0 +1,21 @@
+# HAL IR domain
+type hal_ir_default, domain;
+type hal_ir_default_exec, exec_type, file_type, vendor_file_type;
+
+init_daemon_domain(hal_ir_default)
+
+# Allow hwservicemanager to find the service
+add_hwservice(hal_ir_default, hal_ir_hwservice)
+
+# Allow access to LIRC device
+allow hal_ir_default lirc_device:chr_file rw_file_perms;
+
+# Allow logging
+allow hal_ir_default same_process_hal_file:file { read write getattr open map };
+
+# Allow access to sysfs for PWM IR (if needed)
+allow hal_ir_default sysfs:file rw_file_perms;
+
+# Allow binder IPC
+binder_use(hal_ir_default)
+binder_service(hal_ir_default)

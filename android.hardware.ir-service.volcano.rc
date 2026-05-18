@@ -1,5 +1,10 @@
 service vendor.ir-default /vendor/bin/hw/android.hardware.ir-service.volcano
-    interface android.hardware.ir.IConsumerIr/default
+    interface aidl android.hardware.ir.IConsumerIr/default
     class hal
     user system
     group system
+    oneshot
+    disabled
+    
+on property:sys.boot_completed=1
+    start vendor.ir-default
