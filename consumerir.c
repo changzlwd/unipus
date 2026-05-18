@@ -42,30 +42,12 @@ static int consumerir_transmit(struct consumerir_device *dev __unused,
     int fd = -1;
     int ret = 0;
     unsigned int mode = LIRC_MODE_PULSE;
-    const int *send_buf = pattern;
-    int send_len = pattern_len;
-    int *extended_buf = NULL;
 
     ALOGE("consumerir_transmit: called for %d Hz, %d slices", carrier_freq, pattern_len);
-
-    /* If pattern length is even, add a small trailing space (10ms) to make it odd */
-    if (send_len % 2 == 0 && send_len > 0) {
-        extended_buf = malloc((send_len + 1) * sizeof(int));
-        if (!extended_buf) {
-            ALOGE("Failed to allocate extended buffer");
-            return -1;
-        }
-        memcpy(extended_buf, pattern, send_len * sizeof(int));
-        extended_buf[send_len] = 10000;  // Add 10ms space at the end
-        send_buf = extended_buf;
-        send_len++;
-        ALOGE("consumerir_transmit: pattern is even, adding 10ms trailing space, total %d slices", send_len);
-    }
 
     fd = open(LIRC_DEVICE_PATH, O_RDWR);
     if (fd < 0) {
         ALOGE("Cannot open LIRC device: %s, error: %s", LIRC_DEVICE_PATH, strerror(errno));
-        if (extended_buf) free(extended_buf);
         return -1;
     }
     ALOGE("Opened LIRC device fd=%d", fd);
@@ -81,17 +63,16 @@ static int consumerir_transmit(struct consumerir_device *dev __unused,
     }
 
     /* Write the pattern */
-    ssize_t written = write(fd, send_buf, send_len * sizeof(int));
-    if (written != send_len * sizeof(int)) {
+    ssize_t written = write(fd, pattern, pattern_len * sizeof(int));
+    if (written != pattern_len * sizeof(int)) {
         ALOGE("Failed to write pattern to LIRC: written=%zd, expected=%zd, error: %s", 
-              written, (send_len * sizeof(int)), strerror(errno));
+              written, (pattern_len * sizeof(int)), strerror(errno));
         ret = -1;
     } else {
         ALOGE("Successfully wrote %zd bytes to LIRC", written);
     }
 
     close(fd);
-    if (extended_buf) free(extended_buf);
     return ret;
 }
 
