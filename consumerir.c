@@ -41,6 +41,7 @@ static int consumerir_transmit(struct consumerir_device *dev __unused,
    int carrier_freq, const int pattern[], int pattern_len) {
     int fd = -1;
     int ret = 0;
+    unsigned int mode = LIRC_MODE_PULSE;
 
     ALOGE("consumerir_transmit: called for %d Hz, %d slices", carrier_freq, pattern_len);
 
@@ -51,10 +52,17 @@ static int consumerir_transmit(struct consumerir_device *dev __unused,
     }
     ALOGE("Opened LIRC device fd=%d", fd);
 
+    /* Set send mode to pulse mode first */
+    if (ioctl(fd, LIRC_SET_SEND_MODE, &mode) < 0) {
+        ALOGE("LIRC_SET_SEND_MODE failed: %s", strerror(errno));
+    }
+
+    /* Set carrier frequency */
     if (ioctl(fd, LIRC_SET_SEND_CARRIER, &carrier_freq) < 0) {
         ALOGE("LIRC_SET_SEND_CARRIER failed: %s", strerror(errno));
     }
 
+    /* Write the pattern */
     ssize_t written = write(fd, pattern, pattern_len * sizeof(int));
     if (written != pattern_len * sizeof(int)) {
         ALOGE("Failed to write pattern to LIRC: written=%zd, expected=%zd, error: %s", 
