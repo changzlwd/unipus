@@ -70,6 +70,19 @@ static int consumerir_transmit(struct consumerir_device *dev __unused,
     }
     ALOGE("Opened LIRC device fd=%d", fd);
 
+    unsigned int mode = LIRC_MODE_PULSE;
+    if (ioctl(fd, LIRC_SET_SEND_MODE, &mode) < 0) {
+        ALOGE("LIRC_SET_SEND_MODE failed: %s", strerror(errno));
+    } else {
+        ALOGE("LIRC_SET_SEND_MODE succeeded");
+    }
+
+    if (ioctl(fd, LIRC_SET_SEND_CARRIER, &carrier_freq) < 0) {
+        ALOGE("LIRC_SET_SEND_CARRIER failed: %s", strerror(errno));
+    } else {
+        ALOGE("LIRC_SET_SEND_CARRIER succeeded: %d Hz", carrier_freq);
+    }
+
     unsigned char *byte_buf = malloc(tx_len * sizeof(int));
     if (!byte_buf) {
         ALOGE("Failed to allocate byte buffer");
