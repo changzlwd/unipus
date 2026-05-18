@@ -19,6 +19,7 @@
 #include <fcntl.h>
 #include <malloc.h>
 #include <stdlib.h>
+#include <stdint.h>
 #include <string.h>
 #include <unistd.h>
 #include <sys/ioctl.h>
@@ -41,7 +42,6 @@ static int consumerir_transmit(struct consumerir_device *dev __unused,
    int carrier_freq, const int pattern[], int pattern_len) {
     int fd = -1;
     int ret = 0;
-    unsigned int mode = LIRC_MODE_PULSE;
     int *tx_pattern = NULL;
     int tx_len = pattern_len;
 
@@ -70,15 +70,24 @@ static int consumerir_transmit(struct consumerir_device *dev __unused,
     }
     ALOGE("Opened LIRC device fd=%d", fd);
 
-    if (ioctl(fd, LIRC_SET_SEND_MODE, &mode) < 0) {
-        ALOGE("LIRC_SET_SEND_MODE failed: %s", strerror(errno));
+    unsigned char *byte_buf = malloc(tx_len * sizeof(int));
+    if (!byte_buf) {
+        ALOGE("Failed to allocate byte buffer");
+        close(fd);
+        if (tx_pattern != pattern)
+            free(tx_pattern);
+        return -ENOMEM;
     }
 
-    if (ioctl(fd, LIRC_SET_SEND_CARRIER, &carrier_freq) < 0) {
-        ALOGE("LIRC_SET_SEND_CARRIER failed: %s", strerror(errno));
+    for (int i = 0; i < tx_len; i++) {
+        uint32_t val = tx_pattern[i];
+        byte_buf[i*4] = val & 0xFF;
+        byte_buf[i*4+1] = (val >> 8) & 0xFF;
+        byte_buf[i*4+2] = (val >> 16) & 0xFF;
+        byte_buf[i*4+3] = (val >> 24) & 0xFF;
     }
 
-    ssize_t written = write(fd, tx_pattern, tx_len * sizeof(int));
+    ssize_t written = write(fd, byte_buf, tx_len * sizeof(int));
     if (written != tx_len * sizeof(int)) {
         ALOGE("Failed to write pattern to LIRC: written=%zd, expected=%zd, error: %s", 
               written, (tx_len * sizeof(int)), strerror(errno));
@@ -87,6 +96,7 @@ static int consumerir_transmit(struct consumerir_device *dev __unused,
         ALOGE("Successfully wrote %zd bytes to LIRC", written);
     }
 
+    free(byte_buf);
     close(fd);
     if (tx_pattern != pattern)
         free(tx_pattern);
