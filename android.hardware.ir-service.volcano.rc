@@ -1,7 +1,9 @@
-service vendor.ir-default /vendor/bin/hw/android.hardware.ir-service.volcano
-    class hal
-    user system
-    group system
-    
-on property:sys.boot_completed=1
-    start vendor.ir-default
+# IR HAL service - temporarily disabled to avoid boot loop
+# service vendor.ir-default /vendor/bin/hw/android.hardware.ir-service.volcano
+#     class hal
+#     user system
+#     group system
+# 
+# on property:sys.boot_completed=1
+#     start vendor.ir-default
+
