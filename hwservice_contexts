@@ -1,2 +1,0 @@
-# IR HAL service
-android.hardware.ir.IConsumerIr/default u:object_r:hal_ir_hwservice:s0

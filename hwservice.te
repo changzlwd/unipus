@@ -1,2 +1,0 @@
-# IR HAL service
-type hal_ir_hwservice, hwservice_manager_type;
