@@ -24,6 +24,7 @@
 #include <fcntl.h>
 #include <sys/ioctl.h>
 #include <sys/types.h>
+#include <sys/time.h>
 
 #include <linux/lirc.h>
 
@@ -39,14 +40,20 @@ static const consumerir_freq_range_t consumerir_freqs[] = {
     {.min = 30000, .max = 60000},
 };
 
+static long long get_time_us(void) {
+    struct timeval tv;
+    gettimeofday(&tv, NULL);
+    return (long long)tv.tv_sec * 1000000LL + tv.tv_usec;
+}
+
 static int consumerir_transmit(struct consumerir_device *dev __unused,
    int carrier_freq, const int pattern[], int pattern_len)
 {
     int fd = -1;
     int ret = 0;
-    unsigned int *tx_buf = NULL;
-    size_t buf_size;
+    int i;
 
+    long long start_time = get_time_us();
     ALOGE("consumerir_transmit: called for %d Hz, %d slices", carrier_freq, pattern_len);
 
     if (pattern_len <= 0 || !pattern) {
@@ -54,13 +61,13 @@ static int consumerir_transmit(struct consumerir_device *dev __unused,
         return -1;
     }
 
-    tx_buf = malloc(pattern_len * sizeof(unsigned int));
+    unsigned int *tx_buf = malloc(pattern_len * sizeof(unsigned int));
     if (!tx_buf) {
         ALOGE("Failed to allocate tx buffer");
         return -1;
     }
 
-    for (int i = 0; i < pattern_len; i++) {
+    for (i = 0; i < pattern_len; i++) {
         tx_buf[i] = (unsigned int)pattern[i];
     }
 
@@ -83,14 +90,29 @@ static int consumerir_transmit(struct consumerir_device *dev __unused,
         ALOGE("LIRC_SET_SEND_CARRIER succeeded: %d Hz", carrier_freq);
     }
 
-    buf_size = pattern_len * sizeof(unsigned int);
-    ssize_t bytes_written = write(fd, tx_buf, buf_size);
-    if (bytes_written != (ssize_t)buf_size) {
-        ALOGE("Write to LIRC device failed: %s, written %zd bytes, expected %zu",
-              strerror(errno), bytes_written, buf_size);
+    long long write_start = get_time_us();
+    ssize_t bytes_to_write = pattern_len * sizeof(unsigned int);
+    ssize_t bytes_written = write(fd, tx_buf, bytes_to_write);
+    long long write_end = get_time_us();
+
+    if (bytes_written != bytes_to_write) {
+        ALOGE("Write to LIRC device failed: %s, written %zd bytes, expected %zd",
+              strerror(errno), bytes_written, bytes_to_write);
         ret = -1;
     } else {
-        ALOGE("Successfully wrote %zd bytes (%d samples) to LIRC", bytes_written, pattern_len);
+        ALOGE("Successfully wrote %zd bytes (%d samples) to LIRC, took %lld us",
+              bytes_written, pattern_len, write_end - write_start);
+
+        unsigned int total_time = 0;
+        for (i = 0; i < pattern_len; i++) {
+            total_time += pattern[i];
+        }
+        ALOGE("Expected IR transmission time: %u us (%u ms)", total_time, total_time / 1000);
+
+        usleep(total_time);
+
+        long long end_time = get_time_us();
+        ALOGE("IR transmission completed, total time: %lld us", end_time - start_time);
     }
 
     close(fd);
