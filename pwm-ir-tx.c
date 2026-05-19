@@ -50,6 +50,7 @@ static enum hrtimer_restart ir_timer_callback(struct hrtimer *timer)
         data->transmitting = false;
         kfree(data->pattern);
         data->pattern = NULL;
+        dev_info(data->dev, "IR transmission completed\n");
         return HRTIMER_NORESTART;
     }
 
@@ -86,6 +87,8 @@ static ssize_t frequency_store(struct device *dev, struct device_attribute *attr
                      1000000000UL / freq);
     if (ret < 0)
         dev_err(dev, "Failed to configure PWM\n");
+    else
+        dev_info(dev, "Frequency set to %lu Hz\n", freq);
 
     return count;
 }
@@ -117,6 +120,8 @@ static ssize_t send_store(struct device *dev, struct device_attribute *attr,
     if (len == 0)
         return count;
 
+    dev_info(dev, "Receiving IR pattern with %d elements\n", len);
+
     pattern = kzalloc(len * sizeof(int), GFP_KERNEL);
     if (!pattern)
         return -ENOMEM;
@@ -132,6 +137,8 @@ static ssize_t send_store(struct device *dev, struct device_attribute *attr,
         pattern[i++] = val;
         ptr = endptr;
     }
+
+    dev_info(dev, "IR pattern received, starting transmission\n");
 
     ir_data->pattern = pattern;
     ir_data->pattern_len = len;
