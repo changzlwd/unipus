@@ -44,7 +44,6 @@ static int consumerir_transmit(struct consumerir_device *dev __unused,
 {
     int fd = -1;
     int ret = 0;
-    int i;
 
     ALOGE("consumerir_transmit: called for %d Hz, %d slices", carrier_freq, pattern_len);
 
@@ -66,53 +65,16 @@ static int consumerir_transmit(struct consumerir_device *dev __unused,
         ALOGE("LIRC_SET_SEND_CARRIER succeeded: %d Hz", carrier_freq);
     }
 
-    int *tx_pattern = NULL;
-    int tx_len = pattern_len;
-
-    if (tx_len % 2 == 0 && tx_len > 0) {
-        tx_len++;
-        tx_pattern = malloc(tx_len * sizeof(int));
-        if (!tx_pattern) {
-            ALOGE("Failed to allocate memory for pattern");
-            close(fd);
-            return -ENOMEM;
-        }
-        memcpy(tx_pattern, pattern, (tx_len - 1) * sizeof(int));
-        tx_pattern[tx_len - 1] = 10000;
-        ALOGE("Pattern is even, adding 10ms trailing space, new length: %d", tx_len);
-    } else {
-        tx_pattern = (int *)pattern;
-    }
-
-    unsigned char *byte_buf = malloc(tx_len * sizeof(int));
-    if (!byte_buf) {
-        ALOGE("Failed to allocate byte buffer");
-        if (tx_pattern != pattern)
-            free(tx_pattern);
-        close(fd);
-        return -ENOMEM;
-    }
-
-    for (i = 0; i < tx_len; i++) {
-        uint32_t val = tx_pattern[i];
-        byte_buf[i*4] = val & 0xFF;
-        byte_buf[i*4+1] = (val >> 8) & 0xFF;
-        byte_buf[i*4+2] = (val >> 16) & 0xFF;
-        byte_buf[i*4+3] = (val >> 24) & 0xFF;
-    }
-
-    ssize_t bytes_written = write(fd, byte_buf, tx_len * sizeof(int));
-    if (bytes_written != tx_len * sizeof(int)) {
+    // 直接发送原始数据，不需要添加 trailing space
+    // LIRC 驱动已经去掉偶数限制
+    ssize_t bytes_written = write(fd, pattern, pattern_len * sizeof(int));
+    if (bytes_written != pattern_len * sizeof(int)) {
         ALOGE("Write to LIRC device failed: %s, written %zd bytes, expected %zd",
-              strerror(errno), bytes_written, tx_len * sizeof(int));
+              strerror(errno), bytes_written, pattern_len * sizeof(int));
         ret = -1;
     } else {
         ALOGE("Successfully wrote %zd bytes to LIRC", bytes_written);
     }
-
-    free(byte_buf);
-    if (tx_pattern != pattern)
-        free(tx_pattern);
 
     close(fd);
     return ret;
