@@ -24,7 +24,6 @@
 #include <fcntl.h>
 #include <sys/ioctl.h>
 #include <sys/types.h>
-#include <arpa/inet.h>
 
 #include <linux/lirc.h>
 
@@ -62,8 +61,7 @@ static int consumerir_transmit(struct consumerir_device *dev __unused,
     }
 
     for (int i = 0; i < pattern_len; i++) {
-        unsigned int val = (unsigned int)pattern[i];
-        tx_buf[i] = htonl(val);
+        tx_buf[i] = (unsigned int)pattern[i];
     }
 
     fd = open(LIRC_DEVICE_PATH, O_RDWR);
