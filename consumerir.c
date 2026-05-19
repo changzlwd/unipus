@@ -24,6 +24,7 @@
 #include <fcntl.h>
 #include <sys/ioctl.h>
 #include <sys/types.h>
+#include <arpa/inet.h>
 
 #include <linux/lirc.h>
 
@@ -44,12 +45,31 @@ static int consumerir_transmit(struct consumerir_device *dev __unused,
 {
     int fd = -1;
     int ret = 0;
+    unsigned int *tx_buf = NULL;
+    size_t buf_size;
 
     ALOGE("consumerir_transmit: called for %d Hz, %d slices", carrier_freq, pattern_len);
+
+    if (pattern_len <= 0 || !pattern) {
+        ALOGE("Invalid pattern or pattern_len");
+        return -1;
+    }
+
+    tx_buf = malloc(pattern_len * sizeof(unsigned int));
+    if (!tx_buf) {
+        ALOGE("Failed to allocate tx buffer");
+        return -1;
+    }
+
+    for (int i = 0; i < pattern_len; i++) {
+        unsigned int val = (unsigned int)pattern[i];
+        tx_buf[i] = htonl(val);
+    }
 
     fd = open(LIRC_DEVICE_PATH, O_RDWR);
     if (fd < 0) {
         ALOGE("Cannot open LIRC device: %s, error: %s", LIRC_DEVICE_PATH, strerror(errno));
+        free(tx_buf);
         return -1;
     }
     ALOGE("Opened LIRC device fd=%d", fd);
@@ -65,18 +85,18 @@ static int consumerir_transmit(struct consumerir_device *dev __unused,
         ALOGE("LIRC_SET_SEND_CARRIER succeeded: %d Hz", carrier_freq);
     }
 
-    // 直接发送原始数据，不需要添加 trailing space
-    // LIRC 驱动已经去掉偶数限制
-    ssize_t bytes_written = write(fd, pattern, pattern_len * sizeof(int));
-    if (bytes_written != pattern_len * sizeof(int)) {
-        ALOGE("Write to LIRC device failed: %s, written %zd bytes, expected %zd",
-              strerror(errno), bytes_written, pattern_len * sizeof(int));
+    buf_size = pattern_len * sizeof(unsigned int);
+    ssize_t bytes_written = write(fd, tx_buf, buf_size);
+    if (bytes_written != (ssize_t)buf_size) {
+        ALOGE("Write to LIRC device failed: %s, written %zd bytes, expected %zu",
+              strerror(errno), bytes_written, buf_size);
         ret = -1;
     } else {
-        ALOGE("Successfully wrote %zd bytes to LIRC", bytes_written);
+        ALOGE("Successfully wrote %zd bytes (%d samples) to LIRC", bytes_written, pattern_len);
     }
 
     close(fd);
+    free(tx_buf);
     return ret;
 }
 
