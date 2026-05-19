@@ -24,8 +24,8 @@
 #include <fcntl.h>
 #include <sys/ioctl.h>
 #include <sys/types.h>
-#include <sys/stat.h>
-#include <stdio.h>
+
+#include <linux/lirc.h>
 
 #include <log/log.h>
 
@@ -33,8 +33,7 @@
 
 #define ARRAY_SIZE(a) (sizeof(a) / sizeof((a)[0]))
 
-#define SYSFS_SEND_PATH "/sys/class/consumerir/ir/send"
-#define SYSFS_FREQ_PATH "/sys/class/consumerir/ir/frequency"
+#define LIRC_DEVICE_PATH "/dev/lirc0"
 
 static const consumerir_freq_range_t consumerir_freqs[] = {
     {.min = 30000, .max = 60000},
@@ -46,80 +45,77 @@ static int consumerir_transmit(struct consumerir_device *dev __unused,
     int fd = -1;
     int ret = 0;
     int i;
-    FILE *fp = NULL;
-    char *buffer = NULL;
-    size_t buffer_size = 0;
 
     ALOGE("consumerir_transmit: called for %d Hz, %d slices", carrier_freq, pattern_len);
 
-    ALOGE("IR TX: carrier=%d Hz, count=%d", carrier_freq, pattern_len);
-    ALOGE("IR TX: data dump:");
-    for (i = 0; i < pattern_len; i++) {
-        if (i % 8 == 0) {
-            if (i > 0)
-                ALOGE("");
-            ALOGE("  [%04d-%04d]:", i, (i + 7 < pattern_len) ? i + 7 : pattern_len - 1);
+    fd = open(LIRC_DEVICE_PATH, O_RDWR);
+    if (fd < 0) {
+        ALOGE("Cannot open LIRC device: %s, error: %s", LIRC_DEVICE_PATH, strerror(errno));
+        return -1;
+    }
+    ALOGE("Opened LIRC device fd=%d", fd);
+
+    unsigned int mode = LIRC_MODE_PULSE;
+    if (ioctl(fd, LIRC_SET_SEND_MODE, &mode) < 0) {
+        ALOGE("LIRC_SET_SEND_MODE failed: %s", strerror(errno));
+    }
+
+    if (ioctl(fd, LIRC_SET_SEND_CARRIER, &carrier_freq) < 0) {
+        ALOGE("LIRC_SET_SEND_CARRIER failed: %s", strerror(errno));
+    } else {
+        ALOGE("LIRC_SET_SEND_CARRIER succeeded: %d Hz", carrier_freq);
+    }
+
+    int *tx_pattern = NULL;
+    int tx_len = pattern_len;
+
+    if (tx_len % 2 == 0 && tx_len > 0) {
+        tx_len++;
+        tx_pattern = malloc(tx_len * sizeof(int));
+        if (!tx_pattern) {
+            ALOGE("Failed to allocate memory for pattern");
+            close(fd);
+            return -ENOMEM;
         }
-        ALOGE(" %d", pattern[i]);
-    }
-    ALOGE("");
-
-    // Check if sysfs path exists
-    struct stat st;
-    if (stat(SYSFS_FREQ_PATH, &st) != 0) {
-        ALOGE("Sysfs path does not exist: %s", SYSFS_FREQ_PATH);
-        return -1;
+        memcpy(tx_pattern, pattern, (tx_len - 1) * sizeof(int));
+        tx_pattern[tx_len - 1] = 10000;
+        ALOGE("Pattern is even, adding 10ms trailing space, new length: %d", tx_len);
+    } else {
+        tx_pattern = (int *)pattern;
     }
 
-    // Set frequency
-    fp = fopen(SYSFS_FREQ_PATH, "w");
-    if (fp == NULL) {
-        ALOGE("Cannot open frequency sysfs: %s", SYSFS_FREQ_PATH);
-        return -1;
-    }
-    fprintf(fp, "%d", carrier_freq);
-    fclose(fp);
-    ALOGE("Frequency set to %d Hz", carrier_freq);
-
-    // Build pattern string (comma-separated)
-    buffer_size = pattern_len * 12;  // max 10 digits + comma + safety margin
-    buffer = malloc(buffer_size);
-    if (!buffer) {
-        ALOGE("Failed to allocate buffer");
+    unsigned char *byte_buf = malloc(tx_len * sizeof(int));
+    if (!byte_buf) {
+        ALOGE("Failed to allocate byte buffer");
+        if (tx_pattern != pattern)
+            free(tx_pattern);
+        close(fd);
         return -ENOMEM;
     }
 
-    memset(buffer, 0, buffer_size);
-    for (i = 0; i < pattern_len; i++) {
-        if (i > 0) {
-            strcat(buffer, ",");
-        }
-        char num[16];
-        snprintf(num, sizeof(num), "%d", pattern[i]);
-        strcat(buffer, num);
+    for (i = 0; i < tx_len; i++) {
+        uint32_t val = tx_pattern[i];
+        byte_buf[i*4] = val & 0xFF;
+        byte_buf[i*4+1] = (val >> 8) & 0xFF;
+        byte_buf[i*4+2] = (val >> 16) & 0xFF;
+        byte_buf[i*4+3] = (val >> 24) & 0xFF;
     }
 
-    ALOGE("Sending pattern via sysfs, pattern length: %zu bytes", strlen(buffer));
-
-    // Send pattern
-    fp = fopen(SYSFS_SEND_PATH, "w");
-    if (fp == NULL) {
-        ALOGE("Cannot open send sysfs: %s", SYSFS_SEND_PATH);
-        free(buffer);
-        return -1;
+    ssize_t bytes_written = write(fd, byte_buf, tx_len * sizeof(int));
+    if (bytes_written != tx_len * sizeof(int)) {
+        ALOGE("Write to LIRC device failed: %s, written %zd bytes, expected %zd",
+              strerror(errno), bytes_written, tx_len * sizeof(int));
+        ret = -1;
+    } else {
+        ALOGE("Successfully wrote %zd bytes to LIRC", bytes_written);
     }
 
-    size_t written = fwrite(buffer, 1, strlen(buffer), fp);
-    fclose(fp);
-    free(buffer);
+    free(byte_buf);
+    if (tx_pattern != pattern)
+        free(tx_pattern);
 
-    if (written != strlen(buffer)) {
-        ALOGE("Failed to write pattern to sysfs");
-        return -1;
-    }
-
-    ALOGE("Pattern sent successfully via sysfs");
-    return 0;
+    close(fd);
+    return ret;
 }
 
 static int consumerir_get_num_carrier_freqs(struct consumerir_device *dev __unused)
@@ -172,7 +168,7 @@ static int consumerir_open(const hw_module_t* module, const char* name,
     dev->get_carrier_freqs = consumerir_get_carrier_freqs;
 
     *device = (hw_device_t*) dev;
-    ALOGI("Consumer IR device opened successfully via sysfs");
+    ALOGI("Consumer IR device opened successfully with LIRC");
     return 0;
 }
 
@@ -186,7 +182,7 @@ consumerir_module_t HAL_MODULE_INFO_SYM = {
         .module_api_version = CONSUMERIR_MODULE_API_VERSION_1_0,
         .hal_api_version    = HARDWARE_HAL_API_VERSION,
         .id                 = CONSUMERIR_HARDWARE_MODULE_ID,
-        .name               = "Sysfs IR HAL",
+        .name               = "LIRC IR HAL",
         .author             = "Custom IR HAL Implementation",
         .methods            = &consumerir_module_methods,
     },
