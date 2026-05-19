@@ -128,14 +128,6 @@ static int consumerir_transmit(struct consumerir_device *dev __unused,
         ALOGE("Successfully wrote %zd bytes (%d samples) to LIRC, took %lld us",
               bytes_written, final_len, write_end - write_start);
 
-        unsigned int total_time = 0;
-        for (i = 0; i < final_len; i++) {
-            total_time += final_pattern[i];
-        }
-        ALOGE("Expected IR transmission time: %u us (%u ms)", total_time, total_time / 1000);
-
-        usleep(total_time);
-
         long long end_time = get_time_us();
         ALOGE("IR transmission completed, total time: %lld us", end_time - start_time);
     }
