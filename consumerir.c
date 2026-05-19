@@ -35,6 +35,7 @@
 #define ARRAY_SIZE(a) (sizeof(a) / sizeof((a)[0]))
 
 #define LIRC_DEVICE_PATH "/dev/lirc0"
+#define TRAILING_SPACE_US 5600
 
 static const consumerir_freq_range_t consumerir_freqs[] = {
     {.min = 30000, .max = 60000},
@@ -61,20 +62,44 @@ static int consumerir_transmit(struct consumerir_device *dev __unused,
         return -1;
     }
 
-    unsigned int *tx_buf = malloc(pattern_len * sizeof(unsigned int));
+    int final_len = pattern_len;
+    int *final_pattern = NULL;
+    bool need_free = false;
+
+    if (final_len % 2 == 0) {
+        final_len++;
+        final_pattern = malloc(final_len * sizeof(int));
+        if (!final_pattern) {
+            ALOGE("Failed to allocate memory for pattern");
+            return -1;
+        }
+        memcpy(final_pattern, pattern, pattern_len * sizeof(int));
+        final_pattern[final_len - 1] = TRAILING_SPACE_US;
+        ALOGE("Pattern is even (%d), adding trailing space %d us, new length: %d",
+              pattern_len, TRAILING_SPACE_US, final_len);
+        need_free = true;
+    } else {
+        final_pattern = (int *)pattern;
+    }
+
+    unsigned int *tx_buf = malloc(final_len * sizeof(unsigned int));
     if (!tx_buf) {
         ALOGE("Failed to allocate tx buffer");
+        if (need_free)
+            free(final_pattern);
         return -1;
     }
 
-    for (i = 0; i < pattern_len; i++) {
-        tx_buf[i] = (unsigned int)pattern[i];
+    for (i = 0; i < final_len; i++) {
+        tx_buf[i] = (unsigned int)final_pattern[i];
     }
 
     fd = open(LIRC_DEVICE_PATH, O_RDWR);
     if (fd < 0) {
         ALOGE("Cannot open LIRC device: %s, error: %s", LIRC_DEVICE_PATH, strerror(errno));
         free(tx_buf);
+        if (need_free)
+            free(final_pattern);
         return -1;
     }
     ALOGE("Opened LIRC device fd=%d", fd);
@@ -91,7 +116,7 @@ static int consumerir_transmit(struct consumerir_device *dev __unused,
     }
 
     long long write_start = get_time_us();
-    ssize_t bytes_to_write = pattern_len * sizeof(unsigned int);
+    ssize_t bytes_to_write = final_len * sizeof(unsigned int);
     ssize_t bytes_written = write(fd, tx_buf, bytes_to_write);
     long long write_end = get_time_us();
 
@@ -101,11 +126,11 @@ static int consumerir_transmit(struct consumerir_device *dev __unused,
         ret = -1;
     } else {
         ALOGE("Successfully wrote %zd bytes (%d samples) to LIRC, took %lld us",
-              bytes_written, pattern_len, write_end - write_start);
+              bytes_written, final_len, write_end - write_start);
 
         unsigned int total_time = 0;
-        for (i = 0; i < pattern_len; i++) {
-            total_time += pattern[i];
+        for (i = 0; i < final_len; i++) {
+            total_time += final_pattern[i];
         }
         ALOGE("Expected IR transmission time: %u us (%u ms)", total_time, total_time / 1000);
 
@@ -117,6 +142,8 @@ static int consumerir_transmit(struct consumerir_device *dev __unused,
 
     close(fd);
     free(tx_buf);
+    if (need_free)
+        free(final_pattern);
     return ret;
 }
 
