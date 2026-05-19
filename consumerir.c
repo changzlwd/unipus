@@ -55,6 +55,13 @@ static int consumerir_transmit(struct consumerir_device *dev __unused,
     }
     ALOGE("Opened LIRC device fd=%d", fd);
 
+    unsigned long features = 0;
+    if (ioctl(fd, LIRC_GET_FEATURES, &features) < 0) {
+        ALOGE("LIRC_GET_FEATURES failed: %s", strerror(errno));
+    } else {
+        ALOGE("LIRC features: 0x%lx", features);
+    }
+
     unsigned int mode = LIRC_MODE_PULSE;
     if (ioctl(fd, LIRC_SET_SEND_MODE, &mode) < 0) {
         ALOGE("LIRC_SET_SEND_MODE failed: %s", strerror(errno));
@@ -64,31 +71,48 @@ static int consumerir_transmit(struct consumerir_device *dev __unused,
         ALOGE("LIRC_SET_SEND_CARRIER failed: %s", strerror(errno));
     }
 
-    unsigned char *byte_buf = malloc(pattern_len * sizeof(int));
-    if (!byte_buf) {
-        ALOGE("Failed to allocate byte buffer");
-        close(fd);
-        return -ENOMEM;
-    }
-
+    ALOGE("IR TX: carrier=%d Hz, count=%d", carrier_freq, pattern_len);
+    ALOGE("IR TX: data dump:");
     for (i = 0; i < pattern_len; i++) {
-        uint32_t val = pattern[i];
-        byte_buf[i*4] = val & 0xFF;
-        byte_buf[i*4+1] = (val >> 8) & 0xFF;
-        byte_buf[i*4+2] = (val >> 16) & 0xFF;
-        byte_buf[i*4+3] = (val >> 24) & 0xFF;
+        if (i % 8 == 0) {
+            if (i > 0)
+                ALOGE("");
+            ALOGE("  [%04d-%04d]:", i, (i + 7 < pattern_len) ? i + 7 : pattern_len - 1);
+        }
+        ALOGE(" %d", pattern[i]);
     }
+    ALOGE("");
 
-    ssize_t bytes_written = write(fd, byte_buf, pattern_len * sizeof(int));
-    if (bytes_written != pattern_len * sizeof(int)) {
-        ALOGE("Write to LIRC device failed: %s, written %zd bytes, expected %zd", 
-              strerror(errno), bytes_written, pattern_len * sizeof(int));
-        ret = -1;
+    if (features & LIRC_CAN_SEND_RAW) {
+        size_t buf_size = (pattern_len + 1) * sizeof(unsigned int);
+        unsigned int *buf = malloc(buf_size);
+        if (!buf) {
+            ALOGE("Failed to allocate buffer");
+            close(fd);
+            return -ENOMEM;
+        }
+        buf[0] = pattern_len;
+        memcpy(&buf[1], pattern, pattern_len * sizeof(unsigned int));
+
+        ALOGE("Writing %zu bytes (RAW mode)", buf_size);
+        ssize_t bytes_written = write(fd, buf, buf_size);
+        if (bytes_written != buf_size) {
+            ALOGE("RAW write failed: %s", strerror(errno));
+            ret = -1;
+        } else {
+            ALOGE("RAW write succeeded");
+        }
+        free(buf);
     } else {
-        ALOGE("Successfully wrote %zd bytes to LIRC", bytes_written);
+        ALOGE("Writing %d integers", pattern_len);
+        ssize_t bytes_written = write(fd, pattern, pattern_len * sizeof(int));
+        if (bytes_written != pattern_len * sizeof(int)) {
+            ALOGE("Write failed: %s", strerror(errno));
+            ret = -1;
+        } else {
+            ALOGE("Write succeeded");
+        }
     }
-
-    free(byte_buf);
 
     close(fd);
     return ret;
@@ -163,4 +187,3 @@ consumerir_module_t HAL_MODULE_INFO_SYM = {
         .methods            = &consumerir_module_methods,
     },
 };
-
