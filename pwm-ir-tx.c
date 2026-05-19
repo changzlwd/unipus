@@ -1,257 +1,137 @@
+// SPDX-License-Identifier: GPL-2.0-or-later
 /*
- * PWM IR Transmitter Driver
- *
- * Copyright (C) 2024 Custom IR HAL Implementation
- *
- * This driver provides a sysfs interface for IR transmission using PWM.
- * It creates:
- *   /sys/class/consumerir/ir/frequency - set carrier frequency (Hz)
- *   /sys/class/consumerir/ir/send - send IR pattern (comma-separated microseconds)
- *
- * Based on Rockchip/Allwinner BSP implementations
+ * Copyright (C) 2017 Sean Young <sean@mess.org>
  */
 
+#include <linux/kernel.h>
 #include <linux/module.h>
-#include <linux/platform_device.h>
 #include <linux/pwm.h>
-#include <linux/hrtimer.h>
-#include <linux/sysfs.h>
-#include <linux/kobject.h>
-#include <linux/string.h>
-#include <linux/ctype.h>
 #include <linux/delay.h>
-#include <linux/device.h>
+#include <linux/slab.h>
+#include <linux/of.h>
+#include <linux/platform_device.h>
+#include <media/rc-core.h>
 
-#define DRIVER_NAME "pwm-ir-tx"
-#define DEFAULT_FREQUENCY 38000
-#define DEFAULT_DUTY_CYCLE 50
+#define DRIVER_NAME	"pwm-ir-tx"
+#define DEVICE_NAME	"PWM IR Transmitter"
 
-struct pwm_ir_tx_data {
-    struct pwm_device *pwm;
-    struct device *dev;
-    int frequency;
-    int duty_cycle;
-    struct hrtimer timer;
-    int *pattern;
-    int pattern_len;
-    int pattern_idx;
-    bool transmitting;
+struct pwm_ir {
+	struct pwm_device *pwm;
+	unsigned int carrier;
+	unsigned int duty_cycle;
 };
 
-static struct class *consumerir_class;
-static struct pwm_ir_tx_data *ir_data;
-
-static enum hrtimer_restart ir_timer_callback(struct hrtimer *timer)
-{
-    struct pwm_ir_tx_data *data = container_of(timer, struct pwm_ir_tx_data, timer);
-
-    if (data->pattern_idx >= data->pattern_len) {
-        pwm_disable(data->pwm);
-        data->transmitting = false;
-        kfree(data->pattern);
-        data->pattern = NULL;
-        dev_info(data->dev, "IR transmission completed\n");
-        return HRTIMER_NORESTART;
-    }
-
-    if (data->pattern_idx % 2 == 0) {
-        pwm_enable(data->pwm);
-    } else {
-        pwm_disable(data->pwm);
-    }
-
-    hrtimer_forward_now(timer, ns_to_ktime(data->pattern[data->pattern_idx] * 1000));
-    data->pattern_idx++;
-
-    return HRTIMER_RESTART;
-}
-
-static ssize_t frequency_show(struct device *dev, struct device_attribute *attr, char *buf)
-{
-    return sprintf(buf, "%d\n", ir_data->frequency);
-}
-
-static ssize_t frequency_store(struct device *dev, struct device_attribute *attr,
-                               const char *buf, size_t count)
-{
-    unsigned long freq;
-    int ret;
-
-    ret = kstrtoul(buf, 10, &freq);
-    if (ret)
-        return ret;
-
-    ir_data->frequency = freq;
-
-    ret = pwm_config(ir_data->pwm, (1000000000UL / freq) * ir_data->duty_cycle / 100,
-                     1000000000UL / freq);
-    if (ret < 0)
-        dev_err(dev, "Failed to configure PWM\n");
-    else
-        dev_info(dev, "Frequency set to %lu Hz\n", freq);
-
-    return count;
-}
-
-static ssize_t send_store(struct device *dev, struct device_attribute *attr,
-                          const char *buf, size_t count)
-{
-    int *pattern = NULL;
-    int len = 0, i = 0;
-    const char *ptr = buf;
-    char *endptr;
-    unsigned long val;
-
-    if (ir_data->transmitting) {
-        dev_err(dev, "IR transmitter busy\n");
-        return -EBUSY;
-    }
-
-    while (*ptr) {
-        while (*ptr == ' ' || *ptr == ',' || *ptr == '\n')
-            ptr++;
-        if (!*ptr)
-            break;
-        len++;
-        while (*ptr && *ptr != ' ' && *ptr != ',' && *ptr != '\n')
-            ptr++;
-    }
-
-    if (len == 0)
-        return count;
-
-    dev_info(dev, "Receiving IR pattern with %d elements\n", len);
-
-    pattern = kzalloc(len * sizeof(int), GFP_KERNEL);
-    if (!pattern)
-        return -ENOMEM;
-
-    ptr = buf;
-    while (*ptr && i < len) {
-        while (*ptr == ' ' || *ptr == ',' || *ptr == '\n')
-            ptr++;
-        if (!*ptr)
-            break;
-
-        val = simple_strtoul(ptr, &endptr, 10);
-        pattern[i++] = val;
-        ptr = endptr;
-    }
-
-    dev_info(dev, "IR pattern received, starting transmission\n");
-
-    ir_data->pattern = pattern;
-    ir_data->pattern_len = len;
-    ir_data->pattern_idx = 0;
-    ir_data->transmitting = true;
-
-    hrtimer_start(&ir_data->timer, ns_to_ktime(0), HRTIMER_MODE_REL);
-
-    return count;
-}
-
-static DEVICE_ATTR_RW(frequency);
-static DEVICE_ATTR_WO(send);
-
-static struct attribute *ir_attrs[] = {
-    &dev_attr_frequency.attr,
-    &dev_attr_send.attr,
-    NULL,
+static const struct of_device_id pwm_ir_of_match[] = {
+	{ .compatible = "pwm-ir-tx", },
+	{ },
 };
+MODULE_DEVICE_TABLE(of, pwm_ir_of_match);
 
-static const struct attribute_group ir_attr_group = {
-    .attrs = ir_attrs,
-};
-
-static int pwm_ir_tx_probe(struct platform_device *pdev)
+static int pwm_ir_set_duty_cycle(struct rc_dev *dev, u32 duty_cycle)
 {
-    struct device *dev = &pdev->dev;
-    struct pwm_device *pwm;
-    int ret;
+	struct pwm_ir *pwm_ir = dev->priv;
 
-    pwm = devm_pwm_get(dev, NULL);
-    if (IS_ERR(pwm)) {
-        dev_err(dev, "Failed to get PWM\n");
-        return PTR_ERR(pwm);
-    }
+	pwm_ir->duty_cycle = duty_cycle;
 
-    ir_data = devm_kzalloc(dev, sizeof(*ir_data), GFP_KERNEL);
-    if (!ir_data)
-        return -ENOMEM;
-
-    ir_data->pwm = pwm;
-    ir_data->frequency = DEFAULT_FREQUENCY;
-    ir_data->duty_cycle = DEFAULT_DUTY_CYCLE;
-    ir_data->transmitting = false;
-
-    hrtimer_init(&ir_data->timer, CLOCK_MONOTONIC, HRTIMER_MODE_REL);
-    ir_data->timer.function = ir_timer_callback;
-
-    consumerir_class = class_create(THIS_MODULE, "consumerir");
-    if (IS_ERR(consumerir_class)) {
-        dev_err(dev, "Failed to create consumerir class\n");
-        return PTR_ERR(consumerir_class);
-    }
-
-    ir_data->dev = device_create(consumerir_class, NULL, MKDEV(0, 0), NULL, "ir");
-    if (IS_ERR(ir_data->dev)) {
-        dev_err(dev, "Failed to create ir device\n");
-        class_destroy(consumerir_class);
-        return PTR_ERR(ir_data->dev);
-    }
-
-    ret = sysfs_create_group(&ir_data->dev->kobj, &ir_attr_group);
-    if (ret) {
-        dev_err(dev, "Failed to create sysfs group\n");
-        device_destroy(consumerir_class, MKDEV(0, 0));
-        class_destroy(consumerir_class);
-        return ret;
-    }
-
-    ret = pwm_config(pwm, (1000000000UL / DEFAULT_FREQUENCY) * DEFAULT_DUTY_CYCLE / 100,
-                     1000000000UL / DEFAULT_FREQUENCY);
-    if (ret < 0) {
-        dev_err(dev, "Failed to configure PWM\n");
-        sysfs_remove_group(&ir_data->dev->kobj, &ir_attr_group);
-        device_destroy(consumerir_class, MKDEV(0, 0));
-        class_destroy(consumerir_class);
-        return ret;
-    }
-
-    dev_info(dev, "PWM IR transmitter initialized, frequency: %d Hz\n", DEFAULT_FREQUENCY);
-
-    return 0;
+	return 0;
 }
 
-static int pwm_ir_tx_remove(struct platform_device *pdev)
+static int pwm_ir_set_carrier(struct rc_dev *dev, u32 carrier)
 {
-    hrtimer_cancel(&ir_data->timer);
-    pwm_disable(ir_data->pwm);
-    sysfs_remove_group(&ir_data->dev->kobj, &ir_attr_group);
-    device_destroy(consumerir_class, MKDEV(0, 0));
-    class_destroy(consumerir_class);
+	struct pwm_ir *pwm_ir = dev->priv;
 
-    return 0;
+	if (!carrier)
+		return -EINVAL;
+
+	pwm_ir->carrier = carrier;
+
+	return 0;
 }
 
-static const struct of_device_id pwm_ir_tx_of_match[] = {
-    { .compatible = "custom,pwm-ir-tx" },
-    { /* Sentinel */ }
+static int pwm_ir_tx(struct rc_dev *dev, unsigned int *txbuf,
+		     unsigned int count)
+{
+	struct pwm_ir *pwm_ir = dev->priv;
+	struct pwm_device *pwm = pwm_ir->pwm;
+	struct pwm_state state;
+	int i;
+	ktime_t edge;
+	long delta;
+
+	pwm_init_state(pwm, &state);
+
+	state.period = DIV_ROUND_CLOSEST(NSEC_PER_SEC, pwm_ir->carrier);
+	pwm_set_relative_duty_cycle(&state, pwm_ir->duty_cycle, 100);
+
+	edge = ktime_get();
+
+	for (i = 0; i < count; i++) {
+		state.enabled = !(i % 2);
+		pwm_apply_state(pwm, &state);
+
+		edge = ktime_add_us(edge, txbuf[i]);
+		delta = ktime_us_delta(edge, ktime_get());
+		if (delta > 0)
+			usleep_range(delta, delta + 10);
+	}
+
+	if (count > 0 && (count % 2) == 0) {
+		delta = ktime_us_delta(ktime_add_us(edge, txbuf[count - 1]),
+				       ktime_get());
+		if (delta > 0)
+			usleep_range(delta, delta + 10);
+	}
+
+	state.enabled = false;
+	pwm_apply_state(pwm, &state);
+
+	return count;
+}
+
+static int pwm_ir_probe(struct platform_device *pdev)
+{
+	struct pwm_ir *pwm_ir;
+	struct rc_dev *rcdev;
+	int rc;
+
+	pwm_ir = devm_kmalloc(&pdev->dev, sizeof(*pwm_ir), GFP_KERNEL);
+	if (!pwm_ir)
+		return -ENOMEM;
+
+	pwm_ir->pwm = devm_pwm_get(&pdev->dev, NULL);
+	if (IS_ERR(pwm_ir->pwm))
+		return PTR_ERR(pwm_ir->pwm);
+
+	pwm_ir->carrier = 38000;
+	pwm_ir->duty_cycle = 50;
+
+	rcdev = devm_rc_allocate_device(&pdev->dev, RC_DRIVER_IR_RAW_TX);
+	if (!rcdev)
+		return -ENOMEM;
+
+	rcdev->priv = pwm_ir;
+	rcdev->driver_name = DRIVER_NAME;
+	rcdev->device_name = DEVICE_NAME;
+	rcdev->tx_ir = pwm_ir_tx;
+	rcdev->s_tx_duty_cycle = pwm_ir_set_duty_cycle;
+	rcdev->s_tx_carrier = pwm_ir_set_carrier;
+
+	rc = devm_rc_register_device(&pdev->dev, rcdev);
+	if (rc < 0)
+		dev_err(&pdev->dev, "failed to register rc device\n");
+
+	return rc;
+}
+
+static struct platform_driver pwm_ir_driver = {
+	.probe = pwm_ir_probe,
+	.driver = {
+		.name	= DRIVER_NAME,
+		.of_match_table = of_match_ptr(pwm_ir_of_match),
+	},
 };
-MODULE_DEVICE_TABLE(of, pwm_ir_tx_of_match);
+module_platform_driver(pwm_ir_driver);
 
-static struct platform_driver pwm_ir_tx_driver = {
-    .probe = pwm_ir_tx_probe,
-    .remove = pwm_ir_tx_remove,
-    .driver = {
-        .name = DRIVER_NAME,
-        .of_match_table = pwm_ir_tx_of_match,
-    },
-};
-
-module_platform_driver(pwm_ir_tx_driver);
-
+MODULE_DESCRIPTION("PWM IR Transmitter");
+MODULE_AUTHOR("Sean Young <sean@mess.org>");
 MODULE_LICENSE("GPL");
-MODULE_DESCRIPTION("PWM IR Transmitter Driver");
-MODULE_AUTHOR("Custom IR HAL Implementation");
-MODULE_ALIAS("platform:pwm-ir-tx");
