@@ -66,20 +66,14 @@ static int pwm_ir_tx(struct rc_dev *dev, unsigned int *txbuf,
 	edge = ktime_get();
 
 	for (i = 0; i < count; i++) {
+		edge = ktime_add_us(edge, txbuf[i]);
+		
 		state.enabled = !(i % 2);
 		pwm_apply_state(pwm, &state);
 
-		edge = ktime_add_us(edge, txbuf[i]);
 		delta = ktime_us_delta(edge, ktime_get());
 		if (delta > 0)
-			usleep_range(delta, delta + 10);
-	}
-
-	if (count > 0 && (count % 2) == 0) {
-		delta = ktime_us_delta(ktime_add_us(edge, txbuf[count - 1]),
-				       ktime_get());
-		if (delta > 0)
-			usleep_range(delta, delta + 10);
+			usleep_range(delta, delta);
 	}
 
 	state.enabled = false;
