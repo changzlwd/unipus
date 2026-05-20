@@ -55,25 +55,28 @@ static int pwm_ir_tx(struct rc_dev *dev, unsigned int *txbuf,
 	struct pwm_device *pwm = pwm_ir->pwm;
 	struct pwm_state state;
 	int i;
-	ktime_t edge;
-	long delta;
+	ktime_t start, now, target;
 
 	pwm_init_state(pwm, &state);
 
 	state.period = DIV_ROUND_CLOSEST(NSEC_PER_SEC, pwm_ir->carrier);
 	pwm_set_relative_duty_cycle(&state, pwm_ir->duty_cycle, 100);
 
-	edge = ktime_get();
+	start = ktime_get();
 
 	for (i = 0; i < count; i++) {
-		edge = ktime_add_us(edge, txbuf[i]);
+		target = ktime_add_us(start, txbuf[i]);
 		
 		state.enabled = !(i % 2);
 		pwm_apply_state(pwm, &state);
-
-		delta = ktime_us_delta(edge, ktime_get());
-		if (delta > 0)
-			usleep_range(delta, delta);
+		
+		now = ktime_get();
+		while (ktime_compare(now, target) < 0) {
+			udelay(1);
+			now = ktime_get();
+		}
+		
+		start = target;
 	}
 
 	state.enabled = false;
