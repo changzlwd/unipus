@@ -32,10 +32,9 @@
 #include <hardware/consumerir.h>
 
 #define ARRAY_SIZE(a) (sizeof(a) / sizeof((a)[0]))
-
+// liuqizhi 20260521 implement infrared remote control
 #define LIRC_DEVICE_PATH "/dev/lirc0"
-#define TRAILING_SPACE_US 10  // 标准trailing space
-#define DEFAULT_DUTY_CYCLE 33  // 33% 占空比（推荐值）
+#define TRAILING_SPACE_US 10
 
 static const consumerir_freq_range_t consumerir_freqs[] = {
     {.min = 30000, .max = 60000},
@@ -56,6 +55,7 @@ static int consumerir_transmit(struct consumerir_device *dev __unused,
     }
 
     int final_len = pattern_len;
+    const int *final_pattern = pattern;
     unsigned int *tx_buf = NULL;
 
     /* liuqizhi 20260521 注释掉偶数判断，直接发送原始数据
@@ -80,7 +80,7 @@ static int consumerir_transmit(struct consumerir_device *dev __unused,
             return -1;
         }
         for (i = 0; i < final_len; i++) {
-            tx_buf[i] = (unsigned int)pattern[i];
+            tx_buf[i] = (unsigned int)final_pattern[i];
         }
     /* liuqizhi 20260521
     }
@@ -98,15 +98,6 @@ static int consumerir_transmit(struct consumerir_device *dev __unused,
     if (ioctl(fd, LIRC_SET_SEND_MODE, &mode) < 0) {
         ALOGE("LIRC_SET_SEND_MODE failed: %s", strerror(errno));
     }
-
-    /* liuqizhi 20260521 注释掉占空比设置
-    unsigned int duty_cycle = DEFAULT_DUTY_CYCLE;
-    if (ioctl(fd, LIRC_SET_SEND_DUTY_CYCLE, &duty_cycle) < 0) {
-        ALOGE("LIRC_SET_SEND_DUTY_CYCLE failed: %s", strerror(errno));
-    } else {
-        ALOGI("LIRC_SET_SEND_DUTY_CYCLE succeeded: %u%%", duty_cycle);
-    }
-    */
 
     if (ioctl(fd, LIRC_SET_SEND_CARRIER, &carrier_freq) < 0) {
         ALOGE("LIRC_SET_SEND_CARRIER failed: %s", strerror(errno));
