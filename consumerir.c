@@ -34,7 +34,7 @@
 #define ARRAY_SIZE(a) (sizeof(a) / sizeof((a)[0]))
 
 #define LIRC_DEVICE_PATH "/dev/lirc0"
-#define TRAILING_SPACE_US 10
+#define TRAILING_SPACE_US 100000  // 格力需要更长的trailing space (100ms)
 #define DEFAULT_DUTY_CYCLE 33  // 33% 占空比（推荐值）
 
 static const consumerir_freq_range_t consumerir_freqs[] = {

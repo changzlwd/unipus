@@ -151,7 +151,7 @@ static int pwm_ir_probe(struct platform_device *pdev)
 		return PTR_ERR(pwm_ir->pwm);
 
 	pwm_ir->carrier = 38000;
-	pwm_ir->duty_cycle = 50;
+	pwm_ir->duty_cycle = 33;  // 同步为33%，与HAL层一致
 	pwm_ir->period = DIV_ROUND_CLOSEST(NSEC_PER_SEC, pwm_ir->carrier);
 	pwm_ir->transmitting = false;
 
