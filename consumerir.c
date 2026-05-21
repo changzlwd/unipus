@@ -58,6 +58,7 @@ static int consumerir_transmit(struct consumerir_device *dev __unused,
     int final_len = pattern_len;
     unsigned int *tx_buf = NULL;
 
+    /* liuqizhi 20260521 注释掉偶数判断，直接发送原始数据
     if (final_len % 2 == 0) {
         final_len++;
         tx_buf = malloc(final_len * sizeof(unsigned int));
@@ -72,6 +73,7 @@ static int consumerir_transmit(struct consumerir_device *dev __unused,
         ALOGI("Pattern is even (%d), adding trailing space %d us, new length: %d",
               pattern_len, TRAILING_SPACE_US, final_len);
     } else {
+    */
         tx_buf = malloc(final_len * sizeof(unsigned int));
         if (!tx_buf) {
             ALOGE("Failed to allocate tx buffer");
@@ -80,7 +82,9 @@ static int consumerir_transmit(struct consumerir_device *dev __unused,
         for (i = 0; i < final_len; i++) {
             tx_buf[i] = (unsigned int)pattern[i];
         }
+    /* liuqizhi 20260521
     }
+    */
 
     fd = open(LIRC_DEVICE_PATH, O_RDWR);
     if (fd < 0) {
@@ -95,12 +99,14 @@ static int consumerir_transmit(struct consumerir_device *dev __unused,
         ALOGE("LIRC_SET_SEND_MODE failed: %s", strerror(errno));
     }
 
+    /* liuqizhi 20260521 注释掉占空比设置
     unsigned int duty_cycle = DEFAULT_DUTY_CYCLE;
     if (ioctl(fd, LIRC_SET_SEND_DUTY_CYCLE, &duty_cycle) < 0) {
         ALOGE("LIRC_SET_SEND_DUTY_CYCLE failed: %s", strerror(errno));
     } else {
         ALOGI("LIRC_SET_SEND_DUTY_CYCLE succeeded: %u%%", duty_cycle);
     }
+    */
 
     if (ioctl(fd, LIRC_SET_SEND_CARRIER, &carrier_freq) < 0) {
         ALOGE("LIRC_SET_SEND_CARRIER failed: %s", strerror(errno));
@@ -165,7 +171,7 @@ static int consumerir_open(const hw_module_t* module, const char* name,
     }
     memset(dev, 0, sizeof(consumerir_device_t));
 
-    dev->common.tag = HARDWARE_DEVICE_TAG;
+    dev->common.tag = HARDWARE_MODULE_TAG;
     dev->common.version = 0;
     dev->common.module = (struct hw_module_t*) module;
     dev->common.close = consumerir_close;
