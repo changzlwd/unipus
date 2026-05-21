@@ -36,8 +36,6 @@
 #define LIRC_DEVICE_PATH "/dev/lirc0"
 #define TRAILING_SPACE_US 10  // 标准trailing space
 #define DEFAULT_DUTY_CYCLE 33  // 33% 占空比（推荐值）
-#define SEND_REPEAT_COUNT 3  // 重复发送次数（针对格力空调）
-#define SEND_INTERVAL_US 100000  // 发送间隔（100ms）
 
 static const consumerir_freq_range_t consumerir_freqs[] = {
     {.min = 30000, .max = 60000},
@@ -111,23 +109,15 @@ static int consumerir_transmit(struct consumerir_device *dev __unused,
     }
 
     ssize_t bytes_to_write = final_len * sizeof(unsigned int);
-    
-    for (int retry = 0; retry < SEND_REPEAT_COUNT; retry++) {
-        ssize_t bytes_written = write(fd, tx_buf, bytes_to_write);
-        
-        if (bytes_written != bytes_to_write) {
-            ALOGE("Write to LIRC device failed (retry %d): %s, written %zd bytes, expected %zd",
-                  retry, strerror(errno), bytes_written, bytes_to_write);
-            ret = -1;
-            break;
-        } else {
-            ALOGI("Successfully wrote %zd bytes (%d samples) to LIRC (retry %d)",
-                  bytes_written, final_len, retry);
-        }
-        
-        if (retry < SEND_REPEAT_COUNT - 1) {
-            usleep(SEND_INTERVAL_US);  // 发送间隔
-        }
+    ssize_t bytes_written = write(fd, tx_buf, bytes_to_write);
+
+    if (bytes_written != bytes_to_write) {
+        ALOGE("Write to LIRC device failed: %s, written %zd bytes, expected %zd",
+              strerror(errno), bytes_written, bytes_to_write);
+        ret = -1;
+    } else {
+        ALOGI("Successfully wrote %zd bytes (%d samples) to LIRC",
+              bytes_written, final_len);
     }
 
     close(fd);
