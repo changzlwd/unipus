@@ -34,6 +34,7 @@
 #define ARRAY_SIZE(a) (sizeof(a) / sizeof((a)[0]))
 // liuqizhi 20260521 implement infrared remote control
 #define LIRC_DEVICE_PATH "/dev/lirc0"
+#define TRAILING_SPACE_US 10
 
 static const consumerir_freq_range_t consumerir_freqs[] = {
     {.min = 30000, .max = 60000},
@@ -57,7 +58,6 @@ static int consumerir_transmit(struct consumerir_device *dev __unused,
     const int *final_pattern = pattern;
     unsigned int *tx_buf = NULL;
 
-    // liuqizhi 20260521 偶数时去掉最后一位，保持奇数位（因为红外码最后一位是低电平）
     if (final_len % 2 == 0) {
         final_len--;
         ALOGI("Pattern is even (%d), remove last slice, new length: %d",
@@ -90,6 +90,13 @@ static int consumerir_transmit(struct consumerir_device *dev __unused,
         ALOGE("LIRC_SET_SEND_CARRIER failed: %s", strerror(errno));
     } else {
         ALOGI("LIRC_SET_SEND_CARRIER succeeded: %d Hz", carrier_freq);
+    }
+
+    unsigned int duty_cycle = 33;
+    if (ioctl(fd, LIRC_SET_SEND_DUTY_CYCLE, &duty_cycle) < 0) {
+        ALOGE("LIRC_SET_SEND_DUTY_CYCLE failed: %s", strerror(errno));
+    } else {
+        ALOGI("LIRC_SET_SEND_DUTY_CYCLE succeeded: %d%%", duty_cycle);
     }
 
     ssize_t bytes_to_write = final_len * sizeof(unsigned int);
@@ -149,7 +156,7 @@ static int consumerir_open(const hw_module_t* module, const char* name,
     }
     memset(dev, 0, sizeof(consumerir_device_t));
 
-    dev->common.tag = HARDWARE_DEVICE_TAG;
+    dev->common.tag = HARDWARE_MODULE_TAG;
     dev->common.version = 0;
     dev->common.module = (struct hw_module_t*) module;
     dev->common.close = consumerir_close;
