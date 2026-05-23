@@ -28,6 +28,12 @@
 #include <sys/ioctl.h>
 #include <linux/lirc.h>
 
+
+
+
+
+
+
 #define ARRAY_SIZE(a) (sizeof(a) / sizeof(a[0]))
 #define LIRC_DEV_PATH "/dev/lirc0"
 #define PATT_LENGTH 1024
@@ -75,8 +81,9 @@ static int consumerir_transmit(struct consumerir_device *dev,
         txbuf[i] = (unsigned int)pattern[i];
     }
 
+    /*wangyanchen 打印 pattern 数组前几个元素用于调试 20260330*/
     print_len = pattern_len > 5 ? 5 : pattern_len;
-    ALOGD("txbuf values (first %d): [0x%x, 0x%x, 0x%x, 0x%x, 0x%x]",
+    ALOGD("[wangyanchen] txbuf values (first %d): [0x%x, 0x%x, 0x%x, 0x%x, 0x%x]",
         print_len,
         print_len > 0 ? txbuf[0] : 0,
         print_len > 1 ? txbuf[1] : 0,
@@ -120,9 +127,13 @@ static int consumerir_get_carrier_freqs(struct consumerir_device *dev,
 static int consumerir_close(hw_device_t *dev)
 {
     free(dev);
+   // close(fd);
     return 0;
 }
 
+/*
+ * Generic device handling
+ */
 static int consumerir_open(const hw_module_t* module, const char* name,
         hw_device_t** device)
 {
@@ -166,3 +177,4 @@ consumerir_module_t HAL_MODULE_INFO_SYM = {
         .methods            = &consumerir_module_methods,
     },
 };
+
