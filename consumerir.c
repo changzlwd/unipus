@@ -32,9 +32,8 @@
 #include <hardware/consumerir.h>
 
 #define ARRAY_SIZE(a) (sizeof(a) / sizeof((a)[0]))
-// liuqizhi 20260521 implement infrared remote control
 #define LIRC_DEVICE_PATH "/dev/lirc0"
-#define TRAILING_SPACE_US 10
+#define DEBUG_LOG_ENABLED 1
 
 static int normalize_ir_value(int value)
 {
@@ -67,35 +66,66 @@ static int consumerir_transmit(struct consumerir_device *dev __unused,
 
     ALOGI("consumerir_transmit: called for %d Hz, %d slices", carrier_freq, pattern_len);
 
+#if DEBUG_LOG_ENABLED
+    ALOGI("=== Original Pattern (first 20 values) ===");
+    for (i = 0; i < pattern_len && i < 20; i++) {
+        ALOGI("  [%d] = %d us (%s)", i, pattern[i], 
+              (i % 2 == 0) ? "HIGH" : "LOW");
+    }
+    if (pattern_len > 20) {
+        ALOGI("  ... (%d more values)", pattern_len - 20);
+    }
+#endif
+
     if (pattern_len <= 0 || !pattern) {
         ALOGE("Invalid pattern or pattern_len");
         return -1;
     }
 
-    int final_len = pattern_len;
-    const int *final_pattern = pattern;
-    unsigned int *tx_buf = NULL;
+    unsigned int *normalized_buf = malloc(pattern_len * sizeof(unsigned int));
+    if (!normalized_buf) {
+        ALOGE("Failed to allocate normalized_buf");
+        return -1;
+    }
 
+    for (i = 0; i < pattern_len; i++) {
+        int original = pattern[i];
+        int normalized = normalize_ir_value(original);
+        normalized_buf[i] = (unsigned int)normalized;
+        
+        if (original != normalized) {
+            ALOGI("Normalized: [%d] %d -> %d us", i, original, normalized);
+        }
+    }
+
+    int final_len = pattern_len;
     if (final_len % 2 == 0) {
         final_len--;
         ALOGI("Pattern is even (%d), remove last slice, new length: %d",
               pattern_len, final_len);
     }
 
-    tx_buf = malloc(final_len * sizeof(unsigned int));
+    unsigned int *tx_buf = malloc(final_len * sizeof(unsigned int));
     if (!tx_buf) {
         ALOGE("Failed to allocate tx buffer");
+        free(normalized_buf);
         return -1;
     }
     for (i = 0; i < final_len; i++) {
-        int original = final_pattern[i];
-        int normalized = normalize_ir_value(original);
-        tx_buf[i] = (unsigned int)normalized;
-        
-        if (original != normalized) {
-            ALOGI("Normalized: [%d] %d -> %d us", i, original, normalized);
-        }
+        tx_buf[i] = normalized_buf[i];
     }
+    free(normalized_buf);
+
+#if DEBUG_LOG_ENABLED
+    ALOGI("=== Final Pattern to Send (first 20 values) ===");
+    for (i = 0; i < final_len && i < 20; i++) {
+        ALOGI("  [%d] = %d us (%s)", i, tx_buf[i],
+              (i % 2 == 0) ? "HIGH" : "LOW");
+    }
+    if (final_len > 20) {
+        ALOGI("  ... (%d more values)", final_len - 20);
+    }
+#endif
 
     fd = open(LIRC_DEVICE_PATH, O_RDWR);
     if (fd < 0) {
@@ -180,7 +210,7 @@ static int consumerir_open(const hw_module_t* module, const char* name,
     }
     memset(dev, 0, sizeof(consumerir_device_t));
 
-    dev->common.tag = HARDWARE_MODULE_TAG;
+    dev->common.tag = HARDWARE_DEVICE_TAG;
     dev->common.version = 0;
     dev->common.module = (struct hw_module_t*) module;
     dev->common.close = consumerir_close;
