@@ -113,13 +113,6 @@ static int consumerir_transmit(struct consumerir_device *dev __unused,
         ALOGI("LIRC_SET_SEND_CARRIER succeeded: %d Hz", carrier_freq);
     }
 
-    unsigned int duty_cycle = 33;
-    if (ioctl(fd, LIRC_SET_SEND_DUTY_CYCLE, &duty_cycle) < 0) {
-        ALOGE("LIRC_SET_SEND_DUTY_CYCLE failed: %s", strerror(errno));
-    } else {
-        ALOGI("LIRC_SET_SEND_DUTY_CYCLE succeeded: %d%%", duty_cycle);
-    }
-
     ssize_t bytes_to_write = final_len * sizeof(unsigned int);
     ssize_t bytes_written = TEMP_FAILURE_RETRY(write(fd, tx_buf, bytes_to_write));
 
