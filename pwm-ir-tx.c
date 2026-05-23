@@ -7,12 +7,12 @@
 #include <linux/kernel.h>
 #include <linux/module.h>
 #include <linux/pwm.h>
-#include <linux/delay.h>
 #include <linux/slab.h>
 #include <linux/of.h>
 #include <linux/platform_device.h>
 #include <linux/workqueue.h>
 #include <linux/sched.h>
+#include <linux/cpumask.h>
 #include <media/rc-core.h>
 
 #define DRIVER_NAME	"pwm-ir-tx"
@@ -96,20 +96,8 @@ static int pwm_ir_tx(struct rc_dev *dev, unsigned int *txbuf, unsigned int count
 		.count = count,
 	};
 	long ret;
-	cpu_set_t cpuset;
-	struct sched_param param;
-
-	CPU_ZERO(&cpuset);
-	CPU_SET(0, &cpuset);
-	sched_setaffinity(0, sizeof(cpuset), &cpuset);
-
-	param.sched_priority = 99;
-	sched_setscheduler(0, SCHED_FIFO, &param);
 
 	ret = work_on_cpu(0, pwm_ir_tx_work, &data);
-
-	param.sched_priority = 0;
-	sched_setscheduler(0, SCHED_NORMAL, &param);
 
 	return ret;
 }
