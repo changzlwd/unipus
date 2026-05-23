@@ -44,6 +44,7 @@ static int pwm_ir_set_duty_cycle(struct rc_dev *dev, u32 duty_cycle)
 	struct pwm_ir *pwm_ir = dev->priv;
 
 	pwm_ir->duty_cycle = duty_cycle;
+	pr_err("[pwm-ir-tx] set duty cycle: %u%%\n", duty_cycle);
 
 	return 0;
 }
@@ -57,6 +58,7 @@ static int pwm_ir_set_carrier(struct rc_dev *dev, u32 carrier)
 
 	pwm_ir->carrier = carrier;
 	pwm_ir->period = DIV_ROUND_CLOSEST(NSEC_PER_SEC, carrier);
+	pr_err("[pwm-ir-tx] set carrier: %u Hz, period: %u ns\n", carrier, pwm_ir->period);
 
 	return 0;
 }
@@ -75,6 +77,7 @@ static enum hrtimer_restart pwm_ir_timer(struct hrtimer *timer)
 	if (pwm_ir->txbuf_index >= pwm_ir->txbuf_len) {
 		pwm_disable(pwm);
 		complete(&pwm_ir->tx_done);
+		pr_err("[pwm-ir-tx] tx completed, sent %u samples\n", pwm_ir->txbuf_len);
 		return HRTIMER_NORESTART;
 	}
 
@@ -131,6 +134,8 @@ static int pwm_ir_probe(struct platform_device *pdev)
 	struct rc_dev *rcdev;
 	int rc;
 
+	pr_err("[pwm-ir-tx] probing...\n");
+
 	pwm_ir = devm_kmalloc(&pdev->dev, sizeof(*pwm_ir), GFP_KERNEL);
 	if (!pwm_ir)
 		return -ENOMEM;
@@ -161,15 +166,20 @@ static int pwm_ir_probe(struct platform_device *pdev)
 	rc = devm_rc_register_device(&pdev->dev, rcdev);
 	if (rc < 0)
 		dev_err(&pdev->dev, "failed to register rc device\n");
+	else
+		pr_err("[pwm-ir-tx] rc device registered, tx_ir=%p\n", rcdev->tx_ir);
 
 	pm_qos_add_request(&pwm_ir_qos_req,
 			   PM_QOS_CPU_DMA_LATENCY, PM_QOS_DEFAULT_VALUE);
+
+	pr_err("[pwm-ir-tx] probe completed\n");
 
 	return rc;
 }
 
 static int pwm_ir_remove(struct platform_device *pdev)
 {
+	pr_err("[pwm-ir-tx] removing...\n");
 	pm_qos_remove_request(&pwm_ir_qos_req);
 	return 0;
 }

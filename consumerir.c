@@ -34,6 +34,17 @@
 #define ARRAY_SIZE(a) (sizeof(a) / sizeof((a)[0]))
 // liuqizhi 20260521 implement infrared remote control
 #define LIRC_DEVICE_PATH "/dev/lirc0"
+#define TRAILING_SPACE_US 10
+
+#ifndef TEMP_FAILURE_RETRY
+#define TEMP_FAILURE_RETRY(exp) ({ \
+  typeof(exp) _rc; \
+  do { \
+    _rc = (exp); \
+  } while (_rc == -1 && errno == EINTR); \
+  _rc; \
+})
+#endif
 
 static const consumerir_freq_range_t consumerir_freqs[] = {
     {.min = 30000, .max = 60000},
@@ -56,23 +67,34 @@ static int consumerir_transmit(struct consumerir_device *dev __unused,
     int final_len = pattern_len;
     const int *final_pattern = pattern;
     unsigned int *tx_buf = NULL;
+    bool added_trailing = false;
 
     if (final_len % 2 == 0) {
-        final_len--;
-        ALOGI("Pattern is even (%d), remove last slice, new length: %d",
-              pattern_len, final_len);
+        final_len++;
+        tx_buf = malloc(final_len * sizeof(unsigned int));
+        if (!tx_buf) {
+            ALOGE("Failed to allocate memory for tx_buf");
+            return -1;
+        }
+        for (i = 0; i < pattern_len; i++) {
+            tx_buf[i] = (unsigned int)pattern[i];
+        }
+        tx_buf[final_len - 1] = TRAILING_SPACE_US;
+        added_trailing = true;
+        ALOGI("Pattern is even (%d), adding trailing space %d us, new length: %d",
+              pattern_len, TRAILING_SPACE_US, final_len);
+    } else {
+        tx_buf = malloc(final_len * sizeof(unsigned int));
+        if (!tx_buf) {
+            ALOGE("Failed to allocate tx buffer");
+            return -1;
+        }
+        for (i = 0; i < final_len; i++) {
+            tx_buf[i] = (unsigned int)final_pattern[i];
+        }
     }
 
-    tx_buf = malloc(final_len * sizeof(unsigned int));
-    if (!tx_buf) {
-        ALOGE("Failed to allocate tx buffer");
-        return -1;
-    }
-    for (i = 0; i < final_len; i++) {
-        tx_buf[i] = (unsigned int)final_pattern[i];
-    }
-
-    fd = open(LIRC_DEVICE_PATH, O_RDWR);
+    fd = TEMP_FAILURE_RETRY(open(LIRC_DEVICE_PATH, O_RDWR));
     if (fd < 0) {
         ALOGE("Cannot open LIRC device: %s, error: %s", LIRC_DEVICE_PATH, strerror(errno));
         free(tx_buf);
@@ -99,7 +121,7 @@ static int consumerir_transmit(struct consumerir_device *dev __unused,
     }
 
     ssize_t bytes_to_write = final_len * sizeof(unsigned int);
-    ssize_t bytes_written = write(fd, tx_buf, bytes_to_write);
+    ssize_t bytes_written = TEMP_FAILURE_RETRY(write(fd, tx_buf, bytes_to_write));
 
     if (bytes_written != bytes_to_write) {
         ALOGE("Write to LIRC device failed: %s, written %zd bytes, expected %zd",
