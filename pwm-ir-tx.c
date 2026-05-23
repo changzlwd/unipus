@@ -12,8 +12,8 @@
 #include <linux/platform_device.h>
 #include <linux/hrtimer.h>
 #include <linux/completion.h>
-#include <linux/pm_qos.h>
 #include <linux/workqueue.h>
+#include <linux/sched.h>
 #include <media/rc-core.h>
 // liuqizhi 20260521 optimize infrared transmission
 #define DRIVER_NAME	"pwm-ir-tx"
@@ -30,8 +30,6 @@ struct pwm_ir {
 	unsigned int txbuf_len;
 	unsigned int txbuf_index;
 };
-
-static struct pm_qos_request pwm_ir_qos_req;
 
 static const struct of_device_id pwm_ir_of_match[] = {
 	{ .compatible = "pwm-ir-tx", },
@@ -114,6 +112,8 @@ static int pwm_ir_tx(struct rc_dev *dev, unsigned int *txbuf,
 {
 	struct pwm_ir *pwm_ir = dev->priv;
 	long ret;
+	cpu_set_t cpuset;
+	struct sched_param param;
 
 	pwm_ir->txbuf = txbuf;
 	pwm_ir->txbuf_len = count;
@@ -121,9 +121,17 @@ static int pwm_ir_tx(struct rc_dev *dev, unsigned int *txbuf,
 
 	pr_err("[pwm-ir-tx] TX HIT, count=%u\n", count);
 
-	pm_qos_update_request(&pwm_ir_qos_req, 1);
-	ret = work_on_cpu(0, pwm_ir_tx_work, pwm_ir);
-	pm_qos_update_request(&pwm_ir_qos_req, PM_QOS_DEFAULT_VALUE);
+	CPU_ZERO(&cpuset);
+	CPU_SET(0, &cpuset);
+	sched_setaffinity(0, sizeof(cpuset), &cpuset);
+
+	param.sched_priority = 99;
+	sched_setscheduler(0, SCHED_FIFO, &param);
+
+	ret = pwm_ir_tx_work(pwm_ir);
+
+	param.sched_priority = 0;
+	sched_setscheduler(0, SCHED_NORMAL, &param);
 
 	return ret;
 }
@@ -169,24 +177,13 @@ static int pwm_ir_probe(struct platform_device *pdev)
 	else
 		pr_err("[pwm-ir-tx] rc device registered, tx_ir=%p\n", rcdev->tx_ir);
 
-	pm_qos_add_request(&pwm_ir_qos_req,
-			   PM_QOS_CPU_DMA_LATENCY, PM_QOS_DEFAULT_VALUE);
-
 	pr_err("[pwm-ir-tx] probe completed\n");
 
 	return rc;
 }
 
-static int pwm_ir_remove(struct platform_device *pdev)
-{
-	pr_err("[pwm-ir-tx] removing...\n");
-	pm_qos_remove_request(&pwm_ir_qos_req);
-	return 0;
-}
-
 static struct platform_driver pwm_ir_driver = {
 	.probe = pwm_ir_probe,
-	.remove = pwm_ir_remove,
 	.driver = {
 		.name	= DRIVER_NAME,
 		.of_match_table = of_match_ptr(pwm_ir_of_match),
