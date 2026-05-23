@@ -36,6 +36,24 @@
 #define LIRC_DEVICE_PATH "/dev/lirc0"
 #define TRAILING_SPACE_US 10
 
+static int normalize_ir_value(int value)
+{
+    const int standard_values[] = {9000, 4500, 600, 1600};
+    const int tolerance = 10; 
+    
+    for (int i = 0; i < ARRAY_SIZE(standard_values); i++) {
+        int std = standard_values[i];
+        int min_val = std * (100 - tolerance) / 100;
+        int max_val = std * (100 + tolerance) / 100;
+        
+        if (value >= min_val && value <= max_val) {
+            return std;
+        }
+    }
+    
+    return value;
+}
+
 static const consumerir_freq_range_t consumerir_freqs[] = {
     {.min = 30000, .max = 60000},
 };
@@ -70,7 +88,13 @@ static int consumerir_transmit(struct consumerir_device *dev __unused,
         return -1;
     }
     for (i = 0; i < final_len; i++) {
-        tx_buf[i] = (unsigned int)final_pattern[i];
+        int original = final_pattern[i];
+        int normalized = normalize_ir_value(original);
+        tx_buf[i] = (unsigned int)normalized;
+        
+        if (original != normalized) {
+            ALOGI("Normalized: [%d] %d -> %d us", i, original, normalized);
+        }
     }
 
     fd = open(LIRC_DEVICE_PATH, O_RDWR);
