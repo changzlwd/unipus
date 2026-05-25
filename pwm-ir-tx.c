@@ -13,6 +13,7 @@
 #include <linux/workqueue.h>
 #include <linux/sched.h>
 #include <linux/cpumask.h>
+#include <linux/cpuset.h>
 #include <media/rc-core.h>
 
 #define DRIVER_NAME	"pwm-ir-tx"
@@ -96,8 +97,24 @@ static int pwm_ir_tx(struct rc_dev *dev, unsigned int *txbuf, unsigned int count
 		.count = count,
 	};
 	long ret;
+	cpumask_t original_mask;
+	int original_priority;
+	struct sched_param param;
+
+	cpumask_copy(&original_mask, &current->cpus_allowed);
+	original_priority = current->prio;
+
+	cpumask_clear(&current->cpus_allowed);
+	cpumask_set_cpu(0, &current->cpus_allowed);
+
+	param.sched_priority = MAX_RT_PRIO - 1;
+	sched_setscheduler_nocheck(current, SCHED_FIFO, &param);
 
 	ret = work_on_cpu(0, pwm_ir_tx_work, &data);
+
+	cpumask_copy(&current->cpus_allowed, &original_mask);
+	param.sched_priority = original_priority;
+	sched_setscheduler_nocheck(current, SCHED_NORMAL, &param);
 
 	return ret;
 }
