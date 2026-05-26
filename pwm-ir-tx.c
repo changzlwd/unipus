@@ -13,6 +13,7 @@
  */
 
 #include <linux/delay.h>
+#include <linux/hrtimer.h>
 #include <linux/module.h>
 #include <linux/of.h>
 #include <linux/platform_device.h>
@@ -23,6 +24,9 @@
 
 #define DRIVER_NAME "pwm-ir-tx"
 #define DEVICE_NAME "PWM IR Transmitter"
+
+/* 选择传输模式：true = hrtimer，false = busy-wait */
+#define USE_HRTIMER_MODE false
 
 struct pwm_ir_dev {
 	struct mutex            lock;
@@ -35,7 +39,9 @@ struct pwm_ir_dev {
 
 struct pwm_ir_packet {
 	struct completion  done;
+	struct hrtimer     timer;
 	struct pwm_device *pwm;
+	bool               abort;
 	unsigned int      *buffer;
 	unsigned int       length;
 	unsigned int       next;
@@ -81,6 +87,51 @@ static int pwm_ir_tx_duty_cycle(struct rc_dev *rdev, u32 duty_cycle)
 	return rc;
 }
 
+static enum hrtimer_restart pwm_ir_tx_timer(struct hrtimer *timer)
+{
+	struct pwm_ir_packet *pkt = container_of(timer, struct pwm_ir_packet, timer);
+	enum hrtimer_restart restart = HRTIMER_RESTART;
+
+	if (!pkt->abort && pkt->next < pkt->length) {
+		u64 orun = hrtimer_forward_now(&pkt->timer,
+			ns_to_ktime(pkt->buffer[pkt->next++]));
+
+		if (orun > 1)
+			pr_warn("pwm-ir: lost %llu hrtimer callback\n", orun - 1);
+
+		if (pkt->next & 0x01)
+			pwm_disable(pkt->pwm);
+		else
+			pwm_enable(pkt->pwm);
+	} else {
+		restart = HRTIMER_NORESTART;
+		pwm_disable(pkt->pwm);
+		complete(&pkt->done);
+	}
+
+	return restart;
+}
+
+static int pwm_ir_tx_transmit_with_timer(struct pwm_ir_packet *pkt)
+{
+	int rc = 0;
+
+	init_completion(&pkt->done);
+
+	hrtimer_init(&pkt->timer, CLOCK_MONOTONIC, HRTIMER_MODE_REL);
+	pkt->timer.function = pwm_ir_tx_timer;
+
+	hrtimer_start(&pkt->timer, ns_to_ktime(0), HRTIMER_MODE_REL);
+
+	rc = wait_for_completion_interruptible(&pkt->done);
+	if (rc != 0) {
+		pkt->abort = true;
+		wait_for_completion(&pkt->done);
+	}
+
+	return pkt->next ? pkt->next : -ERESTARTSYS;
+}
+
 static long pwm_ir_tx_work(void *arg)
 {
 	struct pwm_ir_packet *pkt = arg;
@@ -112,11 +163,33 @@ static long pwm_ir_tx_work(void *arg)
 	return i ? i : -ERESTARTSYS;
 }
 
+static int pwm_ir_tx_transmit_with_delay(struct pwm_ir_packet *pkt)
+{
+	int cpu, rc = -ENODEV;
+
+	for_each_online_cpu(cpu) {
+		if (cpu != 0) {
+			rc = work_on_cpu(cpu, pwm_ir_tx_work, pkt);
+			break;
+		}
+	}
+
+	if (rc == -ENODEV) {
+		pr_warn("pwm-ir: can't run on auxilliary cpu, trying CPU 0\n");
+		rc = work_on_cpu(0, pwm_ir_tx_work, pkt);
+	}
+
+	return rc;
+}
+
 static int pwm_ir_tx_transmit(struct rc_dev *rdev, unsigned int *txbuf, unsigned int n)
 {
 	struct pwm_ir_dev *dev = rdev->priv;
 	struct pwm_ir_packet pkt = {};
-	int cpu, rc = -ENODEV;
+	int i, rc;
+
+	for (i = 0; i < n; i++)
+		txbuf[i] *= NSEC_PER_USEC;
 
 	mutex_lock(&dev->lock);
 
@@ -124,17 +197,10 @@ static int pwm_ir_tx_transmit(struct rc_dev *rdev, unsigned int *txbuf, unsigned
 	pkt.buffer = txbuf;
 	pkt.length = n;
 
-	for_each_online_cpu(cpu) {
-		if (cpu != 0) {
-			rc = work_on_cpu(cpu, pwm_ir_tx_work, &pkt);
-			break;
-		}
-	}
-
-	if (rc == -ENODEV) {
-		pr_warn("pwm-ir: can't run on auxilliary cpu, trying CPU 0\n");
-		rc = work_on_cpu(0, pwm_ir_tx_work, &pkt);
-	}
+	if (USE_HRTIMER_MODE)
+		rc = pwm_ir_tx_transmit_with_timer(&pkt);
+	else
+		rc = pwm_ir_tx_transmit_with_delay(&pkt);
 
 	mutex_unlock(&dev->lock);
 
@@ -191,6 +257,9 @@ static int pwm_ir_probe(struct platform_device *pdev)
 	}
 
 	dev->rdev = rcdev;
+
+	pr_info("pwm-ir: probed successfully, using %s mode\n",
+		USE_HRTIMER_MODE ? "hrtimer" : "busy-wait");
 
 	return 0;
 }
