@@ -221,7 +221,7 @@ static int pwm_ir_probe(struct platform_device *pdev)
 	dev->pdev = pdev;
 	platform_set_drvdata(pdev, dev);
 
-	dev->pwm = devm_of_pwm_get(&pdev->dev, pdev->dev.of_node, NULL);
+	dev->pwm = devm_pwm_get(&pdev->dev, NULL);
 	if (IS_ERR(dev->pwm)) {
 		dev_err(&pdev->dev, "failed to get PWM device\n");
 		return PTR_ERR(dev->pwm);
@@ -236,15 +236,14 @@ static int pwm_ir_probe(struct platform_device *pdev)
 		return rc;
 	}
 
-	rcdev = rc_allocate_device();
+	rcdev = rc_allocate_device(RC_DRIVER_IR_RAW);
 	if (!rcdev)
 		return -ENOMEM;
 
-	rcdev->parent       = &pdev->dev;
+	rcdev->dev.parent   = &pdev->dev;
 	rcdev->driver_name  = DRIVER_NAME;
 	rcdev->device_name  = DEVICE_NAME;
-	rcdev->map_name     = RC_MAP_LIRC;
-	rcdev->driver_type  = RC_DRIVER_IR_RAW;
+	rcdev->map_name     = RC_MAP_EMPTY;
 	rcdev->priv        = dev;
 	rcdev->tx_ir        = pwm_ir_tx_transmit;
 	rcdev->s_tx_carrier = pwm_ir_tx_carrier;
