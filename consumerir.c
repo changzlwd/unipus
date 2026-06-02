@@ -24,6 +24,7 @@
 #include <fcntl.h>
 #include <sys/ioctl.h>
 #include <sys/types.h>
+#include <linux/jiffies.h>
 
 #include <linux/lirc.h>
 
@@ -143,6 +144,58 @@ static int consumerir_get_carrier_freqs(struct consumerir_device *dev __unused,
     to_copy = len < to_copy ? len : to_copy;
     memcpy(ranges, consumerir_freqs, to_copy * sizeof(consumerir_freq_range_t));
     return to_copy;
+}
+
+static int consumerir_start_aging_test(struct consumerir_device *dev __unused,
+    int carrier_freq, int duration_ms)
+{
+    int fd = -1;
+    int ret = 0;
+    unsigned int pattern[] = {9000, 4500, 600, 1600, 600, 1600, 600, 1600, 600, 560};
+    int pattern_len = ARRAY_SIZE(pattern);
+    unsigned int tx_buf[pattern_len];
+    int i;
+
+    ALOGI("consumerir_start_aging_test: carrier=%d Hz, duration=%d ms", carrier_freq, duration_ms);
+
+    fd = TEMP_FAILURE_RETRY(open(LIRC_DEVICE_PATH, O_RDWR));
+    if (fd < 0) {
+        ALOGE("Cannot open LIRC device: %s, error: %s", LIRC_DEVICE_PATH, strerror(errno));
+        return -1;
+    }
+
+    unsigned int mode = LIRC_MODE_PULSE;
+    if (ioctl(fd, LIRC_SET_SEND_MODE, &mode) < 0) {
+        ALOGE("LIRC_SET_SEND_MODE failed: %s", strerror(errno));
+    }
+
+    if (ioctl(fd, LIRC_SET_SEND_CARRIER, &carrier_freq) < 0) {
+        ALOGE("LIRC_SET_SEND_CARRIER failed: %s", strerror(errno));
+        close(fd);
+        return -1;
+    }
+
+    for (i = 0; i < pattern_len; i++) {
+        tx_buf[i] = pattern[i];
+    }
+
+    ssize_t bytes_to_write = pattern_len * sizeof(unsigned int);
+    unsigned long start_time = jiffies;
+    unsigned long duration_jiffies = msecs_to_jiffies(duration_ms);
+
+    while (time_before(jiffies, start_time + duration_jiffies)) {
+        ssize_t bytes_written = TEMP_FAILURE_RETRY(write(fd, tx_buf, bytes_to_write));
+        if (bytes_written != bytes_to_write) {
+            ALOGE("Write failed during aging test: %s", strerror(errno));
+            ret = -1;
+            break;
+        }
+        usleep(100000);
+    }
+
+    close(fd);
+    ALOGI("consumerir_start_aging_test: completed");
+    return ret;
 }
 
 static int consumerir_close(hw_device_t *dev)
