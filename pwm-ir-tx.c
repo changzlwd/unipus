@@ -1,9 +1,10 @@
 /*
- * Copyright (C) 2017 Sean Young <sean@mess.org>
+ * Copyright (C) 2013 by Xiang Xiao <xiaoxiang@xiaomi.com>
+ * Copyright (C) 2017 XiaoMi, Inc.
  *
  * This program is free software; you can redistribute it and/or modify
- * it under the terms of the GNU General Public License version 2, or
- * (at your option) any later version.
+ * it under the terms of the GNU General Public License version 2 and
+ * only version 2 as published by the Free Software Foundation.
  *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
@@ -11,33 +12,261 @@
  * GNU General Public License for more details.
  */
 
-#include <linux/kernel.h>
-#include <linux/module.h>
-#include <linux/pwm.h>
 #include <linux/delay.h>
-#include <linux/slab.h>
+#include <linux/hrtimer.h>
+#include <linux/module.h>
 #include <linux/of.h>
 #include <linux/platform_device.h>
-#include <linux/pm_qos.h>
-#include <linux/workqueue.h>
+#include <linux/pwm.h>
+#include <linux/sched.h>
+#include <linux/slab.h>
 #include <media/rc-core.h>
 
-#define DRIVER_NAME	"pwm-ir-tx"
-#define DEVICE_NAME	"PWM IR Transmitter"
+#define DRIVER_NAME "pwm-ir-tx"
+#define DEVICE_NAME "PWM IR Transmitter"
 
-struct pwm_ir {
+/* 选择传输模式：true = hrtimer，false = busy-wait */
+#define USE_HRTIMER_MODE false
+
+struct pwm_ir_dev {
+	struct mutex            lock;
+	struct platform_device *pdev;
+	struct rc_dev          *rdev;
+	struct pwm_device      *pwm;
+	u32                     carrier;
+	u32                     duty_cycle;
+};
+
+struct pwm_ir_packet {
+	struct completion  done;
+	struct hrtimer     timer;
 	struct pwm_device *pwm;
-	unsigned int carrier;
-	unsigned int duty_cycle;
+	bool               abort;
+	unsigned int      *buffer;
+	unsigned int       length;
+	unsigned int       next;
 };
 
-struct pwm_ir_tx_data {
-	struct pwm_ir *pwm_ir;
-	unsigned int *txbuf;
-	unsigned int count;
-};
+static int pwm_ir_tx_config(struct pwm_ir_dev *dev, u32 carrier, u32 duty_cycle)
+{
+	int period_ns, duty_ns, rc;
 
-static struct pm_qos_request pwm_ir_qos_req;
+	period_ns = NSEC_PER_SEC / carrier;
+	duty_ns = period_ns * duty_cycle / 100;
+
+	rc = pwm_config(dev->pwm, duty_ns, period_ns);
+	if (rc == 0) {
+		dev->carrier = carrier;
+		dev->duty_cycle = duty_cycle;
+	}
+
+	return rc;
+}
+
+static int pwm_ir_tx_carrier(struct rc_dev *rdev, u32 carrier)
+{
+	struct pwm_ir_dev *dev = rdev->priv;
+	int rc;
+
+	mutex_lock(&dev->lock);
+	rc = pwm_ir_tx_config(dev, carrier, dev->duty_cycle);
+	mutex_unlock(&dev->lock);
+
+	return rc;
+}
+
+static int pwm_ir_tx_duty_cycle(struct rc_dev *rdev, u32 duty_cycle)
+{
+	struct pwm_ir_dev *dev = rdev->priv;
+	int rc;
+
+	mutex_lock(&dev->lock);
+	rc = pwm_ir_tx_config(dev, dev->carrier, duty_cycle);
+	mutex_unlock(&dev->lock);
+
+	return rc;
+}
+
+static enum hrtimer_restart pwm_ir_tx_timer(struct hrtimer *timer)
+{
+	struct pwm_ir_packet *pkt = container_of(timer, struct pwm_ir_packet, timer);
+	enum hrtimer_restart restart = HRTIMER_RESTART;
+
+	if (!pkt->abort && pkt->next < pkt->length) {
+		u64 orun = hrtimer_forward_now(&pkt->timer,
+			ns_to_ktime(pkt->buffer[pkt->next++]));
+
+		if (orun > 1)
+			pr_warn("pwm-ir: lost %llu hrtimer callback\n", orun - 1);
+
+		if (pkt->next & 0x01)
+			pwm_disable(pkt->pwm);
+		else
+			pwm_enable(pkt->pwm);
+	} else {
+		restart = HRTIMER_NORESTART;
+		pwm_disable(pkt->pwm);
+		complete(&pkt->done);
+	}
+
+	return restart;
+}
+
+static int pwm_ir_tx_transmit_with_timer(struct pwm_ir_packet *pkt)
+{
+	int rc = 0;
+
+	init_completion(&pkt->done);
+
+	hrtimer_init(&pkt->timer, CLOCK_MONOTONIC, HRTIMER_MODE_REL);
+	pkt->timer.function = pwm_ir_tx_timer;
+
+	hrtimer_start(&pkt->timer, ns_to_ktime(0), HRTIMER_MODE_REL);
+
+	rc = wait_for_completion_interruptible(&pkt->done);
+	if (rc != 0) {
+		pkt->abort = true;
+		wait_for_completion(&pkt->done);
+	}
+
+	return pkt->next ? pkt->next : -ERESTARTSYS;
+}
+
+static long pwm_ir_tx_work(void *arg)
+{
+	struct pwm_ir_packet *pkt = arg;
+	unsigned long flags;
+	int i;
+
+	init_completion(&pkt->done);
+
+	local_irq_save(flags);
+
+	for (i = 0; i < pkt->length; i++) {
+		if (signal_pending(current))
+			break;
+
+		if (i & 0x01)
+			pwm_disable(pkt->pwm);
+		else
+			pwm_enable(pkt->pwm);
+
+		ndelay(pkt->buffer[i] % 1000);
+		udelay(pkt->buffer[i] / 1000);
+	}
+
+	pwm_disable(pkt->pwm);
+	local_irq_restore(flags);
+
+	complete(&pkt->done);
+
+	return i ? i : -ERESTARTSYS;
+}
+
+static int pwm_ir_tx_transmit_with_delay(struct pwm_ir_packet *pkt)
+{
+	int cpu, rc = -ENODEV;
+
+	for_each_online_cpu(cpu) {
+		if (cpu != 0) {
+			rc = work_on_cpu(cpu, pwm_ir_tx_work, pkt);
+			break;
+		}
+	}
+
+	if (rc == -ENODEV) {
+		pr_warn("pwm-ir: can't run on auxilliary cpu, trying CPU 0\n");
+		rc = work_on_cpu(0, pwm_ir_tx_work, pkt);
+	}
+
+	return rc;
+}
+
+static int pwm_ir_tx_transmit(struct rc_dev *rdev, unsigned int *txbuf, unsigned int n)
+{
+	struct pwm_ir_dev *dev = rdev->priv;
+	struct pwm_ir_packet pkt = {};
+	int i, rc;
+
+	for (i = 0; i < n; i++)
+		txbuf[i] *= NSEC_PER_USEC;
+
+	mutex_lock(&dev->lock);
+
+	pkt.pwm    = dev->pwm;
+	pkt.buffer = txbuf;
+	pkt.length = n;
+
+	if (USE_HRTIMER_MODE)
+		rc = pwm_ir_tx_transmit_with_timer(&pkt);
+	else
+		rc = pwm_ir_tx_transmit_with_delay(&pkt);
+
+	mutex_unlock(&dev->lock);
+
+	return rc;
+}
+
+static int pwm_ir_probe(struct platform_device *pdev)
+{
+	struct pwm_ir_dev *dev;
+	struct rc_dev *rcdev;
+	int rc;
+
+	dev = devm_kzalloc(&pdev->dev, sizeof(*dev), GFP_KERNEL);
+	if (!dev)
+		return -ENOMEM;
+
+	mutex_init(&dev->lock);
+	dev->pdev = pdev;
+	platform_set_drvdata(pdev, dev);
+
+	dev->pwm = devm_pwm_get(&pdev->dev, NULL);
+	if (IS_ERR(dev->pwm)) {
+		dev_err(&pdev->dev, "failed to get PWM device\n");
+		return PTR_ERR(dev->pwm);
+	}
+
+	dev->carrier = 38000;
+	dev->duty_cycle = 50;
+
+	rc = pwm_ir_tx_config(dev, dev->carrier, dev->duty_cycle);
+	if (rc != 0) {
+		dev_err(&pdev->dev, "failed to config PWM\n");
+		return rc;
+	}
+
+	rcdev = devm_rc_allocate_device(&pdev->dev, RC_DRIVER_IR_RAW_TX);
+	if (!rcdev)
+		return -ENOMEM;
+
+	rcdev->dev.parent   = &pdev->dev;
+	rcdev->driver_name  = DRIVER_NAME;
+	rcdev->device_name  = DEVICE_NAME;
+	rcdev->map_name     = RC_MAP_EMPTY;
+	rcdev->priv        = dev;
+	rcdev->tx_ir        = pwm_ir_tx_transmit;
+	rcdev->s_tx_carrier = pwm_ir_tx_carrier;
+	rcdev->s_tx_duty_cycle = pwm_ir_tx_duty_cycle;
+
+	rc = devm_rc_register_device(&pdev->dev, rcdev);
+	if (rc < 0) {
+		dev_err(&pdev->dev, "failed to register rc device\n");
+		return rc;
+	}
+
+	dev->rdev = rcdev;
+
+	pr_info("pwm-ir: probed successfully, using %s mode\n",
+		USE_HRTIMER_MODE ? "hrtimer" : "busy-wait");
+
+	return 0;
+}
+
+static int pwm_ir_remove(struct platform_device *pdev)
+{
+	return 0;
+}
 
 static const struct of_device_id pwm_ir_of_match[] = {
 	{ .compatible = "pwm-ir-tx", },
@@ -45,133 +274,17 @@ static const struct of_device_id pwm_ir_of_match[] = {
 };
 MODULE_DEVICE_TABLE(of, pwm_ir_of_match);
 
-static int pwm_ir_set_duty_cycle(struct rc_dev *dev, u32 duty_cycle)
-{
-	struct pwm_ir *pwm_ir = dev->priv;
-
-	pwm_ir->duty_cycle = duty_cycle;
-
-	return 0;
-}
-
-static int pwm_ir_set_carrier(struct rc_dev *dev, u32 carrier)
-{
-	struct pwm_ir *pwm_ir = dev->priv;
-
-	if (!carrier)
-		return -EINVAL;
-
-	pwm_ir->carrier = carrier;
-
-	return 0;
-}
-
-static long pwm_ir_tx_work(void *arg)
-{
-	struct pwm_ir_tx_data *data = arg;
-	struct pwm_ir *pwm_ir = data->pwm_ir;
-	struct pwm_device *pwm = pwm_ir->pwm;
-	struct pwm_state state;
-	int i;
-	u64 edge;
-
-	pwm_init_state(pwm, &state);
-
-	state.period = DIV_ROUND_CLOSEST(NSEC_PER_SEC, pwm_ir->carrier);
-	pwm_set_relative_duty_cycle(&state, pwm_ir->duty_cycle, 100);
-
-	state.enabled = false;
-	pwm_apply_state(pwm, &state);
-
-	edge = ktime_get_ns();
-
-	for (i = 0; i < data->count; i++) {
-		if (i & 0x01)
-			pwm_disable(pwm);
-		else
-			pwm_enable(pwm);
-
-		edge += data->txbuf[i] * NSEC_PER_USEC;
-		while (ktime_get_ns() < edge)
-			cpu_relax();
-	}
-
-	pwm_disable(pwm);
-
-	return data->count;
-}
-
-static int pwm_ir_tx(struct rc_dev *dev, unsigned int *txbuf,
-		     unsigned int count)
-{
-	struct pwm_ir *pwm_ir = dev->priv;
-	struct pwm_ir_tx_data data = {
-		.pwm_ir = pwm_ir,
-		.txbuf = txbuf,
-		.count = count,
-	};
-	long ret;
-
-	pm_qos_update_request(&pwm_ir_qos_req, 1);
-	ret = work_on_cpu(0, pwm_ir_tx_work, &data);
-	pm_qos_update_request(&pwm_ir_qos_req, PM_QOS_DEFAULT_VALUE);
-
-	return ret;
-}
-
-static int pwm_ir_probe(struct platform_device *pwd)
-{
-	struct pwm_ir *pwm_ir;
-	struct rc_dev *rcdev;
-	int rc;
-	pwm_ir = devm_kmalloc(&pwd->dev, sizeof(*pwm_ir), GFP_KERNEL);
-	if (!pwm_ir)
-		return -ENOMEM;
-
-	pwm_ir->pwm = devm_pwm_get(&pwd->dev, NULL);
-	if (IS_ERR(pwm_ir->pwm))
-		return PTR_ERR(pwm_ir->pwm);
-
-	pwm_ir->carrier = 38000;
-	pwm_ir->duty_cycle = 50;
-
-	rcdev = devm_rc_allocate_device(&pwd->dev, RC_DRIVER_IR_RAW_TX);
-	if (!rcdev)
-		return -ENOMEM;
-
-	rcdev->priv = pwm_ir;
-	rcdev->driver_name = DRIVER_NAME;
-	rcdev->device_name = DEVICE_NAME;
-	rcdev->tx_ir = pwm_ir_tx;
-	rcdev->s_tx_duty_cycle = pwm_ir_set_duty_cycle;
-	rcdev->s_tx_carrier = pwm_ir_set_carrier;
-
-	rc = devm_rc_register_device(&pwd->dev, rcdev);
-	if (rc < 0)
-		dev_err(&pwd->dev, "failed to register rc device\n");
-
-	pm_qos_add_request(&pwm_ir_qos_req,
-			   PM_QOS_CPU_DMA_LATENCY, PM_QOS_DEFAULT_VALUE);
-
-	return rc;
-}
-
-static int pwm_ir_remove(struct platform_device *pwd)
-{
-	pm_qos_remove_request(&pwm_ir_qos_req);
-	return 0;
-}
-
 static struct platform_driver pwm_ir_driver = {
-	.probe = pwm_ir_probe,
+	.probe  = pwm_ir_probe,
 	.remove = pwm_ir_remove,
 	.driver = {
-		.name	= DRIVER_NAME,
-		.of_match_table = of_match_ptr(pwm_ir_of_match),
+		.name   = DRIVER_NAME,
+		.owner  = THIS_MODULE,
+		.of_match_table = pwm_ir_of_match,
 	},
 };
 module_platform_driver(pwm_ir_driver);
 
-MODULE_DESCRIPTION("PWM IR Transmitter");
-MODULE_AUTHOR("Sean Young <sean@mess.org>");
 MODULE_LICENSE("GPL");
+MODULE_AUTHOR("Xiang Xiao <xiaoxiang@xiaomi.com>");
+MODULE_DESCRIPTION("PWM IR driver");
