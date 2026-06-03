@@ -1,6 +1,14 @@
-// SPDX-License-Identifier: GPL-2.0-or-later
 /*
  * Copyright (C) 2017 Sean Young <sean@mess.org>
+ *
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License version 2, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
  */
 
 #include <linux/kernel.h>
@@ -10,24 +18,26 @@
 #include <linux/slab.h>
 #include <linux/of.h>
 #include <linux/platform_device.h>
-#include <linux/hrtimer.h>
-#include <linux/completion.h>
+#include <linux/pm_qos.h>
+#include <linux/workqueue.h>
 #include <media/rc-core.h>
-// liuqizhi 20260521 optimize infrared transmission
+
 #define DRIVER_NAME	"pwm-ir-tx"
 #define DEVICE_NAME	"PWM IR Transmitter"
 
 struct pwm_ir {
 	struct pwm_device *pwm;
-	struct hrtimer timer;
-	struct completion tx_done;
-	unsigned int period;
-	u32 carrier;
-	u32 duty_cycle;
-	const unsigned int *txbuf;
-	unsigned int txbuf_len;
-	unsigned int txbuf_index;
+	unsigned int carrier;
+	unsigned int duty_cycle;
 };
+
+struct pwm_ir_tx_data {
+	struct pwm_ir *pwm_ir;
+	unsigned int *txbuf;
+	unsigned int count;
+};
+
+static struct pm_qos_request pwm_ir_qos_req;
 
 static const struct of_device_id pwm_ir_of_match[] = {
 	{ .compatible = "pwm-ir-tx", },
@@ -52,102 +62,109 @@ static int pwm_ir_set_carrier(struct rc_dev *dev, u32 carrier)
 		return -EINVAL;
 
 	pwm_ir->carrier = carrier;
-	pwm_ir->period = DIV_ROUND_CLOSEST(NSEC_PER_SEC, carrier);
 
 	return 0;
+}
+
+static long pwm_ir_tx_work(void *arg)
+{
+	struct pwm_ir_tx_data *data = arg;
+	struct pwm_ir *pwm_ir = data->pwm_ir;
+	struct pwm_device *pwm = pwm_ir->pwm;
+	struct pwm_state state;
+	int i;
+	u64 edge;
+
+	pwm_init_state(pwm, &state);
+
+	state.period = DIV_ROUND_CLOSEST(NSEC_PER_SEC, pwm_ir->carrier);
+	pwm_set_relative_duty_cycle(&state, pwm_ir->duty_cycle, 100);
+
+	state.enabled = false;
+	pwm_apply_state(pwm, &state);
+
+	edge = ktime_get_ns();
+
+	for (i = 0; i < data->count; i++) {
+		if (i & 0x01)
+			pwm_disable(pwm);
+		else
+			pwm_enable(pwm);
+
+		edge += data->txbuf[i] * NSEC_PER_USEC;
+		while (ktime_get_ns() < edge)
+			cpu_relax();
+	}
+
+	pwm_disable(pwm);
+
+	return data->count;
 }
 
 static int pwm_ir_tx(struct rc_dev *dev, unsigned int *txbuf,
 		     unsigned int count)
 {
 	struct pwm_ir *pwm_ir = dev->priv;
-	struct pwm_device *pwm = pwm_ir->pwm;
-	int ret;
+	struct pwm_ir_tx_data data = {
+		.pwm_ir = pwm_ir,
+		.txbuf = txbuf,
+		.count = count,
+	};
+	long ret;
 
-	pwm_ir->txbuf = txbuf;
-	pwm_ir->txbuf_len = count;
-	pwm_ir->txbuf_index = 0;
-
-	pwm_config(pwm, pwm_ir->period * pwm_ir->duty_cycle / 100, pwm_ir->period);
-
-	hrtimer_start(&pwm_ir->timer, 0, HRTIMER_MODE_REL);
-
-	ret = wait_for_completion_timeout(&pwm_ir->tx_done,
-					 msecs_to_jiffies(1000));
-	if (!ret)
-		ret = -ETIMEDOUT;
-	else
-		ret = count;
+	pm_qos_update_request(&pwm_ir_qos_req, 1);
+	ret = work_on_cpu(0, pwm_ir_tx_work, &data);
+	pm_qos_update_request(&pwm_ir_qos_req, PM_QOS_DEFAULT_VALUE);
 
 	return ret;
 }
 
-static enum hrtimer_restart pwm_ir_timer(struct hrtimer *timer)
-{
-	struct pwm_ir *pwm_ir = container_of(timer, struct pwm_ir, timer);
-	struct pwm_device *pwm = pwm_ir->pwm;
-	u64 ns;
-
-	if (pwm_ir->txbuf_index % 2 == 0)
-		pwm_enable(pwm);
-	else
-		pwm_disable(pwm);
-
-	if (pwm_ir->txbuf_index >= pwm_ir->txbuf_len) {
-		complete(&pwm_ir->tx_done);
-		return HRTIMER_NORESTART;
-	}
-
-	ns = (u64)pwm_ir->txbuf[pwm_ir->txbuf_index] * 1000;
-	hrtimer_add_expires_ns(timer, ns);
-
-	pwm_ir->txbuf_index++;
-
-	return HRTIMER_RESTART;
-}
-
-static int pwm_ir_probe(struct platform_device *pdev)
+static int pwm_ir_probe(struct platform_device *pwd)
 {
 	struct pwm_ir *pwm_ir;
 	struct rc_dev *rcdev;
 	int rc;
-
-	pwm_ir = devm_kmalloc(&pdev->dev, sizeof(*pwm_ir), GFP_KERNEL);
+	pwm_ir = devm_kmalloc(&pwd->dev, sizeof(*pwm_ir), GFP_KERNEL);
 	if (!pwm_ir)
 		return -ENOMEM;
 
-	pwm_ir->pwm = devm_pwm_get(&pdev->dev, NULL);
+	pwm_ir->pwm = devm_pwm_get(&pwd->dev, NULL);
 	if (IS_ERR(pwm_ir->pwm))
 		return PTR_ERR(pwm_ir->pwm);
 
 	pwm_ir->carrier = 38000;
 	pwm_ir->duty_cycle = 50;
-	pwm_ir->period = DIV_ROUND_CLOSEST(NSEC_PER_SEC, pwm_ir->carrier);
 
-	rcdev = devm_rc_allocate_device(&pdev->dev, RC_DRIVER_IR_RAW_TX);
+	rcdev = devm_rc_allocate_device(&pwd->dev, RC_DRIVER_IR_RAW_TX);
 	if (!rcdev)
 		return -ENOMEM;
 
-	init_completion(&pwm_ir->tx_done);
-	hrtimer_init(&pwm_ir->timer, CLOCK_MONOTONIC, HRTIMER_MODE_REL);
-	pwm_ir->timer.function = pwm_ir_timer;
-
-	rcdev->tx_ir = pwm_ir_tx;
 	rcdev->priv = pwm_ir;
 	rcdev->driver_name = DRIVER_NAME;
 	rcdev->device_name = DEVICE_NAME;
+	rcdev->tx_ir = pwm_ir_tx;
 	rcdev->s_tx_duty_cycle = pwm_ir_set_duty_cycle;
 	rcdev->s_tx_carrier = pwm_ir_set_carrier;
 
-	rc = devm_rc_register_device(&pdev->dev, rcdev);
+	rc = devm_rc_register_device(&pwd->dev, rcdev);
 	if (rc < 0)
-		dev_err(&pdev->dev, "failed to register rc device\n");
+		dev_err(&pwd->dev, "failed to register rc device\n");
+
+	pm_qos_add_request(&pwm_ir_qos_req,
+			   PM_QOS_CPU_DMA_LATENCY, PM_QOS_DEFAULT_VALUE);
 
 	return rc;
 }
 
+static int pwm_ir_remove(struct platform_device *pwd)
+{
+	pm_qos_remove_request(&pwm_ir_qos_req);
+	return 0;
+}
+
 static struct platform_driver pwm_ir_driver = {
 	.probe = pwm_ir_probe,
+	.remove = pwm_ir_remove,
 	.driver = {
 		.name	= DRIVER_NAME,
 		.of_match_table = of_match_ptr(pwm_ir_of_match),
