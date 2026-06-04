@@ -165,21 +165,8 @@ static long pwm_ir_tx_work(void *arg)
 
 static int pwm_ir_tx_transmit_with_delay(struct pwm_ir_packet *pkt)
 {
-	int cpu, rc = -ENODEV;
-
-	for_each_online_cpu(cpu) {
-		if (cpu != 0) {
-			rc = work_on_cpu(cpu, pwm_ir_tx_work, pkt);
-			break;
-		}
-	}
-
-	if (rc == -ENODEV) {
-		pr_warn("pwm-ir: can't run on auxilliary cpu, trying CPU 0\n");
-		rc = work_on_cpu(0, pwm_ir_tx_work, pkt);
-	}
-
-	return rc;
+	// 直接调用，不通过 work_on_cpu，避免调度延迟
+	return pwm_ir_tx_work(pkt);
 }
 
 static int pwm_ir_tx_transmit(struct rc_dev *rdev, unsigned int *txbuf, unsigned int n)
