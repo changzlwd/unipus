@@ -276,7 +276,11 @@ static ssize_t lirc_transmit(struct file *file, const char __user *buf,
 		if (ret < 0)
 			goto out_kfree_raw;
 
-		count = ret;
+		/* drop trailing space */
+		if (!(ret % 2))
+			count = ret - 1;
+		else
+			count = ret;
 
 		txbuf = kmalloc_array(count, sizeof(unsigned int), GFP_KERNEL);
 		if (!txbuf) {
@@ -312,14 +316,14 @@ static ssize_t lirc_transmit(struct file *file, const char __user *buf,
 		}
 	}
 
-	for (i = 0; i < count; i++) {
-		if (txbuf[i] > IR_MAX_DURATION - duration || !txbuf[i]) {
-			ret = -EINVAL;
-			goto out_kfree;
-		}
-
-		duration += txbuf[i];
-	}
+//	for (i = 0; i < count; i++) {
+//		if (txbuf[i] > IR_MAX_DURATION - duration || !txbuf[i]) {
+//			ret = -EINVAL;
+//			goto out_kfree;
+//		}
+//
+//		duration += txbuf[i];
+//	}
 
 	start = ktime_get();
 
