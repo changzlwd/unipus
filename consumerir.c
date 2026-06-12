@@ -152,6 +152,9 @@ static int consumerir_close(hw_device_t *dev)
 static int consumerir_open(const hw_module_t* module, const char* name,
         hw_device_t** device)
 {
+    int init_fd;
+    unsigned int mode;
+
     if (strcmp(name, CONSUMERIR_TRANSMITTER) != 0) {
         ALOGE("Invalid name for IR device: %s", name);
         return -EINVAL;
@@ -176,6 +179,16 @@ static int consumerir_open(const hw_module_t* module, const char* name,
     dev->transmit = consumerir_transmit;
     dev->get_num_carrier_freqs = consumerir_get_num_carrier_freqs;
     dev->get_carrier_freqs = consumerir_get_carrier_freqs;
+
+    init_fd = open(LIRC_DEVICE_PATH, O_RDWR);
+    if (init_fd >= 0) {
+        mode = LIRC_MODE_PULSE;
+        ioctl(init_fd, LIRC_SET_SEND_MODE, &mode);
+        close(init_fd);
+        ALOGI("Consumer IR pre-initialized LIRC device");
+    } else {
+        ALOGW("Failed to pre-initialize LIRC device: %s", strerror(errno));
+    }
 
     *device = (hw_device_t*) dev;
     ALOGI("Consumer IR device opened successfully with LIRC");
