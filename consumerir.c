@@ -180,14 +180,15 @@ static int consumerir_open(const hw_module_t* module, const char* name,
     dev->get_num_carrier_freqs = consumerir_get_num_carrier_freqs;
     dev->get_carrier_freqs = consumerir_get_carrier_freqs;
 
+    ALOGE("consumerir_open: trying to pre-initialize LIRC device");
     init_fd = open(LIRC_DEVICE_PATH, O_RDWR);
     if (init_fd >= 0) {
         mode = LIRC_MODE_PULSE;
         ioctl(init_fd, LIRC_SET_SEND_MODE, &mode);
         close(init_fd);
-        ALOGI("Consumer IR pre-initialized LIRC device");
+        ALOGE("consumerir_open: LIRC device pre-initialized successfully, fd=%d", init_fd);
     } else {
-        ALOGW("Failed to pre-initialize LIRC device: %s", strerror(errno));
+        ALOGE("consumerir_open: FAILED to pre-initialize LIRC device: %s", strerror(errno));
     }
 
     *device = (hw_device_t*) dev;
