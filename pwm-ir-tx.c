@@ -1,15 +1,6 @@
+// SPDX-License-Identifier: GPL-2.0-or-later
 /*
- * Copyright (C) 2013 by Xiang Xiao <xiaoxiang@xiaomi.com>
- * Copyright (C) 2017 XiaoMi, Inc.
- *
- * This program is free software; you can redistribute it and/or modify
- * it under the terms of the GNU General Public License version 2 and
- * only version 2 as published by the Free Software Foundation.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
+ * Copyright (C) 2017 Sean Young <sean@mess.org>
  */
 
 #include <linux/delay.h>
@@ -24,9 +15,7 @@
 
 #define DRIVER_NAME "pwm-ir-tx"
 #define DEVICE_NAME "PWM IR Transmitter"
-
-/* 选择传输模式：true = hrtimer，false = busy-wait */
-#define USE_HRTIMER_MODE false
+#define USE_HRTIMER_MODE true
 
 struct pwm_ir_dev {
 	struct mutex            lock;
@@ -97,7 +86,7 @@ static enum hrtimer_restart pwm_ir_tx_timer(struct hrtimer *timer)
 			ns_to_ktime(pkt->buffer[pkt->next++]));
 
 		if (orun > 1)
-			pr_warn("pwm-ir: lost %llu hrtimer callback\n", orun - 1);
+			pr_err("pwm-ir: lost %llu hrtimer callback\n", orun - 1);
 
 		if (pkt->next & 0x01)
 			pwm_disable(pkt->pwm);
@@ -121,7 +110,10 @@ static int pwm_ir_tx_transmit_with_timer(struct pwm_ir_packet *pkt)
 	hrtimer_init(&pkt->timer, CLOCK_MONOTONIC, HRTIMER_MODE_REL);
 	pkt->timer.function = pwm_ir_tx_timer;
 
-	hrtimer_start(&pkt->timer, ns_to_ktime(0), HRTIMER_MODE_REL);
+	hrtimer_start(&pkt->timer, ns_to_ktime(pkt->buffer[0]), HRTIMER_MODE_REL);
+	pkt->next = 1;
+	if (pkt->next <= pkt->length)
+		pwm_enable(pkt->pwm);
 
 	rc = wait_for_completion_interruptible(&pkt->done);
 	if (rc != 0) {
@@ -130,43 +122,6 @@ static int pwm_ir_tx_transmit_with_timer(struct pwm_ir_packet *pkt)
 	}
 
 	return pkt->next ? pkt->next : -ERESTARTSYS;
-}
-
-static long pwm_ir_tx_work(void *arg)
-{
-	struct pwm_ir_packet *pkt = arg;
-	unsigned long flags;
-	int i;
-
-	init_completion(&pkt->done);
-
-	local_irq_save(flags);
-
-	for (i = 0; i < pkt->length; i++) {
-		if (signal_pending(current))
-			break;
-
-		if (i & 0x01)
-			pwm_disable(pkt->pwm);
-		else
-			pwm_enable(pkt->pwm);
-
-		ndelay(pkt->buffer[i] % 1000);
-		udelay(pkt->buffer[i] / 1000);
-	}
-
-	pwm_disable(pkt->pwm);
-	local_irq_restore(flags);
-
-	complete(&pkt->done);
-
-	return i ? i : -ERESTARTSYS;
-}
-
-static int pwm_ir_tx_transmit_with_delay(struct pwm_ir_packet *pkt)
-{
-	// 直接调用，不通过 work_on_cpu，避免调度延迟
-	return pwm_ir_tx_work(pkt);
 }
 
 static int pwm_ir_tx_transmit(struct rc_dev *rdev, unsigned int *txbuf, unsigned int n)
@@ -184,10 +139,7 @@ static int pwm_ir_tx_transmit(struct rc_dev *rdev, unsigned int *txbuf, unsigned
 	pkt.buffer = txbuf;
 	pkt.length = n;
 
-	if (USE_HRTIMER_MODE)
-		rc = pwm_ir_tx_transmit_with_timer(&pkt);
-	else
-		rc = pwm_ir_tx_transmit_with_delay(&pkt);
+	rc = pwm_ir_tx_transmit_with_timer(&pkt);
 
 	mutex_unlock(&dev->lock);
 
@@ -210,7 +162,7 @@ static int pwm_ir_probe(struct platform_device *pdev)
 
 	dev->pwm = devm_pwm_get(&pdev->dev, NULL);
 	if (IS_ERR(dev->pwm)) {
-		dev_err(&pdev->dev, "failed to get PWM device\n");
+		pr_err("failed to get PWM device\n");
 		return PTR_ERR(dev->pwm);
 	}
 
@@ -219,7 +171,7 @@ static int pwm_ir_probe(struct platform_device *pdev)
 
 	rc = pwm_ir_tx_config(dev, dev->carrier, dev->duty_cycle);
 	if (rc != 0) {
-		dev_err(&pdev->dev, "failed to config PWM\n");
+		pr_err("failed to config PWM\n");
 		return rc;
 	}
 
@@ -238,14 +190,13 @@ static int pwm_ir_probe(struct platform_device *pdev)
 
 	rc = devm_rc_register_device(&pdev->dev, rcdev);
 	if (rc < 0) {
-		dev_err(&pdev->dev, "failed to register rc device\n");
+		pr_err("failed to register rc device\n");
 		return rc;
 	}
 
 	dev->rdev = rcdev;
 
-	pr_info("pwm-ir: probed successfully, using %s mode\n",
-		USE_HRTIMER_MODE ? "hrtimer" : "busy-wait");
+	pr_err("pwm-ir: probed successfully, using hrtimer mode\n");
 
 	return 0;
 }
@@ -272,6 +223,6 @@ static struct platform_driver pwm_ir_driver = {
 };
 module_platform_driver(pwm_ir_driver);
 
+MODULE_DESCRIPTION("PWM IR Transmitter");
+MODULE_AUTHOR("Sean Young <sean@mess.org>");
 MODULE_LICENSE("GPL");
-MODULE_AUTHOR("Xiang Xiao <xiaoxiang@xiaomi.com>");
-MODULE_DESCRIPTION("PWM IR driver");
