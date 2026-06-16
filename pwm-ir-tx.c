@@ -226,3 +226,569 @@ module_platform_driver(pwm_ir_driver);
 MODULE_DESCRIPTION("PWM IR Transmitter");
 MODULE_AUTHOR("Sean Young <sean@mess.org>");
 MODULE_LICENSE("GPL");
+// SPDX-License-Identifier// SPDX-License-Identifier: GPL-2.0-or-later
+/*
+ * Copyright (C) 20// SPDX-License-Identifier: GPL-2.0-or-later
+/*
+ * Copyright (C) 2017 Sean Young <sean@mess.org// SPDX-License-Identifier: GPL-2.0-or-later
+/*
+ * Copyright (C) 2017 Sean Young <sean@mess.org>
+ */
+
+#include <linux/delay.h>
+#include <linux/hrtimer.h>
+#include <linux/module.h>
+#include// SPDX-License-Identifier: GPL-2.0-or-later
+/*
+ * Copyright (C) 2017 Sean Young <sean@mess.org>
+ */
+
+#include <linux/delay.h>
+#include <linux/hrtimer.h>
+#include <linux/module.h>
+#include <linux/of.h>
+#include <linux/platform// SPDX-License-Identifier: GPL-2.0-or-later
+/*
+ * Copyright (C) 2017 Sean Young <sean@mess.org>
+ */
+
+#include <linux/delay.h>
+#include <linux/hrtimer.h>
+#include <linux/module.h>
+#include <linux/of.h>
+#include <linux/platform_device.h>
+#include <linux/pwm.h>
+#include <linux/sched.h>
+// SPDX-License-Identifier: GPL-2.0-or-later
+/*
+ * Copyright (C) 2017 Sean Young <sean@mess.org>
+ */
+
+#include <linux/delay.h>
+#include <linux/hrtimer.h>
+#include <linux/module.h>
+#include <linux/of.h>
+#include <linux/platform_device.h>
+#include <linux/pwm.h>
+#include <linux/sched.h>
+#include <linux/slab.h>
+#include <media/rc-core.h>
+
+#define DRIVER// SPDX-License-Identifier: GPL-2.0-or-later
+/*
+ * Copyright (C) 2017 Sean Young <sean@mess.org>
+ */
+
+#include <linux/delay.h>
+#include <linux/hrtimer.h>
+#include <linux/module.h>
+#include <linux/of.h>
+#include <linux/platform_device.h>
+#include <linux/pwm.h>
+#include <linux/sched.h>
+#include <linux/slab.h>
+#include <media/rc-core.h>
+
+#define DRIVER_NAME "pwm-ir-tx"
+#define DEVICE_NAME "PWM IR Transmitter// SPDX-License-Identifier: GPL-2.0-or-later
+/*
+ * Copyright (C) 2017 Sean Young <sean@mess.org>
+ */
+
+#include <linux/delay.h>
+#include <linux/hrtimer.h>
+#include <linux/module.h>
+#include <linux/of.h>
+#include <linux/platform_device.h>
+#include <linux/pwm.h>
+#include <linux/sched.h>
+#include <linux/slab.h>
+#include <media/rc-core.h>
+
+#define DRIVER_NAME "pwm-ir-tx"
+#define DEVICE_NAME "PWM IR Transmitter"
+
+#define SHORT_PULSE_THRESH// SPDX-License-Identifier: GPL-2.0-or-later
+/*
+ * Copyright (C) 2017 Sean Young <sean@mess.org>
+ */
+
+#include <linux/delay.h>
+#include <linux/hrtimer.h>
+#include <linux/module.h>
+#include <linux/of.h>
+#include <linux/platform_device.h>
+#include <linux/pwm.h>
+#include <linux/sched.h>
+#include <linux/slab.h>
+#include <media/rc-core.h>
+
+#define DRIVER_NAME "pwm-ir-tx"
+#define DEVICE_NAME "PWM IR Transmitter"
+
+#define SHORT_PULSE_THRESHOLD_US 1000
+
+struct pwm_ir_dev {
+	struct mutex            lock;
+	struct platform_device *pdev;
+// SPDX-License-Identifier: GPL-2.0-or-later
+/*
+ * Copyright (C) 2017 Sean Young <sean@mess.org>
+ */
+
+#include <linux/delay.h>
+#include <linux/hrtimer.h>
+#include <linux/module.h>
+#include <linux/of.h>
+#include <linux/platform_device.h>
+#include <linux/pwm.h>
+#include <linux/sched.h>
+#include <linux/slab.h>
+#include <media/rc-core.h>
+
+#define DRIVER_NAME "pwm-ir-tx"
+#define DEVICE_NAME "PWM IR Transmitter"
+
+#define SHORT_PULSE_THRESHOLD_US 1000
+
+struct pwm_ir_dev {
+	struct mutex            lock;
+	struct platform_device *pdev;
+	struct rc_dev          *rdev;
+	struct// SPDX-License-Identifier: GPL-2.0-or-later
+/*
+ * Copyright (C) 2017 Sean Young <sean@mess.org>
+ */
+
+#include <linux/delay.h>
+#include <linux/hrtimer.h>
+#include <linux/module.h>
+#include <linux/of.h>
+#include <linux/platform_device.h>
+#include <linux/pwm.h>
+#include <linux/sched.h>
+#include <linux/slab.h>
+#include <media/rc-core.h>
+
+#define DRIVER_NAME "pwm-ir-tx"
+#define DEVICE_NAME "PWM IR Transmitter"
+
+#define SHORT_PULSE_THRESHOLD_US 1000
+
+struct pwm_ir_dev {
+	struct mutex            lock;
+	struct platform_device *pdev;
+	struct rc_dev          *rdev;
+	struct pwm_device      *pwm;
+	u32                     carrier;
+	u32                     duty_cycle;
+};
+
+struct pwm// SPDX-License-Identifier: GPL-2.0-or-later
+/*
+ * Copyright (C) 2017 Sean Young <sean@mess.org>
+ */
+
+#include <linux/delay.h>
+#include <linux/hrtimer.h>
+#include <linux/module.h>
+#include <linux/of.h>
+#include <linux/platform_device.h>
+#include <linux/pwm.h>
+#include <linux/sched.h>
+#include <linux/slab.h>
+#include <media/rc-core.h>
+
+#define DRIVER_NAME "pwm-ir-tx"
+#define DEVICE_NAME "PWM IR Transmitter"
+
+#define SHORT_PULSE_THRESHOLD_US 1000
+
+struct pwm_ir_dev {
+	struct mutex            lock;
+	struct platform_device *pdev;
+	struct rc_dev          *rdev;
+	struct pwm_device      *pwm;
+	u32                     carrier;
+	u32                     duty_cycle;
+};
+
+struct pwm_ir_packet {
+	struct completion  done// SPDX-License-Identifier: GPL-2.0-or-later
+/*
+ * Copyright (C) 2017 Sean Young <sean@mess.org>
+ */
+
+#include <linux/delay.h>
+#include <linux/hrtimer.h>
+#include <linux/module.h>
+#include <linux/of.h>
+#include <linux/platform_device.h>
+#include <linux/pwm.h>
+#include <linux/sched.h>
+#include <linux/slab.h>
+#include <media/rc-core.h>
+
+#define DRIVER_NAME "pwm-ir-tx"
+#define DEVICE_NAME "PWM IR Transmitter"
+
+#define SHORT_PULSE_THRESHOLD_US 1000
+
+struct pwm_ir_dev {
+	struct mutex            lock;
+	struct platform_device *pdev;
+	struct rc_dev          *rdev;
+	struct pwm_device      *pwm;
+	u32                     carrier;
+	u32                     duty_cycle;
+};
+
+struct pwm_ir_packet {
+	struct completion  done;
+	struct hrtimer     timer;
+	struct pwm_device *pwm;
+	bool// SPDX-License-Identifier: GPL-2.0-or-later
+/*
+ * Copyright (C) 2017 Sean Young <sean@mess.org>
+ */
+
+#include <linux/delay.h>
+#include <linux/hrtimer.h>
+#include <linux/module.h>
+#include <linux/of.h>
+#include <linux/platform_device.h>
+#include <linux/pwm.h>
+#include <linux/sched.h>
+#include <linux/slab.h>
+#include <media/rc-core.h>
+
+#define DRIVER_NAME "pwm-ir-tx"
+#define DEVICE_NAME "PWM IR Transmitter"
+
+#define SHORT_PULSE_THRESHOLD_US 1000
+
+struct pwm_ir_dev {
+	struct mutex            lock;
+	struct platform_device *pdev;
+	struct rc_dev          *rdev;
+	struct pwm_device      *pwm;
+	u32                     carrier;
+	u32                     duty_cycle;
+};
+
+struct pwm_ir_packet {
+	struct completion  done;
+	struct hrtimer     timer;
+	struct pwm_device *pwm;
+	bool               abort;
+	unsigned int      *buffer;// SPDX-License-Identifier: GPL-2.0-or-later
+/*
+ * Copyright (C) 2017 Sean Young <sean@mess.org>
+ */
+
+#include <linux/delay.h>
+#include <linux/hrtimer.h>
+#include <linux/module.h>
+#include <linux/of.h>
+#include <linux/platform_device.h>
+#include <linux/pwm.h>
+#include <linux/sched.h>
+#include <linux/slab.h>
+#include <media/rc-core.h>
+
+#define DRIVER_NAME "pwm-ir-tx"
+#define DEVICE_NAME "PWM IR Transmitter"
+
+#define SHORT_PULSE_THRESHOLD_US 1000
+
+struct pwm_ir_dev {
+	struct mutex            lock;
+	struct platform_device *pdev;
+	struct rc_dev          *rdev;
+	struct pwm_device      *pwm;
+	u32                     carrier;
+	u32                     duty_cycle;
+};
+
+struct pwm_ir_packet {
+	struct completion  done;
+	struct hrtimer     timer;
+	struct pwm_device *pwm;
+	bool               abort;
+	unsigned int      *buffer;
+	unsigned int       length;
+	unsigned int       next;
+};
+
+static int pwm_// SPDX-License-Identifier: GPL-2.0-or-later
+/*
+ * Copyright (C) 2017 Sean Young <sean@mess.org>
+ */
+
+#include <linux/delay.h>
+#include <linux/hrtimer.h>
+#include <linux/module.h>
+#include <linux/of.h>
+#include <linux/platform_device.h>
+#include <linux/pwm.h>
+#include <linux/sched.h>
+#include <linux/slab.h>
+#include <media/rc-core.h>
+
+#define DRIVER_NAME "pwm-ir-tx"
+#define DEVICE_NAME "PWM IR Transmitter"
+
+#define SHORT_PULSE_THRESHOLD_US 1000
+
+struct pwm_ir_dev {
+	struct mutex            lock;
+	struct platform_device *pdev;
+	struct rc_dev          *rdev;
+	struct pwm_device      *pwm;
+	u32                     carrier;
+	u32                     duty_cycle;
+};
+
+struct pwm_ir_packet {
+	struct completion  done;
+	struct hrtimer     timer;
+	struct pwm_device *pwm;
+	bool               abort;
+	unsigned int      *buffer;
+	unsigned int       length;
+	unsigned int       next;
+};
+
+static int pwm_ir_tx_config(struct pwm_ir_dev *dev, u32 carrier, u32// SPDX-License-Identifier: GPL-2.0-or-later
+/*
+ * Copyright (C) 2017 Sean Young <sean@mess.org>
+ */
+
+#include <linux/delay.h>
+#include <linux/hrtimer.h>
+#include <linux/module.h>
+#include <linux/of.h>
+#include <linux/platform_device.h>
+#include <linux/pwm.h>
+#include <linux/sched.h>
+#include <linux/slab.h>
+#include <media/rc-core.h>
+
+#define DRIVER_NAME "pwm-ir-tx"
+#define DEVICE_NAME "PWM IR Transmitter"
+
+#define SHORT_PULSE_THRESHOLD_US 1000
+
+struct pwm_ir_dev {
+	struct mutex            lock;
+	struct platform_device *pdev;
+	struct rc_dev          *rdev;
+	struct pwm_device      *pwm;
+	u32                     carrier;
+	u32                     duty_cycle;
+};
+
+struct pwm_ir_packet {
+	struct completion  done;
+	struct hrtimer     timer;
+	struct pwm_device *pwm;
+	bool               abort;
+	unsigned int      *buffer;
+	unsigned int       length;
+	unsigned int       next;
+};
+
+static int pwm_ir_tx_config(struct pwm_ir_dev *dev, u32 carrier, u32 duty_cycle)
+{
+	int period_ns, duty_ns, rc;
+
+	// SPDX-License-Identifier: GPL-2.0-or-later
+/*
+ * Copyright (C) 2017 Sean Young <sean@mess.org>
+ */
+
+#include <linux/delay.h>
+#include <linux/hrtimer.h>
+#include <linux/module.h>
+#include <linux/of.h>
+#include <linux/platform_device.h>
+#include <linux/pwm.h>
+#include <linux/sched.h>
+#include <linux/slab.h>
+#include <media/rc-core.h>
+
+#define DRIVER_NAME "pwm-ir-tx"
+#define DEVICE_NAME "PWM IR Transmitter"
+
+#define SHORT_PULSE_THRESHOLD_US 1000
+
+struct pwm_ir_dev {
+	struct mutex            lock;
+	struct platform_device *pdev;
+	struct rc_dev          *rdev;
+	struct pwm_device      *pwm;
+	u32                     carrier;
+	u32                     duty_cycle;
+};
+
+struct pwm_ir_packet {
+	struct completion  done;
+	struct hrtimer     timer;
+	struct pwm_device *pwm;
+	bool               abort;
+	unsigned int      *buffer;
+	unsigned int       length;
+	unsigned int       next;
+};
+
+static int pwm_ir_tx_config(struct pwm_ir_dev *dev, u32 carrier, u32 duty_cycle)
+{
+	int period_ns, duty_ns, rc;
+
+	period_ns = NSEC_PER_SEC / carrier;
+	duty_ns = period_n// SPDX-License-Identifier: GPL-2.0-or-later
+/*
+ * Copyright (C) 2017 Sean Young <sean@mess.org>
+ */
+
+#include <linux/delay.h>
+#include <linux/hrtimer.h>
+#include <linux/module.h>
+#include <linux/of.h>
+#include <linux/platform_device.h>
+#include <linux/pwm.h>
+#include <linux/sched.h>
+#include <linux/slab.h>
+#include <media/rc-core.h>
+
+#define DRIVER_NAME "pwm-ir-tx"
+#define DEVICE_NAME "PWM IR Transmitter"
+
+#define SHORT_PULSE_THRESHOLD_US 1000
+
+struct pwm_ir_dev {
+	struct mutex            lock;
+	struct platform_device *pdev;
+	struct rc_dev          *rdev;
+	struct pwm_device      *pwm;
+	u32                     carrier;
+	u32                     duty_cycle;
+};
+
+struct pwm_ir_packet {
+	struct completion  done;
+	struct hrtimer     timer;
+	struct pwm_device *pwm;
+	bool               abort;
+	unsigned int      *buffer;
+	unsigned int       length;
+	unsigned int       next;
+};
+
+static int pwm_ir_tx_config(struct pwm_ir_dev *dev, u32 carrier, u32 duty_cycle)
+{
+	int period_ns, duty_ns, rc;
+
+	period_ns = NSEC_PER_SEC / carrier;
+	duty_ns = period_ns * duty_cycle / 100;
+
+	rc = pwm_config(dev->// SPDX-License-Identifier: GPL-2.0-or-later
+/*
+ * Copyright (C) 2017 Sean Young <sean@mess.org>
+ */
+
+#include <linux/delay.h>
+#include <linux/hrtimer.h>
+#include <linux/module.h>
+#include <linux/of.h>
+#include <linux/platform_device.h>
+#include <linux/pwm.h>
+#include <linux/sched.h>
+#include <linux/slab.h>
+#include <media/rc-core.h>
+
+#define DRIVER_NAME "pwm-ir-tx"
+#define DEVICE_NAME "PWM IR Transmitter"
+
+#define SHORT_PULSE_THRESHOLD_US 1000
+
+struct pwm_ir_dev {
+	struct mutex            lock;
+	struct platform_device *pdev;
+	struct rc_dev          *rdev;
+	struct pwm_device      *pwm;
+	u32                     carrier;
+	u32                     duty_cycle;
+};
+
+struct pwm_ir_packet {
+	struct completion  done;
+	struct hrtimer     timer;
+	struct pwm_device *pwm;
+	bool               abort;
+	unsigned int      *buffer;
+	unsigned int       length;
+	unsigned int       next;
+};
+
+static int pwm_ir_tx_config(struct pwm_ir_dev *dev, u32 carrier, u32 duty_cycle)
+{
+	int period_ns, duty_ns, rc;
+
+	period_ns = NSEC_PER_SEC / carrier;
+	duty_ns = period_ns * duty_cycle / 100;
+
+	rc = pwm_config(dev->pwm, duty_ns, period_ns);
+	if (rc == 0) {// SPDX-License-Identifier: GPL-2.0-or-later
+/*
+ * Copyright (C) 2017 Sean Young <sean@mess.org>
+ */
+
+#include <linux/delay.h>
+#include <linux/hrtimer.h>
+#include <linux/module.h>
+#include <linux/of.h>
+#include <linux/platform_device.h>
+#include <linux/pwm.h>
+#include <linux/sched.h>
+#include <linux/slab.h>
+#include <media/rc-core.h>
+
+#define DRIVER_NAME "pwm-ir-tx"
+#define DEVICE_NAME "PWM IR Transmitter"
+
+#define SHORT_PULSE_THRESHOLD_US 1000
+
+struct pwm_ir_dev {
+	struct mutex            lock;
+	struct platform_device *pdev;
+	struct rc_dev          *rdev;
+	struct pwm_device      *pwm;
+	u32                     carrier;
+	u32                     duty_cycle;
+};
+
+struct pwm_ir_packet {
+	struct completion  done;
+	struct hrtimer     timer;
+	struct pwm_device *pwm;
+	bool               abort;
+	unsigned int      *buffer;
+	unsigned int       length;
+	unsigned int       next;
+};
+
+static int pwm_ir_tx_config(struct pwm_ir_dev *dev, u32 carrier, u32 duty_cycle)
+{
+	int period_ns, duty_ns, rc;
+
+	period_ns = NSEC_PER_SEC / carrier;
+	duty_ns = period_ns * duty_cycle / 100;
+
+	rc = pwm_config(dev->pwm, duty_ns, period_ns);
+	if (rc == 0) {
+		dev->carrier = carrier;
+		dev->duty_cycle = duty_cycle;
+	}
+
+	return rc
