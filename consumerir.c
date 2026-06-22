@@ -94,7 +94,14 @@ static int consumerir_transmit(struct consumerir_device *dev __unused,
     }
 
     ssize_t bytes_to_write = final_len * sizeof(unsigned int);
+
+    ALOGE("consumerir_transmit: About to write %zd bytes (%d samples) to fd=%d",
+          bytes_to_write, final_len, fd);
+
     ssize_t bytes_written = write(fd, tx_buf, bytes_to_write);
+
+    ALOGE("consumerir_transmit: write() returned %zd, errno=%d (%s)",
+          bytes_written, errno, strerror(errno));
 
     if (bytes_written != bytes_to_write) {
         ALOGE("Write to LIRC device failed: %s, written %zd bytes, expected %zd",
