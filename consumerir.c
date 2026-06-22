@@ -76,14 +76,33 @@ static int consumerir_transmit(struct consumerir_device *dev __unused,
         ALOGE("Failed to allocate tx buffer");
         return -1;
     }
+
+    // 先计算总时长
+    unsigned int total_duration = 0;
     for (i = 0; i < pattern_len; i++) {
         unsigned int val = (unsigned int)final_pattern[i];
-        if (val > MAX_SINGLE_DURATION_US) {
-            ALOGI("consumerir_transmit: clamping pattern[%d] from %u to %d us",
-                  i, val, CLAMP_DURATION_US);
-            val = CLAMP_DURATION_US;
+        total_duration += val;
+    }
+
+    ALOGI("consumerir_transmit: total_duration=%u us (%d ms), max=%d ms",
+          total_duration, total_duration / 1000, 500);
+
+    // 如果总时长超过500ms，将超过50ms的数据砍成40ms
+    if (total_duration > 500000) {
+        ALOGI("consumerir_transmit: total duration > 500ms, clamping large values...");
+        for (i = 0; i < pattern_len; i++) {
+            unsigned int val = (unsigned int)final_pattern[i];
+            if (val > MAX_SINGLE_DURATION_US) {
+                ALOGI("consumerir_transmit: clamping pattern[%d] from %u to %d us",
+                      i, val, CLAMP_DURATION_US);
+                val = CLAMP_DURATION_US;
+            }
+            tx_buf[i] = val;
         }
-        tx_buf[i] = val;
+    } else {
+        for (i = 0; i < pattern_len; i++) {
+            tx_buf[i] = (unsigned int)final_pattern[i];
+        }
     }
     if (final_len != pattern_len) {
         tx_buf[pattern_len] = 10;
