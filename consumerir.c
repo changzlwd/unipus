@@ -34,8 +34,7 @@
 #define ARRAY_SIZE(a) (sizeof(a) / sizeof((a)[0]))
 // liuqizhi 20260521 implement infrared remote control
 #define LIRC_DEVICE_PATH "/dev/lirc0"
-#define MAX_SINGLE_DURATION_US 50000  // 单个数据最大50ms
-#define CLAMP_DURATION_US 40000       // 砍成40ms
+#define TRAILING_SPACE_US 10
 
 static const consumerir_freq_range_t consumerir_freqs[] = {
     {.min = 30000, .max = 60000},
@@ -55,59 +54,34 @@ static int consumerir_transmit(struct consumerir_device *dev __unused,
         return -1;
     }
 
-    ALOGI("Pattern data (first 50):");
-    for (i = 0; i < pattern_len && i < 50; i++) {
-        ALOGI("pattern[%d] = %d", i, pattern[i]);
-    }
-    if (pattern_len > 50) {
-        ALOGI("... and %d more samples", pattern_len - 50);
-    }
-
     int final_len = pattern_len;
     const int *final_pattern = pattern;
     unsigned int *tx_buf = NULL;
+    bool added_trailing = false;
 
     if (final_len % 2 == 0) {
         final_len++;
-    }
-
-    tx_buf = malloc(final_len * sizeof(unsigned int));
-    if (!tx_buf) {
-        ALOGE("Failed to allocate tx buffer");
-        return -1;
-    }
-
-    // 先计算总时长
-    unsigned int total_duration = 0;
-    for (i = 0; i < pattern_len; i++) {
-        unsigned int val = (unsigned int)final_pattern[i];
-        total_duration += val;
-    }
-
-    ALOGI("consumerir_transmit: total_duration=%u us (%d ms), max=%d ms",
-          total_duration, total_duration / 1000, 500);
-
-    // 如果总时长超过500ms，将超过50ms的数据砍成40ms
-    if (total_duration > 500000) {
-        ALOGI("consumerir_transmit: total duration > 500ms, clamping large values...");
-        for (i = 0; i < pattern_len; i++) {
-            unsigned int val = (unsigned int)final_pattern[i];
-            if (val > MAX_SINGLE_DURATION_US) {
-                ALOGI("consumerir_transmit: clamping pattern[%d] from %u to %d us",
-                      i, val, CLAMP_DURATION_US);
-                val = CLAMP_DURATION_US;
-            }
-            tx_buf[i] = val;
+        tx_buf = malloc(final_len * sizeof(unsigned int));
+        if (!tx_buf) {
+            ALOGE("Failed to allocate memory for tx_buf");
+            return -1;
         }
-    } else {
         for (i = 0; i < pattern_len; i++) {
+            tx_buf[i] = (unsigned int)pattern[i];
+        }
+        tx_buf[final_len - 1] = TRAILING_SPACE_US;
+        added_trailing = true;
+        ALOGI("Pattern is even (%d), adding trailing space %d us, new length: %d",
+              pattern_len, TRAILING_SPACE_US, final_len);
+    } else {
+        tx_buf = malloc(final_len * sizeof(unsigned int));
+        if (!tx_buf) {
+            ALOGE("Failed to allocate tx buffer");
+            return -1;
+        }
+        for (i = 0; i < final_len; i++) {
             tx_buf[i] = (unsigned int)final_pattern[i];
         }
-    }
-    if (final_len != pattern_len) {
-        tx_buf[pattern_len] = 10;
-        ALOGE("consumerir_transmit: pattern was even (%d), added trailing space, new length: %d",
-              pattern_len, final_len);
     }
 
     fd = open(LIRC_DEVICE_PATH, O_RDWR);
@@ -130,14 +104,7 @@ static int consumerir_transmit(struct consumerir_device *dev __unused,
     }
 
     ssize_t bytes_to_write = final_len * sizeof(unsigned int);
-
-    ALOGE("consumerir_transmit: About to write %zd bytes (%d samples) to fd=%d",
-          bytes_to_write, final_len, fd);
-
     ssize_t bytes_written = write(fd, tx_buf, bytes_to_write);
-
-    ALOGE("consumerir_transmit: write() returned %zd, errno=%d (%s)",
-          bytes_written, errno, strerror(errno));
 
     if (bytes_written != bytes_to_write) {
         ALOGE("Write to LIRC device failed: %s, written %zd bytes, expected %zd",
@@ -177,9 +144,6 @@ static int consumerir_close(hw_device_t *dev)
 static int consumerir_open(const hw_module_t* module, const char* name,
         hw_device_t** device)
 {
-    int init_fd;
-    unsigned int mode;
-
     if (strcmp(name, CONSUMERIR_TRANSMITTER) != 0) {
         ALOGE("Invalid name for IR device: %s", name);
         return -EINVAL;
@@ -204,17 +168,6 @@ static int consumerir_open(const hw_module_t* module, const char* name,
     dev->transmit = consumerir_transmit;
     dev->get_num_carrier_freqs = consumerir_get_num_carrier_freqs;
     dev->get_carrier_freqs = consumerir_get_carrier_freqs;
-
-    ALOGE("consumerir_open: trying to pre-initialize LIRC device");
-    init_fd = open(LIRC_DEVICE_PATH, O_RDWR);
-    if (init_fd >= 0) {
-        mode = LIRC_MODE_PULSE;
-        ioctl(init_fd, LIRC_SET_SEND_MODE, &mode);
-        close(init_fd);
-        ALOGE("consumerir_open: LIRC device pre-initialized successfully, fd=%d", init_fd);
-    } else {
-        ALOGE("consumerir_open: FAILED to pre-initialize LIRC device: %s", strerror(errno));
-    }
 
     *device = (hw_device_t*) dev;
     ALOGI("Consumer IR device opened successfully with LIRC");
