@@ -336,7 +336,7 @@ static ssize_t lirc_transmit(struct file *file, const char __user *buf,
 
 	pr_err("lirc_transmit: calling dev->tx_ir with count=%zu\n", count);
 	ret = dev->tx_ir(dev, txbuf, count);
-	pr_err("lirc_transmit: dev->tx_ir returned %d\n", ret);
+	pr_err("lirc_transmit: dev->tx_ir returned %zd\n", ret);
 	if (ret < 0)
 		goto out_kfree;
 
