@@ -225,9 +225,15 @@ static ssize_t lirc_transmit(struct file *file, const char __user *buf,
 	unsigned int duration = 0; /* signal duration in us */
 	int i;
 
+	pr_err("LIUQIZHI: === lirc_transmit ENTER === n=%zu, count=%zu, is_even=%d\n",
+	       n, n/sizeof(unsigned int), (n/sizeof(unsigned int)) % 2 == 0);
+
 	ret = mutex_lock_interruptible(&dev->lock);
 	if (ret)
 		return ret;
+
+	pr_err("LIUQIZHI: lirc_transmit - after mutex_lock, registered=%d, tx_ir=%p\n",
+	       dev->registered, dev->tx_ir);
 
 	if (!dev->registered) {
 		ret = -ENODEV;
@@ -236,6 +242,7 @@ static ssize_t lirc_transmit(struct file *file, const char __user *buf,
 
 	if (!dev->tx_ir) {
 		ret = -EINVAL;
+		pr_err("LIUQIZHI: lirc_transmit - !dev->tx_ir, returning EINVAL\n");
 		goto out_unlock;
 	}
 
