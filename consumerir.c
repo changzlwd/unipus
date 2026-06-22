@@ -61,6 +61,16 @@ static int consumerir_transmit(struct consumerir_device *dev __unused,
     unsigned int *tx_buf = NULL;
     bool added_trailing = false;
 
+    // 先计算总时长
+    unsigned int total_duration = 0;
+    for (i = 0; i < pattern_len; i++) {
+        total_duration += (unsigned int)pattern[i];
+    }
+    ALOGI("Total duration: %u us (%d ms)", total_duration, total_duration / 1000);
+
+    // 如果总时长超过500ms，将超过50ms的砍成40ms
+    bool need_clamp = (total_duration > 500000);
+
     if (final_len % 2 == 0) {
         final_len++;
         tx_buf = malloc(final_len * sizeof(unsigned int));
@@ -70,7 +80,7 @@ static int consumerir_transmit(struct consumerir_device *dev __unused,
         }
         for (i = 0; i < pattern_len; i++) {
             unsigned int val = (unsigned int)pattern[i];
-            if (val > MAX_SINGLE_DURATION_US) {
+            if (need_clamp && val > MAX_SINGLE_DURATION_US) {
                 ALOGI("Clamping pattern[%d] from %u to %d us", i, val, CLAMP_DURATION_US);
                 val = CLAMP_DURATION_US;
             }
@@ -88,7 +98,7 @@ static int consumerir_transmit(struct consumerir_device *dev __unused,
         }
         for (i = 0; i < final_len; i++) {
             unsigned int val = (unsigned int)final_pattern[i];
-            if (val > MAX_SINGLE_DURATION_US) {
+            if (need_clamp && val > MAX_SINGLE_DURATION_US) {
                 ALOGI("Clamping pattern[%d] from %u to %d us", i, val, CLAMP_DURATION_US);
                 val = CLAMP_DURATION_US;
             }
