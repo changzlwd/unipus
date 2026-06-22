@@ -32,11 +32,12 @@
 
 
 
-
-
 #define ARRAY_SIZE(a) (sizeof(a) / sizeof(a[0]))
 #define LIRC_DEV_PATH "/dev/lirc0"
 #define PATT_LENGTH 1024
+#define MAX_SINGLE_DURATION_US 50000  // 单个数据最大50ms
+#define CLAMP_DURATION_US 40000       // 砍成40ms
+#define MAX_TOTAL_DURATION_US 500000  // 总时长最大500ms
 
 static const consumerir_freq_range_t consumerir_freqs[] = {
     {.min = 30000, .max = 30000},
@@ -55,12 +56,30 @@ static int consumerir_transmit(struct consumerir_device *dev,
     int ret;
     int print_len;
     unsigned int txbuf[PATT_LENGTH];
+    int final_len = pattern_len;
 
     ALOGD("consumerir_transmit: pattern_len=%d, carrier_freq=%d", pattern_len, carrier_freq);
 
     if (pattern_len > PATT_LENGTH) {
         ALOGE("pattern_len %d exceeds max %d", pattern_len, PATT_LENGTH);
         return -EINVAL;
+    }
+
+    // 计算总时长
+    unsigned int total_duration = 0;
+    for (i = 0; i < pattern_len; i++) {
+        total_duration += (unsigned int)pattern[i];
+    }
+    ALOGD("consumerir_transmit: total_duration=%u us (%d ms)", total_duration, total_duration / 1000);
+
+    // 处理数据：超过50ms的砍成40ms
+    for (i = 0; i < pattern_len; i++) {
+        unsigned int val = (unsigned int)pattern[i];
+        if (val > MAX_SINGLE_DURATION_US) {
+            ALOGD("consumerir_transmit: clamping pattern[%d] from %u to %d us", i, val, CLAMP_DURATION_US);
+            val = CLAMP_DURATION_US;
+        }
+        txbuf[i] = val;
     }
 
     fd = TEMP_FAILURE_RETRY(open(LIRC_DEV_PATH, O_RDWR));
@@ -75,10 +94,6 @@ static int consumerir_transmit(struct consumerir_device *dev,
         close(fd);
         fd = -1;
         return -errno;
-    }
-
-    for (i = 0; i < pattern_len; i++) {
-        txbuf[i] = (unsigned int)pattern[i];
     }
 
     /*wangyanchen 打印 pattern 数组前几个元素用于调试 20260330*/
@@ -168,7 +183,7 @@ static struct hw_module_methods_t consumerir_module_methods = {
 
 consumerir_module_t HAL_MODULE_INFO_SYM = {
     .common = {
-        .tag                = HARDWARE_MODULE_TAG,
+        .tag                = HARDWARE_DEVICE_TAG,
         .module_api_version = CONSUMERIR_MODULE_API_VERSION_1_0,
         .hal_api_version    = HARDWARE_HAL_API_VERSION,
         .id                 = CONSUMERIR_HARDWARE_MODULE_ID,
@@ -177,4 +192,3 @@ consumerir_module_t HAL_MODULE_INFO_SYM = {
         .methods            = &consumerir_module_methods,
     },
 };
-
