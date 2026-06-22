@@ -37,6 +37,7 @@
 #define TRAILING_SPACE_US 10
 #define MAX_SINGLE_DURATION_US 50000  // 单个数据最大50ms，超过则砍成40ms
 #define CLAMP_DURATION_US 40000       // 砍成40ms
+#define MAX_TOTAL_DURATION_US 500000  // 总时长最大500ms
 
 static const consumerir_freq_range_t consumerir_freqs[] = {
     {.min = 30000, .max = 60000},
@@ -48,6 +49,11 @@ static int consumerir_transmit(struct consumerir_device *dev __unused,
     int fd = -1;
     int ret = 0;
     int i;
+    int final_len;
+    unsigned int *tx_buf = NULL;
+    unsigned int total_duration = 0;
+    bool need_clamp = false;
+    bool added_trailing = false;
 
     ALOGI("consumerir_transmit: called for %d Hz, %d slices", carrier_freq, pattern_len);
 
@@ -56,56 +62,47 @@ static int consumerir_transmit(struct consumerir_device *dev __unused,
         return -1;
     }
 
-    int final_len = pattern_len;
-    const int *final_pattern = pattern;
-    unsigned int *tx_buf = NULL;
-    bool added_trailing = false;
-
-    // 先计算总时长
-    unsigned int total_duration = 0;
+    // 计算总时长
     for (i = 0; i < pattern_len; i++) {
         total_duration += (unsigned int)pattern[i];
     }
     ALOGI("Total duration: %u us (%d ms)", total_duration, total_duration / 1000);
 
-    // 如果总时长超过500ms，将超过50ms的砍成40ms
-    bool need_clamp = (total_duration > 500000);
+    // 判断是否需要clamp
+    need_clamp = (total_duration > MAX_TOTAL_DURATION_US);
 
+    // 计算最终长度（偶数需要加trailing space变奇数）
+    final_len = pattern_len;
     if (final_len % 2 == 0) {
         final_len++;
-        tx_buf = malloc(final_len * sizeof(unsigned int));
-        if (!tx_buf) {
-            ALOGE("Failed to allocate memory for tx_buf");
-            return -1;
-        }
-        for (i = 0; i < pattern_len; i++) {
-            unsigned int val = (unsigned int)pattern[i];
-            if (need_clamp && val > MAX_SINGLE_DURATION_US) {
-                ALOGI("Clamping pattern[%d] from %u to %d us", i, val, CLAMP_DURATION_US);
-                val = CLAMP_DURATION_US;
-            }
-            tx_buf[i] = val;
-        }
-        tx_buf[final_len - 1] = TRAILING_SPACE_US;
         added_trailing = true;
-        ALOGI("Pattern is even (%d), adding trailing space %d us, new length: %d",
-              pattern_len, TRAILING_SPACE_US, final_len);
-    } else {
-        tx_buf = malloc(final_len * sizeof(unsigned int));
-        if (!tx_buf) {
-            ALOGE("Failed to allocate tx buffer");
-            return -1;
-        }
-        for (i = 0; i < final_len; i++) {
-            unsigned int val = (unsigned int)final_pattern[i];
-            if (need_clamp && val > MAX_SINGLE_DURATION_US) {
-                ALOGI("Clamping pattern[%d] from %u to %d us", i, val, CLAMP_DURATION_US);
-                val = CLAMP_DURATION_US;
-            }
-            tx_buf[i] = val;
-        }
     }
 
+    // 分配内存
+    tx_buf = malloc(final_len * sizeof(unsigned int));
+    if (!tx_buf) {
+        ALOGE("Failed to allocate tx buffer, size=%d", final_len);
+        return -1;
+    }
+
+    // 复制数据，超过50ms的砍成40ms
+    for (i = 0; i < pattern_len; i++) {
+        unsigned int val = (unsigned int)pattern[i];
+        if (need_clamp && val > MAX_SINGLE_DURATION_US) {
+            ALOGI("Clamping pattern[%d] from %u to %d us", i, val, CLAMP_DURATION_US);
+            val = CLAMP_DURATION_US;
+        }
+        tx_buf[i] = val;
+    }
+
+    // 偶数数据添加trailing space
+    if (added_trailing) {
+        tx_buf[pattern_len] = TRAILING_SPACE_US;
+        ALOGI("Pattern is even (%d), added trailing space %d us, new length: %d",
+              pattern_len, TRAILING_SPACE_US, final_len);
+    }
+
+    // 打开设备
     fd = open(LIRC_DEVICE_PATH, O_RDWR);
     if (fd < 0) {
         ALOGE("Cannot open LIRC device: %s, error: %s", LIRC_DEVICE_PATH, strerror(errno));
@@ -114,17 +111,20 @@ static int consumerir_transmit(struct consumerir_device *dev __unused,
     }
     ALOGI("Opened LIRC device fd=%d", fd);
 
+    // 设置发送模式
     unsigned int mode = LIRC_MODE_PULSE;
     if (ioctl(fd, LIRC_SET_SEND_MODE, &mode) < 0) {
         ALOGE("LIRC_SET_SEND_MODE failed: %s", strerror(errno));
     }
 
+    // 设置载波频率
     if (ioctl(fd, LIRC_SET_SEND_CARRIER, &carrier_freq) < 0) {
         ALOGE("LIRC_SET_SEND_CARRIER failed: %s", strerror(errno));
     } else {
         ALOGI("LIRC_SET_SEND_CARRIER succeeded: %d Hz", carrier_freq);
     }
 
+    // 发送数据
     ssize_t bytes_to_write = final_len * sizeof(unsigned int);
     ssize_t bytes_written = write(fd, tx_buf, bytes_to_write);
 
@@ -151,7 +151,6 @@ static int consumerir_get_carrier_freqs(struct consumerir_device *dev __unused,
     size_t len, consumerir_freq_range_t *ranges)
 {
     size_t to_copy = ARRAY_SIZE(consumerir_freqs);
-
     to_copy = len < to_copy ? len : to_copy;
     memcpy(ranges, consumerir_freqs, to_copy * sizeof(consumerir_freq_range_t));
     return to_copy;
@@ -202,7 +201,7 @@ static struct hw_module_methods_t consumerir_module_methods = {
 
 consumerir_module_t HAL_MODULE_INFO_SYM = {
     .common = {
-        .tag                = HARDWARE_MODULE_TAG,
+        .tag                = HARDWARE_DEVICE_TAG,
         .module_api_version = CONSUMERIR_MODULE_API_VERSION_1_0,
         .hal_api_version    = HARDWARE_HAL_API_VERSION,
         .id                 = CONSUMERIR_HARDWARE_MODULE_ID,
