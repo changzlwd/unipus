@@ -65,13 +65,22 @@ static int consumerir_transmit(struct consumerir_device *dev __unused,
     const int *final_pattern = pattern;
     unsigned int *tx_buf = NULL;
 
+    if (final_len % 2 == 0) {
+        final_len++;
+    }
+
     tx_buf = malloc(final_len * sizeof(unsigned int));
     if (!tx_buf) {
         ALOGE("Failed to allocate tx buffer");
         return -1;
     }
-    for (i = 0; i < final_len; i++) {
+    for (i = 0; i < pattern_len; i++) {
         tx_buf[i] = (unsigned int)final_pattern[i];
+    }
+    if (final_len != pattern_len) {
+        tx_buf[pattern_len] = 10;
+        ALOGE("consumerir_transmit: pattern was even (%d), added trailing space, new length: %d",
+              pattern_len, final_len);
     }
 
     fd = open(LIRC_DEVICE_PATH, O_RDWR);
