@@ -304,6 +304,8 @@ static ssize_t lirc_transmit(struct file *file, const char __user *buf,
 		}
 
 		count = n / sizeof(unsigned int);
+		pr_err("lirc_transmit: n=%zu, count=%zu, LIRCBUF_SIZE=%d\n",
+		       n, count, LIRCBUF_SIZE);
 		if (count > LIRCBUF_SIZE) {
 			ret = -EINVAL;
 			goto out_unlock;
@@ -314,6 +316,11 @@ static ssize_t lirc_transmit(struct file *file, const char __user *buf,
 			ret = PTR_ERR(txbuf);
 			goto out_unlock;
 		}
+
+		/* 打印前10个数据值 */
+		pr_err("lirc_transmit: first 10 values: %u %u %u %u %u %u %u %u %u %u\n",
+		       txbuf[0], txbuf[1], txbuf[2], txbuf[3], txbuf[4],
+		       txbuf[5], txbuf[6], txbuf[7], txbuf[8], txbuf[9]);
 	}
 
 //	for (i = 0; i < count; i++) {
@@ -327,7 +334,9 @@ static ssize_t lirc_transmit(struct file *file, const char __user *buf,
 
 	start = ktime_get();
 
+	pr_err("lirc_transmit: calling dev->tx_ir with count=%zu\n", count);
 	ret = dev->tx_ir(dev, txbuf, count);
+	pr_err("lirc_transmit: dev->tx_ir returned %d\n", ret);
 	if (ret < 0)
 		goto out_kfree;
 
