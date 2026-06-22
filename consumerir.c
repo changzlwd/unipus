@@ -34,6 +34,8 @@
 #define ARRAY_SIZE(a) (sizeof(a) / sizeof((a)[0]))
 // liuqizhi 20260521 implement infrared remote control
 #define LIRC_DEVICE_PATH "/dev/lirc0"
+#define MAX_SINGLE_DURATION_US 50000  // 单个数据最大50ms
+#define CLAMP_DURATION_US 40000       // 砍成40ms
 
 static const consumerir_freq_range_t consumerir_freqs[] = {
     {.min = 30000, .max = 60000},
@@ -75,7 +77,13 @@ static int consumerir_transmit(struct consumerir_device *dev __unused,
         return -1;
     }
     for (i = 0; i < pattern_len; i++) {
-        tx_buf[i] = (unsigned int)final_pattern[i];
+        unsigned int val = (unsigned int)final_pattern[i];
+        if (val > MAX_SINGLE_DURATION_US) {
+            ALOGI("consumerir_transmit: clamping pattern[%d] from %u to %d us",
+                  i, val, CLAMP_DURATION_US);
+            val = CLAMP_DURATION_US;
+        }
+        tx_buf[i] = val;
     }
     if (final_len != pattern_len) {
         tx_buf[pattern_len] = 10;
