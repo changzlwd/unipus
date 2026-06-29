@@ -1,0 +1,16 @@
+	//liuqizhi add ir 20260113
+	ir_vdd_en_pins {
+		ir_vdd_en_active: ir_vdd_en_active {
+			mux {
+				pins = "gpio70", "gpio142";
+				function = "gpio";
+			};
+
+			config {
+				pins = "gpio70", "gpio142";
+				drive-strength = <2>;
+				bias-disable;
+				output-high;
+			};
+		};
+	};
