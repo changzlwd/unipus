@@ -1,0 +1,55 @@
+	//liuqizhi add ir 20260113
+	ir_vdd_en_pins {
+		ir_vdd_en_active: ir_vdd_en_active {
+			mux {
+				pins = "gpio70", "gpio142";
+				function = "gpio";
+			};
+
+			config {
+				pins = "gpio70", "gpio142";
+				drive-strength = <2>;
+				bias-disable;
+				output-high;
+			};
+		};
+
+		ir_vdd_en_sleep: ir_vdd_en_sleep {
+			mux {
+				pins = "gpio70", "gpio142";
+				function = "gpio";
+			};
+
+			config {
+				pins = "gpio70", "gpio142";
+				drive-strength = <2>;
+				bias-disable;
+				output-low;
+			};
+		};
+	};
+
+	&pmxr2230_gpios {
+		pwm_out_default: pwm_out_default {
+			pins = "gpio11";
+			function = "func1";
+			input-disable;
+			output-low;
+			bias-disable;
+			power-source = <1>;
+			qcom,drive-strength = <2>;
+		};
+	};
+
+	&soc {
+		pwm-ir {
+			compatible = "pwm-ir-tx";
+			label = "pwm-ir-tx";
+			status = "okay";
+			pinctrl-names = "default", "sleep";
+			pinctrl-0 = <&pwm_out_default &ir_vdd_en_active>;
+			pinctrl-1 = <&pwm_out_default &ir_vdd_en_sleep>;
+			pwms = <&pmxr2230_pwm_3 0 26315>;
+			pwm-names = "gpio-pwm-ir";
+		};
+	};
